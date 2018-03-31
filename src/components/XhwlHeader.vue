@@ -1,0 +1,100 @@
+<template>
+  <div id="Xhwlheader">
+
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+               :router='true' background-color="#f6f6f6"
+               style="margin:auto;top:-50px">
+
+        <el-menu-item index="1" style="margin-left: 36%;"><a href="/index.html">首页</a></el-menu-item>
+        <el-menu-item index="2"><a href="https://www.ele.me">社会招聘</a></el-menu-item>
+        <el-submenu index="3" mode="horizontal">
+          <template slot="title">校园招聘</template>
+          <el-menu-item index="3-1">校招职位</el-menu-item>
+          <el-menu-item index="3-2">招聘流程</el-menu-item>
+          <el-menu-item index="3-3">培养计划</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="4"><a href="https://www.ele.me">实习生招聘</a></el-menu-item>
+        <el-menu-item index="5"><a href="https://www.ele.me">关于兴海物联</a></el-menu-item>
+      </el-menu>
+      <el-button-group style="position: absolute;top: 2.5%;right: 10%">
+        <el-button type="primary" round @click="dialogFormVisible1 = true">登录</el-button>
+        <el-button round @click="dialogFormVisible = true">注册</el-button>
+
+      </el-button-group>
+      <a style="position: absolute;top: 2.5%;left: 10%"><img
+        src="http://www.copm.com.cn/templates/temp/images/logo.png"></a>
+
+    <div class="line"></div>
+
+    <el-dialog title="注册" :visible.sync="dialogFormVisible" style="width: 50%;margin:auto auto">
+      <el-form label-position="labelPosition" label-width="60px">
+        <el-form-item label="手机号">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="验证码">
+          <el-input style="width: 60%">
+          </el-input>
+          <el-button style="width: 38%" type="primary">发送验证</el-button>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto">
+      <el-form :label-position="labelPosition1" label-width="60px">
+        <el-form-item label="手机号">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible1 = false">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'XhwlHeader',
+  data () {
+    return {
+      activeIndex: '1',
+      dialogFormVisible: false,
+      dialogFormVisible1: false,
+      formLabelWidth: '14%',
+      labelPosition: 'left',
+      labelPosition1: 'left'
+    }
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+  XhwlHeader {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: left;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+
+</style>
