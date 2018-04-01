@@ -1,27 +1,17 @@
-# xhwl
+# 招娉网站对用户前端项目日志
 
-> website of xhwl
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+**请前端人员在更改项目时以如下格式写明自己正在做以及做完的组件或者其他文件**
+```markdown
+### 18年03月31日08时-18年03月31日09时 
+  
+  更新内容：创建项目 
+  
+  更新人员：李新阳
 ```
+## 4月日志
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 18年04月01日10时-(ing) 
+
+  更新内容：修改原html文件改为vue组件形式
+  
+  更新人员：李新阳
