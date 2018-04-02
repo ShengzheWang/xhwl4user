@@ -5,16 +5,16 @@
                :router='true' background-color="#f6f6f6"
                style="margin:auto;top:-50px">
 
-        <el-menu-item index="1" style="margin-left: 36%;"><a href="/index.html">首页</a></el-menu-item>
-        <el-menu-item index="2"><a href="https://www.ele.me">社会招聘</a></el-menu-item>
+        <el-menu-item index="1" style="margin-left: 36%;" route="">首页</el-menu-item>
+        <el-menu-item index="2" route="/Social">社会招聘</el-menu-item>
         <el-submenu index="3" mode="horizontal">
           <template slot="title">校园招聘</template>
-          <el-menu-item index="3-1">校招职位</el-menu-item>
-          <el-menu-item index="3-2">招聘流程</el-menu-item>
-          <el-menu-item index="3-3">培养计划</el-menu-item>
+          <el-menu-item index="3-1" route="/Campus/Post">校招职位</el-menu-item>
+          <el-menu-item index="3-2" route="/Campus/Procedure">招聘流程</el-menu-item>
+          <el-menu-item index="3-3" route="/Campus/Plan">培养计划</el-menu-item>
         </el-submenu>
-        <el-menu-item index="4"><a href="https://www.ele.me">实习生招聘</a></el-menu-item>
-        <el-menu-item index="5"><a href="https://www.ele.me">关于兴海物联</a></el-menu-item>
+        <el-menu-item index="4" route="/Trainee">实习生招聘</el-menu-item>
+        <el-menu-item index="5" route="/AboutUs">关于兴海物联</el-menu-item>
       </el-menu>
       <el-button-group style="position: absolute;top: 2.5%;right: 10%">
         <el-button type="primary" round @click="dialogFormVisible1 = true">登录</el-button>
