@@ -7,19 +7,9 @@
       <el-main>
         <router-view></router-view>
       </el-main>
-      <div class="footer">
-        <div class="wrap">
-          <ul class="friend-link">
-            <li><a href="//www.jd.com" target="_blank">兴海物联
-              官方网站</a></li>
-            <li>|</li>
-            <li><a href="//zhaopin.jd.com" target="_blank">中建集团</a></li>
-            <li>|</li>
-            <li><a href="//xiaoyuan.jd.com" target="_blank">校园团队</a></li>
-          </ul>
-        </div>
-      </div>
-        <span class="copyright" style="margin:0 auto;display: block">Copyright © 2004-2015  兴海物联 版权所有</span>
+      <xhwl-footer></xhwl-footer>
+      <span class="copyright" style="display: inline-block;margin:0 auto;">Copyright © 2004-2015  兴海物联 版权所有</span>
+
     </el-container>
   </div>
 </template>

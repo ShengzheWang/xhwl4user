@@ -15,9 +15,9 @@
     <!--<div class="show-rectangle-sw">3</div>-->
     <!--<div class="show-rectangle-se">4</div>-->
     <!--</div>-->
-    <div style="width: 40%;margin:3% auto">
-      <el-input placeholder="请输入内容" v-model="input3">
-        <template slot="prepend">关键字</template>
+    <div style="width: 40%;margin:3% auto;">
+      <el-input placeholder="请输入内容" v-model="input3" style="margin-left:-1%">
+        <template slot="prepend">立即搜索</template>
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
 

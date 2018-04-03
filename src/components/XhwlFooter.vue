@@ -12,7 +12,6 @@
         </ul>
       </div>
     </div>
-    <span class="copyright" style="margin:0 auto;display: block">Copyright © 2004-2015  兴海物联 版权所有</span>
   </div>
 </template>
 <script>

@@ -5,7 +5,7 @@
                :router='true' background-color="#f6f6f6"
                style="margin:auto;top:-50px">
 
-        <el-menu-item index="1" style="margin-left: 36%;" route="">首页</el-menu-item>
+        <el-menu-item index="1" style="margin-left: 36%;" route="/">首页</el-menu-item>
         <el-menu-item index="2" route="/Social">社会招聘</el-menu-item>
         <el-submenu index="3" mode="horizontal">
           <template slot="title">校园招聘</template>
@@ -16,11 +16,27 @@
         <el-menu-item index="4" route="/Trainee">实习生招聘</el-menu-item>
         <el-menu-item index="5" route="/AboutUs">关于兴海物联</el-menu-item>
       </el-menu>
-      <el-button-group style="position: absolute;top: 2.5%;right: 10%">
+    <div style="position: absolute;top: 2.5%;right: 10%">
+      <el-button-group v-if="Need2Login">
         <el-button type="primary" round @click="dialogFormVisible1 = true">登录</el-button>
         <el-button round @click="dialogFormVisible = true">注册</el-button>
-
       </el-button-group>
+      <el-dropdown v-else>
+        <el-badge :value="mine[2].messageNum" class="item">
+      <el-button  type="text" ><img
+        src="../../static/Default.png"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        </el-badge>
+        <el-dropdown-menu slot="dropdown" >
+          <el-dropdown-item v-for="item in mine">
+            <router-link style="color: #333333" :to="item.path">
+              <el-badge :value="item.messageNum" class="item">
+              {{item.text}}
+              </el-badge>
+            </router-link>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
       <a style="position: absolute;top: 2.5%;left: 10%"><img
         src="http://www.copm.com.cn/templates/temp/images/logo.png"></a>
 
@@ -75,7 +91,12 @@ export default {
       dialogFormVisible1: false,
       formLabelWidth: '14%',
       labelPosition: 'left',
-      labelPosition1: 'left'
+      labelPosition1: 'left',
+      Need2Login: false,
+      mine: [{path: '', text: '个人中心'},
+        {path: '/MyResume', text: '我的简历'},
+        {path: '', text: '我的应聘', messageNum: 3}]
+
     }
   },
   methods: {
