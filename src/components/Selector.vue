@@ -1,6 +1,6 @@
 <template>
   <div id="Selector">
-<h1 style="margin-left:2%;font-size: 20pt">社会招聘</h1>
+
 <el-input placeholder="请输入内容" v-model="input3">
   <template slot="prepend">立即搜索</template>
   <el-button slot="append" icon="el-icon-search"></el-button>

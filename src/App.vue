@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="width: 1880px">
     <el-container>
       <el-header>
         <XhwlHeader></XhwlHeader>

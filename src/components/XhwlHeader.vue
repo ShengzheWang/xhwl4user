@@ -3,9 +3,9 @@
 
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true' background-color="#f6f6f6"
-               style="margin:auto;top:-50px">
+               style="margin:auto;top:-50px;float: right;margin-right:36% ;">
 
-        <el-menu-item index="1" style="margin-left: 36%;" route="/">首页</el-menu-item>
+        <el-menu-item index="1" style="" route="/">首页</el-menu-item>
         <el-menu-item index="2" route="/Social">社会招聘</el-menu-item>
         <el-submenu index="3" mode="horizontal">
           <template slot="title">校园招聘</template>
@@ -14,9 +14,9 @@
           <el-menu-item index="3-3" route="/Campus/Plan">培养计划</el-menu-item>
         </el-submenu>
         <el-menu-item index="4" route="/Trainee">实习生招聘</el-menu-item>
-        <el-menu-item index="5" route="/AboutUs">关于兴海物联</el-menu-item>
+        <el-menu-item index="5" route="/AboutUs" style="">关于兴海物联</el-menu-item>
       </el-menu>
-    <div style="position: absolute;top: 2.5%;right: 10%">
+    <div style="position:absolute;top: 2.5%;left: 1600px">
       <el-button-group v-if="Need2Login">
         <el-button type="primary" round @click="dialogFormVisible1 = true">登录</el-button>
         <el-button round @click="dialogFormVisible = true">注册</el-button>
@@ -37,7 +37,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-      <a style="position: absolute;top: 2.5%;left: 10%"><img
+      <a style="position: absolute;top: 2.5%;left: 188px"><img
         src="http://www.copm.com.cn/templates/temp/images/logo.png"></a>
 
     <div class="line"></div>
@@ -95,7 +95,7 @@ export default {
       Need2Login: false,
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
-        {path: '', text: '我的应聘', messageNum: 3}]
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
 
     }
   },

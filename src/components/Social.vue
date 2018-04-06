@@ -1,6 +1,6 @@
 <template>
   <div id="Social">
-
+    <h1 style="margin-left:2%;font-size: 20pt">社会招聘</h1>
     <div style="width: 60%;margin:0% auto;height: auto">
       <selector></selector>
       <post-card></post-card>

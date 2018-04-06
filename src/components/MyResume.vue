@@ -2,8 +2,8 @@
   <div id="MyResume" style="height: 500px;width: 1300px;margin:0% auto;">
     <h1 style="width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
     <div style="height: 350px;width: 1100px;margin:5% auto">
-      <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end">
-      <div class="animated bounceIn" style=" display:inline-block;width:300px; height:300px; border-radius:300px;background:url(../../static/plus.png)no-repeat;background-size: 100% 100%">
+      <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end" >
+      <div @click="createAResume()" class="animated bounceIn" style=" display:inline-block;width:300px; height:300px; border-radius:300px;background:url(../../static/plus.png)no-repeat;background-size: 100% 100%">
         <img
           src="../../static/social.png">
       </div>
@@ -43,7 +43,9 @@ export default {
     }
   },
   methods: {
-
+    createAResume () {
+      this.$router.push('/ResumeForm/1')
+    },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     }
