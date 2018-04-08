@@ -37,7 +37,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-      <a style="position: absolute;top: 2.5%;left: 188px"><img
+      <a style="position: absolute;top: 2.5%;left: 188px;font-size: 32px;"><img
         src="http://www.copm.com.cn/templates/temp/images/logo.png"></a>
 
     <div class="line"></div>

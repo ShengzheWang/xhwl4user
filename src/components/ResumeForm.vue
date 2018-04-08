@@ -1,5 +1,5 @@
 <template>
-  <div id="ResumeForm" style="width: 60%;margin:0% auto" class="animated zoomIn">
+  <div id="ResumeForm" style="width: 70%;margin:0% auto" class="animated bounceInLeft">
     <el-row class="tac">
       <el-col :span="4">
     <el-menu
@@ -18,7 +18,7 @@
     </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="width: 90%;height:auto;margin:0 auto; background: #ffffff;border: solid;border-color: #a4a4a4" >
+        <div style="width: 90%;min-height: 561px;margin:0 auto; background: #ffffff;border: solid;border-color: #a4a4a4" >
           <router-view ></router-view>
         </div>
       </el-col>

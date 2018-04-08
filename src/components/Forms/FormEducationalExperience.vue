@@ -6,11 +6,11 @@
       <el-form label-position="labelPosition" label-width="140px">
         <el-form-item label="入学日期">
           <el-date-picker type="date" placeholder="选择日期"
-                          style="width: 39%;"></el-date-picker>
+                          class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="毕业日期">
           <el-date-picker type="date" placeholder="选择日期"
-                          style="width: 39%;"></el-date-picker>
+                          class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="学校" style="width: 50%">
           <el-input></el-input>
@@ -21,17 +21,10 @@
         <el-form-item label="学历" style="width: 50%">
           <el-input></el-input>
         </el-form-item>
-        <el-form-item label="专业成绩排名" style="width: 50%">
-          <el-select placeholder="百分制排名">
-            <el-option label="5%"></el-option>
-            <el-option label="10%"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="证明人" style="width: 50%">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label="证明人联系方式" style="width: 50%">
-          <el-input></el-input>
+        <el-form-item label="专业成绩排名占比" style="width: 50%">
+          <el-input>
+            <template slot="append">%</template>
+          </el-input>
         </el-form-item>
         <el-form-item label="还有其他教育经历？" style="width: 50%">
           <el-button><i class="el-icon-plus"></i></el-button>
@@ -47,7 +40,16 @@
 </template>
 <script>
 export default {
-
+  data () {
+    return {
+      select: ''
+    }
+  },
+  methods: {
+    nextStep () {
+      this.$router.push('/ResumeForm/3')
+    }
+  }
 }
 </script>
 <style scoped>
@@ -55,12 +57,15 @@ export default {
     content:"";
     position: absolute;
     right: 79%;
-    top: 10.4%;
+    top: 12%;
     width: 0;
     height: 0;
     border-top: 16px solid transparent;
     border-right: 32px solid #ffffff;
     border-bottom: 16px solid transparent;
 
+  }
+  .input-date{
+    width:40.3%;
   }
 </style>
