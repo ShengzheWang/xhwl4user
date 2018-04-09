@@ -1,5 +1,5 @@
 <template>
-  <div id="Xhwlheader">
+  <div id="Xhwlheader" style="height:50px">
 
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true' background-color="#f6f6f6"

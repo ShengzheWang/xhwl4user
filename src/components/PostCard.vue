@@ -1,87 +1,141 @@
 <template>
   <div id="PostCard">
-  <el-card class="box-card" style="width:100%;margin:3% auto">
-    <div slot="header" class="clearfix">
-      <span style="font-size: 25px;color:cornflowerblue;font-weight: bold"><i class="el-icon-news"></i> {{name}}</span>
-      <div class="button" style="float:right;">
-        <el-button style="font-size:12px;" type="primary" @click="showToggle" v-text="btnText"></el-button>
-        <el-button style="font-size: 12px;" type="danger" @click="ApplyJob">投递简历</el-button>
+    <el-card v-for="item in cardInfo" class="box-card animated zoomIn"
+             v-bind:style="'margin-top:2%;width:100%;background-color:#f6f6f6;animation-delay:'+(item.index+4)*0.2+'s'">
+      <div>
+        <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.name}}</span>
+        <span style="font-size:18px;" class="name">  | {{item.direction}}</span>
+        <span style="float:right;font-size:25px;opacity: 0.35;"><i class="el-icon-menu"/> {{item.kinds}}</span>
       </div>
-    </div>
-    <div class="intro">
-      <div class="job-address">
-        <p ><i class="el-icon-info"></i>职位方向：{{direction}}</p>
-      </div>
-      <p> </p>
-      <div class="job-direction">
-        <p><i class="el-icon-question"></i>工作地点：{{address}}</p>
-      </div>
-      <div class="job-func">
-        <p><i class="el-icon-success"></i>面试方式：{{func}}</p>
 
+      <div style="height:20px;" class="blank"></div>
+
+      <div class="brief" style="font-weight:normal;font-size:15px;">
+        <div style="margin-top: 1%">
+          <i class="el-icon-location"/><a style="font-size: 20px">      工作地点：{{item.address}}</a>
+        </div>
+        <div style="margin-top: 1%">
+          <i class="el-icon-location-outline"/><a  style="font-size: 20px">      所属部门：{{item.department}}</a>
+        </div>
       </div>
-      <p v-show="Show">...</p>
-    </div>
-    <div class="table-expand" v-if="isShow">
-      <div class="job-passage">
-        <p><i class="el-icon-tickets"></i>工作要求: </p>
-        <p class="content" style="font-size:14px;">{{requirments}}</p>
+
+      <div style="height:20px;" class="blank"></div>
+      <div id="details" style="font-weight:normal;font-size:15px;">
+
+        <el-collapse-transition>
+          <div v-if="item.Ashow" >
+            <div style="margin-top: 1%">
+              <div style="display:block">
+              <i class="el-icon-location"/>
+              <a style="font-size: 20px">岗位描述：</a>
+              </div>
+              <div style="display: block;margin-top: 1%;margin-left:120px">
+              <a style="white-space:pre-wrap">{{item.responsibility}}</a>
+              </div>
+            </div>
+            <div style="margin-top: 1%">
+              <div style="display:block">
+                <i class="el-icon-location"/>
+                <a style="font-size: 20px">岗位要求：</a>
+              </div>
+              <div style="display: block;margin-top: 1%;margin-left:120px">
+                <a style="white-space:pre-wrap">{{item.requirement}}</a>
+              </div>
+            </div>
+          </div>
+
+        </el-collapse-transition>
       </div>
-    </div>
-  </el-card>
-    </div>
+      <el-button-group style="position: relative;margin-bottom:2%;margin-top: 2%;float: right" >
+        <el-button type="primary" round icon="el-icon-message">立即投递</el-button>
+        <el-button type="info"  round  @click="item.Ashow=!item.Ashow;"
+                   :icon="item.Ashow?'el-icon-arrow-up':'el-icon-arrow-down'" >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
+      </el-button-group>
+    </el-card>
+  </div>
 </template>
+
 <script>
+import ElCard from 'element-ui/packages/card/src/main'
+import ElButtonGroup from '../../node_modules/element-ui/packages/button/src/button-group.vue'
+
 export default {
-  name: 'PostCard',
+  components: {
+    ElButtonGroup,
+    ElCard},
   data () {
     return {
-      jobid: 1, // 职位编号
-      name: '后端开发岗位', // 职位名称
-      direction: '后端开发方向', // 职位方向
-      address: '厦门', // 工作地点
-      btnText: '查看详情',
-      func: '线上面试', // 面试方式
-      requirments: '编程基本功扎实，掌握C/C++/JAVA等开发语言、常用算法和数据结构' + '\n' + // 工作要求
-        '熟悉TCP/UDP网络协议及相关编程、进程间通讯编程； \n ' +
-        '了解Python、Shell、Perl等脚本语言； \n ' +
-        '了解MYSQL及SQL语言、编程，了解NoSQL, key-value存储原理； \n ' +
-        '全面、扎实的软件知识结构，掌握操作系统、软件工程、设计模式、数据结构、数据库系统、网络安全等专业知识； \n ' +
-        '了解分布式系统设计与开发、负载均衡技术，系统容灾设计，高可用系统等知识。 \n ' +
-        ' \n ' +
-        '注：招聘城市根据项目类型有所不同，其中，暑期实习招聘城市为下方除补录外全部“招聘城市”，mini实习招聘城市为：北京，成都，杭州，合肥，南京，上海，武汉，西安，天津。校园招聘（2018届）招聘城市请选择：补录。该岗位“招聘城市”在简历投递截止日前会有部分调整，请密切关注，腾讯公司对招聘信息保留最终解释权。',
-      isShow: false,
-      Show: true
+      cardInfo: [{
+        index: 0,
+        Ashow: false,
+        name: '后端开发',
+        address: '厦门',
+        number: 5,
+        direction: '研发类',
+        date: '2018-3-5',
+        kinds: '实习生',
+        education: '本科',
+        department: '设计研发部',
+        responsibility: '1、负责研发/测试工程效率工具的开发和维护工作\n' +
+        '2、负责CI相关工具开发和维护工作\n' +
+        '3、负责测试环境管理和环境部署自动化工具的开发工作\n' +
+        '4、负责其他相关工具开发和维护工作',
+        requirement: '1、计算机基础知识扎实，掌握数据结构、操作系统、网络、数据库知识\n' +
+        '2、至少精通PHP或者Java其中之一，有项目经验\n' +
+        '3、熟悉linux环境，能够熟练使用Linux常用命令，能够基于Linux开发和部署项目\n' +
+        '4、熟练掌握至少一门脚本语言python/ruby/shell，能用脚本编写简单工具\n' +
+        '5、非常热爱互联网及其相关技术\n'
+      }, {
+        index: 1,
+        Ashow: false,
+        name: '后端开发',
+        address: '厦门',
+        number: 5,
+        direction: '研发类',
+        date: '2018-3-5',
+        kinds: '实习生',
+        education: '本科',
+        department: '设计研发部',
+        responsibility: '1、负责研发/测试工程效率工具的开发和维护工作\n' +
+        '2、负责CI相关工具开发和维护工作\n' +
+        '3、负责测试环境管理和环境部署自动化工具的开发工作\n' +
+        '4、负责其他相关工具开发和维护工作',
+        requirement: '1、计算机基础知识扎实，掌握数据结构、操作系统、网络、数据库知识\n' +
+        '2、至少精通PHP或者Java其中之一，有项目经验\n' +
+        '3、熟悉linux环境，能够熟练使用Linux常用命令，能够基于Linux开发和部署项目\n' +
+        '4、熟练掌握至少一门脚本语言python/ruby/shell，能用脚本编写简单工具\n' +
+        '5、非常热爱互联网及其相关技术\n'
+      }]
     }
   },
-  methods: {
-    showToggle: function () {
-      this.isShow = !this.isShow
-      this.Show = !this.Show
-      if (this.isShow) {
-        this.btnText = '收起面板'
-      } else {
-        this.btnText = '查看详情'
-      }
-    },
-    ApplyJob: function () {
-      // 投递简历的鼠标点击事件
-      // jobid是职位的编号
-    }
-  }
+  methods: {}
+
 }
 </script>
-<style scoped>
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
+
+<style>
+  .transition-box {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 100px;
+    border-radius: 4px;
+    background-color: #409EFF;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
   }
-  .clearfix:after {
-    clear: both
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: translateX(20px);
+    opacity: 0;
   }
 
-  .box-card {
-    width: 480px;
-  }
 </style>

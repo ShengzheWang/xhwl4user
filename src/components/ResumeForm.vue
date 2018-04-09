@@ -1,5 +1,22 @@
 <template>
   <div id="ResumeForm" style="width: 70%;margin:0% auto" class="animated bounceInLeft">
+    <div style="margin-left:80%;margin-bottom:0%;">
+    你正在创建的是
+      <el-dropdown>
+          <el-button  type="text" >社会招聘简历<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        <el-dropdown-menu slot="dropdown" >
+          <el-dropdown-item>
+            社会招聘简历
+          </el-dropdown-item>
+          <el-dropdown-item>
+            校园招聘简历
+          </el-dropdown-item>
+          <el-dropdown-item>
+            实习生招聘简历
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
     <el-row class="tac">
       <el-col :span="4">
     <el-menu
@@ -18,7 +35,7 @@
     </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="width: 90%;min-height: 561px;margin:0 auto; background: #ffffff;border: solid;border-color: #a4a4a4" >
+        <div style="width: 90%;min-height: 560px;margin:0 auto; background: #ffffff;border: solid;border-color: #a4a4a4" >
           <router-view ></router-view>
         </div>
       </el-col>
@@ -36,16 +53,16 @@ export default {
       classChosen: '',
       placeChosen: '',
       forms: [
-        {index: 1, name: '基本信息'},
-        {index: 2, name: '教育经历'},
-        {index: 3, name: '培训经历'},
-        {index: 4, name: '项目经历'},
-        {index: 5, name: '工作经历'},
-        {index: 6, name: '实习经历'},
-        {index: 7, name: '奖励活动'},
-        {index: 8, name: '求职意向'},
-        {index: 9, name: '自我评价'},
-        {index: 10, name: '上传附件'}
+        {index: '1', name: '基本信息'},
+        {index: '2', name: '教育经历'},
+        {index: '3', name: '培训经历'},
+        {index: '4', name: '项目经历'},
+        {index: '5', name: '工作经历'},
+        {index: '6', name: '实习经历'},
+        {index: '7', name: '奖励活动'},
+        {index: '8', name: '求职意向'},
+        {index: '9', name: '自我评价'},
+        {index: '10', name: '上传附件'}
       ],
       items: [
         {text: '展示示例一'},

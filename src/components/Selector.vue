@@ -1,12 +1,12 @@
 <template>
   <div id="Selector">
 
-<el-input placeholder="请输入内容" v-model="input3">
+<el-input placeholder="请输入内容" v-model="input3" class="animated bounceInLeft" style="animation-delay:0s">
   <template slot="prepend">立即搜索</template>
   <el-button slot="append" icon="el-icon-search"></el-button>
 </el-input>
 
-<div style="margin-top: 4%;margin-left:2%">
+<div style="margin-top: 3%;margin-left:2%;animation-delay:0.2s" class="animated bounceInLeft" >
   <h3 style="display: inline;margin-right: 3%">工作地点</h3>
 
   <el-radio-group v-model="placeChosen" >
@@ -14,13 +14,13 @@
   </el-radio-group>
 
 </div>
-<div style="margin-top: 2%;margin-left:2%">
+<div style="margin-top: 2%;margin-left:2%;animation-delay:0.4s" class="animated bounceInLeft" >
   <h3 style="display: inline;margin-right: 3%">职位类型</h3>
   <el-radio-group v-model="classChosen" >
     <el-radio v-for="item in classes" border :label="item.text" :key="item.value"></el-radio>
   </el-radio-group>
 </div>
-<div style="margin-top: 2%;margin-left:2%">
+<div style="margin-top: 2%;margin-left:2%;animation-delay:0.6s" class="animated bounceInLeft" >
   <h3 style="display: inline;margin-right: 3%">招聘类型</h3>
   <el-radio-group v-model="postChosen" >
     <el-radio v-for="item in posts" border :label="item.text" :key="item.value"></el-radio>

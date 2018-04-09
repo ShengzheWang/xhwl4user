@@ -3,22 +3,22 @@
     <h1 v-bind:class="'animated fade'+show2" style="animation-delay:0.6s;width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
     <div style="height: 350px;width: 1100px;margin:5% auto">
       <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end" >
-      <div @click="createAResume()" v-bind:class="'animated bounce'+show"
-           style="display:inline-block;width:300px; height:300px; border-radius:300px;background:url(../../static/plus.png)no-repeat;background-size: 100% 100%">
+      <div @click="createAResume(1)" v-bind:class="'animated bounce'+show" id="circle1"
+           v-bind:style="'animation-delay:'+time[0]+'s'">
         <img
           src="../../static/social.png">
       </div>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="创建校园招聘简历" placement="top-end">
-      <div @click="createAResume()" v-bind:class="'animated bounce'+show"
-           style=" animation-delay:0.2s;display:inline-block;width:300px; height:300px; background:url(../../static/plus.png)no-repeat;background-size: 100% 100%; border-radius:300px;position:relative;left:100px">
+      <div @click="createAResume(2)" v-bind:class="'animated bounce'+show" id="circle2"
+           v-bind:style="'animation-delay:'+time[1]+'s'">
         <img
           src="../../static/campus.png">
       </div>
       </el-tooltip>
         <el-tooltip class="item" effect="dark" content="创建实习生招聘简历" placement="top-end">
-      <div @click="createAResume()" v-bind:class="'animated bounce'+show"
-           style=" animation-delay:0.4s;display:inline-block;width:300px; height:300px; background:url(../../static/plus.png)no-repeat;background-size: 100% 100%; border-radius:300px;position:relative;left:200px">
+      <div @click="createAResume(3)" v-bind:class="'animated bounce'+show" id="circle3"
+           v-bind:style="'animation-delay:'+time[2]+'s'">
         <img
           src="../../static/trainee.png">
       </div>
@@ -35,6 +35,7 @@ export default {
       show: 'In',
       show2: 'In',
       activeIndex: '1',
+      time: [0, 0.2, 0.4],
       dialogFormVisible: false,
       dialogFormVisible1: false,
       formLabelWidth: '14%',
@@ -48,7 +49,14 @@ export default {
     }
   },
   methods: {
-    createAResume () {
+    createAResume (whichOne) {
+      switch (whichOne) {
+        case 1:break
+        case 2:this.$data.time = [0.2, 0, 0.4]
+          break
+        case 3:this.$data.time = [0.2, 0.4, 0]
+          break
+      }
       this.$data.show = 'OutRight'
       this.$data.show2 = 'Out'
       setTimeout(() => {
@@ -64,7 +72,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  MyResume {
+  #circle1{
+    display:inline-block;
+    width:300px;
+    height:300px;
+    border-radius:300px;
+    background:url(../../static/plus.png)no-repeat;
+    background-size: 100% 100%
+  }
+  #circle2{
+    display:inline-block;
+    width:300px;
+    height:300px;
+    background:url(../../static/plus.png)no-repeat;
+    background-size: 100% 100%;
+    border-radius:300px;
+    position:relative;
+    left:100px
+  }
+  #circle3{
+    display:inline-block;
+    width:300px;
+    height:300px;
+    background:url(../../static/plus.png)no-repeat;
+    background-size: 100% 100%;
+    border-radius:300px;
+    position:relative;
+    left:200px
+  }
+  #MyResume {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

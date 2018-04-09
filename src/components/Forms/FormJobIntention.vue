@@ -15,7 +15,7 @@
           <el-input></el-input>
         </el-form-item>
         <el-form-item  style="width: 25%">
-          <el-button type="primary">保存并进行下一步</el-button>
+          <el-button type="primary" @click="nextStep()">保存并进行下一步</el-button>
         </el-form-item>
       </el-form>
       <div style="width:100%;height:30px">
@@ -25,6 +25,17 @@
 </template>
 <script>
 export default {
+  data () {
+    return {
+      select: '',
+      imageUrl: ''
+    }
+  },
+  methods: {
+    nextStep () {
+      this.$router.push('/ResumeForm/9')
+    }
+  }
 }
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div id="Campus">
+  <div id="Trainee">
     <div style="width: 60%;margin:0% auto;height: auto">
       <selector></selector>
       <post-card></post-card>
@@ -16,7 +16,7 @@
 import Selector from './Selector.vue'
 import PostCard from './PostCard.vue'
 export default {
-  name: 'Campus',
+  name: 'Trainee',
   data () {
     return {
       postChosen: '',

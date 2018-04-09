@@ -1,15 +1,14 @@
 <template>
-  <div id="app" style="width: 1880px">
+  <div id="app" style="min-width: 1366pt">
     <el-container>
       <el-header>
         <XhwlHeader></XhwlHeader>
       </el-header>
-      <el-main>
+      <el-main style="top:-10%">
         <router-view></router-view>
       </el-main>
       <xhwl-footer></xhwl-footer>
       <span class="copyright" style="display: inline-block;margin:0 auto;">Copyright © 2004-2015  兴海物联 版权所有</span>
-
     </el-container>
   </div>
 </template>
@@ -18,6 +17,7 @@
 import XhwlHeader from './components/XhwlHeader.vue'
 import XhwlFooter from './components/XhwlFooter.vue'
 import Home from './components/Home.vue'
+import ElFooter from '../node_modules/element-ui/packages/footer/src/main.vue'
 export default {
   name: 'App',
   data () {
@@ -49,7 +49,9 @@ export default {
     }
   },
   methods: {},
-  components: {XhwlHeader,
+  components: {
+    ElFooter,
+    XhwlHeader,
     XhwlFooter,
     Home}
 }
