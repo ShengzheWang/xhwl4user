@@ -19,11 +19,34 @@ a:link {
 }
 
 ol, ul {
-    padding-left: 0;
-    list-style-type: none
+  padding-left: 0;
+  list-style-type: none
 }
 .block{
     margin: 0;
+}
+.el-menu-demo{
+  border: none;
+}
+
+.el-button{
+  background: #f6f6f6;
+}
+.el-button--primary{
+  background:#1476C1;
+  border: none;
+}
+
+.el-button--text{
+  color:#222222;
+}
+.el-menu-item{
+  font-size: 18px;
+}
+
+.el-submenu__title{
+  font-size: 18px;
+  border-bottom: none;
 }
 .el-carousel__item h3 {
     color: #475669;
@@ -48,6 +71,7 @@ ol, ul {
 .el-col {
     border-radius: 4px;
 }
+
 .wrap {
     -webkit-box-flex: 1;
     flex: 1;

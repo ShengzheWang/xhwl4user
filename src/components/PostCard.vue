@@ -26,7 +26,7 @@
           <div v-if="item.Ashow" >
             <div style="margin-top: 1%">
               <div style="display:block">
-              <i class="el-icon-location"/>
+              <img src="../assets/responsibility.png">
               <a style="font-size: 20px">岗位描述：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
@@ -35,7 +35,7 @@
             </div>
             <div style="margin-top: 1%">
               <div style="display:block">
-                <i class="el-icon-location"/>
+                <img src="../assets/requirement.png">
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">

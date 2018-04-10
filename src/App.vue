@@ -4,11 +4,9 @@
       <el-header>
         <XhwlHeader></XhwlHeader>
       </el-header>
-      <el-main style="top:-10%">
         <router-view></router-view>
-      </el-main>
       <xhwl-footer></xhwl-footer>
-      <span class="copyright" style="display: inline-block;margin:0 auto;">Copyright © 2004-2015  兴海物联 版权所有</span>
+      <span class="copyright" style="display:block;margin:0 auto;text-align: center">Copyright © 2004-2015  兴海物联 版权所有</span>
     </el-container>
   </div>
 </template>

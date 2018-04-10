@@ -16,26 +16,19 @@
     <!--<div class="show-rectangle-se">4</div>-->
     <!--</div>-->
     <div style="width: 40%;margin:3% auto;">
-      <el-input placeholder="请输入内容" v-model="input3" style="margin-left:-1%">
-        <template slot="prepend">立即搜索</template>
-        <el-button slot="append" icon="el-icon-search"></el-button>
+      <el-input placeholder=" 立即搜索" v-model="input3" style="margin-left:-1%;;font-size: 21.06px;">
+        <el-button slot="append"><img src="../assets/search.png"> </el-button>
       </el-input>
 
       <div style="margin-top: 4%;margin-left:2%">
-        <h3 style="display: inline;margin-right: 3%">工作地点</h3>
+        <h3 style="display: inline;margin-right: 3%;font-weight: 500">工作地点：</h3>
 
-        <el-button type="text" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        <el-button type="text" style="font-weight: 600;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
 
       </div>
       <div style="margin-top: 2%;margin-left:2%">
-        <h3 style="display: inline;margin-right: 3%">职位类型</h3>
-        <el-button type="text" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
-      </div>
-      <div style="margin-top: 2%;margin-left:2%">
-        <h3 style="display: inline;margin-right: 3%">招聘类型</h3>
-        <el-radio-group v-model="postChosen" >
-          <el-radio v-for="item in posts" border :label="item.text" :key="item.value"></el-radio>
-        </el-radio-group>
+        <h3 style="display: inline;margin-right: 3%;font-weight: 500">职位类型：</h3>
+        <el-button type="text" style="font-weight: 600;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
       </div>
 
       <!--<el-switch-->
@@ -90,14 +83,23 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  Home {
+<style lang="less">
+  #Home {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #2c3e50;
-    margin-top: 60px;
+    margin-top: -20px;
+    font-size: 18px;
+  .el-input__inner{
+    border:3px solid #1476C1;
+    border-radius:44px 0 0 44px;
   }
-
+  .el-input-group__append{
+    border:1px solid #1476C1;
+    border-radius:0px 44px 44px 0;
+    background: #1476C1;
+  }
+  }
 </style>
