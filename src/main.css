@@ -29,14 +29,23 @@ ol, ul {
   border: none;
 }
 
-.el-button{
+.button4plain{
   background: #f6f6f6;
 }
 .el-button--primary{
   background:#1476C1;
-  border: none;
 }
-
+.radio4forms {
+  border-radius: 26px !important;
+  width: 160px !important;
+  margin: 0 50px;
+}
+.item4forms{
+  border-radius: 30px 0 0 30px;
+}
+.img4forms{
+  filter:Invert();
+}
 .el-button--text{
   color:#222222;
 }

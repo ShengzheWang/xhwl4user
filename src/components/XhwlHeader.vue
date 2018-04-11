@@ -2,9 +2,12 @@
   <div id="Xhwlheader" style="height:50px">
 
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-               :router='true' background-color="#f6f6f6"
+               :router='true'
+               text-color="#444444"
+               background-color="#f6f6f6"
                active-text-color='#1476C1'
-               style="margin:auto;top:-50px;float: right;margin-right:33% ;height:90px">
+               active-background-color="#f6f6f6"
+               style="width:600px;margin:0 auto;top:-40px;height:90px">
 
         <el-menu-item index="1" style="border: none" route="/">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social">社会招聘</el-menu-item>
@@ -19,9 +22,9 @@
       </el-menu>
     <div style="position:absolute;top: 2.5%;left: 1500px" v-if="Need2Login">
       <div>
-        <el-button plain round @click="dialogFormVisible = true"
+        <el-button plain round @click="dialogFormVisible = true" class="button4plain"
                    style="border: 2px solid #909399;border-radius:28px;color:#909399;font-size: 16px">注册</el-button>
-        <el-button plain round @click="dialogFormVisible1 = true"
+        <el-button plain round @click="dialogFormVisible1 = true" class="button4plain"
                    style="border: 2px solid #909399;;border-radius:28px;color: #909399;font-size: 16px">登录</el-button>
       </div>
     </div>
@@ -97,7 +100,7 @@ export default {
       formLabelWidth: '14%',
       labelPosition: 'left',
       labelPosition1: 'left',
-      Need2Login: true,
+      Need2Login: false,
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]

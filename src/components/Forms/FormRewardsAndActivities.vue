@@ -41,18 +41,6 @@ export default {
 }
 </script>
 <style scoped>
-  #FormRewardsAndActivities::before{
-    content:"";
-    position: absolute;
-    right: 79%;
-    top: 62%;
-    width: 0;
-    height: 0;
-    border-top: 16px solid transparent;
-    border-right: 32px solid #ffffff;
-    border-bottom: 16px solid transparent;
-
-  }
   .input-date{
     width:40.3%;
   }

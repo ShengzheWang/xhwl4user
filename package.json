@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "element": "^0.1.4",
-    "element-ui": "^2.3.2",
+    "element-ui": "^2.3.3",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "vue": "^2.5.2",

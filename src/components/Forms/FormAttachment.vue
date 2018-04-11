@@ -47,16 +47,5 @@ export default {
 }
 </script>
 <style scoped>
-  #FormAttachment::before{
-    content:"";
-    position: absolute;
-    right: 79%;
-    top: 92%;
-    width: 0;
-    height: 0;
-    border-top: 16px solid transparent;
-    border-right: 32px solid #ffffff;
-    border-bottom: 16px solid transparent;
 
-  }
 </style>
