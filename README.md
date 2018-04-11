@@ -1,4 +1,8 @@
 # 招娉网站对用户前端项目日志
+## 运行步骤：
+- npm install
+- 将根目录下的element-ui.commom.js放在node_modules\element-ui\lib下覆盖原文件
+- npm run dev
 
 **请前端人员在更改项目时以如下格式写明自己正在做以及做完的组件或者其他文件**
 ```markdown
