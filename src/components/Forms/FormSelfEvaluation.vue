@@ -9,10 +9,10 @@
             type="textarea"
             :rows="15"
             placeholder="请输入内容"
+            v-model="formSelfEvaluation.self_description"
           >
           </el-input>
         </el-form-item>
-
         <el-form-item  style="width: 25%">
           <el-button type="primary" @click="nextStep()">保存并进行下一步</el-button>
         </el-form-item>
@@ -23,19 +23,23 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      select: '',
-      imageUrl: ''
+  export default {
+    data () {
+      return {
+        formSelfEvaluation: {
+          ID: null,
+          resume_id:null,
+          self_description: ''
     }
-  },
-  methods: {
-    nextStep () {
-      this.$router.push('/ResumeForm/10')
+    }
+    },
+    methods: {
+      nextStep () {
+        this.$router.push('/ResumeForm/10')
+      }
     }
   }
-}
 </script>
+
 <style scoped>
 </style>
