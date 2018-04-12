@@ -4,29 +4,24 @@
       <div style="width:100%;height:30px">
       </div>
       <el-form label-position="labelPosition" label-width="140px">
-        <el-form-item label="入学日期">
-          <el-date-picker type="date" placeholder="选择日期"
+        <el-form-item label="开始日期">
+          <el-date-picker type="date" placeholder="选择日期" v-model="formTraining.training_start_time"
                           class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="毕业日期">
-          <el-date-picker type="date" placeholder="选择日期"
+          <el-date-picker type="date" placeholder="选择日期" v-model="formTraining.training_end_time"
                           class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="培训机构" style="width: 50%">
-          <el-input></el-input>
+          <el-input v-model="formTraining.training_institutions"></el-input>
         </el-form-item>
         <el-form-item label="培训内容" style="width: 50%">
-          <el-input></el-input>
-        </el-form-item>
-        <el-form-item label="详细描述" style="width: 100%">
           <el-input
             type="textarea"
-            :rows="5"
-            placeholder="请输入内容"
-           >
+            :rows="5" v-model="formTraining.training_description"
+            placeholder="请输入内容">
           </el-input>
         </el-form-item>
-
         <el-form-item label="还有其他培训经历？" style="width: 50%">
           <el-button><i class="el-icon-plus"></i></el-button>
         </el-form-item>
@@ -40,19 +35,26 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      select: '',
-      imageUrl: ''
-    }
-  },
-  methods: {
-    nextStep () {
-      this.$router.push('/ResumeForm/4')
+  export default {
+    data () {
+      return {
+        formTraining:{
+          ID:null,
+          resume_id:null,
+          training_start_time:'',
+          training_end_time:'',
+          training_institutions:'',
+          training_description:''
+        }
+      }
+    },
+    methods: {
+      nextStep () {
+        this.$router.push('/ResumeForm/4')
+      },
+
     }
   }
-}
 </script>
 <style scoped>
   .input-date{

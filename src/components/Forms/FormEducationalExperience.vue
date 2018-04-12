@@ -6,23 +6,30 @@
       <el-form label-position="labelPosition" label-width="140px">
         <el-form-item label="入学日期">
           <el-date-picker type="date" placeholder="选择日期"
-                          class="input-date"></el-date-picker>
+                          class="input-date" v-model="formEducation.education_start_time"></el-date-picker>
         </el-form-item>
         <el-form-item label="毕业日期">
           <el-date-picker type="date" placeholder="选择日期"
-                          class="input-date"></el-date-picker>
+                          class="input-date" v-model="formEducation.education_end_time"></el-date-picker>
         </el-form-item>
         <el-form-item label="学校" style="width: 50%">
-          <el-input></el-input>
+          <el-input v-model="formEducation.education_school"></el-input>
         </el-form-item>
         <el-form-item label="专业" style="width: 50%">
-          <el-input></el-input>
+          <el-input v-model="formEducation.education_speciality"></el-input>
         </el-form-item>
         <el-form-item label="学历" style="width: 50%">
-          <el-input></el-input>
+          <el-select v-model="formEducation.education_history" placeholder="请选择学历">
+            <el-option label="高中" value=1></el-option>
+            <el-option label="专科" value=2></el-option>
+            <el-option label="本科" value=3></el-option>
+            <el-option label="研究生" value=4></el-option>
+            <el-option label="博士生" value=5></el-option>
+            <el-option label="博士后" value=6></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="专业成绩排名占比" style="width: 50%">
-          <el-input>
+          <el-input v-model="formEducation.rank">
             <template slot="append">%</template>
           </el-input>
         </el-form-item>
@@ -39,18 +46,27 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      select: ''
-    }
-  },
-  methods: {
-    nextStep () {
-      this.$router.push('/ResumeForm/3')
+  export default {
+    data () {
+      return {
+        formEducation:{
+          ID: 0,
+          resume_id: 0,
+          education_start_time: '',
+          education_end_time: '',
+          education_school: '',
+          education_speciality:'',
+          education_history:null,
+          rank:'',
+        }
+      }
+    },
+    methods: {
+      nextStep () {
+        this.$router.push('/ResumeForm/3')
+      }
     }
   }
-}
 </script>
 <style scoped>
 

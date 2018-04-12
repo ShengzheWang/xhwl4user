@@ -3,22 +3,21 @@
     <div style="width:90%;margin: 0% auto;">
       <div style="width:100%;height:30px">
       </div>
-      <el-form label-position="labelPosition" label-width="140px">
+      <el-form label-position="labelPosition" label-width="140px" >
         <el-form-item label="起始日期">
-          <el-date-picker type="date" placeholder="选择日期"
+          <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.work_start_time"
                           class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="结束日期">
-          <el-date-picker type="date" placeholder="选择日期"
+          <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.work_end_time"
                           class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="所在公司" style="width: 50%">
-          <el-input></el-input>
+          <el-input v-model="formWorkExp.work_company"></el-input>
         </el-form-item>
         <el-form-item label="所任职位" style="width: 50%">
-          <el-input></el-input>
+          <el-input v-model="formWorkExp.work_position"></el-input>
         </el-form-item>
-
         <el-form-item label="还有其他工作经历？" style="width: 50%">
           <el-button><i class="el-icon-plus"></i></el-button>
         </el-form-item>
@@ -32,19 +31,26 @@
   </div>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      select: '',
-      imageUrl: ''
-    }
-  },
-  methods: {
-    nextStep () {
-      this.$router.push('/ResumeForm/6')
+  export default {
+    data () {
+      return {
+        formWorkExp:{
+          ID:null,
+          resume_id:null,
+          work_start_time:'',
+          work_end_time:'',
+          work_company:'',
+          work_position:''
+        }
+      }
+    },
+    methods: {
+      nextStep () {
+        this.$router.push('/ResumeForm/6')
+      },
+
     }
   }
-}
 </script>
 <style scoped>
 

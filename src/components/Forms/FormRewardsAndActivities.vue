@@ -5,14 +5,15 @@
       </div>
       <el-form label-position="labelPosition" label-width="140px">
         <el-form-item label="奖励日期">
-          <el-date-picker type="date" placeholder="选择日期"
+          <el-date-picker type="date" placeholder="选择日期" v-model="formAward.award_date"
                           class="input-date"></el-date-picker>
-        </el-form-item>
 
-        <el-form-item label="奖励名称" style="width: 50%">
+        </el-form-item>
+        <el-form-item label="奖励名称" style="width: 50%" v-model="formAward.award_name">
           <el-input></el-input>
         </el-form-item>
-
+      </el-form>
+      <el-form label-position="labelPosition" label-width="140px">
         <el-form-item label="还有其他奖励？" style="width: 50%">
           <el-button><i class="el-icon-plus"></i></el-button>
         </el-form-item>
@@ -26,6 +27,29 @@
   </div>
 </template>
 <script>
+
+
+  export default {
+    data () {
+      return {
+        formAward:{
+          ID:null,
+          resume_id:null,
+          index:1,
+          award_name:'',
+          award_date:''
+
+        }
+      }
+    },
+    methods: {
+      nextStep () {
+        this.$router.push('/ResumeForm/8');
+      },
+
+    }
+  }
+</script>
 export default {
   data () {
     return {
