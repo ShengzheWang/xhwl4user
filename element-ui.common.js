@@ -6605,7 +6605,8 @@ exports.default = {
     disabled: Boolean,
     name: String,
     border: Boolean,
-    size: String
+    size: String,
+    isText: Boolean
   },
 
   data: function data() {
@@ -6725,7 +6726,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   [_c('span',{staticClass:"el-radio__input",class:{
       'is-disabled': _vm.isDisabled,
       'is-checked': _vm.model === _vm.label
-    }},[_c('span',{staticClass:""}),
+    }},[_c('span',{staticClass:_vm.isText?"":"el-radio__inner"}),
   _c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.model),expression:"model"}],staticClass:"el-radio__original",
     attrs:{"type":"radio","name":_vm.name,"disabled":_vm.isDisabled,"tabindex":"-1"},domProps:{"value":_vm.label,"checked":_vm._q(_vm.model,_vm.label)},on:{"focus":function($event){_vm.focus = true},"blur":function($event){_vm.focus = false},"change":[function($event){_vm.model=_vm.label},_vm.handleChange]}})]),_c('span',{staticClass:"el-radio__label"},[_vm._t("default"),(!_vm.$slots.default)?[_vm._v(_vm._s(_vm.label))]:_vm._e()],2)])}
 var staticRenderFns = []

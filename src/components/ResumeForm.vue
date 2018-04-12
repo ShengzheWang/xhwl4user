@@ -2,9 +2,9 @@
   <div id="ResumeForm" style="width: 70%;margin:0% auto;border-top: solid 1px #e6e6e6" class="animated bounceInLeft">
     <div style="margin:0 auto;text-align: center">
       <el-radio-group v-model="resumes_form" size="large">
-        <el-radio class="radio4forms" label="1" border style="margin-top: 20px">校园招聘简历</el-radio>
-        <el-radio class="radio4forms" label="2" border >社会招聘简历</el-radio>
-        <el-radio class="radio4forms" label="3" border >实习招聘简历</el-radio>
+        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
+        <el-radio class="radio4forms" label="2" border isText>社会招聘简历</el-radio>
+        <el-radio class="radio4forms" label="3" border isText>实习招聘简历</el-radio>
       </el-radio-group>
       <div style=" width:49%;margin:0 auto">
       <transition class="fade-in-linear-enter">

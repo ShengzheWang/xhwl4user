@@ -100,7 +100,7 @@ export default {
       formLabelWidth: '14%',
       labelPosition: 'left',
       labelPosition1: 'left',
-      Need2Login: false,
+      Need2Login: true,
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
