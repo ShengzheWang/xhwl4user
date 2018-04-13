@@ -1,9 +1,12 @@
 <template>
   <div id="FormBasicInformation">
     <div style="width:90%;margin: 0% auto;">
-      <div style="width:100%;height:30px">
+      <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="140px">
+      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2><h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
+      <div style="width:100%;height:10px">
+      </div>
+      <el-form label-position="labelPosition" label-width="200px">
 
         <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
           <el-upload
@@ -66,8 +69,9 @@
         <el-form-item label="现居住地" style="width: 50%">
           <el-input v-model="formBasic.present_address"></el-input>
         </el-form-item>
+        <div class="needMarginBorder"></div>
         <el-form-item  style="width: 25%">
-          <el-button type="primary" @click="nextStep()">保存并进行下一步</el-button>
+          <el-button type="primary" class="button4forms" @click="nextStep()">保存并进行下一步</el-button>
         </el-form-item>
       </el-form>
       <div style="width:100%;height:30px">
@@ -77,37 +81,36 @@
 </template>
 <script>
 
+export default {
+  data () {
+    return {
+      formBasic: {
 
-  export default {
-    data () {
-      return {
-        formBasic:{
-
-          ID:'',
-          resume_id:null,
-          name:'',
-          sex:null,
-          id_type:null,
-          id_number:'',
-          birthday:'',
-          email:'',
-          telephone:'',
-          marital_status:null,
-          work_seniority:'',
-          political_status:'',
-          present_address:'',
-          imageUrl: ''
-        },
-
+        ID: '',
+        resume_id: null,
+        name: '',
+        sex: null,
+        id_type: null,
+        id_number: '',
+        birthday: '',
+        email: '',
+        telephone: '',
+        marital_status: null,
+        work_seniority: '',
+        political_status: '',
+        present_address: '',
+        imageUrl: ''
       }
-    },
-    methods: {
-      nextStep () {
-        this.$router.push('/ResumeForm/2')
-      }
+
     }
-
+  },
+  methods: {
+    nextStep () {
+      this.$router.push('/ResumeForm/2')
+    }
   }
+
+}
 </script>
 <style>
   .avatar-uploader .el-upload {
