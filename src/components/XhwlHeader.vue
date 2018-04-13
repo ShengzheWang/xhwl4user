@@ -74,16 +74,16 @@
     <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto">
       <el-form :label-position="labelPosition1" label-width="60px">
         <el-form-item label="手机号">
-          <el-input></el-input>
+          <el-input v-model="user.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input></el-input>
+          <el-input v-model="user.password"></el-input>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible1 = false">确 定</el-button>
+        <el-button type="primary" @click="login();">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -101,6 +101,10 @@ export default {
       labelPosition: 'left',
       labelPosition1: 'left',
       Need2Login: true,
+      user: {
+        username: '',
+        password: ''
+      },
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
@@ -110,6 +114,22 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    login () {
+      this.$axios({
+        method: 'post',
+        url: '/login',
+        baseURL: 'http://localhost:8080',
+        data: {
+          username: this.$data.user.username,
+          password: this.$data.user.password
+        },
+        auth: {
+        }
+      }).then(function (response) {
+        console.log(response)
+      })
+
     }
   }
 }

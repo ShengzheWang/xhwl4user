@@ -24,6 +24,7 @@ import FormTrainingExperience from './components/Forms/FormTrainingExperience.vu
 import FormWorkExperience from './components/Forms/FormWorkExperience.vue'
 
 import Router from 'vue-router'
+import axios from 'axios'
 import './components/XhwlHeader.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -33,6 +34,7 @@ import './main.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Router)
+Vue.prototype.$axios = axios
 const routes = [
   { path: '', component: Home },
   { path: '/Social', component: Social },
