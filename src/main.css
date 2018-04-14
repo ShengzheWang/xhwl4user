@@ -40,7 +40,30 @@ ol, ul {
   width: 160px !important;
   margin: 0 50px;
 }
+.button4plain{
+  border: 1px solid #707070;border-radius:14px;color:#707070;font-size: 16px;
+  height: 28px;
+  width: 60px;
+  line-height: 0;
+  padding: 0;
+}
+.button4plain:hover{
+  color:#1376BE;
+  border-color:#1376BE;
+  background-color: #f6f6f6 !important;
 
+}
+.item4menu{
+  background: #f6f6f6 !important;
+  color:#484848
+}
+.item4menu:hover{
+  background: #f6f6f6 !important;
+  color:#1376BE !important;
+}
+.item4menu.is-active{
+  color:#1A72B7 !important;
+}
 .button4forms{
   background: #E01B2F;
   border: 1px solid #E01B2F;

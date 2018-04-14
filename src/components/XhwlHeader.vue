@@ -7,28 +7,28 @@
                background-color="#f6f6f6"
                active-text-color='#1476C1'
                active-background-color="#f6f6f6"
-               style="width:600px;margin:0 auto;top:-40px;height:90px">
+               style="width:598px;margin:0 auto;top:-40px;height:120px">
 
-        <el-menu-item index="1" style="border: none" route="/">首页</el-menu-item>
-        <el-menu-item index="2" style="border: none" route="/Social">社会招聘</el-menu-item>
-        <el-submenu index="3" style="border: none" mode="horizontal">
+        <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
+        <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
+        <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
           <template style="border: none" slot="title">校园招聘</template>
           <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
           <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
           <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
         </el-submenu>
-        <el-menu-item index="4" style="border: none" route="/Trainee">实习生招聘</el-menu-item>
-        <el-menu-item index="5" style="border: none" route="/AboutUs" >关于兴海物联</el-menu-item>
+        <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
+        <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
-    <div style="position:absolute;top: 2.5%;left: 1500px" v-if="Need2Login">
+    <div style="position:absolute;top: 30px;right: 10%" v-if="Need2Login">
       <div>
-        <el-button plain round @click="dialogFormVisible = true" class="button4plain"
-                   style="border: 2px solid #909399;border-radius:28px;color:#909399;font-size: 16px">注册</el-button>
-        <el-button plain round @click="dialogFormVisible1 = true" class="button4plain"
-                   style="border: 2px solid #909399;;border-radius:28px;color: #909399;font-size: 16px">登录</el-button>
+        <el-button plain @click="dialogFormVisible = true" class="button4plain"
+                   style="">注册</el-button>
+        <el-button plain @click="dialogFormVisible1 = true" class="button4plain"
+                   style="">登录</el-button>
       </div>
     </div>
-      <div style="position:absolute;top: 2.5%;left: 1600px" v-else>
+      <div style="position:absolute;top: 30px;right:10%" v-else>
       <el-dropdown >
         <el-badge :value="mine[2].messageNum" class="item">
       <el-button  type="text" ><img
@@ -45,12 +45,12 @@
         </el-dropdown-menu>
       </el-dropdown>
       </div>
-      <a style="position: absolute;top: 2.5%;left: 188px;font-size: 32px;"><img
-        src="../assets/logoMain.png"></a>
+      <a style="position: absolute;top: 25px;left:5%;font-size: 32px;"><img
+        src="../assets/logoMain.png" style="height:auto;width: 100%"></a>
 
     <div class="line"></div>
 
-    <el-dialog title="注册" :visible.sync="dialogFormVisible" style="width: 50%;margin:auto auto">
+    <el-dialog title="注册" :visible.sync="dialogFormVisible" style="width: 50%;margin:auto auto" :lock-scroll="false">
       <el-form label-position="labelPosition" label-width="60px">
         <el-form-item label="手机号">
           <el-input></el-input>
@@ -71,7 +71,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto">
+    <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto" :lock-scroll="false">
       <el-form :label-position="labelPosition1" label-width="60px">
         <el-form-item label="手机号">
           <el-input v-model="user.username"></el-input>
@@ -100,14 +100,15 @@ export default {
       formLabelWidth: '14%',
       labelPosition: 'left',
       labelPosition1: 'left',
-      Need2Login: true,
+      Need2Login: false,
       user: {
         username: '',
         password: ''
       },
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3},
+        {path: '/logout', text: '注销'}]
 
     }
   },
@@ -116,18 +117,27 @@ export default {
       console.log(key, keyPath)
     },
     login () {
+      let _this = this
       this.$axios({
         method: 'post',
         url: '/login',
-        baseURL: 'http://localhost:8080',
-        data: {
+        baseURL: 'http://119.29.16.250:8080/',
+        data: this.$qs.stringify({
           username: this.$data.user.username,
           password: this.$data.user.password
-        },
-        auth: {
-        }
+        })
+//        header: {
+//          'Content-type': 'application/x-www-form-urlencoded'
+//        }
       }).then(function (response) {
-        console.log(response)
+        console.log(response.data.data)
+        const token = response.data.data
+        _this.$axios.defaults.headers.Authorization = token
+        _this.$axios({
+          method: 'get',
+          url: '/person',
+          baseURL: 'http://119.29.16.250:8080/',
+        })
       })
 
     }
@@ -155,6 +165,9 @@ export default {
 
     .el-button--text{
       color:#222222;
+    }
+    .el-dropdown-menu__item{
+      letter-spacing: 2.5px;
     }
   }
 

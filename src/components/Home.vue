@@ -2,7 +2,7 @@
   <div id="Home">
     <div class="block">
 
-      <el-carousel height="450pt" width="100%">
+      <el-carousel height="540pt" width="100%">
         <el-carousel-item v-for="item in items" :key="item.value">
           <h1 style="margin: 10% 49%;">{{ item.text }}</h1>
         </el-carousel-item>
@@ -15,20 +15,20 @@
     <!--<div class="show-rectangle-sw">3</div>-->
     <!--<div class="show-rectangle-se">4</div>-->
     <!--</div>-->
-    <div style="width: 40%;margin:3% auto;">
-      <el-input placeholder=" 立即搜索" v-model="input3" style="margin-left:-1%;;font-size: 21.06px;">
+    <div style="width: 620px;margin:3% auto;">
+      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;margin-left: -1%">
         <el-button slot="append"><img src="../assets/search.png"> </el-button>
       </el-input>
 
       <div style="margin-top: 4%;margin-left:2%">
-        <h3 style="display: inline;margin-right: 3%;font-weight: 500">工作地点：</h3>
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
 
-        <el-button type="text" style="font-weight: 600;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
 
       </div>
       <div style="margin-top: 2%;margin-left:2%">
-        <h3 style="display: inline;margin-right: 3%;font-weight: 500">职位类型：</h3>
-        <el-button type="text" style="font-weight: 600;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
+        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
       </div>
 
       <!--<el-switch-->
@@ -36,9 +36,6 @@
       <!--active-text="校园招聘"-->
       <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
       <!--</el-switch>-->
-    </div>
-    <div style="text-align: center">
-      <el-button type="primary" style="margin: auto;width: 20%" round>投递简历</el-button>
     </div>
   </div>
 </template>
@@ -93,12 +90,13 @@ export default {
     margin-top: -20px;
     font-size: 18px;
   .el-input__inner{
-    border:3px solid #1476C1;
-    border-radius:44px 0 0 44px;
+    border:4px solid #1476C1;
+    border-radius:100px 0 0 100px;
+    height: 60px;
   }
   .el-input-group__append{
     border:1px solid #1476C1;
-    border-radius:0px 44px 44px 0;
+    border-radius:0px 100px 100px 0;
     background: #1476C1;
   }
   }
