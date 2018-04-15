@@ -35,10 +35,10 @@ export default {
   data () {
     return {
       formIntention: {
-        ID: null,
-        resume_id: null,
-        work_place: null,
-        salary: null,
+        ID: '',
+        resume_id: '',
+        work_place: '',
+        salary: '',
         expected_time_for_duty: ''
       }
     }

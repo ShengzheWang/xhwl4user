@@ -55,13 +55,13 @@ export default {
   data () {
     return {
       formEducation: {
-        ID: 0,
-        resume_id: 0,
+        ID: '',
+        resume_id: '',
         education_start_time: '',
         education_end_time: '',
         education_school: '',
         education_speciality: '',
-        education_history: null,
+        education_history: '',
         rank: ''
       }
     }
