@@ -70,7 +70,6 @@ export default {
     ElButton},
   data () {
     return {
-<<<<<<< HEAD
       formsEducation: [{
         startTime: '',
         endTime: '',
@@ -86,17 +85,6 @@ export default {
         school: '',
         speciality: '',
         educationHistory: null,
-=======
-      formEducation: {
-        ID: '',
-        resume_id: '',
-        education_start_time: '',
-        education_end_time: '',
-        education_school: '',
-        education_speciality: '',
-        education_history: '',
->>>>>>> 45f39bf40072d70e794c4c6fe825a60a25794488
-        rank: ''
       }
     }
   },
