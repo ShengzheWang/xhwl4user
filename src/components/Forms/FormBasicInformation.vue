@@ -24,17 +24,17 @@
           <el-input v-model="formBasic.name"></el-input>
         </el-form-item>
         <el-form-item label="性别">
-          <el-radio-group v-model="formBasic.sex">
-            <el-radio label="男" value="1"></el-radio>
-            <el-radio label="女" value="2"></el-radio>
-          </el-radio-group>
+          <el-select v-model="formBasic.sex">
+            <el-option label="男" :value="1"></el-option>
+            <el-option label="女" :value="1"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="证件类型及号码" style="width: 50%">
-          <el-input class="input-with-select" >
-            <el-select v-model="formBasic.id_type" slot="prepend"  placeholder="证件类型" style="width: 110px">
-              <el-option label="身份证" value="1"></el-option>
-              <el-option label="港澳台通行证" value="2"></el-option>
-              <el-option label="护照" value="3"></el-option>
+          <el-input class="input-with-select" v-model="formBasic.idNumber">
+            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 110px">
+              <el-option label="身份证" :value="1"></el-option>
+              <el-option label="港澳台通行证" :value="2"></el-option>
+              <el-option label="护照" :value="3"></el-option>
             </el-select>
           </el-input>
         </el-form-item>
@@ -43,9 +43,9 @@
                           class="input-date"></el-date-picker>
         </el-form-item>
         <el-form-item label="意愿城市">
-          <el-select placeholder="请选择" v-model="formBasic.work_seniority">
-            <el-option label="深圳"></el-option>
-            <el-option label="其他"></el-option>
+          <el-select placeholder="请选择" v-model="formBasic.workSeniority">
+            <el-option label="深圳" value="1"></el-option>
+            <el-option label="其他" value="5"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="电子邮箱" style="width: 50%">
@@ -55,19 +55,19 @@
           <el-input v-model="formBasic.telephone"></el-input>
         </el-form-item>
         <el-form-item label="婚姻状况">
-          <el-select placeholder="请选择" v-model="formBasic.marital_status">
-            <el-option label="已婚" value="1"></el-option>
-            <el-option label="未婚" value="2"></el-option>
+          <el-select placeholder="请选择" v-model="formBasic.maritalStatus">
+            <el-option label="已婚" :value="1"></el-option>
+            <el-option label="未婚" :value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="工作年限" style="width: 50%">
-          <el-input v-model="formBasic.work_seniority"></el-input>
+          <el-input v-model="formBasic.workSeniority"></el-input>
         </el-form-item>
         <el-form-item label="政治面貌" style="width: 50%">
-          <el-input v-model="formBasic.political_status"></el-input>
+          <el-input v-model="formBasic.politicalStatus"></el-input>
         </el-form-item>
         <el-form-item label="现居住地" style="width: 50%">
-          <el-input v-model="formBasic.present_address"></el-input>
+          <el-input v-model="formBasic.presentAddress"></el-input>
         </el-form-item>
         <div class="needMarginBorder"></div>
         <el-form-item  style="width: 25%">
@@ -87,29 +87,47 @@ export default {
       formBasic: {
 
         ID: '',
-        resume_id: null,
+        resumeId: null,
         name: '',
         sex: null,
-        id_type: null,
-        id_number: '',
+        idType: null,
+        idNumber: '',
         birthday: '',
         email: '',
         telephone: '',
-        marital_status: null,
-        work_seniority: '',
-        political_status: '',
-        present_address: '',
+        maritalStatus: null,
+        workSeniority: '',
+        politicalStatus: '',
+        presentAddress: '',
         imageUrl: ''
       }
 
     }
   },
+  created () {
+    let _this = this
+    this.$axios({
+      method: 'get',
+      url: '/person'
+    }).then(function (response) {
+      _this.$data.formBasic = response.data
+      console.log(_this.$data.formBasic)
+
+    })
+  },
   methods: {
     nextStep () {
-      this.$router.push('/ResumeForm/2')
+      let _this = this
+      this.$axios({
+        method: 'post',
+        url: '/person',
+        data: this.$data.formBasic
+      }).then(function (response) {
+        console.log(response.data.data)
+        this.$router.push('/ResumeForm/2')
+      })
     }
   }
-
 }
 </script>
 <style>

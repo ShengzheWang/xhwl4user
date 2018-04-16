@@ -42,6 +42,9 @@
               </el-badge>
             </router-link>
           </el-dropdown-item>
+          <el-dropdown-item>
+            <el-button type="text" @click="Need2Login=true">注销</el-button>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       </div>
@@ -100,16 +103,14 @@ export default {
       formLabelWidth: '14%',
       labelPosition: 'left',
       labelPosition1: 'left',
-      Need2Login: false,
+      Need2Login: true,
       user: {
         username: '',
         password: ''
       },
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3},
-        {path: '/logout', text: '注销'}]
-
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
     }
   },
   methods: {
@@ -121,25 +122,25 @@ export default {
       this.$axios({
         method: 'post',
         url: '/login',
-        baseURL: 'http://119.29.16.250:8080/',
         data: this.$qs.stringify({
           username: this.$data.user.username,
           password: this.$data.user.password
         })
-//        header: {
-//          'Content-type': 'application/x-www-form-urlencoded'
-//        }
       }).then(function (response) {
         console.log(response.data.data)
-        const token = response.data.data
-        _this.$axios.defaults.headers.Authorization = token
-        _this.$axios({
-          method: 'get',
-          url: '/person',
-          baseURL: 'http://119.29.16.250:8080/',
-        })
+        switch (response.data.code ) {
+          case 200:
+            const token = response.data.data
+            _this.$axios.defaults.headers.Authorization = token
+            _this.$data.Need2Login = false
+            _this.$data.dialogFormVisible1 = false
+            break
+          case 500:
+            break
+          case 401:
+            break
+        }
       })
-
     }
   }
 }

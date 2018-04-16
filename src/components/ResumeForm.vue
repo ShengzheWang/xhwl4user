@@ -26,7 +26,7 @@
       active-text-color="#ffffff"
       active-background-color="#1476C1"
       class="el-menu-vertical-demo"
-      router="true"
+      :router="true"
       >
       <el-menu-item  class="item4forms" v-for="item in forms"
                      v-bind:key="item.index" :index="item.index" :route="'/ResumeForm/'+item.index">
