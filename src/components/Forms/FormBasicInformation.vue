@@ -81,13 +81,7 @@
 </template>
 <script>
 
-import {isvalidPhone} from '../../util/Validate'
-import {isvalidEmail} from '../../util/Validate'
-import {isvlaidIDnumber} from '../../util/Validate'
-import {isvalidPassport} from '../../util/Validate'
-import {isvalidPass} from '../../util/Validate'
-import {isvalidAddress} from '../../util/Validate'
-import {isName} from '../../util/Validate'
+import { isvalidPhone, isvalidEmail, isvlaidIDnumber, isvalidPassport, isvalidPass, isvalidAddress, isName } from '../../util/Validate'
 
 var checkEmail = (rule, value, callback) => { // 检查邮箱格式
   if (!value) {
