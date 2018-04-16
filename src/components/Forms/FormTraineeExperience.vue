@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       formTrainee: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         trainee_start_time: '',
         trainee_end_time: '',
         trainee_company: '',

@@ -41,8 +41,8 @@ export default {
     return {
       index: 0,
       formProject: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         project_name: '',
         project_role: '',
         project_description: ''

@@ -44,8 +44,8 @@ export default {
   data () {
     return {
       formTraining: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         training_start_time: '',
         training_end_time: '',
         training_institutions: '',

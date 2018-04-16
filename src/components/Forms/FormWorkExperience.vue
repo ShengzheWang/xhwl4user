@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       formWorkExp: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         work_start_time: '',
         work_end_time: '',
         work_company: '',
