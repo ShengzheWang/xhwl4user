@@ -31,8 +31,8 @@ export default {
   data () {
     return {
       formSelfEvaluation: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         self_description: ''
       }
     }

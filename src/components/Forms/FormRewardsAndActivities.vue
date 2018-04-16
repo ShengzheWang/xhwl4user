@@ -35,8 +35,8 @@ export default {
   data () {
     return {
       formAward: {
-        ID: null,
-        resume_id: null,
+        ID: '',
+        resume_id: '',
         index: 1,
         award_name: '',
         award_date: ''
