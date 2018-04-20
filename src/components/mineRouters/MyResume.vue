@@ -6,21 +6,21 @@
       <div @click="createAResume(1)" v-bind:class="'animated bounce'+show" id="circle1"
            v-bind:style="'animation-delay:'+time[0]+'s'">
         <img
-          src="../../static/social.png">
+          src="../../../static/img/social.png">
       </div>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="创建校园招聘简历" placement="top-end">
       <div @click="createAResume(2)" v-bind:class="'animated bounce'+show" id="circle2"
            v-bind:style="'animation-delay:'+time[1]+'s'">
         <img
-          src="../../static/campus.png">
+          src="../../../static/campus.png">
       </div>
       </el-tooltip>
         <el-tooltip class="item" effect="dark" content="创建实习生招聘简历" placement="top-end">
       <div @click="createAResume(3)" v-bind:class="'animated bounce'+show" id="circle3"
            v-bind:style="'animation-delay:'+time[2]+'s'">
         <img
-          src="../../static/trainee.png">
+          src="../../../static/img/trainee.png">
       </div>
         </el-tooltip>
     </div>
@@ -77,14 +77,14 @@ export default {
     width:300px;
     height:300px;
     border-radius:300px;
-    background:url(../../static/plus.png)no-repeat;
+    background:url(../../../static/img/plus.png)no-repeat;
     background-size: 100% 100%
   }
   #circle2{
     display:inline-block;
     width:300px;
     height:300px;
-    background:url(../../static/plus.png)no-repeat;
+    background:url(../../../static/img/plus.png)no-repeat;
     background-size: 100% 100%;
     border-radius:300px;
     position:relative;
@@ -94,7 +94,7 @@ export default {
     display:inline-block;
     width:300px;
     height:300px;
-    background:url(../../static/plus.png)no-repeat;
+    background:url(../../../static/img/plus.png)no-repeat;
     background-size: 100% 100%;
     border-radius:300px;
     position:relative;

@@ -3,14 +3,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App.vue'
-import Home from './components/Home.vue'
-import Social from './components/Social.vue'
-import Campus from './components/Campus.vue'
-import Trainee from './components/Trainee.vue'
-import MyResume from './components/MyResume.vue'
-import ResumeForm from './components/ResumeForm.vue'
-import MyJobApplication from './components/MyJobApplication.vue'
-import AboutUs from './components/AboutUs.vue'
+import Home from './components/headerRouters/Home.vue'
+import Social from './components/headerRouters/Social.vue'
+import Campus from './components/headerRouters/Campus.vue'
+import Trainee from './components/headerRouters/Trainee.vue'
+import MyResume from './components/mineRouters/MyResume.vue'
+import ResumeForm from './components/mineRouters/ResumeForm.vue'
+import MyJobApplication from './components/mineRouters/MyJobApplication.vue'
 
 import FormBasicInformation from './components/Forms/FormBasicInformation.vue'
 import FormEducationalExperience from './components/Forms/FormEducationalExperience.vue'
@@ -29,8 +28,8 @@ import qs from 'qs'
 import './components/XhwlHeader.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '../static/animate.css'
-import './main.css'
+import '../static/css/animate.css'
+import '../static/css/main.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

@@ -17,7 +17,7 @@
     <!--</div>-->
     <div style="width: 620px;margin:3% auto;">
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;margin-left: -1%">
-        <el-button slot="append"><img src="../assets/search.png"> </el-button>
+        <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
       </el-input>
 
       <div style="margin-top: 4%;margin-left:2%">

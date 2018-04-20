@@ -4,9 +4,9 @@
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true'
                text-color="#444444"
-               background-color="#f6f6f6"
+               background-color="#ffffff"
                active-text-color='#1476C1'
-               active-background-color="#f6f6f6"
+               active-background-color="#ffffff"
                style="width:598px;margin:0 auto;top:-40px;height:120px">
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
@@ -32,7 +32,7 @@
       <el-dropdown >
         <el-badge :value="mine[2].messageNum" class="item">
       <el-button  type="text" ><img
-        src="../../static/Default.png"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        src="../../static/img/Default.png"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
         </el-badge>
         <el-dropdown-menu slot="dropdown" >
           <el-dropdown-item v-for="item in mine">
@@ -49,7 +49,7 @@
       </el-dropdown>
       </div>
       <a style="position: absolute;top: 25px;left:5%;font-size: 32px;"><img
-        src="../assets/logoMain.png" style="height:auto;width: 100%"></a>
+        src="../../static/img/logoMain.png" style="height:auto;width: 100%"></a>
 
     <div class="line"></div>
 
@@ -128,7 +128,7 @@ export default {
         })
       }).then(function (response) {
         console.log(response.data.data)
-        switch (response.data.code ) {
+        switch (response.data.code) {
           case 200:
             const token = response.data.data
             _this.$axios.defaults.headers.Authorization = token

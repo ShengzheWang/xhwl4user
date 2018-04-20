@@ -1,22 +1,22 @@
 <template>
-  <div id="Trainee">
+  <div id="Social">
     <div style="width: 60%;margin:0% auto;height: auto">
       <selector></selector>
       <post-card></post-card>
     </div>
-    <!--<el-switch-->
-    <!--v-model="value3"-->
-    <!--active-text="校园招聘"-->
-    <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
-    <!--</el-switch>-->
+      <!--<el-switch-->
+      <!--v-model="value3"-->
+      <!--active-text="校园招聘"-->
+      <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
+      <!--</el-switch>-->
   </div>
 </template>
 
 <script>
-import Selector from './Selector.vue'
-import PostCard from './PostCard.vue'
+import Selector from '../miniComponents/Selector.vue'
+import PostCard from '../miniComponents/PostCard.vue'
 export default {
-  name: 'Trainee',
+  name: 'Social',
   data () {
     return {
       postChosen: '',

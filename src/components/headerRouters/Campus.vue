@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Selector from './Selector.vue'
-import PostCard from './PostCard.vue'
+import Selector from '../miniComponents/Selector.vue'
+import PostCard from '../miniComponents/PostCard.vue'
 export default {
   name: 'Campus',
   data () {

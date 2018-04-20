@@ -21,7 +21,7 @@
     <el-menu
       :default-active="formNow"
       @select="handleSelect"
-      background-color="#f6f6f6"
+      background-color="#ffffff"
       text-color="#444444"
       active-text-color="#ffffff"
       active-background-color="#1476C1"
@@ -31,16 +31,16 @@
       <el-menu-item  class="item4forms" v-for="item in forms"
                      v-bind:key="item.index" :index="item.index" :route="'/ResumeForm/'+item.index">
         <template slot="title">
-          <img :src="'../../static/icon'+item.index+'.png'" class="img4forms">
+          <img :src="'../../static/img/formIcon/icon'+item.index+'.png'" class="img4forms">
           <span style="font-size: 20px;margin-left: 15px">{{item.name}}</span>
-          <img v-if="item.isNecessary" src="../assets/necessary.png" class="img4forms" style="margin-left: 15px">
+          <img v-if="item.isNecessary" src="../../../static/img/necessary.png" class="img4forms" style="margin-left: 15px">
         </template>
       </el-menu-item>
 
     </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="width: 100%;min-height: 560px;margin:0 -1px; background: #f6f6f6;border: solid 1px #e6e6e6" >
+        <div style="width: 100%;min-height: 700px;margin:0 -1px; background: #ffffff;border: solid 1px #e6e6e6" >
           <router-view ></router-view>
         </div>
       </el-col>

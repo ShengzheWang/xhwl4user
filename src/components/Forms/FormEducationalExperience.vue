@@ -1,13 +1,13 @@
 <template>
-  <div id="FormEducationExperience" >
-    <div style="width:90%;margin: 0% auto;">
+  <div id="FormEducationExperience"  >
+    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">教育经历</h2>
       <div style="width:100%;height:10px">
       </div>
 
-      <el-form v-for="(formEducation,index) in formsEducation" label-position="labelPosition" label-width="200px" class="animated fadeIn">
+      <el-form v-for="(formEducation,index) in formsEducation" label-position="labelPosition" label-width="200px" >
         <el-form-item label="入学日期">
           <el-date-picker type="date" placeholder="选择日期"
                           class="input-date" v-model="formEducation.startTime"></el-date-picker>
@@ -70,14 +70,8 @@ export default {
     ElButton},
   data () {
     return {
-      formsEducation: [{
-        startTime: '',
-        endTime: '',
-        school: '',
-        speciality: '',
-        educationHistory: null,
-        rank: ''
-      }],
+      formsEducation: null,
+      loading: true,
       formEducationDefault: {
         id: null,
         startTime: '',
@@ -88,13 +82,16 @@ export default {
       }
     }
   },
-  created () {
+  beforeCreate () {
     let _this = this
     this.$axios({
       method: 'get',
       url: '/education'
     }).then(function (response) {
-      _this.$data.formsEducation = response.data
+      _this.$nextTick(() => {
+        _this.$data.formsEducation = response.data
+        _this.$data.loading = false
+      })
 
     })
   },

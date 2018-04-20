@@ -14,7 +14,7 @@
 <script>
 import XhwlHeader from './components/XhwlHeader.vue'
 import XhwlFooter from './components/XhwlFooter.vue'
-import Home from './components/Home.vue'
+import Home from './components/headerRouters/Home.vue'
 import ElFooter from '../node_modules/element-ui/packages/footer/src/main.vue'
 export default {
   name: 'App',

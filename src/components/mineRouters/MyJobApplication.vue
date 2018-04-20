@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import ElIcon from '../../node_modules/element-ui/packages/icon/src/icon.vue'
+import ElIcon from '../../../node_modules/element-ui/packages/icon/src/icon.vue'
 
 export default {
   components: {ElIcon},

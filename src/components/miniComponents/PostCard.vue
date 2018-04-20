@@ -26,7 +26,7 @@
           <div v-if="item.Ashow" >
             <div style="margin-top: 1%">
               <div style="display:block">
-              <img src="../assets/responsibility.png">
+              <img src="../../../static/img/responsibility.png">
               <a style="font-size: 20px">岗位描述：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
@@ -35,7 +35,7 @@
             </div>
             <div style="margin-top: 1%">
               <div style="display:block">
-                <img src="../assets/requirement.png">
+                <img src="../../../static/img/requirement.png">
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
@@ -57,7 +57,7 @@
 
 <script>
 import ElCard from 'element-ui/packages/card/src/main'
-import ElButtonGroup from '../../node_modules/element-ui/packages/button/src/button-group.vue'
+import ElButtonGroup from '../../../node_modules/element-ui/packages/button/src/button-group.vue'
 
 export default {
   components: {

@@ -1,12 +1,13 @@
 <template>
   <div id="FormBasicInformation">
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2><h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" >
+      <el-form label-position="labelPosition" v-loading="loading"
+               label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" status-icon>
 
         <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
           <el-upload
@@ -171,21 +172,8 @@ var checkName = (rule, value, callback) => {
 export default {
   data () {
     return {
-      formBasic: {
-        ID: '',
-        resumeId: null,
-        name: '',
-        sex: null,
-        idType: null,
-        idNumber: '',
-        birthday: '',
-        email: '',
-        telephone: '',
-        maritalStatus: null,
-        workSeniority: '',
-        politicalStatus: '',
-        presentAddress: ''
-      },
+      formBasic: null,
+      loading: true,
       rules: {
         email: [
           {validator: checkEmail, trigger: 'blur'},
@@ -231,13 +219,16 @@ export default {
 
     }
   },
-  created () {
+  mounted () {
     let _this = this
     this.$axios({
       method: 'get',
       url: '/person'
     }).then(function (response) {
-      _this.$data.formBasic = response.data
+      _this.$nextTick(() => {
+        _this.$data.formBasic = response.data
+        _this.$data.loading = false
+      })
     })
   },
   methods: {
@@ -249,7 +240,8 @@ export default {
         data: this.$data.formBasic
       }).then(function (response) {
         console.log(response.data.data)
-        this.$router.push('/ResumeForm/2')
+        _this.$message('保存成功，请进行下一步填写')
+        _this.$router.push('/ResumeForm/2')
       })
     }
   }
