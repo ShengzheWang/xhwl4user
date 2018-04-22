@@ -12,7 +12,8 @@
         <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            :action="$axios.defaults.baseURL+'/upload-photo'"
+            :headers="header"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
@@ -173,6 +174,8 @@ export default {
   data () {
     return {
       formBasic: null,
+      header:{
+      },
       loading: true,
       rules: {
         email: [
@@ -227,11 +230,20 @@ export default {
     }).then(function (response) {
       _this.$nextTick(() => {
         _this.$data.formBasic = response.data
+        _this.$data.header = {
+          'authorization': _this.$axios.defaults.headers.Authorization
+        }
         _this.$data.loading = false
       })
     })
   },
   methods: {
+    handleAvatarSuccess(res, file) {
+      this.$data.formBasic.imageUrl = URL.createObjectURL(file.raw)
+    },
+    beforeAvatarUpload () {
+      return
+    },
     nextStep () {
       let _this = this
       this.$axios({
