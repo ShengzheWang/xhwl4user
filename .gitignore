@@ -13,3 +13,5 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+src/components/Forms/FormBasicInformation.vue
+src/components/Forms/FormBasicInformation.vue

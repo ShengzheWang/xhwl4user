@@ -6,52 +6,186 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">实习经历</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px">
-        <el-form-item label="起始日期">
-          <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.trainee_start_time"
+      <div v-for="(formTrainee,index) in formsTrainee">
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :rules="rules" :model="formTrainee" ref="formsTrainee" v-if="!loading">
+        <el-form-item label="起始日期" prop="startTime">
+          <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.startTime"
                           class="input-date"></el-date-picker>
         </el-form-item>
-        <el-form-item label="结束日期">
-          <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.trainee_end_time"
+        <el-form-item label="结束日期" prop="endTime">
+          <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.endTime"
                           class="input-date"></el-date-picker>
         </el-form-item>
-        <el-form-item label="实习公司" style="width: 50%">
-          <el-input v-model="formTrainee.trainee_company"></el-input>
+        <el-form-item label="实习公司" style="width: 50%" prop="company">
+          <el-input v-model="formTrainee.company"></el-input>
         </el-form-item>
-        <el-form-item label="实习职位" style="width: 50%">
-          <el-input v-model="formTrainee.trainee_position"></el-input>
+        <el-form-item label="实习职位" style="width: 50%" prop="position">
+          <el-input v-model="formTrainee.position"></el-input>
+        </el-form-item>
+        <el-form-item label="详细描述" style="width: 70%" prop="description">
+          <el-input type="textarea" rows="7" v-model="formTrainee.description"></el-input>
+          <span>{{formTrainee.description.length}}/200</span>
+        </el-form-item>
+        <el-form-item label="" style="width: 50%">
+          <el-button type="primary" @click="saveOne(index,'formsTrainee')">保存</el-button>
+          <el-button type="info" @click="deleteOne(formTrainee.id,index)">删除</el-button>
         </el-form-item>
         <div class="needMarginBorder"></div>
-        <el-form-item label="还有其他实习经历？" style="width: 50%">
-          <el-button><i class="el-icon-plus"></i></el-button>
-        </el-form-item>
-        <div class="needMarginBorder"></div>
-        <el-form-item  style="width: 25%">
-          <el-button type="primary" class="button4forms" @click="nextStep()">保存并进行下一步</el-button>
-        </el-form-item>
       </el-form>
+      </div>
+
+      <el-form  label-position="labelPosition" label-width="200px">
+        <el-form-item label="还有其他实习经历？" style="width: 50%">
+          <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
+        </el-form-item>
+        <div class="needMarginBorder"></div>
+        <el-form-item style="width: 25%">
+          <el-button type="primary" class="button4forms" @click="nextStep('formsTrainee')">保存并进行下一步</el-button>
+        </el-form-item>
+        <div style="width:100%;height:30px">
+        </div>
+      </el-form>
+
       <div style="width:100%;height:30px">
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {
+  import {isName} from "../../util/Validate";
+
+  var checkCompanyName=(rule,value,callback)=>{
+    if(!isName(value)){
+      callback(new Error('公司名不合法！'))
+    }else{
+      callback();
+    }
+  }
+  var checkPositionName=(rule,value,callback)=>{
+    if(!isName(value)){
+      callback(new Error('公司名不合法！'))
+    }else{
+      callback();
+    }
+  }
+
+  export default {
   data () {
     return {
-      formTrainee: {
-        ID: '',
-        resume_id: '',
-        trainee_start_time: '',
-        trainee_end_time: '',
-        trainee_company: '',
-        trainee_position: ''
+      loading: true,
+      formsTrainee: null/*[{
+        id: '',
+        resumeId: '',
+        startTime: '',
+        endTime: '',
+        company: '',
+        position: '',
+        description:''
+      }]*/,
+      formTraineeDefault: {
+        id: null,
+        resumeId: '',
+        startTime: '',
+        endTime: '',
+        company: '',
+        position: '',
+        description:''
+      },
+      rules:{
+        /*
+        startTime:[
+          {type:'date',message:'请选择正确日期',trigger:'blur'}
+        ],
+        endTime:[
+          {type:'date',message:'请选择正确日期',trigger:'blur'}
+        ],*/
+        company:[
+          {max:50,message:'公司名字超过限制',trigger:'change'},
+          {validator:checkCompanyName,trigger:'change'},
+          //{required:true,message:'请输入公司名',trigger:'change'}
+        ],
+        position:[
+          {max:50,message:'职位名长度超过限制',trigger:'change'},
+          {validator:checkPositionName,trigger:'change'}
+        ],
+        description:[
+          {max:200,message:'描述字数超过限制',trigger:'change'}
+        ]
       }
     }
   },
+  created() {
+    let _this = this;
+    this.$axios({
+      method: 'get',
+      url: '/internship'
+    }).then(function (response) {
+      _this.$nextTick(() => {
+        _this.$data.formsTrainee = response.data
+        _this.$data.loading = false
+      })
+
+    });
+  },
   methods: {
-    nextStep () {
-      this.$router.push('/ResumeForm/7')
+    nextStep (formName) {
+      let flag=true;
+      for(let index=0;index<this.$refs[formName].length;index++)
+      {
+        this.$refs[formName][index].validate((valid)=>{
+          if(!valid){
+            flag=false;
+          }else{
+            let _this = this
+            this.$axios({
+              method: 'post',
+              url: '/internship',
+              data: this.$data.formsTrainee[index]
+            }).then(function (response) {
+              _this.$data.formsTrainee.splice(index, 1, response.data)
+            })
+          }
+        })
+      }
+      if(flag===true) {
+        this.$router.push('/ResumeForm/7')
+      }
+    },
+    addOne () {
+      this.$data.formsTrainee.push(this.$data.formTraineeDefault)
+    },
+    deleteOne (num,index) {
+      let _this = this
+      console.log(this.$data.formsTrainee)
+      if (num === null) {
+        this.$data.formsTrainee.splice(index, 1)
+        return
+      }
+      this.$axios({
+        method: 'delete',
+        url: '/internship/' + num
+      }).then(function (response) {
+        _this.$data.formsTrainee.splice(index, 1)
+      })
+    },
+    saveOne (index,formName) {
+      let flag=true;
+
+      this.$refs[formName][index].validate((valid)=>{
+        if(!valid){
+         flag=false;
+        }
+      })
+      if(flag===true){
+        let _this = this
+        this.$axios({
+          method: 'post',
+          url: '/internship',
+          data: this.$data.formsTrainee[index]
+        }).then(function (response) {
+          _this.$data.formsTrainee.splice(index, 1, response.data)
+        })
+      }
     }
 
   }
