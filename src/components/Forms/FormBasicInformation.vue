@@ -1,12 +1,13 @@
 <template>
   <div id="FormBasicInformation">
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading" >
       <div style="width:100%;height:10px">
       </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2><h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
+      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2>
+      <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic"  v-loading="loading">
+      <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" >
 
         <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
           <el-upload
@@ -97,7 +98,6 @@ var checkPhone = (rule, value, callback) => { // 检查手机号格式是否正�
   }
 }
 
-
 var checkAddress = (rule, value, callback) => { // 检查住宅地址
   if (!value) {
     callback(new Error('请输入住址'))
@@ -120,12 +120,11 @@ var checkName = (rule, value, callback) => {
 
 export default {
 
-
   data () {
     var checkId = (rule, value, callback) => { // 检查证件格式是否正确
-      var key1 = 1;
-      var key2 = 2;
-      var key3 = 3;
+      var key1 = 1
+      var key2 = 2
+      var key3 = 3
       if (!value) {
         callback(new Error('请输入证件号码'))
       } else if (this.formBasic.idType === key1) {
@@ -143,7 +142,7 @@ export default {
       } else if (this.formBasic.idType === key2) {
         if (!isvalidPass(value)) {
           callback(new Error('通行证格式不正确'))
-        } else if(this.$refs.formBasic.idType===null){
+        } else if (this.$refs.formBasic.idType === null) {
           callback(new Error('请选择证件类型'))
         } else {
           callback()
@@ -151,43 +150,40 @@ export default {
       } else {
         callback(new Error('请选择证件类型'))
       }
-    };
+    }
     return {
-<<<<<<< HEAD
-      formBasic: null,
-      header:{
+      header: {
       },
-=======
-      image_url:'',
->>>>>>> 81dee51a9fde33d4dce744d48dbd633c004a0441
+      imageUrl: null,
       loading: true,
-      formBasic:null /*{
-        ID: '',
-        resumeId: null,
-        name: '',
-        sex: null,
-        idType: '',
-        idNumber: '',
-        birthday: '',
-        email: '',
-        telephone: '',
-        maritalStatus: '',
-        workSeniority: '',
-        politicalStatus: '',
-        presentAddress: '',
-      }*/,
+      formBasic: null,
+      //    {
+      //        ID: '',
+      //        resumeId: null,
+      //        name: '',
+      //        sex: null,
+      //        idType: '',
+      //        idNumber: '',
+      //        birthday: '',
+      //        email: '',
+      //        telephone: '',
+      //        maritalStatus: '',
+      //        workSeniority: '',
+      //        politicalStatus: '',
+      //        presentAddress: '',
+      //      },
       rules: {
         email: [
           {validator: checkEmail, trigger: 'change'},
-          {required: true,message:'请输入邮箱',trigger:'change'}
+          {required: true, message: '请输入邮箱', trigger: 'change'}
         ],
         telephone: [
           {validator: checkPhone, trigger: 'change'},
           {required: true, message: '请输入手机号', trigger: 'change'}
-        ],/*
-        birthday: [
-          {type: 'date', required:true, message: '请选择日期', trigger: 'change'}
-        ],*/
+        ],
+        //        birthday: [
+        //          {type: 'date', required:true, message: '请选择日期', trigger: 'change'}
+        //        ],
         name: [
           {required: true, message: '请输入名字', trigger: 'change'},
           {validator: checkName, trigger: 'change'}
@@ -217,7 +213,7 @@ export default {
 
     }
   },
-  mounted () {
+  created () {
     let _this = this
     this.$axios({
       method: 'get',
@@ -225,36 +221,15 @@ export default {
     }).then(function (response) {
       _this.$nextTick(() => {
         _this.$data.formBasic = response.data
+        _this.$data.loading = false
         _this.$data.header = {
           'authorization': _this.$axios.defaults.headers.Authorization
         }
-        _this.$data.loading = false
       })
-
     })
   },
   methods: {
-<<<<<<< HEAD
-    handleAvatarSuccess(res, file) {
-      this.$data.formBasic.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload () {
-      return
-    },
-    nextStep () {
-      let _this = this
-      this.$axios({
-        method: 'post',
-        url: '/person',
-        data: this.$data.formBasic
-      }).then(function (response) {
-        console.log(response.data.data)
-        _this.$message('保存成功，请进行下一步填写')
-        _this.$router.push('/ResumeForm/2')
-      })
-=======
     nextStep (formName) {
-
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios({
@@ -263,31 +238,42 @@ export default {
             data: this.$data.formBasic
           }).then(function (response) {
             console.log(response.data)
-
           })
           this.$router.push('/ResumeForm/2')
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
+    },
+    handleAvatarSuccess () {
+      let _this = this
+      this.$axios.get(this.$axios.defaults.baseURL + '/download-photo',{
+        responseType: 'arraybuffer'
+      })
+        .then(function (response) {
+          console.log(response.data)
+          _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
+            new Uint8Array(response.data)
+              .reduce((data, byte) => data + String.fromCharCode(byte), '')
+          )
 
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+        this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M;
->>>>>>> 81dee51a9fde33d4dce744d48dbd633c004a0441
+      return isJPG && isLt2M
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div id="FormEducationExperience" >
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading" >
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">教育经历</h2>
@@ -45,7 +45,7 @@
       </el-form>
       </div>
 
-      <el-form  label-position="labelPosition" label-width="200px">
+      <el-form  label-position="labelPosition" label-width="200px" v-if="!loading">
       <el-form-item label="还有其他教育经历？" style="width: 50%">
         <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
       </el-form-item>
@@ -65,32 +65,29 @@ import ElButton from '../../../node_modules/element-ui/packages/button/src/butto
 import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
 import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition'
 
-
 export default {
   components: {
     ElCollapseTransition,
     ElFormItem,
     ElButton},
   data () {
-
-    var checkRank=(rule,value,callback)=>{
-      if(value>100||value<0){
-        callback(new Error('请输入正确的排名'));
-      }else{
-        callback();
+    var checkRank = (rule, value, callback) => {
+      if (value > 100 || value < 0) {
+        callback(new Error('请输入正确的排名'))
+      } else {
+        callback()
       }
     }
 
     return {
       loading: true,
-      formsEducation:null/* [{
-        startTime: '',
+      formsEducation: null, /* [{        startTime: '',
         endTime: '',
         school: '',
         speciality: '',
         educationHistory: null,
         rank: ''
-      }]*/,
+      }] */
       formEducationDefault: {
         id: null,
         startTime: '',
@@ -98,19 +95,19 @@ export default {
         school: '',
         speciality: '',
         educationHistory: null,
-        rank:''
+        rank: ''
       },
 
-      rules:{
-        school:[{pattern:/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/,message:'名字不合法',trigger:'change'},
-                {required:true,message:'学校不能为空',trigger:'change'}],
-        rank:[{validator:checkRank,message:'请输入正确的排名',trigger:'change'},
-              {required:true,message:'请输入排名',trigger:'change'},
-              {type:'number',message:'请输入正确的排名',trigger:'change'}],
-        speciality:[{required:true,message:'请输入专业',trigger:'change'},
-                    {pattern:/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/,message:'专业名字不合法',trigger:'change'}],
-        educationHistory:[
-          {required:true,message:'请选择学历',trigger:'blur'}
+      rules: {
+        school: [{pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '名字不合法', trigger: 'change'},
+          {required: true, message: '学校不能为空', trigger: 'change'}],
+        rank: [{validator: checkRank, message: '请输入正确的排名', trigger: 'change'},
+          {required: true, message: '请输入排名', trigger: 'change'},
+          {type: 'number', message: '请输入正确的排名', trigger: 'change'}],
+        speciality: [{required: true, message: '请输入专业', trigger: 'change'},
+          {pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '专业名字不合法', trigger: 'change'}],
+        educationHistory: [
+          {required: true, message: '请选择学历', trigger: 'blur'}
         ]
 
       }
@@ -126,20 +123,18 @@ export default {
         _this.$data.formsEducation = response.data
         _this.$data.loading = false
       })
-
     })
   },
   name: 'FormEducationExperience',
   methods: {
     nextStep (formName) {
-      let flag=true;
+      let flag = true
 
-      for(let index=0;index<this.$refs[formName].length;index++)
-      {
-        this.$refs[formName][index].validate((valid)=>{
-          if(!valid){
-            flag=false;
-          }else{
+      for (let index = 0; index < this.$refs[formName].length; index++) {
+        this.$refs[formName][index].validate((valid) => {
+          if (!valid) {
+            flag = false
+          } else {
             let _this = this
             this.$axios({
               method: 'post',
@@ -152,14 +147,14 @@ export default {
         })
       }
 
-      if(flag===true){
-        this.$router.push('/ResumeForm/3');
+      if (flag === true) {
+        this.$router.push('/ResumeForm/3')
       }
     },
     addOne () {
       this.$data.formsEducation.push(this.$data.formEducationDefault)
     },
-    deleteOne (num,index) {
+    deleteOne (num, index) {
       let _this = this
       console.log(this.$data.formsEducation)
       if (num === null) {
@@ -173,19 +168,19 @@ export default {
         _this.$data.formsEducation.splice(index, 1)
       })
     },
-    saveOne (index,formName) {
-      this.$refs[formName][index].validate((valid)=> {
-       if(valid) {
-         let _this = this
-         this.$axios({
-           method: 'post',
-           url: '/education',
-           data: this.$data.formsEducation[index]
-         }).then(function (response) {
-           _this.$data.formsEducation.splice(index, 1, response.data)
-         })
-       }
-      });
+    saveOne (index, formName) {
+      this.$refs[formName][index].validate((valid) => {
+        if (valid) {
+          let _this = this
+          this.$axios({
+            method: 'post',
+            url: '/education',
+            data: this.$data.formsEducation[index]
+          }).then(function (response) {
+            _this.$data.formsEducation.splice(index, 1, response.data)
+          })
+        }
+      })
     }
   }
 }
