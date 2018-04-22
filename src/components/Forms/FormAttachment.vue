@@ -10,7 +10,7 @@
         <el-form-item  style="width: 25%" label="上传简历">
         <el-upload
           class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/">
+          :action="$axios.defaults.baseURL+'upload-resume'">
           <el-button size="small" type="primary" plain>点击上传</el-button>
         </el-upload>
         </el-form-item>
@@ -18,8 +18,7 @@
           <el-upload
             class="upload-demo"
             drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple>
+            :action="$axios.defaults.baseURL+'upload-support-detail'">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
