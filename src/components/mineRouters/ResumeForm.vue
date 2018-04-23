@@ -1,10 +1,10 @@
 <template>
-  <div id="ResumeForm" style="width: 70%;margin:0% auto;border-top: solid 1px #e6e6e6" class="animated bounceInLeft">
+  <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;border-top: solid 1px #e6e6e6" class="animated bounceInLeft">
     <div style="margin:0 auto;text-align: center">
       <el-radio-group v-model="resumes_form" size="large">
-        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
-        <el-radio class="radio4forms" label="2" border isText>社会招聘简历</el-radio>
-        <el-radio class="radio4forms" label="3" border isText>实习招聘简历</el-radio>
+        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px" @click="changeType(1)">校园招聘简历</el-radio>
+        <el-radio class="radio4forms" label="2" border isText @click="changeType(2)">社会招聘简历</el-radio>
+        <el-radio class="radio4forms" label="3" border isText @click="changeType(3)">实习招聘简历</el-radio>
       </el-radio-group>
       <div style=" width:640px;margin:0 auto">
       <transition >
@@ -14,7 +14,7 @@
       </transition>
       </div>
     </div>
-    <el-row class="tac" style="margin-top: 20px">
+    <el-row class="tac" style="margin-top: 20px;">
       <el-col :span="4">
         <div style="height:0px">
         </div>
@@ -37,7 +37,7 @@
         </template>
       </el-menu-item>
       <div style="width: 100%;text-align: center;margin-top: 20%;margin-left: 4px">
-      <el-button class="button4details">预览简历</el-button>
+      <el-button class="button4details" @click="details()">预览简历</el-button>
       </div>
     </el-menu>
       </el-col>
@@ -106,6 +106,12 @@ export default {
     handleSelect (key, keyPath) {
       this.$data.formNow = key
 
+    },
+    changeType() {
+
+    },
+    details () {
+      this.$router.push({ path: '/ResumeDetails'})
     }
   }
 }

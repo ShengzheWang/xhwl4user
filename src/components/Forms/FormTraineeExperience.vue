@@ -115,7 +115,7 @@
     }
   },
   created() {
-    let _this = this;
+    let _this = this
     this.$axios({
       method: 'get',
       url: '/internship'
@@ -125,7 +125,7 @@
         _this.$data.loading = false
       })
 
-    });
+    })
   },
   methods: {
     nextStep (formName) {

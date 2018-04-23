@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="min-width:1660px">
+  <div id="app" style="min-width:1200px">
     <XhwlHeader></XhwlHeader>
     <router-view></router-view>
     <xhwl-footer></xhwl-footer>

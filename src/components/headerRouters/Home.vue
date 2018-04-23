@@ -49,8 +49,8 @@ export default {
       imgs: ['../../../static/img/a1.png', '../../../static/img/a2.png',
         '../../../static/img/a3.png', '../../../static/img/a4.png', '../../../static/img/a5.png'],
       size: {
-        width : 1880,
-        height : 760
+        width : document.body.scrollWidth,
+        height : document.body.scrollWidth*1/2
       },//容器的大小 可选
       //行数与列数 可选
       grid : {

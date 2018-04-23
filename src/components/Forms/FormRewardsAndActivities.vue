@@ -85,8 +85,6 @@ export default {
         _this.$data.formsAward = response.data
         _this.$data.loading = false
       })
-
-
     })
     },
   methods: {

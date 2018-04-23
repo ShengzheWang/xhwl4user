@@ -39,11 +39,14 @@ export default {
       console.log(response.data)
       if (response.data.id === null) {
       } else {
-        _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: response.data.resumesForm.toString()} })
+        _this.$router.push({ name: 'ResumeForm', params: {
+          resumes_form_selected: response.data.resumesForm.toString(),
+          resumesId: response.data.id.toString()
+        } })
       }
     })
   },
-  mounted (){
+  mounted () {
     this.$data.loading = false
   },
   data () {

@@ -33,7 +33,7 @@
         </el-form-item>
         <el-form-item label="证件类型及号码" style="width: 60%" prop="idNumber">
           <el-input class="input-with-select" v-model="formBasic.idNumber">
-            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 140px">
+            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 150px">
               <el-option label="身份证" :value="1"></el-option>
               <el-option label="港澳台通行证" :value="2"></el-option>
               <el-option label="护照" :value="3"></el-option>
@@ -227,6 +227,20 @@ export default {
         }
       })
     })
+    this.$axios.get(this.$axios.defaults.baseURL + '/download-photo',{
+      responseType: 'arraybuffer'
+    })
+      .then(function (response) {
+        console.log(response.data)
+        _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
+          new Uint8Array(response.data)
+            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        )
+
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   },
   methods: {
     nextStep (formName) {
