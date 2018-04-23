@@ -1,6 +1,6 @@
 <template>
   <div id="PostCard">
-    <el-card v-for="item in cardInfo" class="box-card animated zoomIn"
+    <el-card v-for="item in cardInfo" class="box-card animated zoomIn" v-bind:key="item.index"
              v-bind:style="'margin-top:2%;width:100%;background-color:#f6f6f6;animation-delay:'+(item.index+4)*0.2+'s'">
       <div>
         <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.positionName}}</span>
@@ -23,7 +23,7 @@
       <div id="details" style="font-weight:normal;font-size:15px;">
 
         <el-collapse-transition>
-          <div v-if="item.Ashow" >
+          <div v-show="item.Ashow" >
             <div style="margin-top: 1%">
               <div style="display:block">
               <img src="../../../static/img/responsibility.png">
@@ -71,56 +71,23 @@ export default {
     console.log(this.$props.resumeForm)
     this.$axios({
       method: 'get',
-      url: '/position/' + this.$props.resumeForm
+      url: '/positions/' + this.$props.resumeForm
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.cardInfo = response.data
+        response.data.forEach((item, index) => {
+          item['index'] = index
+          item['Ashow'] = false
+          _this.$data.cardInfo.push(item)
+        })
+        console.log(_this.$data.cardInfo)
       })
     })
+    this.$data.kind=this.$props.resumeForm==='1'?'校招':this.$props.resumeForm==='2'?'社招':'实习生'
   },
   data () {
     return {
-      cardInfo: [{
-        index: 0,
-        Ashow: false,
-        name: '后端开发',
-        address: '厦门',
-        number: 5,
-        direction: '研发类',
-        date: '2018-3-5',
-        kinds: '实习生',
-        education: '本科',
-        department: '设计研发部',
-        responsibility: '1、负责研发/测试工程效率工具的开发和维护工作\n' +
-        '2、负责CI相关工具开发和维护工作\n' +
-        '3、负责测试环境管理和环境部署自动化工具的开发工作\n' +
-        '4、负责其他相关工具开发和维护工作',
-        requirement: '1、计算机基础知识扎实，掌握数据结构、操作系统、网络、数据库知识\n' +
-        '2、至少精通PHP或者Java其中之一，有项目经验\n' +
-        '3、熟悉linux环境，能够熟练使用Linux常用命令，能够基于Linux开发和部署项目\n' +
-        '4、熟练掌握至少一门脚本语言python/ruby/shell，能用脚本编写简单工具\n' +
-        '5、非常热爱互联网及其相关技术\n'
-      }, {
-        index: 1,
-        Ashow: false,
-        name: '后端开发',
-        address: '厦门',
-        number: 5,
-        direction: '研发类',
-        date: '2018-3-5',
-        kinds: '实习生',
-        education: '本科',
-        department: '设计研发部',
-        responsibility: '1、负责研发/测试工程效率工具的开发和维护工作\n' +
-        '2、负责CI相关工具开发和维护工作\n' +
-        '3、负责测试环境管理和环境部署自动化工具的开发工作\n' +
-        '4、负责其他相关工具开发和维护工作',
-        requirement: '1、计算机基础知识扎实，掌握数据结构、操作系统、网络、数据库知识\n' +
-        '2、至少精通PHP或者Java其中之一，有项目经验\n' +
-        '3、熟悉linux环境，能够熟练使用Linux常用命令，能够基于Linux开发和部署项目\n' +
-        '4、熟练掌握至少一门脚本语言python/ruby/shell，能用脚本编写简单工具\n' +
-        '5、非常热爱互联网及其相关技术\n'
-      }]
+      kind: '',
+      cardInfo: []
     }
   },
   methods: {}
