@@ -3,16 +3,16 @@
     <el-card v-for="item in cardInfo" class="box-card animated zoomIn"
              v-bind:style="'margin-top:2%;width:100%;background-color:#f6f6f6;animation-delay:'+(item.index+4)*0.2+'s'">
       <div>
-        <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.name}}</span>
-        <span style="font-size:18px;" class="name">  | {{item.direction}}</span>
-        <span style="float:right;font-size:25px;opacity: 0.35;"><i class="el-icon-menu"/> {{item.kinds}}</span>
+        <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.positionName}}</span>
+        <span style="font-size:18px;" class="name">  | {{item.positionType}}</span>
+        <span style="float:right;font-size:25px;opacity: 0.35;"><i class="el-icon-menu"/> {{kind}}</span>
       </div>
 
       <div style="height:20px;" class="blank"></div>
 
       <div class="brief" style="font-weight:normal;font-size:15px;">
         <div style="margin-top: 1%">
-          <i class="el-icon-location"/><a style="font-size: 20px">      工作地点：{{item.address}}</a>
+          <i class="el-icon-location"/><a style="font-size: 20px">      工作地点：{{item.workPlace}}</a>
         </div>
         <div style="margin-top: 1%">
           <i class="el-icon-location-outline"/><a  style="font-size: 20px">      所属部门：{{item.department}}</a>
@@ -30,7 +30,7 @@
               <a style="font-size: 20px">岗位描述：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
-              <a style="white-space:pre-wrap">{{item.responsibility}}</a>
+              <a style="white-space:pre-wrap">{{item.jobResponsibilities}}</a>
               </div>
             </div>
             <div style="margin-top: 1%">
@@ -39,7 +39,7 @@
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
-                <a style="white-space:pre-wrap">{{item.requirement}}</a>
+                <a style="white-space:pre-wrap">{{item.jobRequirements}}</a>
               </div>
             </div>
           </div>
@@ -63,6 +63,21 @@ export default {
   components: {
     ElButtonGroup,
     ElCard},
+  props: {
+    resumeForm: ''
+  },
+  mounted () {
+    let _this = this
+    console.log(this.$props.resumeForm)
+    this.$axios({
+      method: 'get',
+      url: '/position/' + this.$props.resumeForm
+    }).then(function (response) {
+      _this.$nextTick(() => {
+        _this.$data.cardInfo = response.data
+      })
+    })
+  },
   data () {
     return {
       cardInfo: [{

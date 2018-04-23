@@ -31,9 +31,9 @@
             <el-option label="女" :value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="证件类型及号码" style="width: 50%" prop="idNumber">
+        <el-form-item label="证件类型及号码" style="width: 60%" prop="idNumber">
           <el-input class="input-with-select" v-model="formBasic.idNumber">
-            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 110px">
+            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 140px">
               <el-option label="身份证" :value="1"></el-option>
               <el-option label="港澳台通行证" :value="2"></el-option>
               <el-option label="护照" :value="3"></el-option>

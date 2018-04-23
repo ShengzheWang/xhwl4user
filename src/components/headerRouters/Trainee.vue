@@ -1,14 +1,16 @@
 <template>
   <div id="Trainee">
+    <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
       <selector></selector>
-      <post-card></post-card>
+      <post-card resume-form="3"></post-card>
     </div>
     <!--<el-switch-->
     <!--v-model="value3"-->
     <!--active-text="校园招聘"-->
     <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
     <!--</el-switch>-->
+  </div>
   </div>
 </template>
 

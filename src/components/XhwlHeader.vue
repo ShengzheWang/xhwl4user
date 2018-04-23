@@ -1,13 +1,19 @@
 <template>
-  <div id="Xhwlheader" style="height:50px">
-
+  <div id="Xhwlheader" style="height:120px;border-bottom: solid 1px #dddddd;">
+    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;vertical-align: middle">
+      <div style="display: block;margin: 4% auto">
+       <img
+        src="../../static/img/logoMain.png" style="height:auto;width: 70%;">
+      </div>
+    </div>
+     <div style="display: inline-block;width: 48%;text-align: center;height: 60px">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true'
                text-color="#444444"
                background-color="#ffffff"
                active-text-color='#1476C1'
                active-background-color="#ffffff"
-               style="width:598px;margin:0 auto;top:-40px;height:120px">
+               style="width:598px;margin:0 auto;height:60px;display: inline-block">
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
@@ -20,15 +26,18 @@
         <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
         <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
-    <div style="position:absolute;top: 30px;right: 10%" v-if="Need2Login">
-      <div>
+  </div>
+    <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login">
+      <div style="margin: 4% auto">
         <el-button plain @click="dialogFormVisible = true" class="button4plain"
                    style="">注册</el-button>
         <el-button plain @click="dialogFormVisible1 = true" class="button4plain"
                    style="">登录</el-button>
       </div>
     </div>
-      <div style="position:absolute;top: 30px;right:10%" v-else>
+
+      <div style="width:25%;display:inline-block;height: 100px;text-align: center;vertical-align: middle" v-else>
+        <div style="margin: 0 auto">
       <el-dropdown >
         <el-badge :value="mine[2].messageNum" class="item">
       <el-button  type="text" ><img
@@ -48,11 +57,8 @@
         </el-dropdown-menu>
       </el-dropdown>
       </div>
-      <a style="position: absolute;top: 25px;left:5%;font-size: 32px;"><img
-        src="../../static/img/logoMain.png" style="height:auto;width: 100%"></a>
-
+      </div>
     <div class="line"></div>
-
     <el-dialog title="注册" :visible.sync="dialogFormVisible" style="width: 50%;margin:auto auto" :lock-scroll="false">
       <el-form label-position="labelPosition" label-width="60px">
         <el-form-item label="手机号">
@@ -113,19 +119,25 @@ export default {
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
     }
   },
+  beforeMount () {
+    const token = document.cookie.split(';')[0]
+    console.log(token)
+    if (token) {
+      this.$axios.defaults.headers.Authorization = token
+      this.$data.Need2Login = false
+    }
+  },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
     login () {
+      delete this.$axios.defaults.headers['Authorization']
       let _this = this
       this.$axios({
         method: 'post',
         url: '/login',
-        data: this.$qs.stringify({
-          username: this.$data.user.username,
-          password: this.$data.user.password
-        })
+        data: this.$qs.stringify(this.$data.user)
       }).then(function (response) {
         console.log(response.data.data)
         switch (response.data.code) {
@@ -134,6 +146,7 @@ export default {
             _this.$axios.defaults.headers.Authorization = token
             _this.$data.Need2Login = false
             _this.$data.dialogFormVisible1 = false
+            document.cookie = token
             break
           case 500:
             break

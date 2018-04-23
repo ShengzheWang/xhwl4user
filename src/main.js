@@ -30,6 +30,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../static/css/animate.css'
 import '../static/css/main.css'
+import '../static/css/iconfont.css'
+import '../static/css/banner.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -46,7 +48,8 @@ const routes = [
   { path: '/AboutUs', component: null },
   { path: '/MyResume', component: MyResume },
   { path: '/MyJobApplication', component: MyJobApplication },
-  { path: '/ResumeForm',
+  { name: 'ResumeForm',
+    path: '/ResumeForm',
     component: ResumeForm,
     children: [{path: '/ResumeForm', component: FormBasicInformation},
       {path: '/ResumeForm/1', component: FormBasicInformation},

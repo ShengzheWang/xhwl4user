@@ -1,13 +1,10 @@
 <template>
-  <div id="app" style="">
-    <el-container>
-      <el-header>
-        <XhwlHeader></XhwlHeader>
-      </el-header>
-        <router-view></router-view>
-      <xhwl-footer></xhwl-footer>
-      <span class="copyright" style="display:block;margin:0 auto;text-align: center">Copyright © 2004-2015  兴海物联 版权所有</span>
-    </el-container>
+  <div id="app" style="min-width:1660px">
+    <XhwlHeader></XhwlHeader>
+    <router-view></router-view>
+    <xhwl-footer></xhwl-footer>
+    <span class="copyright"
+          style="display:block;margin:0 auto;text-align: center">Copyright © 2004-2015  兴海物联 版权所有</span>
   </div>
 </template>
 
@@ -62,6 +59,6 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #2c3e50;
-    margin-top: 60px;
+
   }
 </style>

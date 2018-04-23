@@ -1,13 +1,12 @@
 <template>
   <div id="Home">
-    <div class="block">
+      <div class="banner" id="banner4home" style="margin: 1% auto;">
+        <div class="banner-view"></div>
+        <div class="banner-btn"></div>
+        <div class="banner-number"></div>
+        <div class="banner-progres"></div>
+      </div>
 
-      <el-carousel height="540pt" width="100%">
-        <el-carousel-item v-for="item in items" :key="item.value">
-          <h1 style="margin: 10% 49%;">{{ item.text }}</h1>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
     <!--<div class="show-rectangle">-->
     <!--<div class="show-rectangle-big" >5</div>-->
     <!--<div class="show-rectangle-nw">1</div>-->
@@ -36,13 +35,34 @@
       <!--active-text="校园招聘"-->
       <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
       <!--</el-switch>-->
-    </div>
+  </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Home',
+  mounted () {
+    var banenr2 = new FragmentBanner({
+      container: '#banner4home',
+      imgs: ['../../../static/img/a1.png', '../../../static/img/a2.png',
+        '../../../static/img/a3.png', '../../../static/img/a4.png', '../../../static/img/a5.png'],
+      size: {
+        width : 1880,
+        height : 760
+      },//容器的大小 可选
+      //行数与列数 可选
+      grid : {
+        line : 4,
+        list : 8
+      },
+      index: 0,//图片集合的索引位置 可选
+      type : 2,//切换类型 1 ， 2 可选
+      boxTime : 5000,//小方块来回运动的时长 可选
+      fnTime: 10000
+    })
+  },
   data () {
     return {
       input3: '',
@@ -77,6 +97,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

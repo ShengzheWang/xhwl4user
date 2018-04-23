@@ -1,5 +1,5 @@
 <template>
-  <div ref="c" id="MyResume" style="height: 500px;width: 1300px;margin:0% auto;">
+  <div ref="c" id="MyResume" style="height: 500px;width: 1300px;margin:0% auto;" v-loading="loading">
     <h1 v-bind:class="'animated fade'+show2" style="animation-delay:0.6s;width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
     <div style="height: 350px;width: 1100px;margin:5% auto">
       <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end" >
@@ -30,12 +30,29 @@
 <script>
 export default {
   name: 'MyResume',
+  beforeCreate () {
+    let _this = this
+    this.$axios({
+      method: 'get',
+      url: '/resume'
+    }).then(function (response) {
+      console.log(response.data)
+      if (response.data.id === null) {
+      } else {
+        _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: response.data.resumesForm.toString()} })
+      }
+    })
+  },
+  mounted (){
+    this.$data.loading = false
+  },
   data () {
     return {
       show: 'In',
       show2: 'In',
+      loading: true,
       activeIndex: '1',
-      time: [0, 0.2, 0.4],
+      time: [0.3, 0.5, 0.7],
       dialogFormVisible: false,
       dialogFormVisible1: false,
       formLabelWidth: '14%',
@@ -59,9 +76,14 @@ export default {
       }
       this.$data.show = 'OutRight'
       this.$data.show2 = 'Out'
-      setTimeout(() => {
-        this.$router.push('/ResumeForm/1')
-      }, 1000)
+      this.$axios({
+        method: 'put',
+        url: '/resume?form=' + whichOne
+      }).then(function (response) {
+        setTimeout(() => {
+          this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: whichOne.toString()} })
+        }, 1000)
+      })
     },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)

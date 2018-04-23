@@ -1,8 +1,10 @@
 <template>
   <div id="Campus">
+    <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
       <selector></selector>
-      <post-card></post-card>
+      <post-card resume-form="1"></post-card>
+    </div>
     </div>
     <!--<el-switch-->
     <!--v-model="value3"-->
