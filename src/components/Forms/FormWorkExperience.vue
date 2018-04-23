@@ -66,15 +66,7 @@
   data () {
     return {
       loading: true,
-      formsWorkExp:null/* [{
-        id: '',
-        resumeId: '',
-        startTime: '',
-        endTime: '',
-        company: '',
-        position: '',
-        description:''
-      }]*/,
+      formsWorkExp:null,
       formWorkExpDefault: {
         id: null,
         resumeId: '',
@@ -85,13 +77,12 @@
         description:''
       },
       rules:{
-        /*                              //由于date-picker原因,暂时注释日期的验证
         startTime:[
           {type:'date',message:'请选择正确的日期',trigger:'blur'}
         ],
         endTime:[
           {type:'date',message:'请选择正确的日期',trigger:'blur'}
-        ],*/
+        ],
         company:[
           //{required:true,trigger:'change'},
           {validator:checkCompanyName,trigger:'change'},
@@ -127,6 +118,10 @@
       let flag=true;
       for(let index=0;index<this.$refs[formName].length;index++)
       {
+        this.$data.formsWorkExp[index].startTime=new Date(this.$data.formsWorkExp[index].startTime);
+        this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);
+        this.$data.formsWorkExp[index].endTime=new Date(this.$data.formsWorkExp[index].endTime);
+        this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);
         this.$refs[formName][index].validate((valid)=>{
           if(!valid){
             flag=false;
@@ -166,7 +161,10 @@
     },
     saveOne(index,formName){
       let flag=true;
-
+      this.$data.formsWorkExp[index].startTime=new Date(this.$data.formsWorkExp[index].startTime);
+      this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);
+      this.$data.formsWorkExp[index].endTime=new Date(this.$data.formsWorkExp[index].endTime);
+      this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
           flag=false;

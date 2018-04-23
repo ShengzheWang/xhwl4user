@@ -69,9 +69,8 @@ export default {
       },
       rules:{
         awardName:[
-          {required:true,message:'奖励名不能为空',trigger:'change'},
           {validator:checkAwardName,trigger:'change'}
-        ]
+        ],
       }
     }
   },
@@ -95,6 +94,8 @@ export default {
       let _this=this;
 
       for(let index=0;index<this.$refs[formName].length;index++){
+        this.$data.formsAward[index].dateOfAward=new Date(this.$data.formsAward[index].dateOfAward);
+        this.$data.formsAward[index].dateOfAward.setTime( this.$data.formsAward[index].dateOfAward.getTime()+8*1000*3600);
         this.$refs[formName][index].validate((valid)=>{
           if(!valid){
             flag=false;
@@ -135,6 +136,8 @@ export default {
     },
     saveOne (index,formName) {
       let flag=true;
+      this.$data.formsAward[index].dateOfAward=new Date(this.$data.formsAward[index].dateOfAward);
+      this.$data.formsAward[index].dateOfAward.setTime( this.$data.formsAward[index].dateOfAward.getTime()+8*1000*3600);
       this.$refs[formName][index].validate((valid)=>{       //对表单循环进行验证
         if(!valid){
           flag=false;

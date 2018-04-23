@@ -231,6 +231,7 @@ export default {
   methods: {
     nextStep (formName) {
       this.$data.formBasic.birthday=new Date(this.$data.formBasic.birthday);
+      this.$data.formBasic.birthday.setTime(this.$data.formBasic.birthday.getTime()+1000*3600*8);
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios({

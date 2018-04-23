@@ -129,7 +129,6 @@ var checkRoleName=(rule,value,callback)=>{
     nextStep (formName) {
       let flag=true;
      let _this=this;
-
      for(let index=0;index<this.$refs[formName].length;index++){
        this.$refs[formName][index].validate((valid)=>{
          if(!valid){
@@ -168,6 +167,8 @@ var checkRoleName=(rule,value,callback)=>{
       })
     },
     saveOne (index,formName) {
+
+
       let flag=true;
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
