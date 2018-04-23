@@ -73,15 +73,7 @@
   data () {
     return {
       loading: true,
-      formsTrainee: null/*[{
-        id: '',
-        resumeId: '',
-        startTime: '',
-        endTime: '',
-        company: '',
-        position: '',
-        description:''
-      }]*/,
+      formsTrainee: null,
       formTraineeDefault: {
         id: null,
         resumeId: '',
@@ -92,17 +84,16 @@
         description:''
       },
       rules:{
-        /*
+
         startTime:[
           {type:'date',message:'请选择正确日期',trigger:'blur'}
         ],
         endTime:[
           {type:'date',message:'请选择正确日期',trigger:'blur'}
-        ],*/
+        ],
         company:[
           {max:50,message:'公司名字超过限制',trigger:'change'},
           {validator:checkCompanyName,trigger:'change'},
-          //{required:true,message:'请输入公司名',trigger:'change'}
         ],
         position:[
           {max:50,message:'职位名长度超过限制',trigger:'change'},
@@ -132,6 +123,10 @@
       let flag=true;
       for(let index=0;index<this.$refs[formName].length;index++)
       {
+        this.$data.formsTrainee[index].startTime=new Date(this.$data.formsTrainee[index].startTime);
+        this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);
+        this.$data.formsTrainee[index].endTime=new Date(this.$data.formsTrainee[index].endTime);
+        this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);
         this.$refs[formName][index].validate((valid)=>{
           if(!valid){
             flag=false;
@@ -170,7 +165,10 @@
     },
     saveOne (index,formName) {
       let flag=true;
-
+      this.$data.formsTrainee[index].startTime=new Date(this.$data.formsTrainee[index].startTime);
+      this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);
+      this.$data.formsTrainee[index].endTime=new Date(this.$data.formsTrainee[index].endTime);
+      this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
          flag=false;
