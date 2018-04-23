@@ -48,10 +48,10 @@ export default {
         ],
         workPlace:[
           {required:true,message:'请选择城市',trigger:'blur'}
-        ]/*,
+        ],
         expectedTimeForDuty:[
           {required:true,type:'date',message:'请选择时间',trigger:'blur'}
-        ]*/
+        ]
       }
     }
   },
@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     nextStep (formName) {
+      this.$data.formsIntention.expectedTimeForDuty=new Date(this.$data.formsIntention.expectedTimeForDuty)
       this.$refs[formName].validate((valid)=>{
         if(valid){
           let _this=this;

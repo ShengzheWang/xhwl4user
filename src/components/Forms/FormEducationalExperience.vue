@@ -10,7 +10,8 @@
       <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formEducation" ref="formsEducation" :rules="rules" v-if="!loading">
         <el-form-item label="入学日期" prop="startTime">
           <el-date-picker type="date" placeholder="选择日期"
-                          class="input-date" v-model="formEducation.startTime"></el-date-picker>
+                          class="input-date" v-model="formEducation.startTime"
+                          format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
         <el-form-item label="毕业日期" prop="endTime">
           <el-date-picker type="date" placeholder="选择日期"
@@ -23,13 +24,13 @@
           <el-input v-model="formEducation.speciality"></el-input>
         </el-form-item>
         <el-form-item label="学历" style="width: 50%" prop="educationHistory">
-          <el-select v-model="formEducation.educationHistory" placeholder="请选择学历" :rules="[{type:'number',required:true,trigger:'blur'}]">
-            <el-option label="高中" :value=1></el-option>
-            <el-option label="专科" :value=2></el-option>
-            <el-option label="本科" :value=3></el-option>
-            <el-option label="研究生" :value=4></el-option>
-            <el-option label="博士生" :value=5></el-option>
-            <el-option label="博士后" :value=6></el-option>
+          <el-select v-model="formEducation.educationHistory" placeholder="请选择学历" :rules="[{required:true,trigger:'blur'}]">
+            <el-option label="高中" :value="1"></el-option>
+            <el-option label="专科" :value="2"></el-option>
+            <el-option label="本科" :value="3"></el-option>
+            <el-option label="研究生" :value="4"></el-option>
+            <el-option label="博士生" :value="5"></el-option>
+            <el-option label="博士后" :value="6"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="专业成绩排名占比" style="width: 50%" prop="rank" >
@@ -65,6 +66,8 @@ import ElButton from '../../../node_modules/element-ui/packages/button/src/butto
 import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
 import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition'
 
+
+
 export default {
   components: {
     ElCollapseTransition,
@@ -78,6 +81,7 @@ export default {
         callback()
       }
     }
+
 
     return {
       loading: true,
@@ -108,6 +112,12 @@ export default {
           {pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '专业名字不合法', trigger: 'change'}],
         educationHistory: [
           {required: true, message: '请选择学历', trigger: 'blur'}
+        ],
+        startTime:[
+          {required:true,message:'请选择起始时间',trigger:'blur'},
+        ],
+        endTime:[
+          {required:true,message:'请选择结束时间',trigger:'blur'}
         ]
 
       }
@@ -124,6 +134,12 @@ export default {
         _this.$data.loading = false
       })
     })
+    for(let index=0;index<this.$data.formsEducation.length;index++)
+    {
+
+      this.$data.formsEducation[index].startTime=new Date(this.$data.formsEducation[index].startTime);
+      this.$data.formsEducation[index].endTime=new Date(this.$data.formsEducation[index].endTime);
+    }
   },
   name: 'FormEducationExperience',
   methods: {
@@ -131,6 +147,10 @@ export default {
       let flag = true
 
       for (let index = 0; index < this.$refs[formName].length; index++) {
+        let tempDate1= this.$refs[formName][index].startTime;
+        let tempDate2= this.$refs[formName][index].endTime;
+        this.$refs[formName][index].startTime=tempDate1
+        this.$refs[formName][index].endTime=tempDate2;
         this.$refs[formName][index].validate((valid) => {
           if (!valid) {
             flag = false
@@ -169,6 +189,11 @@ export default {
       })
     },
     saveOne (index, formName) {
+      let k=new Date(this.$data.formsEducation[index].startTime);
+      k.setDate(k.getDate()+1);
+      let d=(new Date(this.$data.formsEducation[index].endTime));
+      this.$data.formsEducation.startTime=k;
+      this.$data.formsEducation.endTime=d;
       this.$refs[formName][index].validate((valid) => {
         if (valid) {
           let _this = this
@@ -182,6 +207,7 @@ export default {
         }
       })
     }
+
   }
 }
 </script>

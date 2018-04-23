@@ -6,7 +6,8 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">自我评价</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formSelfEvaluation" ref="formSelfEvaluation" :rules="rules">
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn"
+               :model="formSelfEvaluation" ref="formSelfEvaluation" :rules="rules" v-if="!loading">
         <el-form-item label="自我评价" style="width: 70%" prop="selfAssessment" >
           <el-input
             type="textarea"
@@ -52,7 +53,7 @@ export default {
     }).then(function (response) {
       _this.$nextTick(() => {
         _this.$data.formSelfEvaluation.selfAssessment = response.data
-       // _this.$data.loading = false
+        _this.$data.loading = false
       })
 
     })
@@ -66,7 +67,7 @@ export default {
           this.$axios({
             method: 'post',
             url: '/selfAssessment',
-            data: this.$data.formSelfEvaluation.selfAssessment
+            data: this.$data.formSelfEvaluation
           }).then(function (response) {
             console.log(response.data.data)
 

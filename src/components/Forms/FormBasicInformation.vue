@@ -25,7 +25,7 @@
         <el-form-item label="姓名" style="width: 50%" prop="name">
           <el-input v-model="formBasic.name"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
+        <el-form-item label="性别" prop="sex">
           <el-select v-model="formBasic.sex">
             <el-option label="男" :value="1"></el-option>
             <el-option label="女" :value="2"></el-option>
@@ -181,9 +181,9 @@ export default {
           {validator: checkPhone, trigger: 'change'},
           {required: true, message: '请输入手机号', trigger: 'change'}
         ],
-        //        birthday: [
-        //          {type: 'date', required:true, message: '请选择日期', trigger: 'change'}
-        //        ],
+        birthday: [
+          {type: 'date', required:true, message: '请选择日期', trigger: 'change'}
+                ],
         name: [
           {required: true, message: '请输入名字', trigger: 'change'},
           {validator: checkName, trigger: 'change'}
@@ -192,7 +192,7 @@ export default {
           {required: true, message: '请选择性别', trigger: 'change'}
         ],
         workSeniority: [
-          {required: true, message: '请输入工作年限', trigger: 'change'}
+          {required: true, message: '请输入工作年限', trigger: 'blur'}
         ],
         idNumber: [
           {validator: checkId, trigger: 'change'},
@@ -230,6 +230,7 @@ export default {
   },
   methods: {
     nextStep (formName) {
+      this.$data.formBasic.birthday=new Date(this.$data.formBasic.birthday);
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios({
