@@ -134,12 +134,6 @@ export default {
         _this.$data.loading = false
       })
     })
-    for(let index=0;index<this.$data.formsEducation.length;index++)
-    {
-
-      this.$data.formsEducation[index].startTime=new Date(this.$data.formsEducation[index].startTime);
-      this.$data.formsEducation[index].endTime=new Date(this.$data.formsEducation[index].endTime);
-    }
   },
   name: 'FormEducationExperience',
   methods: {
@@ -147,10 +141,10 @@ export default {
       let flag = true
 
       for (let index = 0; index < this.$refs[formName].length; index++) {
-        let tempDate1= this.$refs[formName][index].startTime;
-        let tempDate2= this.$refs[formName][index].endTime;
-        this.$refs[formName][index].startTime=tempDate1
-        this.$refs[formName][index].endTime=tempDate2;
+        this.$refs[formName][index].startTime = new Date(this.$refs[formName][index].startTime);
+        this.$refs[formName][index].startTime.setTime(this.$refs[formName][index].startTime.getTime() + 3600 * 1000 * 8);
+        this.$refs[formName][index].endTime = new Date(this.$refs[formName][index].endTime);
+        this.$refs[formName][index].endTime.setTime(this.$refs[formName][index].endTime.getTime() + 3600 * 1000 * 8);
         this.$refs[formName][index].validate((valid) => {
           if (!valid) {
             flag = false
@@ -189,11 +183,10 @@ export default {
       })
     },
     saveOne (index, formName) {
-      let k=new Date(this.$data.formsEducation[index].startTime);
-      k.setDate(k.getDate()+1);
-      let d=(new Date(this.$data.formsEducation[index].endTime));
-      this.$data.formsEducation.startTime=k;
-      this.$data.formsEducation.endTime=d;
+      this.$data.formsEducation[index].startTime=new Date( this.$data.formsEducation[index].startTime);
+      this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime()+3600*1000*8);
+      this.$refs[formName][index].endTime=new Date( this.$refs[formName][index].endTime);
+      this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime()+3600*1000*8)
       this.$refs[formName][index].validate((valid) => {
         if (valid) {
           let _this = this
