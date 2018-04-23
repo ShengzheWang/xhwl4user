@@ -44,7 +44,7 @@
         src="../../static/img/Default.png"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
         </el-badge>
         <el-dropdown-menu slot="dropdown" >
-          <el-dropdown-item v-for="item in mine">
+          <el-dropdown-item v-for="(item, index) in mine" v-bind:key="index">
             <router-link style="color: #333333" :to="item.path">
               <el-badge :value="item.messageNum" class="item">
               {{item.text}}

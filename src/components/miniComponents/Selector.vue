@@ -37,6 +37,7 @@ export default {
       postChosen: '',
       classChosen: '',
       placeChosen: '',
+      input3: '',
       items: [
         {text: '展示示例一'},
         {text: '展示示例二'},
