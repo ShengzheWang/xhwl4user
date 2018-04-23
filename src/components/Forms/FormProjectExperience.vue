@@ -31,7 +31,7 @@
       </el-form>
       </div>
       <div>
-      <el-form  label-position="labelPosition" label-width="200px">
+      <el-form  label-position="labelPosition" label-width="200px" v-if="!loading">
         <el-form-item label="还有其他项目经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>
