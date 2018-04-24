@@ -137,6 +137,10 @@ export default {
     nextStep (formName) {
       let flag=true;
       if(this.$data.formsTraining.length===0){
+        this.$message({
+          message: '此页面你没有保存任何东西就进入下一步了哦',
+          type: 'success'
+        })
         this.$router.push('/ResumeForm/4')
       }else {
         for (let index = 0; index < this.$refs[formName].length; index++) {
