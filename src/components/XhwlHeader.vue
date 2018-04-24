@@ -124,7 +124,20 @@ export default {
     console.log(token)
     if (token) {
       this.$axios.defaults.headers.Authorization = token
-      this.$data.Need2Login = false
+      let _this = this
+      this.$axios({
+        method: 'get',
+        url: '/tokenCheck',
+      }).then(function (response) {
+        _this.$message('欢迎回来')
+        _this.$data.Need2Login = false
+      }).catch(function(error) {
+        _this.$message('用户凭证已过期，请重新登陆')
+        delete _this.$axios.defaults.headers['Authorization']
+        document.cookie = ''
+        _this.$data.Need2Login = true
+        _this.$router.push('/')
+      })
     }
   },
   methods: {
