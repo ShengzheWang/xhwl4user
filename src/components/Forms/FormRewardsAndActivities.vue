@@ -117,6 +117,7 @@ export default {
     },
     addOne () {
       this.$data.formsAward.push(this.$data.formAwardDefault)
+      console.log(this.$data.formAwardDefault)
     },
     deleteOne (num,index) {
       let _this = this
@@ -143,14 +144,13 @@ export default {
       })
 
       if(flag===true){
-
         let _this = this
         this.$axios({
           method: 'post',
           url: '/award',
-          data: this.$data.formsProject[index]
+          data: this.$data.formsAward[index]
         }).then(function (response) {
-          _this.$data.formsProject.splice(index, 1, response.data)
+          _this.$data.formsAward.splice(index, 1, response.data)
         })
       }
     }
