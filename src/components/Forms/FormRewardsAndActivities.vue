@@ -112,10 +112,10 @@ export default {
       if(flag===true) {
         this.$router.push('/ResumeForm/8')
       }
-
-      //this.$router.push('/ResumeForm/8')
     },
     addOne () {
+      this.$data.formAwardDefault.dateOfAward='';
+      this.$data.formAwardDefault.awardName='';
       this.$data.formsAward.push(this.$data.formAwardDefault)
     },
     deleteOne (num,index) {
@@ -148,9 +148,9 @@ export default {
         this.$axios({
           method: 'post',
           url: '/award',
-          data: this.$data.formsProject[index]
+          data: this.$data.formsAward[index]
         }).then(function (response) {
-          _this.$data.formsProject.splice(index, 1, response.data)
+          _this.$data.formsAward.splice(index, 1, response.data)
         })
       }
     }

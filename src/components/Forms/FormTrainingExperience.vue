@@ -70,6 +70,19 @@
 export default {
 
   data () {
+
+    var checkEndTime=(rule,value,callback)=>{
+      for(let index=0;index<this.$data.formsTraining.length;index++){
+        if(this.$data.formsTraining[index].endTime===value){
+          if(this.$data.formsTraining[index].startTime>value){
+            callback(new Error('起始日期不能大于结束日期'))
+          }
+        }
+      }
+      callback();
+    }
+
+
     return {
       loading: true,
       formsTraining: null/*[{
@@ -96,7 +109,8 @@ export default {
           {type:'date',message:'请选择正确日期',trigger:'change'}
         ],
         endTime:[
-          {type:'date',message:'请选择正确日期',trigger:'change'}
+          {type:'date',message:'请选择正确日期',trigger:'change'},
+          {validator:checkEndTime,trigger:'blur'}
         ],
         trainingInstitutions:[
           {validator:checkInsititutionName,trigger:'change'},
@@ -128,10 +142,11 @@ export default {
     nextStep (formName) {
       let flag=true;
       for(let index=0;index<this.$refs[formName].length;index++){
-        this.$data.formsTraining[index].startTime=new Date(this.$data.formsTraining[index].startTime);
-        this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime()+8*3600*1000);
-        this.$data.formsTraining[index].endTime=new Date(this.$data.formsTraining[index].endTime);
-        this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime()+8*3600*1000);
+          this.$data.formsTraining[index].startTime = new Date(this.$data.formsTraining[index].startTime);
+          this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);
+          this.$data.formsTraining[index].endTime = new Date(this.$data.formsTraining[index].endTime);
+          this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);
+
         this.$refs[formName][index].validate((valid)=>{
           if(!valid){
             flag=false;
@@ -151,6 +166,11 @@ export default {
       this.$router.push('/ResumeForm/4')}
     },
     addOne () {
+      this.$data.formTrainingDefault.startTime=''
+      this.$data.formTrainingDefault.endTime=''
+      this.$data.formTrainingDefault.description=''
+      this.$data.formTrainingDefault.trainingContent=''
+      this.$data.formTrainingDefault.trainingInstitutions=''
       this.$data.formsTraining.push(this.$data.formTrainingDefault)
     },
     deleteOne (num,index) {
@@ -169,10 +189,13 @@ export default {
     },
     saveOne (index,formName) {
       let flag=true;
-      this.$data.formsTraining[index].startTime=new Date(this.$data.formsTraining[index].startTime);
-      this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime()+8*3600*1000);
-      this.$data.formsTraining[index].endTime=new Date(this.$data.formsTraining[index].endTime);
-      this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime()+8*3600*1000);
+
+        this.$data.formsTraining[index].startTime = new Date(this.$data.formsTraining[index].startTime);
+        this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);
+
+        this.$data.formsTraining[index].endTime = new Date(this.$data.formsTraining[index].endTime);
+        this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);
+
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
           flag=false;

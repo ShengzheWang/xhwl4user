@@ -82,6 +82,19 @@ export default {
       }
     }
 
+    var checkEndtime=(rule,value,callback)=>{
+      for(let index=0;index<this.$data.formsEducation.length;index++)
+      {
+        if(this.$data.formsEducation[index].endTime===value){
+          if(this.$data.formsEducation[index].startTime>value){
+            callback(new Error('起始日期不能大于结束日期'))
+          }
+        }
+      }
+      callback();
+
+    }
+
 
     return {
       loading: true,
@@ -117,7 +130,8 @@ export default {
           {required:true,message:'请选择起始时间',trigger:'blur'},
         ],
         endTime:[
-          {required:true,message:'请选择结束时间',trigger:'blur'}
+          {required:true,message:'请选择结束时间',trigger:'blur'},
+          {validator:checkEndtime,trigger:'blur'}
         ]
 
       }
@@ -141,10 +155,12 @@ export default {
       let flag = true
 
       for (let index = 0; index < this.$refs[formName].length; index++) {
-        this.$refs[formName][index].startTime = new Date(this.$refs[formName][index].startTime);
-        this.$refs[formName][index].startTime.setTime(this.$refs[formName][index].startTime.getTime() + 3600 * 1000 * 8);
-        this.$refs[formName][index].endTime = new Date(this.$refs[formName][index].endTime);
-        this.$refs[formName][index].endTime.setTime(this.$refs[formName][index].endTime.getTime() + 3600 * 1000 * 8);
+
+          this.$data.formsEducation[index].startTime = new Date(this.$data.formsEducation[index].startTime);
+          this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);
+          this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
+          this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8);
+
         this.$refs[formName][index].validate((valid) => {
           if (!valid) {
             flag = false
@@ -166,7 +182,17 @@ export default {
       }
     },
     addOne () {
-      this.$data.formsEducation.push(this.$data.formEducationDefault)
+      if(this.$data.formsEducation.length===0)
+      this.$data.formsEducation.push(this.$data.formEducationDefault);
+      else{
+        this.$data.formEducationDefault.startTime=''
+        this.$data.formEducationDefault.endTime=''
+        this.$data.formEducationDefault.speciality=''
+        this.$data.formEducationDefault.school=''
+        this.$data.formEducationDefault.educationHistory=null;
+        this.$data.formEducationDefault.rank=''
+        this.$data.formsEducation.push(this.$data.formEducationDefault);
+      }
     },
     deleteOne (num, index) {
       let _this = this
@@ -183,10 +209,12 @@ export default {
       })
     },
     saveOne (index, formName) {
-      this.$data.formsEducation[index].startTime=new Date( this.$data.formsEducation[index].startTime);
-      this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime()+3600*1000*8);
-      this.$refs[formName][index].endTime=new Date( this.$refs[formName][index].endTime);
-      this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime()+3600*1000*8)
+
+        this.$data.formsEducation[index].startTime = new Date(this.$data.formsEducation[index].startTime);
+        this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);
+      this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
+      this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8)
+
       this.$refs[formName][index].validate((valid) => {
         if (valid) {
           let _this = this
@@ -199,6 +227,7 @@ export default {
           })
         }
       })
+      //this.$data.formEducationDefault.startTime='';
     }
 
   }

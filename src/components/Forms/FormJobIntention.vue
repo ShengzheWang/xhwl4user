@@ -72,6 +72,7 @@ export default {
     nextStep (formName) {
       this.$data.formsIntention.expectedTimeForDuty=new Date(this.$data.formsIntention.expectedTimeForDuty)
       this.$data.formsIntention.expectedTimeForDuty.setTime(this.$data.formsIntention.expectedTimeForDuty.getTime()+3600*1000*8);
+
       this.$refs[formName].validate((valid)=>{
         if(valid){
           let _this=this;
