@@ -131,13 +131,32 @@
   methods: {
     nextStep (formName) {
       let flag=true;
-      if(this.$data.formsWorkExp.length===0){
-        this.$router.push('/ResumeForm/6')
-      }else {
-        for (let index = 0; index < this.$refs[formName].length; index++) {
-          if (this.$data.formsWorkExp[index].startTime !== null) {
-            this.$data.formsWorkExp[index].startTime = new Date(this.$data.formsWorkExp[index].startTime);
-            this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime() + 8 * 3600 * 1000);
+
+
+      for(let index=0;index<this.$refs[formName].length;index++)
+      {
+        this.$data.formsWorkExp[index].startTime=new Date(this.$data.formsWorkExp[index].startTime);
+        this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);
+        this.$data.formsWorkExp[index].endTime=new Date(this.$data.formsWorkExp[index].endTime);
+        this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);
+        this.$refs[formName][index].validate((valid)=>{
+          if(!valid){
+            flag=false;
+          }else{
+            let _this=this;
+            this.$axios({
+              method:'post',
+              url:'/work',
+              data:this.$data.formsWorkExp[index]
+            }).then(function (response) {
+              _this.$message({
+                message: '成功保存，进入下一步填写',
+                type: 'success'
+              })
+              _this.$data.formsWorkExp.splice(index,1,response.data)
+
+            })
+
           }
           if (this.$data.formsWorkExp[index].endTime !== null) {
             this.$data.formsWorkExp[index].endTime = new Date(this.$data.formsWorkExp[index].endTime);
@@ -212,10 +231,6 @@
           url: '/work',
           data: this.$data.formsWorkExp[index]
         }).then(function (response) {
-          _this.$message({
-            message: '成功保存，进入下一步填写',
-            type: 'success'
-          })
           _this.$data.formsWorkExp.splice(index, 1, response.data)
 
         })

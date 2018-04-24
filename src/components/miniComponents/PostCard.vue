@@ -47,7 +47,7 @@
         </el-collapse-transition>
       </div>
       <el-button-group style="position: relative;margin-bottom:2%;margin-top: 2%;float: right" >
-        <el-button type="primary" round icon="el-icon-message">立即投递</el-button>
+        <el-button type="primary" round icon="el-icon-message" @click="send(item.index)">立即投递</el-button>
         <el-button type="info"  round  @click="item.Ashow=!item.Ashow;"
                    :icon="item.Ashow?'el-icon-arrow-up':'el-icon-arrow-down'" >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
       </el-button-group>
@@ -90,7 +90,22 @@ export default {
       cardInfo: []
     }
   },
-  methods: {}
+  methods: {
+    send (index) {
+      let _this=this
+      this.$confirm('确定投递职位' + _this.$data.cardInfo[index].positionName + '吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$message({
+          type: 'success',
+          message: '提交投递成功!'
+        })
+      }).catch(() => {
+      })
+    }
+  }
 
 }
 </script>
