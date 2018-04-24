@@ -163,7 +163,7 @@ export default {
         sex: '',
         idType: '',
         idNumber: '',
-        birthday: '',
+        birthday: null,
         email: '',
         telephone: '',
         maritalStatus: '',
@@ -246,8 +246,10 @@ export default {
   methods: {
     nextStep (formName) {
       let _this = this
+      if(this.$data.formBasic.birthday!==null){
       this.$data.formBasic.birthday=new Date(this.$data.formBasic.birthday);
-      this.$data.formBasic.birthday.setTime(this.$data.formBasic.birthday.getTime()+1000*3600*8);
+      this.$data.formBasic.birthday.setTime(this.$data.formBasic.birthday.getTime()+1000*3600*8);}
+
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios({

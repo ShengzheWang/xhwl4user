@@ -78,27 +78,20 @@ var checkRoleName=(rule,value,callback)=>{
     return {
 
       loading: true,
-      formsProject: null/*[{
-        id: '',
-        resumeId: '',
-        projectName: '',
-        projectRole: '',
-        projectDescription: '',
-
-      }]*/,
-      formProjectDefault:{
+      formsProject: [{
         id: null,
         resumeId: '',
         projectName: '',
         projectRole: '',
         projectDescription: '',
 
-      },
+      }],
+
       rules:{
         projectName:[
           {required:true,message:'请输入项目名',trigger:'change'},
         //  {validator:checkName,trigger:'change'},
-        //  {max:50,message:'长度超过50字限制',trigger:'change'},
+          {max:50,message:'长度超过50字限制',trigger:'change'},
         ],
         projectRole:[
           {required:true,message:'请输入担任角色',trigger:'change'},
@@ -130,35 +123,43 @@ var checkRoleName=(rule,value,callback)=>{
     nextStep (formName) {
       let flag=true;
      let _this=this;
-     for(let index=0;index<this.$refs[formName].length;index++){
-       this.$refs[formName][index].validate((valid)=>{
-         if(!valid){
-           flag=false;
-         }else{
-           this.$axios({
-             method:'post',
-             url:'/project',
-             data:this.$data.formsProject[index]
-           }).then(function (response) {
-             _this.$message({
-               message: '成功保存，进入下一步填写',
-               type: 'success'
-             })
-             _this.$data.formsProject.splice(index,1,response.data);
-           })
-         }
-       })
-     }
 
-      if(flag===true) {
-        this.$router.push('/ResumeForm/5')
-      }
+     if(this.$data.formsProject.length===0){
+       this.$message.error('项目经历为必填项')
+     }else {
+       for (let index = 0; index < this.$refs[formName].length; index++) {
+         this.$refs[formName][index].validate((valid) => {
+           if (!valid) {
+             flag = false;
+           } else {
+             this.$axios({
+               method: 'post',
+               url: '/project',
+               data: this.$data.formsProject[index]
+             }).then(function (response) {
+               _this.$message({
+                 message: '成功保存，进入下一步填写',
+                 type: 'success'
+               })
+               _this.$data.formsProject.splice(index, 1, response.data);
+             })
+           }
+         })
+       }
+
+       if (flag === true) {
+         this.$router.push('/ResumeForm/5')
+       }
+     }
     },
     addOne () {
-        this.$data.formProjectDefault.projectDescription='';
-        this.$data.formProjectDefault.projectName='';
-        this.$data.formProjectDefault.projectRole='';
-        this.$data.formsProject.push(this.$data.formProjectDefault)
+        this.$data.formsProject.push({
+          id: null,
+          resumeId: '',
+          projectName: '',
+          projectRole: '',
+          projectDescription: ''
+        })
     },
     deleteOne (num,index) {
       let _this = this

@@ -54,23 +54,22 @@ export default {
   data () {
     return {
       loading: true,
-      formsAward: null/*[{
-        id: '',
-        resumeId: '',
-        awardName: '',
-        dateOfAward: ''
-      }]*/,
-      formAwardDefault: {
+      formsAward: [{
         id: null,
         resumeId: '',
         awardName: '',
-        dateOfAward: ''
+        dateOfAward: null
+      }],
 
-      },
       rules:{
         awardName:[
-          {validator:checkAwardName,trigger:'change'}
+          {validator:checkAwardName,trigger:'change'},
+          {required:true,message:'请输入奖项名',trigger:'change'}
         ],
+        dateOfAward:[
+          {required:true,message:'请选择获奖时间',trigger:'blur'}
+        ]
+
       }
     }
   },
@@ -90,37 +89,46 @@ export default {
     nextStep (formName) {
       let flag=true;
       let _this=this;
-
-      for(let index=0;index<this.$refs[formName].length;index++){
-        this.$data.formsAward[index].dateOfAward=new Date(this.$data.formsAward[index].dateOfAward);
-        this.$data.formsAward[index].dateOfAward.setTime( this.$data.formsAward[index].dateOfAward.getTime()+8*1000*3600);
-        this.$refs[formName][index].validate((valid)=>{
-          if(!valid){
-            flag=false;
-          }else{
-            this.$axios({
-              method:'post',
-              url:'/award',
-              data:this.$data.formsAward[index]
-            }).then(function (response) {
-             _this.$message({
-                message: '成功保存，进入下一步填写',
-                type: 'success'
-              })
-              _this.$data.formsAward.splice(index,1,response.data);
-            })
-          }
-        })
-      }
-
-      if(flag===true) {
+      if(this.$data.formsAward.length===0){
         this.$router.push('/ResumeForm/8')
+      }else {
+        for (let index = 0; index < this.$refs[formName].length; index++) {
+          if (this.$data.formsAward[index].dateOfAward !== null) {
+            this.$data.formsAward[index].dateOfAward = new Date(this.$data.formsAward[index].dateOfAward);
+            this.$data.formsAward[index].dateOfAward.setTime(this.$data.formsAward[index].dateOfAward.getTime() + 8 * 1000 * 3600);
+          }
+          this.$refs[formName][index].validate((valid) => {
+            if (!valid) {
+              flag = false;
+            } else {
+              this.$axios({
+                method: 'post',
+                url: '/award',
+                data: this.$data.formsAward[index]
+              }).then(function (response) {
+                _this.$message({
+                  message: '成功保存，进入下一步填写',
+                  type: 'success'
+                })
+                _this.$data.formsAward.splice(index, 1, response.data);
+              })
+            }
+          })
+        }
+
+        if (flag === true) {
+          this.$router.push('/ResumeForm/8')
+        }
       }
     },
     addOne () {
-      this.$data.formAwardDefault.dateOfAward='';
-      this.$data.formAwardDefault.awardName='';
-      this.$data.formsAward.push(this.$data.formAwardDefault)
+
+      this.$data.formsAward.push({
+        id: null,
+        resumeId: '',
+        awardName: '',
+        dateOfAward: null
+      })
     },
     deleteOne (num,index) {
       let _this = this
@@ -138,8 +146,10 @@ export default {
     },
     saveOne (index,formName) {
       let flag=true;
-      this.$data.formsAward[index].dateOfAward=new Date(this.$data.formsAward[index].dateOfAward);
-      this.$data.formsAward[index].dateOfAward.setTime( this.$data.formsAward[index].dateOfAward.getTime()+8*1000*3600);
+      if(this.$data.formsAward[index].dateOfAward!==null) {
+        this.$data.formsAward[index].dateOfAward = new Date(this.$data.formsAward[index].dateOfAward);
+        this.$data.formsAward[index].dateOfAward.setTime(this.$data.formsAward[index].dateOfAward.getTime() + 8 * 1000 * 3600);
+      }
       this.$refs[formName][index].validate((valid)=>{       //对表单循环进行验证
         if(!valid){
           flag=false;

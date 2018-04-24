@@ -80,16 +80,15 @@
 
     return {
       loading: true,
-      formsWorkExp:null,
-      formWorkExpDefault: {
+      formsWorkExp:[{
         id: null,
         resumeId: '',
-        startTime: '',
-        endTime: '',
+        startTime: null,
+        endTime: null,
         company: '',
         position: '',
         description:''
-      },
+      }],
       rules:{
         startTime:[
           {type:'date',message:'请选择正确的日期',trigger:'blur'}
@@ -100,14 +99,17 @@
         ],
         company:[
           {validator:checkCompanyName,trigger:'change'},
-          {max:5,message:'长度超过限制',trigger:'change'}
+          {max:5,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入公司名',trigger:'change'}
         ],
         position:[
           {validator:checkCompanyName,trigger:'change'},
-          {max:30,message:'长度超过限制',trigger:'change'}
+          {max:30,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入职位名',trigger:'change'}
         ],
         description:[
-          {max:200,message:'长度超过限制',trigger:'change'}
+          {max:200,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入职位描述',trigger:'change'}
         ]
       }
     }
@@ -129,39 +131,51 @@
   methods: {
     nextStep (formName) {
       let flag=true;
-      for(let index=0;index<this.$refs[formName].length;index++)
-      {
-        this.$data.formsWorkExp[index].startTime=new Date(this.$data.formsWorkExp[index].startTime);
-        this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);
-        this.$data.formsWorkExp[index].endTime=new Date(this.$data.formsWorkExp[index].endTime);
-        this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);
-        this.$refs[formName][index].validate((valid)=>{
-          if(!valid){
-            flag=false;
-          }else{
-            let _this=this;
-            this.$axios({
-              method:'post',
-              url:'/work',
-              data:this.$data.formsWorkExp[index]
-            }).then(function (response) {
-              _this.$data.formsWorkExp.splice(index,1,response.data)
-
-            })
+      if(this.$data.formsWorkExp.length===0){
+        this.$router.push('/ResumeForm/6')
+      }else {
+        for (let index = 0; index < this.$refs[formName].length; index++) {
+          if (this.$data.formsWorkExp[index].startTime !== null) {
+            this.$data.formsWorkExp[index].startTime = new Date(this.$data.formsWorkExp[index].startTime);
+            this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime() + 8 * 3600 * 1000);
           }
-        })
-      }
-      if(flag===true){
-      this.$router.push('/ResumeForm/6')}
+          if (this.$data.formsWorkExp[index].endTime !== null) {
+            this.$data.formsWorkExp[index].endTime = new Date(this.$data.formsWorkExp[index].endTime);
+            this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime() + 8 * 3600 * 1000);
+          }
+          this.$refs[formName][index].validate((valid) => {
+            if (!valid) {
+              flag = false;
+            } else {
+              let _this = this;
+              this.$axios({
+                method: 'post',
+                url: '/work',
+                data: this.$data.formsWorkExp[index]
+              }).then(function (response) {
+                _this.$data.formsWorkExp.splice(index, 1, response.data)
 
+              })
+            }
+          })
+        }
+        if (flag === true) {
+          this.$router.push('/ResumeForm/6')
+        }
+      }
     },
     addOne(){
-      this.$data.formWorkExpDefault.company=''
-      this.$data.formWorkExpDefault.description=''
-      this.$data.formWorkExpDefault.endTime=''
-      this.$data.formWorkExpDefault.startTime=''
-      this.$data.formWorkExpDefault.position=''
-      this.$data.formsWorkExp.push(this.formWorkExpDefault);
+      this.$data.formsWorkExp.push(
+        {
+          id: null,
+          resumeId: '',
+          startTime: null,
+          endTime: null,
+          company: '',
+          position: '',
+          description:''
+        }
+      );
     },
     deleteOne (num,index) {
       let _this = this
@@ -179,10 +193,12 @@
     },
     saveOne(index,formName){
       let flag=true;
+      if(this.$data.formsWorkExp[index].startTime!==null){
       this.$data.formsWorkExp[index].startTime=new Date(this.$data.formsWorkExp[index].startTime);
-      this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);
+      this.$data.formsWorkExp[index].startTime.setTime(this.$data.formsWorkExp[index].startTime.getTime()+8*3600*1000);}
+      if(this.$data.formsWorkExp[index].endTime!==null){
       this.$data.formsWorkExp[index].endTime=new Date(this.$data.formsWorkExp[index].endTime);
-      this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);
+      this.$data.formsWorkExp[index].endTime.setTime(this.$data.formsWorkExp[index].endTime.getTime()+8*3600*1000);}
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
           flag=false;
