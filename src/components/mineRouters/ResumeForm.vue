@@ -78,7 +78,7 @@ export default {
         {index: '6', name: '实习经历', iconName: 'shixijingli', isNecessary: false},
         {index: '7', name: '奖励活动', iconName: 'jianglihuodong', isNecessary: false},
         {index: '8', name: '求职意向', iconName: 'qiuzhiyixiang', isNecessary: true},
-        {index: '9', name: '自我评价', iconName: 'ziwopingjia', isNecessary: true},
+        {index: '9', name: '自我评价', iconName: 'ziwopingjia', isNecessary: false},
         {index: '10', name: '上传附件', iconName: 'shangchuanfujian', isNecessary: true}
       ],
       items: [
