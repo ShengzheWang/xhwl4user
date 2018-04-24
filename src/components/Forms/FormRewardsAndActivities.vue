@@ -103,6 +103,10 @@ export default {
               url:'/award',
               data:this.$data.formsAward[index]
             }).then(function (response) {
+             _this.$message({
+                message: '成功保存，进入下一步填写',
+                type: 'success'
+              })
               _this.$data.formsAward.splice(index,1,response.data);
             })
           }
@@ -117,7 +121,6 @@ export default {
       this.$data.formAwardDefault.dateOfAward='';
       this.$data.formAwardDefault.awardName='';
       this.$data.formsAward.push(this.$data.formAwardDefault)
-      console.log(this.$data.formAwardDefault)
     },
     deleteOne (num,index) {
       let _this = this

@@ -1,29 +1,28 @@
 <template>
   <div id="Selector" >
 
-<el-input placeholder="请输入内容" v-model="input3"  style="animation-delay:0s">
-  <template slot="prepend">立即搜索</template>
-  <el-button slot="append" icon="el-icon-search"></el-button>
-</el-input>
+    <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px">
+      <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
+    </el-input>
 
 <div style="margin-top: 3%;margin-left:2%;animation-delay:0.2s" >
   <h3 style="display: inline;margin-right: 3%">工作地点</h3>
 
-  <el-radio-group v-model="placeChosen" >
-    <el-radio v-for="item in places" border :label="item.text" :key="item.value"></el-radio>
+  <el-radio-group v-model="placeChosen" text-color="#ffffff" fill="#1476C1">
+    <el-radio-button v-for="item in places"  :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 
 </div>
 <div style="margin-top: 2%;margin-left:2%;animation-delay:0.4s"  >
   <h3 style="display: inline;margin-right: 3%">职位类型</h3>
-  <el-radio-group v-model="classChosen" >
-    <el-radio v-for="item in classes" border :label="item.text" :key="item.value"></el-radio>
+  <el-radio-group v-model="classChosen" text-color="#ffffff" fill="#1476C1">
+    <el-radio-button v-for="item in classes" :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 </div>
 <div style="margin-top: 2%;margin-left:2%;animation-delay:0.6s" >
   <h3 style="display: inline;margin-right: 3%">招聘类型</h3>
-  <el-radio-group v-model="postChosen" >
-    <el-radio v-for="item in posts" border :label="item.text" :key="item.value"></el-radio>
+  <el-radio-group v-model="postChosen" text-color="#ffffff" fill="#1476C1">
+    <el-radio-button v-for="item in posts" :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 </div>
 </div>
@@ -67,3 +66,18 @@ export default {
   }
 }
 </script>
+<style lang="less">
+   #Selector{
+     font-size: 15px;
+     .el-input__inner{
+       border:4px solid #1476C1;
+       border-radius:100px 0 0 100px;
+       height: 60px;
+     }
+     .el-input-group__append{
+       border:1px solid #1476C1;
+       border-radius:0px 100px 100px 0;
+       background: #1476C1;
+     }
+   }
+</style>

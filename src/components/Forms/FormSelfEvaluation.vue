@@ -70,9 +70,13 @@ export default {
             data: this.$data.formSelfEvaluation
           }).then(function (response) {
             console.log(response.data.data)
+            _this.$message({
+              message: '成功保存，进入下一步填写',
+              type: 'success'
+            })
 
           });
-          this.$router.push('/ResumeForm/2')
+          this.$router.push('/ResumeForm/10')
         }else{
           console.log('提交失败！');
         }

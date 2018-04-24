@@ -1,6 +1,6 @@
 <template>
   <div id="PostCard">
-    <el-card v-for="item in cardInfo" class="box-card animated zoomIn" v-bind:key="item.index"
+    <el-card v-for="item in cardInfo" class="box-card animated fadeInLeft" v-bind:key="item.index"
              v-bind:style="'margin-top:2%;width:100%;background-color:#f6f6f6;animation-delay:'+(item.index+4)*0.2+'s'">
       <div>
         <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.positionName}}</span>

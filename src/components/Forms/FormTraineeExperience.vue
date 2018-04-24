@@ -154,6 +154,10 @@
               url: '/internship',
               data: this.$data.formsTrainee[index]
             }).then(function (response) {
+              _this.$message({
+                message: '成功保存，进入下一步填写',
+                type: 'success'
+              })
               _this.$data.formsTrainee.splice(index, 1, response.data)
             })
           }

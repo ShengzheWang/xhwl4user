@@ -43,7 +43,11 @@ export default {
   },
   methods: {
     nextStep () {
-      this.$router.push('/ResumeForm/2')
+      this.$message({
+        message: '填写完成，进入简历预览，请仔细查看是否有遗漏或者差错哦',
+        type: 'success'
+      })
+      this.$router.push({ path: '/ResumeDetails'})
     }
   }
 

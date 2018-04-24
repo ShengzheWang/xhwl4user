@@ -196,6 +196,10 @@
           url: '/work',
           data: this.$data.formsWorkExp[index]
         }).then(function (response) {
+          _this.$message({
+            message: '成功保存，进入下一步填写',
+            type: 'success'
+          })
           _this.$data.formsWorkExp.splice(index, 1, response.data)
 
         })

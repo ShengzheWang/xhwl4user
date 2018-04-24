@@ -4,6 +4,7 @@
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">教育经历</h2>
+      <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">教育经历请从最高学历开始填起</h4>
       <div style="width:100%;height:10px">
       </div>
       <div  v-for="(formEducation,index) in formsEducation">
@@ -171,6 +172,10 @@ export default {
               url: '/education',
               data: this.$data.formsEducation[index]
             }).then(function (response) {
+              _this.$message({
+                message: '成功保存，进入下一步填写',
+                type: 'success'
+              })
               _this.$data.formsEducation.splice(index, 1, response.data)
             })
           }

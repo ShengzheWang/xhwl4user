@@ -245,6 +245,7 @@ export default {
   },
   methods: {
     nextStep (formName) {
+      let _this = this
       this.$data.formBasic.birthday=new Date(this.$data.formBasic.birthday);
       this.$data.formBasic.birthday.setTime(this.$data.formBasic.birthday.getTime()+1000*3600*8);
       this.$refs[formName].validate((valid) => {
@@ -254,9 +255,13 @@ export default {
             url: '/person',
             data: this.$data.formBasic
           }).then(function (response) {
-            console.log(response.data)
+            _this.$message({
+              message: '成功保存，进入下一步填写',
+              type: 'success'
+            })
+            _this.$router.push('/ResumeForm/2')
           })
-          this.$router.push('/ResumeForm/2')
+
         } else {
           console.log('error submit!!')
           return false

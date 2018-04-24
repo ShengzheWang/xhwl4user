@@ -8,6 +8,7 @@ import Social from './components/headerRouters/Social.vue'
 import Campus from './components/headerRouters/Campus.vue'
 import Trainee from './components/headerRouters/Trainee.vue'
 import ResumeDetails from './components/headerRouters/ResumeDetails.vue'
+import AboutUs from './components/headerRouters/AboutUs.vue'
 
 import MyResume from './components/mineRouters/MyResume.vue'
 import ResumeForm from './components/mineRouters/ResumeForm.vue'
@@ -48,7 +49,7 @@ const routes = [
   { path: '/Campus/Plan', component: Social },
   { path: '/Trainee', component: Trainee },
   { path: '/ResumeDetails', component: ResumeDetails },
-  { path: '/AboutUs', component: null },
+  { path: '/AboutUs', component: AboutUs },
   { path: '/MyResume', component: MyResume },
   { path: '/MyJobApplication', component: MyJobApplication },
   { name: 'ResumeForm',

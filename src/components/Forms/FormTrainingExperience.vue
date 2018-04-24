@@ -157,6 +157,10 @@ export default {
               url: '/training',
               data: this.$data.formsTraining[index]
             }).then(function (response) {
+              _this.$message({
+                message: '成功保存，进入下一步填写',
+                type: 'success'
+              })
               _this.$data.formsTraining.splice(index, 1, response.data)
             })
           }

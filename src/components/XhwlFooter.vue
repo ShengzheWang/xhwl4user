@@ -11,6 +11,10 @@
           <li><a href="//xiaoyuan.jd.com" target="_blank">校园团队</a></li>
         </ul>
       </div>
+      <div style="text-align: center;width: 100%">
+      <a class="copyright"
+         >Copyright © 2004-2015  兴海物联 版权所有</a>
+    </div>
     </div>
   </div>
 </template>

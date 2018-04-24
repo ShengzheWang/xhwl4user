@@ -1,10 +1,10 @@
 <template>
   <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;border-top: solid 1px #e6e6e6" class="animated bounceInLeft">
     <div style="margin:0 auto;text-align: center">
-      <el-radio-group v-model="resumes_form" size="large">
-        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px" @click="changeType(1)">校园招聘简历</el-radio>
-        <el-radio class="radio4forms" label="2" border isText @click="changeType(2)">社会招聘简历</el-radio>
-        <el-radio class="radio4forms" label="3" border isText @click="changeType(3)">实习招聘简历</el-radio>
+      <el-radio-group v-model="resumes_form" size="large" @change="changeType">
+        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
+        <el-radio class="radio4forms" label="2" border isText >社会招聘简历</el-radio>
+        <el-radio class="radio4forms" label="3" border isText >实习招聘简历</el-radio>
       </el-radio-group>
       <div style=" width:640px;margin:0 auto">
       <transition >
@@ -59,6 +59,9 @@ export default {
     this.$data.resumes_form = this.$route.params.resumes_form_selected
     this.$router.push('/ResumeForm/1')
   },
+  watch: {
+    '$route.path': 'changeActive'
+  },
   data () {
     return {
       postChosen: '',
@@ -103,12 +106,25 @@ export default {
     }
   },
   methods: {
+    changeActive () {
+      const str = this.$route.path
+      this.$data.formNow = str.charAt(str.length - 1)
+    },
     handleSelect (key, keyPath) {
       this.$data.formNow = key
 
     },
-    changeType() {
-
+    changeType(whichOne) {
+      let _this = this
+      this.$axios({
+        method: 'put',
+        url: '/resumesForm/' + whichOne
+      }).then(function (response) {
+        _this.$message({
+          message: '更改简历类型成功',
+          type: 'success'
+        })
+      })
     },
     details () {
       this.$router.push({ path: '/ResumeDetails'})

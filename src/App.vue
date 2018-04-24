@@ -3,8 +3,6 @@
     <XhwlHeader></XhwlHeader>
     <router-view></router-view>
     <xhwl-footer></xhwl-footer>
-    <span class="copyright"
-          style="display:block;margin:0 auto;text-align: center">Copyright © 2004-2015  兴海物联 版权所有</span>
   </div>
 </template>
 
