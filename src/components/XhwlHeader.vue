@@ -156,12 +156,27 @@ export default {
             _this.$data.Need2Login = false
             _this.$data.dialogFormVisible1 = false
             document.cookie = token
+            _this.$message({
+              message: '登陆成功',
+              type: 'success'
+            })
             break
           case 500:
+            _this.$message({
+              message: '用户名或密码错误，请重试',
+              type: 'warning'
+            })
+            _this.$data.user.password = ''
             break
           case 401:
             break
         }
+      }).catch(function(error){
+        console.log(error)
+        _this.$message({
+          message: '用户名或密码错误，请重试',
+          type: 'warning'
+        })
       })
     }
   }
