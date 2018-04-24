@@ -74,6 +74,7 @@ var checkRoleName=(rule,value,callback)=>{
 
 
   data () {
+
     return {
 
       loading: true,
@@ -150,7 +151,10 @@ var checkRoleName=(rule,value,callback)=>{
       }
     },
     addOne () {
-      this.$data.formsProject.push(this.$data.formProjectDefault)
+        this.$data.formProjectDefault.projectDescription='';
+        this.$data.formProjectDefault.projectName='';
+        this.$data.formProjectDefault.projectRole='';
+        this.$data.formsProject.push(this.$data.formProjectDefault)
     },
     deleteOne (num,index) {
       let _this = this

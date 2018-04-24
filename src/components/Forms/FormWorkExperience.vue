@@ -61,9 +61,23 @@
     }
   }
 
+
   export default {
 
   data () {
+
+    var checkEndTime=(rule,value,callback)=>{
+      for(let index=0;index<this.$data.formsWorkExp.length;index++){
+        if(this.$data.formsWorkExp[index].endTime===value){
+          if(this.$data.formsWorkExp[index].startTime>value){
+            callback(new Error('起始日期不能大于结束日期'));
+          }
+        }
+      }
+      callback();
+    }
+
+
     return {
       loading: true,
       formsWorkExp:null,
@@ -81,15 +95,14 @@
           {type:'date',message:'请选择正确的日期',trigger:'blur'}
         ],
         endTime:[
-          {type:'date',message:'请选择正确的日期',trigger:'blur'}
+          {type:'date',message:'请选择正确日期',trigger:'blur'},
+          {validator:checkEndTime,trigger:'blur'}
         ],
         company:[
-          //{required:true,trigger:'change'},
           {validator:checkCompanyName,trigger:'change'},
           {max:5,message:'长度超过限制',trigger:'change'}
         ],
         position:[
-         // {required:true,trigger:'change'},
           {validator:checkCompanyName,trigger:'change'},
           {max:30,message:'长度超过限制',trigger:'change'}
         ],
@@ -143,6 +156,11 @@
 
     },
     addOne(){
+      this.$data.formWorkExpDefault.company=''
+      this.$data.formWorkExpDefault.description=''
+      this.$data.formWorkExpDefault.endTime=''
+      this.$data.formWorkExpDefault.startTime=''
+      this.$data.formWorkExpDefault.position=''
       this.$data.formsWorkExp.push(this.formWorkExpDefault);
     },
     deleteOne (num,index) {

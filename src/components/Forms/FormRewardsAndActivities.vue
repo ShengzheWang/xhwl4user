@@ -112,10 +112,10 @@ export default {
       if(flag===true) {
         this.$router.push('/ResumeForm/8')
       }
-
-      //this.$router.push('/ResumeForm/8')
     },
     addOne () {
+      this.$data.formAwardDefault.dateOfAward='';
+      this.$data.formAwardDefault.awardName='';
       this.$data.formsAward.push(this.$data.formAwardDefault)
       console.log(this.$data.formAwardDefault)
     },
