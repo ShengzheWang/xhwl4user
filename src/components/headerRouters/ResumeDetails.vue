@@ -1,12 +1,14 @@
 <template>
   <div id="ResumeDetails">
-    <div class="block">
+    <div class="block" v-loading="loading">
       <div style="width:1200px;margin: 0% auto 0 auto">
         <h1 class="resume-header">{{formBasic.name}} 简历预览</h1>
         <div>
           <h1 class="resume-item-header">个人信息</h1>
           <div class="line"></div>
-          <a><img style="position: absolute;top:300px;right: 20%;height:300px" :src="imgUrl"></a>
+          <div style="position: absolute;left: 60%;height:300px;">
+          <img style="height:300px" v-if="imgUrl" :src="imgUrl">
+          </div>
           <div style="width:90%;margin: 0% auto 0 auto">
             <h1 class="resume-item-middle">{{formBasic.name}}</h1>
             <div style="width: 95%;margin:0 auto">
@@ -183,6 +185,7 @@ export default {
   name: 'ResumeDetails',
   data () {
     return {
+      loading: true,
       formBasicItem: [
         {label: '性别', name: 'sex', info: '男'},
         {label: '证件类型', name: 'idType', info: '身份证'},
@@ -195,28 +198,28 @@ export default {
         {label: '政治面貌', name: 'politicalStatus', info: '团员'},
         {label: '现居住地', name: 'presentAddress', info: '厦门大学'}
       ],
-      formBasic: null,
-      imgUrl: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2356960934,261710042&fm=27&gp=0.jpg',
+      formBasic: {name: ''},
+      imgUrl: null,
       formsEducation: [
-        {startTime: '2015-09-01', endTime: '2019-07-30', school: '厦门大学', speciality: '计算机', educationHistory: '本科', rank: '20'}
+//        {startTime: '2015-09-01', endTime: '2019-07-30', school: '厦门大学', speciality: '计算机', educationHistory: '本科', rank: '20'}
       ],
       formsTraining: [
-        {startTime: '2015-09-01', endTime: '2019-07-30', trainingContent: '蓝翔技校',trainingInstitutions: '烹饪', description: '在蓝翔技术学校认真学习了挖掘机,并且认真完成烹饪技术的培训，可以做回锅肉给大家吃啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊'}
+//        {startTime: '2015-09-01', endTime: '2019-07-30', trainingContent: '蓝翔技校',trainingInstitutions: '烹饪', description: '在蓝翔技术学校认真学习了挖掘机,并且认真完成烹饪技术的培训，可以做回锅肉给大家吃啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊'}
       ],
       formsProject: [
         //{projectName: '兴海物联校园团队', projectRole: '酱油小兵', projectDescription: '呀呀呀呀呀呀呀呀呀呀呀呀呀'}
       ],
       formsWork: [
-        {startTime: '2015-09-01', endTime: '2019-07-30', company: '兴海物联有限公司', position: '打杂'}
+//        {startTime: '2015-09-01', endTime: '2019-07-30', company: '兴海物联有限公司', position: '打杂'}
       ],
       formsTrainee: [
-        {startTime: '2015-09-01', endTime: '2019-07-30', company: '兴海物联有限公司', position: '打杂'}
+//        {startTime: '2015-09-01', endTime: '2019-07-30', company: '兴海物联有限公司', position: '打杂'}
       ],
       formsRewards: [
-        {dateOfAward: '2017-10-01', awardName: '小红花一枚'}
+//        {dateOfAward: '2017-10-01', awardName: '小红花一枚'}
       ],
       formIntention: [
-        {workPlace: '深圳', salary: '20000', expectedTimeForDuty: '2019-10-10'}
+//        {workPlace: '深圳', salary: '20000', expectedTimeForDuty: '2019-10-10'}
       ],
       selfAssessment: '聪明可爱又伶俐'
     }
@@ -247,11 +250,10 @@ export default {
     })
       .then(function (response) {
         console.log(response.data)
-        _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
+        _this.$data.imgUrl = 'data:image/png;base64,' + btoa(
           new Uint8Array(response.data)
             .reduce((data, byte) => data + String.fromCharCode(byte), '')
         )
-
       })
       .catch(function (error) {
         console.log(error)
@@ -319,10 +321,10 @@ export default {
     }).then(function (response) {
       _this.$nextTick(() => {
         _this.$data.formsWork = response.data
+        _this.$data.loading = false
       })
-
-
     })
+
   },
   method: {
 

@@ -35,13 +35,13 @@ export default {
   data () {
     return {
       loading: true,
-      formsIntention: null/*{
+      formsIntention: {
         id: '',
         resumeId: '',
         workPlace: '',
         salary: '',
         expectedTimeForDuty: ''
-      }*/,
+      },
       rules: {
         salary:[
           {type:'number',message:'请输入正确薪资',trigger:'change'},
@@ -62,7 +62,7 @@ export default {
       url: '/intention'
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.formsIntention = response.data
+        _this.$data.formsIntention = response.data === ''?_this.$data.formsIntention:response.data
         _this.$data.loading = false
       })
 

@@ -156,22 +156,21 @@ export default {
       },
       imageUrl: null,
       loading: true,
-      formBasic: null,
-      //    {
-      //        ID: '',
-      //        resumeId: null,
-      //        name: '',
-      //        sex: null,
-      //        idType: '',
-      //        idNumber: '',
-      //        birthday: '',
-      //        email: '',
-      //        telephone: '',
-      //        maritalStatus: '',
-      //        workSeniority: '',
-      //        politicalStatus: '',
-      //        presentAddress: '',
-      //      },
+      formBasic: {
+        ID: '',
+        resumeId: '',
+        name: '',
+        sex: '',
+        idType: '',
+        idNumber: '',
+        birthday: '',
+        email: '',
+        telephone: '',
+        maritalStatus: '',
+        workSeniority: '',
+        politicalStatus: '',
+        presentAddress: '',
+      },
       rules: {
         email: [
           {validator: checkEmail, trigger: 'change'},
@@ -183,7 +182,7 @@ export default {
         ],
         birthday: [
           {type: 'date', required:true, message: '请选择日期', trigger: 'change'}
-                ],
+        ],
         name: [
           {required: true, message: '请输入名字', trigger: 'change'},
           {validator: checkName, trigger: 'change'}
@@ -220,7 +219,7 @@ export default {
       url: '/person'
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.formBasic = response.data
+        _this.$data.formBasic = response.data === ''?_this.$data.formBasic:response.data
         _this.$data.loading = false
         _this.$data.header = {
           'authorization': _this.$axios.defaults.headers.Authorization
@@ -232,10 +231,12 @@ export default {
     })
       .then(function (response) {
         console.log(response.data)
-        _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
-          new Uint8Array(response.data)
-            .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        )
+        if(response.data.length!=0) {
+          _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
+            new Uint8Array(response.data)
+              .reduce((data, byte) => data + String.fromCharCode(byte), '')
+          )
+        }
 
       })
       .catch(function (error) {
