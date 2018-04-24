@@ -99,22 +99,16 @@ export default {
 
     return {
       loading: true,
-      formsEducation: null, /* [{        startTime: '',
-        endTime: '',
-        school: '',
-        speciality: '',
-        educationHistory: null,
-        rank: ''
-      }] */
-      formEducationDefault: {
-        id: null,
+      formsEducation: [{
+        id:'',
+        resumeId:'',
         startTime: '',
         endTime: '',
         school: '',
         speciality: '',
         educationHistory: null,
         rank: ''
-      },
+      }] ,
 
       rules: {
         school: [{pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '名字不合法', trigger: 'change'},
@@ -154,50 +148,57 @@ export default {
   methods: {
     nextStep (formName) {
       let flag = true
-
-      for (let index = 0; index < this.$refs[formName].length; index++) {
-
-          this.$data.formsEducation[index].startTime = new Date(this.$data.formsEducation[index].startTime);
-          this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);
-          this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
-          this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8);
-
-        this.$refs[formName][index].validate((valid) => {
-          if (!valid) {
-            flag = false
-          } else {
-            let _this = this
-            this.$axios({
-              method: 'post',
-              url: '/education',
-              data: this.$data.formsEducation[index]
-            }).then(function (response) {
-              _this.$message({
-                message: '成功保存，进入下一步填写',
-                type: 'success'
-              })
-              _this.$data.formsEducation.splice(index, 1, response.data)
-            })
+      if(this.$data.formsEducation.length===0){
+        this.$message.error('教育经历为必填')
+      }else {
+        for (let index = 0; index < this.$refs[formName].length; index++) {
+          if (this.$data.formsEducation[index].startTime !== null) {
+            this.$data.formsEducation[index].startTime = new Date(this.$data.formsEducation[index].startTime);
+            this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);
           }
-        })
-      }
+          if (this.$data.formsEducation[index].endTime !== null) {
+            this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
+            this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8);
+          }
 
-      if (flag === true) {
-        this.$router.push('/ResumeForm/3')
+          this.$refs[formName][index].validate((valid) => {
+            if (!valid) {
+              flag = false
+            } else {
+              let _this = this
+              this.$axios({
+                method: 'post',
+                url: '/education',
+                data: this.$data.formsEducation[index]
+              }).then(function (response) {
+                _this.$message({
+                  message: '成功保存，进入下一步填写',
+                  type: 'success'
+                })
+                _this.$data.formsEducation.splice(index, 1, response.data)
+              })
+            }
+          })
+        }
+
+        if (flag === true) {
+          this.$router.push('/ResumeForm/3')
+        }
       }
     },
     addOne () {
-      if(this.$data.formsEducation.length===0)
-      this.$data.formsEducation.push(this.$data.formEducationDefault);
-      else{
-        this.$data.formEducationDefault.startTime=''
-        this.$data.formEducationDefault.endTime=''
-        this.$data.formEducationDefault.speciality=''
-        this.$data.formEducationDefault.school=''
-        this.$data.formEducationDefault.educationHistory=null;
-        this.$data.formEducationDefault.rank=''
-        this.$data.formsEducation.push(this.$data.formEducationDefault);
-      }
+
+      this.$data.formsEducation.push(
+        {
+          id:null,
+          resumeId:null,
+          startTime:null,
+          endTime:null,
+          school:'',
+          educationHistory:'',
+          speciality: '',
+          rank:null
+        });
     },
     deleteOne (num, index) {
       let _this = this
@@ -214,11 +215,12 @@ export default {
       })
     },
     saveOne (index, formName) {
-
+      if(this.$data.formsEducation[index].startTime!==null){
         this.$data.formsEducation[index].startTime = new Date(this.$data.formsEducation[index].startTime);
-        this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);
-      this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
-      this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8)
+        this.$data.formsEducation[index].startTime.setTime(this.$data.formsEducation[index].startTime.getTime() + 3600 * 1000 * 8);}
+      if(this.$data.formsEducation[index].startTime!==null){
+        this.$data.formsEducation[index].endTime = new Date(this.$data.formsEducation[index].endTime);
+        this.$data.formsEducation[index].endTime.setTime(this.$data.formsEducation[index].endTime.getTime() + 3600 * 1000 * 8);}
 
       this.$refs[formName][index].validate((valid) => {
         if (valid) {
@@ -232,7 +234,6 @@ export default {
           })
         }
       })
-      //this.$data.formEducationDefault.startTime='';
     }
 
   }

@@ -37,7 +37,7 @@ export default {
       },
       rules:{
         selfAssessment:[
-          {required:true,message:'请输入自我描述',trigger:'change'},
+         // {required:true,message:'请输入自我描述',trigger:'change'},
           {max:500,message:'长度超过限制',trigger:'change'}
         ]
       }

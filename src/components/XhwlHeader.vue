@@ -81,27 +81,49 @@
     </el-dialog>
 
     <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto" :lock-scroll="false">
-      <el-form :label-position="labelPosition1" label-width="60px">
-        <el-form-item label="手机号">
+      <el-form :label-position="labelPosition1" label-width="60px" :model="user" ref="user" :rules="rules">
+        <el-form-item label="手机号" prop="username">
           <el-input v-model="user.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" prop="password">
           <el-input v-model="user.password"></el-input>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-        <el-button type="primary" @click="login();">确 定</el-button>
+        <el-button type="primary" @click="login('user');">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-export default {
+  import {isvalidPhone} from "../util/Validate";
+
+
+  export default {
   name: 'XhwlHeader',
   data () {
+
+    var checkPhoneNum=(rule,value,callback)=>{
+      if(!value){
+        callback(new Error('请输入手机号'))
+      }else if(!isvalidPhone(value)){
+        callback(new Error('请输入正确的手机号'))
+      }else{
+        callback();
+      }
+    }
+
+    var checkLogPass=(rule,value,callback)=>{
+      if(!value){
+        callback(new Error('请输入密码'))
+      }else{
+        callback();
+      }
+    }
+
     return {
       activeIndex: '1',
       dialogFormVisible: false,
@@ -113,6 +135,14 @@ export default {
       user: {
         username: '',
         password: ''
+      },
+      rules:{
+        username:[
+          {validator:checkPhoneNum,trigger:'change'}
+        ],
+        password:[
+          {validator:checkLogPass,trigger:'change'}
+        ]
       },
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
@@ -154,43 +184,48 @@ export default {
       })
       this.$router.push('/')
     },
-    login () {
-      let _this = this
-      this.$axios({
-        method: 'post',
-        url: '/login',
-        data: this.$qs.stringify(this.$data.user)
-      }).then(function (response) {
-        console.log(response.data.data)
-        switch (response.data.code) {
-          case 200:
-            const token = response.data.data
-            _this.$axios.defaults.headers.Authorization = token
-            _this.$data.Need2Login = false
-            _this.$data.dialogFormVisible1 = false
-            document.cookie = token
-            _this.$message({
-              message: '登陆成功',
-              type: 'success'
-            })
-            break
-          case 500:
+    login (formName) {
+      this.$refs[formName].validate((valid)=>{
+        if(valid){
+          let _this = this
+          this.$axios({
+            method: 'post',
+            url: '/login',
+            data: this.$qs.stringify(this.$data.user)
+          }).then(function (response) {
+            console.log(response.data.data)
+            switch (response.data.code) {
+              case 200:
+                const token = response.data.data
+                _this.$axios.defaults.headers.Authorization = token
+                _this.$data.Need2Login = false
+                _this.$data.dialogFormVisible1 = false
+                document.cookie = token
+                _this.$message({
+                  message: '登陆成功',
+                  type: 'success'
+                })
+                break
+              case 500:
+                _this.$message({
+                  message: '用户名或密码错误，请重试',
+                  type: 'warning'
+                })
+                _this.$data.user.password = ''
+                break
+              case 401:
+                break
+            }
+          }).catch(function(error){
+            console.log(error)
             _this.$message({
               message: '用户名或密码错误，请重试',
               type: 'warning'
             })
-            _this.$data.user.password = ''
-            break
-          case 401:
-            break
+          })
         }
-      }).catch(function(error){
-        console.log(error)
-        _this.$message({
-          message: '用户名或密码错误，请重试',
-          type: 'warning'
-        })
       })
+
     }
   }
 }

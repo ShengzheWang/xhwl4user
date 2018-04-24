@@ -85,24 +85,16 @@ export default {
 
     return {
       loading: true,
-      formsTraining: null/*[{
-        id: '',
-        resumeId: '',
-        startTime: '',
-        endTime: '',
-        trainingInstitutions: '',
-        trainingContent: '',
-        description:''
-      }]*/,
-      formTrainingDefault: {
+      formsTraining: [{
         id: null,
         resumeId: '',
-        startTime: '',
-        endTime: '',
+        startTime: null,
+        endTime: null,
         trainingInstitutions: '',
         trainingContent: '',
         description:''
-      },
+      }],
+
       rules:{
         startTime:[
           //{required:true,trigger:'change'},
@@ -114,13 +106,16 @@ export default {
         ],
         trainingInstitutions:[
           {validator:checkInsititutionName,trigger:'change'},
-          {max:50,message:'长度超过限制',trigger:'change'}
+          {max:50,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入机构名',trigger:'change'}
         ],
         trainingContent:[
-          {max:50,message:'长度超过限制',trigger:'change'}
+          {max:50,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入培训内容',trigger:'change'}
         ],
         description:[
-          {max:200,message:'长度超过限制',trigger:'change'}
+          {max:200,message:'长度超过限制',trigger:'change'},
+          {required:true,message:'请输入详细内容',trigger:'change'}
         ]
       }
     }
@@ -141,41 +136,54 @@ export default {
   methods: {
     nextStep (formName) {
       let flag=true;
-      for(let index=0;index<this.$refs[formName].length;index++){
+      if(this.$data.formsTraining.length===0){
+        this.$router.push('/ResumeForm/4')
+      }else {
+        for (let index = 0; index < this.$refs[formName].length; index++) {
+          if(this.$data.formsTraining[index].startTime!==null){
           this.$data.formsTraining[index].startTime = new Date(this.$data.formsTraining[index].startTime);
-          this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);
+          this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);}
+          if(this.$data.formsTraining[index].endTime!==null){
           this.$data.formsTraining[index].endTime = new Date(this.$data.formsTraining[index].endTime);
-          this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);
+          this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);}
 
-        this.$refs[formName][index].validate((valid)=>{
-          if(!valid){
-            flag=false;
-          }else{
-            let _this = this
-            this.$axios({
-              method: 'post',
-              url: '/training',
-              data: this.$data.formsTraining[index]
-            }).then(function (response) {
-              _this.$message({
-                message: '成功保存，进入下一步填写',
-                type: 'success'
+          this.$refs[formName][index].validate((valid) => {
+            if (!valid) {
+              flag = false;
+            } else {
+              let _this = this
+              this.$axios({
+                method: 'post',
+                url: '/training',
+                data: this.$data.formsTraining[index]
+              }).then(function (response) {
+                _this.$message({
+                  message: '成功保存，进入下一步填写',
+                  type: 'success'
+                })
+                _this.$data.formsTraining.splice(index, 1, response.data)
               })
-              _this.$data.formsTraining.splice(index, 1, response.data)
-            })
-          }
-        });
+            }
+          });
+        }
+        if (flag === true) {
+          this.$router.push('/ResumeForm/4')
+        }
       }
-      if(flag===true){
-      this.$router.push('/ResumeForm/4')}
     },
     addOne () {
-      this.$data.formTrainingDefault.startTime=''
-      this.$data.formTrainingDefault.endTime=''
-      this.$data.formTrainingDefault.description=''
-      this.$data.formTrainingDefault.trainingContent=''
-      this.$data.formTrainingDefault.trainingInstitutions=''
-      this.$data.formsTraining.push(this.$data.formTrainingDefault)
+
+      this.$data.formsTraining.push(
+        {
+        id: null,
+        resumeId: '',
+        startTime: null,
+        endTime: null,
+        trainingInstitutions: '',
+        trainingContent: '',
+        description:''
+        }
+      )
     },
     deleteOne (num,index) {
       let _this = this
@@ -193,12 +201,12 @@ export default {
     },
     saveOne (index,formName) {
       let flag=true;
-
+        if(this.$data.formsTraining[index].startTime!==null){
         this.$data.formsTraining[index].startTime = new Date(this.$data.formsTraining[index].startTime);
-        this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);
-
+        this.$data.formsTraining[index].startTime.setTime(this.$data.formsTraining[index].startTime.getTime() + 8 * 3600 * 1000);}
+        if(this.$data.formsTraining[index].endTime!==null){
         this.$data.formsTraining[index].endTime = new Date(this.$data.formsTraining[index].endTime);
-        this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);
+        this.$data.formsTraining[index].endTime.setTime(this.$data.formsTraining[index].endTime.getTime() + 8 * 3600 * 1000);}
 
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){

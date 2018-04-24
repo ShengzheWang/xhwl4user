@@ -88,16 +88,15 @@
 
     return {
       loading: true,
-      formsTrainee: null,
-      formTraineeDefault: {
+      formsTrainee: [{
         id: null,
         resumeId: '',
-        startTime: '',
-        endTime: '',
+        startTime: null,
+        endTime: null,
         company: '',
         position: '',
         description:''
-      },
+      }],
       rules:{
 
         startTime:[
@@ -110,10 +109,12 @@
         company:[
           {max:50,message:'公司名字超过限制',trigger:'change'},
           {validator:checkCompanyName,trigger:'change'},
+          {required:true,message:'请输入公司名',trigger:'change'}
         ],
         position:[
           {max:50,message:'职位名长度超过限制',trigger:'change'},
-          {validator:checkPositionName,trigger:'change'}
+          {validator:checkPositionName,trigger:'change'},
+          {required:true,message:'请输入职位名',trigger:'change'}
         ],
         description:[
           {max:200,message:'描述字数超过限制',trigger:'change'}
@@ -137,43 +138,53 @@
   methods: {
     nextStep (formName) {
       let flag=true;
-      for(let index=0;index<this.$refs[formName].length;index++)
-      {
-        this.$data.formsTrainee[index].startTime=new Date(this.$data.formsTrainee[index].startTime);
-        this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);
-        this.$data.formsTrainee[index].endTime=new Date(this.$data.formsTrainee[index].endTime);
-        this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);
-
-        this.$refs[formName][index].validate((valid)=>{
-          if(!valid){
-            flag=false;
-          } else{
-            let _this = this
-            this.$axios({
-              method: 'post',
-              url: '/internship',
-              data: this.$data.formsTrainee[index]
-            }).then(function (response) {
-              _this.$message({
-                message: '成功保存，进入下一步填写',
-                type: 'success'
-              })
-              _this.$data.formsTrainee.splice(index, 1, response.data)
-            })
-          }
-        })
-      }
-      if(flag===true) {
+      if(this.$data.formsTrainee.length===0){
         this.$router.push('/ResumeForm/7')
+      }else {
+        for (let index = 0; index < this.$refs[formName].length; index++) {
+          if (this.$data.formsTrainee[index].startTime !== null) {
+            this.$data.formsTrainee[index].startTime = new Date(this.$data.formsTrainee[index].startTime);
+            this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime() + 8 * 3600 * 1000);
+          }
+          if (this.$data.formsTrainee[index].endTime !== null) {
+            this.$data.formsTrainee[index].endTime = new Date(this.$data.formsTrainee[index].endTime);
+            this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime() + 8 * 3600 * 1000);
+          }
+
+          this.$refs[formName][index].validate((valid) => {
+            if (!valid) {
+              flag = false;
+            } else {
+              let _this = this
+              this.$axios({
+                method: 'post',
+                url: '/internship',
+                data: this.$data.formsTrainee[index]
+              }).then(function (response) {
+                _this.$message({
+                  message: '成功保存，进入下一步填写',
+                  type: 'success'
+                })
+                _this.$data.formsTrainee.splice(index, 1, response.data)
+              })
+            }
+          })
+        }
+        if (flag === true) {
+          this.$router.push('/ResumeForm/7')
+        }
       }
     },
     addOne () {
-      this.$data.formTraineeDefault.startTime='';
-      this.$data.formTraineeDefault.endTime='';
-      this.$data.formTraineeDefault.description='';
-      this.$data.formTraineeDefault.company=''
-      this.$data.formTraineeDefault.position=''
-      this.$data.formsTrainee.push(this.$data.formTraineeDefault)
+      this.$data.formsTrainee.push({
+        id: null,
+        resumeId: '',
+        startTime: null,
+        endTime: null,
+        company: '',
+        position: '',
+        description:''
+      })
     },
     deleteOne (num,index) {
       let _this = this
@@ -191,10 +202,12 @@
     },
     saveOne (index,formName) {
       let flag=true;
+      if(this.$data.formsTrainee[index].startTime!==null){
       this.$data.formsTrainee[index].startTime=new Date(this.$data.formsTrainee[index].startTime);
-      this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);
+      this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);}
+      if(this.$data.formsTrainee[index].endTime!==null){
       this.$data.formsTrainee[index].endTime=new Date(this.$data.formsTrainee[index].endTime);
-      this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);
+      this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);}
       this.$refs[formName][index].validate((valid)=>{
         if(!valid){
          flag=false;
