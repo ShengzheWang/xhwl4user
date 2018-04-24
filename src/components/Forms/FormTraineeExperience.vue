@@ -12,7 +12,7 @@
           <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.startTime"
                           class="input-date"></el-date-picker>
         </el-form-item>
-        <el-form-item label="结束日期" prop="endTime">
+        <el-form-item label="结束日期" prop="endTime" ref="formTrainee">
           <el-date-picker type="date" placeholder="选择日期" v-model="formTrainee.endTime"
                           class="input-date"></el-date-picker>
         </el-form-item>
@@ -71,6 +71,21 @@
 
   export default {
   data () {
+
+    var checkEndTime=(rule,value,callback)=>{
+      for(let index=0;index<this.$data.formsTrainee.length;index++)
+      {
+        if(this.$data.formsTrainee[index].endTime===value){
+          if(this.$data.formsTrainee[index].startTime>value){
+            callback(new Error('结束日期不能大于起始日期'));
+          }
+        }
+      }
+      callback();
+
+    }
+
+
     return {
       loading: true,
       formsTrainee: null,
@@ -89,7 +104,8 @@
           {type:'date',message:'请选择正确日期',trigger:'blur'}
         ],
         endTime:[
-          {type:'date',message:'请选择正确日期',trigger:'blur'}
+          {type:'date',message:'请选择正确日期',trigger:'blur'},
+          {validator:checkEndTime,trigger:'blur'}
         ],
         company:[
           {max:50,message:'公司名字超过限制',trigger:'change'},
@@ -127,10 +143,11 @@
         this.$data.formsTrainee[index].startTime.setTime(this.$data.formsTrainee[index].startTime.getTime()+8*3600*1000);
         this.$data.formsTrainee[index].endTime=new Date(this.$data.formsTrainee[index].endTime);
         this.$data.formsTrainee[index].endTime.setTime(this.$data.formsTrainee[index].endTime.getTime()+8*3600*1000);
+
         this.$refs[formName][index].validate((valid)=>{
           if(!valid){
             flag=false;
-          }else{
+          } else{
             let _this = this
             this.$axios({
               method: 'post',
@@ -147,6 +164,11 @@
       }
     },
     addOne () {
+      this.$data.formTraineeDefault.startTime='';
+      this.$data.formTraineeDefault.endTime='';
+      this.$data.formTraineeDefault.description='';
+      this.$data.formTraineeDefault.company=''
+      this.$data.formTraineeDefault.position=''
       this.$data.formsTrainee.push(this.$data.formTraineeDefault)
     },
     deleteOne (num,index) {
