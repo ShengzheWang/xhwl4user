@@ -1,14 +1,14 @@
 <template>
   <div id="FormWorkExperience">
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">工作经历</h2>
       <div style="width:100%;height:10px">
       </div>
       <div v-for="(formWorkExp,index) in formsWorkExp">
-        <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :rules="rules"
-                 :model="formWorkExp" ref="formsWorkExp" v-if="!loading">
+        <el-form label-position="labelPosition" label-width="260px" :status-icon="true" class="animated fadeIn" :rules="rules"
+                 :model="formWorkExp" ref="formsWorkExp">
           <el-form-item label="起始日期" prop="startTime">
             <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.startTime"
                             class="input-date"></el-date-picker>
@@ -34,7 +34,7 @@
           <div class="needMarginBorder"></div>
         </el-form>
       </div>
-      <el-form label-position="labelPosition" label-width="200px" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px" >
         <el-form-item label="还有其他工作经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

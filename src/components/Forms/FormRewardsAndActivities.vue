@@ -1,13 +1,13 @@
 <template>
   <div id="FormRewardsAndActivities" >
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">奖励活动</h2>
       <div style="width:100%;height:10px">
       </div>
       <div  v-for="(formAward,index) in formsAward">
-      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formAward" ref="formsAward" :rules="rules" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :model="formAward" :status-icon="true" ref="formsAward" :rules="rules" >
         <el-form-item label="奖励日期" prop="dateOfAward">
           <el-date-picker type="date" placeholder="选择日期" v-model="formAward.dateOfAward"
                           class="input-date"></el-date-picker>
@@ -22,7 +22,7 @@
         <div class="needMarginBorder"></div>
       </el-form>
       </div>
-      <el-form  label-position="labelPosition" label-width="200px" v-if="!loading">
+      <el-form  label-position="labelPosition" label-width="260px" v-if="!loading">
         <el-form-item label="还有其他获奖经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

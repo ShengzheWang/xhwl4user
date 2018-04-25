@@ -1,5 +1,5 @@
 <template>
-  <div id="FormTrainingExperience">
+  <div id="FormTrainingExperience" v-if="!loading">
     <div style="width:90%;margin: 0% auto;">
       <div style="width:100%;height:10px">
       </div>
@@ -7,8 +7,8 @@
       <div style="width:100%;height:10px">
       </div>
       <div v-for="(formTraining,index) in formsTraining">
-        <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" ref="formsTraining"
-                 :rules="rules" :model="formTraining" v-if="!loading">
+        <el-form label-position="labelPosition" label-width="260px" :status-icon="true" class="animated fadeIn" ref="formsTraining"
+                 :rules="rules" :model="formTraining" >
           <el-form-item label="开始日期" prop="startTime">
             <el-date-picker type="date" placeholder="选择日期" v-model="formTraining.startTime"
                             class="input-date"></el-date-picker>
@@ -40,7 +40,7 @@
           <div class="needMarginBorder"></div>
         </el-form>
       </div>
-      <el-form label-position="labelPosition" label-width="200px" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px">
         <el-form-item label="还有其他培训经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

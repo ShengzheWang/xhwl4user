@@ -1,31 +1,24 @@
 <template>
   <div id="MyJobApplication" class="animated bounceInLeft" style="height: 500px;width: 1300px;margin:0% auto;">
-    <h1 style="width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
-    <div style="height: 350px;width: 1100px;margin:5% auto">
+    <div style="height: 350px;width: 1100px;margin:5% auto" >
       <el-table
         :data="tableData"
         stripe
         style="width: 100%">
         <el-table-column
-          fixed
-          prop="date"
-          label="投递日期"
-          width="240">
-        </el-table-column>
-        <el-table-column
-          prop="name"
+          prop="positionName"
           label="申请职位"
           width="260">
         </el-table-column>
         <el-table-column
-          prop="type"
+          prop="recruitmentType"
           label="职位类型"
-          width="220">
+          width="260">
         </el-table-column>
         <el-table-column
-          prop="state"
+          prop="recruitmentState"
           label="投递状态"
-          width="220">
+          width="260">
         </el-table-column>
         <el-table-column
           label="操作"
@@ -54,21 +47,28 @@ export default {
   name: 'MyJobApplication',
   data () {
     return {
-      tableData: [{
-        date: '2016-05-03',
-        name: 'web前端工程师',
-        type: '技术类',
-        state: '已提交',
-        ApplicationID: 200333
-      }, {
-        date: '2016-05-03',
-        name: 'web前端工程师',
-        type: '技术类',
-        state: '已提交',
-        ApplicationID: 200333
-      }]
+      tableData: []
 
     }
+  },
+  created () {
+    let _this = this
+    this.$axios({
+      method: 'get',
+      url: '/deliver'
+    }).then(function (response) {
+      _this.$nextTick(() => {
+        response.data.forEach((item, index) => {
+          item['index'] = index
+          item['recruitmentType'] = item['recruitmentType'] === '1' ? '校园招聘'
+            : item['recruitmentType'] === '2' ? '社会招聘' : '实习生招聘'
+          item['recruitmentState'] = item['recruitmentState'] === '0' ? '审核中'
+            : item['recruitmentState'] === '1' ? '已通过' : '已回绝'
+          _this.$data.tableData.push(item)
+        })
+        console.log(_this.$data.tableData)
+      })
+    })
   },
   methods: {
     createAResume () {

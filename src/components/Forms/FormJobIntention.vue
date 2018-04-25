@@ -1,12 +1,12 @@
 <template>
   <div id="FormTraineeExperience" >
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">求职意向</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :rules="rules" :model="formsIntention" ref="formsIntention" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :rules="rules" :status-icon="true" :model="formsIntention" ref="formsIntention">
         <el-form-item label="可到岗时间" prop="expectedTimeForDuty">
           <el-date-picker type="date" placeholder="选择日期" v-model="formsIntention.expectedTimeForDuty"
                           class="input-date"></el-date-picker>

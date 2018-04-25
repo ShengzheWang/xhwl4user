@@ -1,7 +1,7 @@
 <template>
   <div id="PostCard">
     <el-card v-for="item in cardInfo" class="box-card animated fadeInLeft" v-bind:key="item.index"
-             v-bind:style="'margin-top:2%;width:100%;background-color:#f6f6f6;animation-delay:'+(item.index+4)*0.2+'s'">
+             v-bind:style="'margin-top:2%;width:100%;background-color:#f8f8f8;animation-delay:'+(item.index+4)*0.2+'s'">
       <div>
         <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  | {{item.positionType}}</span>
@@ -93,20 +93,36 @@ export default {
   methods: {
     send (index) {
       let _this=this
+      if (this.$axios.defaults.headers.Authorization == null) {
+        _this.$message({
+          type: 'warning',
+          message: '请先登录并填写简历才能投递哦!'
+        })
+        return
+      }
       this.$confirm('确定投递职位' + _this.$data.cardInfo[index].positionName + '吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        _this.$message({
-          type: 'success',
-          message: '提交投递成功!'
+        _this.$axios({
+          method: 'put',
+          url: '/deliver/' + _this.$data.cardInfo[index].id
+        }).then(function (response) {
+          _this.$message({
+            type: 'success',
+            message: '提交投递成功!'
+          })
+        }).catch(() => {
+          _this.$message({
+            type: 'warning',
+            message: '提交失败，请检查你的简历类型!'
+          })
         })
       }).catch(() => {
       })
     }
   }
-
 }
 </script>
 

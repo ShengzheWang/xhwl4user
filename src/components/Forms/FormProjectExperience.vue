@@ -1,13 +1,13 @@
 <template>
   <div id="FormProjectExperience" >
-    <div style="width:90%;margin: 0% auto;">
+    <div style="width:90%;margin: 0% auto;" v-if="!loading">
       <div style="width:100%;height:10px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">项目经历</h2>
       <div style="width:100%;height:10px">
       </div>
       <div v-for="(formProject,index) in formsProject">
-      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formProject" ref="formsProject" :rules="rules" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :model="formProject" :status-icon="true" ref="formsProject" :rules="rules">
         <el-form-item label="项目名称" style="width: 50%" prop="projectName" >
           <el-input v-model="formProject.projectName"></el-input>
         </el-form-item>
@@ -31,7 +31,7 @@
       </el-form>
       </div>
       <div>
-      <el-form  label-position="labelPosition" label-width="200px" v-if="!loading">
+      <el-form  label-position="labelPosition" label-width="260px">
         <el-form-item label="还有其他项目经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

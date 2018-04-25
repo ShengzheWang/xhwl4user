@@ -8,7 +8,7 @@
       <div style="width:100%;height:10px">
       </div>
       <div  v-for="(formEducation,index) in formsEducation">
-      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formEducation" ref="formsEducation" :rules="rules" v-if="!loading">
+      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :model="formEducation" :status-icon="true" ref="formsEducation" :rules="rules" v-if="!loading">
         <el-form-item label="入学日期" prop="startTime">
           <el-date-picker type="date" placeholder="选择日期"
                           class="input-date" v-model="formEducation.startTime"
@@ -40,14 +40,14 @@
           </el-input>
         </el-form-item>
         <el-form-item label="" style="width: 50%">
-          <el-button type="primary" @click="saveOne(index,'formsEducation')">保存</el-button>
-          <el-button type="info" @click="deleteOne(formEducation.id,index)">删除</el-button>
+          <el-button type="primary"  @click="saveOne(index,'formsEducation')">保存</el-button>
+          <el-button type="info"  @click="deleteOne(formEducation.id,index)">删除</el-button>
         </el-form-item>
         <div class="needMarginBorder"></div>
       </el-form>
       </div>
 
-      <el-form  label-position="labelPosition" label-width="200px" v-if="!loading">
+      <el-form  label-position="labelPosition" label-width="260px" v-if="!loading">
       <el-form-item label="还有其他教育经历？" style="width: 50%">
         <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
       </el-form-item>

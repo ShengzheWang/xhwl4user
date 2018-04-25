@@ -6,7 +6,7 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">上传附件</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px">
+      <el-form label-position="labelPosition" label-width="260px">
         <el-form-item  style="width: 45%" label="上传简历">
         <el-upload
           class="upload-demo"

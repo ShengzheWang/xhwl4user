@@ -1,5 +1,5 @@
 <template>
-  <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;border-top: solid 1px #e6e6e6" class="animated bounceInLeft">
+  <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;" class="animated bounceInLeft">
     <div style="margin:0 auto;text-align: center">
       <el-radio-group v-model="resumes_form" size="large" @change="changeType">
         <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
@@ -33,7 +33,7 @@
         <template slot="title">
           <i class="img4forms icon iconfont " :class="'icon-'+item.iconName"></i>
           <span style="font-size: 20px;margin-left: 15px">{{item.name}}</span>
-          <img v-if="item.isNecessary" src="../../../static/img/necessary.png" class="img4forms" style="margin-left: 15px">
+          <i v-if="item.isNecessary"  class="img4forms icon iconfont icon-xinghao" style="margin-left: 15px;font-size: 16px"></i>
         </template>
       </el-menu-item>
       <div style="width: 100%;text-align: center;margin-top: 20%;margin-left: 4px">
@@ -42,7 +42,7 @@
     </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="width: 100%;min-height: 700px;margin:0 -1px; background: #ffffff;border: solid 1px #e6e6e6" >
+        <div style="width: 100%;min-height: 700px;margin:0 -1px; background: #ffffff;border: solid 3px #e6e6e6" >
           <router-view ></router-view>
         </div>
       </el-col>

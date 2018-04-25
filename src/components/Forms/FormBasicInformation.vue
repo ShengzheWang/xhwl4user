@@ -7,7 +7,7 @@
       <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" >
+      <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" :status-icon="true" >
 
         <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
           <el-upload

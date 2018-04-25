@@ -29,9 +29,9 @@
   </div>
     <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login">
       <div style="margin: 4% auto">
-        <el-button plain @click="dialogFormVisible = true" class="button4plain"
+        <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
-        <el-button plain @click="dialogFormVisible1 = true" class="button4plain"
+        <el-button plain @click="dialogFormVisible1 = true; State = true" class="button4plain"
                    style="">登录</el-button>
       </div>
     </div>
@@ -59,40 +59,50 @@
       </div>
       </div>
     <div class="line"></div>
-    <el-dialog title="注册" :visible.sync="dialogFormVisible" style="width: 50%;margin:auto auto" :lock-scroll="false">
-      <el-form label-position="labelPosition" label-width="60px">
-        <el-form-item label="手机号">
-          <el-input></el-input>
+
+    <el-dialog  id="form4login" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto" :lock-scroll="false">
+      <el-collapse-transition>
+        <div v-show="State">
+      <el-form :label-position="labelPosition1"  :model="user" ref="user" :rules="rules" style="width: 80%;margin: 3% auto" :status-icon="true">
+        <el-form-item  prop="username" class="item4login">
+          <el-input v-model="user.username" placeholder="请输入手机号" prefix-icon="iconfont icon-shoujihao icon4form" ></el-input>
         </el-form-item>
-        <el-form-item label="验证码">
-          <el-input style="width: 60%">
-          </el-input>
-          <el-button style="width: 38%" type="primary">发送验证</el-button>
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input></el-input>
+        <el-form-item  prop="password" class="item4login">
+          <el-input v-model="user.password" type="password"  placeholder="请输入密码" prefix-icon="iconfont icon-mima icon4form"></el-input>
         </el-form-item>
       </el-form>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false" >取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog title="登录" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto" :lock-scroll="false">
-      <el-form :label-position="labelPosition1" label-width="60px" :model="user" ref="user" :rules="rules">
-        <el-form-item label="手机号" prop="username">
-          <el-input v-model="user.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="user.password"></el-input>
-        </el-form-item>
-      </el-form>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-        <el-button type="primary" @click="login('user');">确 定</el-button>
+        </div>
+      </el-collapse-transition>
+        <el-collapse-transition>
+          <div v-show="!State">
+            <el-form :label-position="labelPosition1"  :model="user0" ref="user0"  style="width: 80%;margin: 3% auto" :status-icon="true">
+              <el-form-item  prop="username" class="item4login">
+                <el-input v-model="user0.username" placeholder="请输入手机号" prefix-icon="iconfont icon-shoujihao icon4form" ></el-input>
+              </el-form-item>
+              <el-form-item  prop="password" class="item4login">
+                <el-input v-model="user0.password" type="password"  placeholder="请输入密码" prefix-icon="iconfont icon-mima icon4form"></el-input>
+              </el-form-item>
+            <el-form-item  prop="passwordRepeat" class="item4login">
+              <el-input v-model="user0.passwordRepeat" type="password"  placeholder="请重复密码" prefix-icon="iconfont icon-querenmima icon4form"></el-input>
+            </el-form-item>
+              <el-form-item  prop="identifyingCode" class="item4login">
+                <el-input v-model="user0.identifyingCode"  placeholder="请输入验证码" prefix-icon="iconfont icon-yanzhengma icon4form">
+                  <el-button slot="append">发送手机验证码</el-button>
+                </el-input>
+              </el-form-item>
+              <!--<el-form-item class="item4login" style="text-align: center">-->
+              <!--<img :src="indentifyingImg" style="height: 48px">-->
+                <!--<el-button icon="el-icon-refresh" type="text"></el-button>-->
+              <!--</el-form-item>-->
+              <!--<el-form-item  prop="telephoneIdentifyingCode" class="item4login">-->
+                <!--<el-input v-model="user0.telephoneIdentifyingCode" type="password"  placeholder="请输入手机验证码" prefix-icon="iconfont icon-querenmima icon4form"></el-input>-->
+              <!--</el-form-item>-->
+            </el-form>
+          </div>
+        </el-collapse-transition>
+      <div class="foot4login" style="margin: 3% auto;width: 80%">
+        <el-button v-bind:class="'button4forms now'+(State == true?'Login':'Register')+'-register'" @click="Register('user0')">注册</el-button>
+        <el-button v-bind:class="'button4forms now'+(State == true?'Login':'Register')+'-login'" @click="login('user');">登录</el-button>
       </div>
     </el-dialog>
   </div>
@@ -124,15 +134,24 @@ export default {
 
     return {
       activeIndex: '1',
+      State: true,
       dialogFormVisible: false,
       dialogFormVisible1: false,
       formLabelWidth: '14%',
       labelPosition: 'left',
       labelPosition1: 'left',
       Need2Login: true,
+      indentifyingImg: '',
       user: {
         username: '',
         password: ''
+      },
+      user0: {
+        username: '',
+        password: '',
+        passwordRepeat: '',
+        identifyingCode: '',
+        telephoneIdentifyingCode: ''
       },
       rules:{
         username:[
@@ -150,9 +169,9 @@ export default {
   beforeMount () {
     const token = document.cookie.split(';')[0]
     console.log(token)
+    let _this = this
     if (token) {
       this.$axios.defaults.headers.Authorization = token
-      let _this = this
       this.$axios({
         method: 'get',
         url: '/tokenCheck',
@@ -167,9 +186,22 @@ export default {
         _this.$router.push('/')
       })
     }
-
+    this.$axios({
+      method: 'get',
+      url: '/register'
+    }).then(function (response) {
+      console.log(_this.$data.indentifyingImg)
+      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+    }).catch(function(error) {
+    })
   },
   methods: {
+    Register(){
+      if(this.$data.State) {
+        this.$data.State = !this.$data.State
+        return
+      }
+    },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
@@ -184,6 +216,10 @@ export default {
       this.$router.push('/')
     },
     login (formName) {
+      if(!this.$data.State) {
+        this.$data.State = !this.$data.State
+        return
+      }
       this.$refs[formName].validate((valid)=>{
         if(valid){
           let _this = this
@@ -232,6 +268,99 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
+  #form4login{
+    .is-error{
+      .icon4form{
+        color:#f56c6c;
+      }
+    }
+    .is-success{
+      .icon4form{
+        color:#67c23a;
+      }
+    }
+    .el-input__inner{
+      height:54px;
+      padding-left:48px;
+    }
+    .el-input__prefix{
+      height:54px;
+      width: 48px;
+    }
+    .el-button{
+      transition: all 0.2s;
+    }
+  }
+  .item4login{
+    height:54px;
+    transition: all 0.6s;
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(1.05);
+    }
+  }
+  .nowLogin-login{
+    margin-left: 3% !important;
+    width: 65% !important;
+    font-weight: 500;
+    background: #E01B2F!important ;
+    color:#ffffff  !important;
+    border:solid 2px #E01B2F !important;
+    &:hover {
+      transform: scale(1.05);
+      background: #E01B2F;
+      color:#ffffff  ;
+      border:solid 2px #E01B2F;
+    }
+  }
+  .nowRegister-login{
+    margin-left: 3% !important;
+    width: 30% !important;
+    background: #ffffff;
+    color:#E01B2F  ;
+    border:solid 2px #E01B2F;
+    font-weight: 500;
+    &:hover {
+      transform: scale(1.05);
+      background: #E01B2F;
+      color:#ffffff  ;
+      border:solid 2px #E01B2F;
+    }
+  }
+  .nowLogin-register{
+    margin-left: 0 !important;
+    width: 30% !important;
+    background: #ffffff;
+    color:#a4a4a4  ;
+    border:solid 2px #a4a4a4;
+    font-weight: 500;
+    &:hover {
+      transform: scale(1.05);
+      background: #a4a4a4;
+      color:#ffffff  ;
+      border:solid 2px #ffffff;
+    }
+  }
+  .nowRegister-register{
+    margin-left: 0 !important;
+    width: 65% !important;
+    color:#ffffff  !important;
+    border:solid 2px #a4a4a4 !important;
+    background: #a4a4a4 !important;
+    font-weight: 500;
+    &:hover {
+      transform: scale(1.05);
+      color:#ffffff  ;
+      border:solid 2px #a4a4a4;
+      background: #a4a4a4;
+    }
+  }
+  .icon4form{
+    color:#1476C1;
+    font-size: 30px;
+  }
   #XhwlHeader {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -239,7 +368,6 @@ export default {
     text-align: left;
     color: #2c3e50;
     margin-top: 60px;
-
     .el-button{
       background: #f6f6f6;
     }
