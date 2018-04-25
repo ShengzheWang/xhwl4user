@@ -28,7 +28,8 @@
               <h1 class="resume-item-middle" style="width: 33%">{{item.startTime}}~{{item.endTime}}</h1>
               <h1 class="resume-item-middle" style="width: 33%;text-align: center">{{item.school}}</h1>
               <h1 class="resume-item-middle" style="width: 33%;text-align: right">
-                {{item.speciality}}({{item.educationHistory}})</h1>
+                {{item.speciality}}({{item.educationHistory==1?'高中':item.educationHistory==2?'专科':
+                item.educationHistory==3?'本科':item.educationHistory==4?'研究生':item.educationHistory==5?'博士生':'博士后'}})</h1>
               <div style="width: 95%;margin:0 auto">
                 <p class="resume-item-label">专业排名占比：</p>
                 <p class="resume-item-info">{{item.rank}}%</p>
@@ -163,7 +164,7 @@
           <div  style="width:90%;margin: 40px auto 0 auto">
             <div style="width: 95%;margin:0 auto">
               <p class="resume-item-label">简历：</p>
-              <el-button type="text" class="resume-item-info" size="small">下载链接</el-button>
+              <el-button type="text" class="resume-item-info" @click="downloadResume" size="small">下载链接</el-button>
             </div>
             <div style="width: 95%;margin:0 auto">
               <p class="resume-item-label">其他辅助材料：</p>
@@ -326,8 +327,33 @@ export default {
     })
 
   },
-  method: {
-
+  methods: {
+    downloadResume(){
+      this.$axios({ // 用axios发送post请求
+        method: 'get',
+        url: '/download-resume', // 请求地址
+        // 参数
+        responseType: 'blob' // 表明返回服务器返回的数据类型
+      })
+        .then((res) => { // 处理返回的文件流
+          console.log(res)
+//          const content = res
+//          const blob = new Blob([content])
+//          const fileName = '简历'
+//          if ('download' in document.createElement('a')) { // 非IE下载
+//            const elink = document.createElement('a')
+//            elink.download = fileName
+//            elink.style.display = 'none'
+//            elink.href = URL.createObjectURL(blob)
+//            document.body.appendChild(elink)
+//            elink.click()
+//            URL.revokeObjectURL(elink.href) // 释放URL 对象
+//            document.body.removeChild(elink)
+//          } else { // IE10+下载
+//            navigator.msSaveBlob(blob, fileName)
+//          }
+        })
+    },
     resumeDetails (num) {
       this.$router.push('/ResumeDetails')
     }

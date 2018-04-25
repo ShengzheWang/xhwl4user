@@ -167,6 +167,7 @@ export default {
         _this.$router.push('/')
       })
     }
+
   },
   methods: {
     handleSelect (key, keyPath) {

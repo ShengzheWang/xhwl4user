@@ -7,9 +7,13 @@
       <div style="width:100%;height:10px">
       </div>
       <el-form label-position="labelPosition" label-width="200px">
-        <el-form-item  style="width: 25%" label="上传简历">
+        <el-form-item  style="width: 45%" label="上传简历">
         <el-upload
           class="upload-demo"
+          :show-file-list="true"
+          :headers="header"
+          accept="pdf,doc,docx"
+          :on-success="uploadSuccess1"
           :action="$axios.defaults.baseURL+'upload-resume'">
           <el-button size="small" type="primary" plain>点击上传</el-button>
         </el-upload>
@@ -17,6 +21,8 @@
         <el-form-item  style="width: 25%" label="上传其他材料">
           <el-upload
             class="upload-demo"
+            :headers="header"
+            :on-success="uploadSuccess2"
             drag
             :action="$axios.defaults.baseURL+'upload-support-detail'">
             <i class="el-icon-upload"></i>
@@ -38,10 +44,30 @@ export default {
   data () {
     return {
       select: '',
-      imageUrl: ''
+      imageUrl: '',
+      header: '',
+      fileName1: null
+    }
+  },
+  created() {
+    this.$data.header = {
+      'authorization': this.$axios.defaults.headers.Authorization
     }
   },
   methods: {
+    uploadSuccess1(response, file) {
+      this.$message({
+        type: 'success',
+        message: '上传简历成功'
+      })
+      this.$data.fileName1 = file.name
+    },
+    uploadSuccess2(response, file) {
+      this.$message({
+        type: 'success',
+        message: '上传辅助材料成功'
+      })
+    },
     nextStep () {
       this.$message({
         message: '填写完成，进入简历预览，请仔细查看是否有遗漏或者差错哦',
