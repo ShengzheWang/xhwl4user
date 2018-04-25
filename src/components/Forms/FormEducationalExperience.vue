@@ -230,6 +230,10 @@ export default {
             url: '/education',
             data: this.$data.formsEducation[index]
           }).then(function (response) {
+            _this.$message({
+              message: '此次经历保存成功',
+              type: 'success'
+            })
             _this.$data.formsEducation.splice(index, 1, response.data)
           })
         }

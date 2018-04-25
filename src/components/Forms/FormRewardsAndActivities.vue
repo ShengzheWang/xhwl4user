@@ -163,6 +163,10 @@ export default {
           url: '/award',
           data: this.$data.formsAward[index]
         }).then(function (response) {
+          _this.$message({
+            message: '此次经历保存成功',
+            type: 'success'
+          })
           _this.$data.formsAward.splice(index, 1, response.data)
         })
       }

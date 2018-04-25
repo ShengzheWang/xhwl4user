@@ -193,6 +193,10 @@ var checkRoleName=(rule,value,callback)=>{
           url: '/project',
           data: this.$data.formsProject[index]
         }).then(function (response) {
+          _this.$message({
+            message: '此次经历保存成功',
+            type: 'success'
+          })
           _this.$data.formsProject.splice(index, 1, response.data)
         })
       }

@@ -36,8 +36,8 @@
       </div>
     </div>
 
-      <div style="width:25%;display:inline-block;height: 100px;text-align: center;vertical-align: middle" v-else>
-        <div style="margin: 0 auto">
+      <div style="width:25%;display:inline-block;height: 80px;text-align: center;vertical-align: top" v-else>
+        <div style="margin-top:20px;">
       <el-dropdown >
         <el-badge :value="mine[2].messageNum" class="item">
       <el-button  type="text" ><img
@@ -99,10 +99,8 @@
 </template>
 
 <script>
-  import {isvalidPhone} from "../util/Validate";
-
-
-  export default {
+import {isvalidPhone} from "../util/Validate";
+export default {
   name: 'XhwlHeader',
   data () {
 
