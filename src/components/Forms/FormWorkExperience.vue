@@ -94,7 +94,7 @@
           ],
           company: [
             {validator: checkCompanyName, trigger: 'change'},
-            {max: 5, message: '长度超过限制', trigger: 'change'},
+            {max: 30, message: '长度超过限制', trigger: 'change'},
             {required: true, message: '请输入公司名', trigger: 'change'}
           ],
           position: [
