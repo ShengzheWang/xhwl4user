@@ -75,11 +75,11 @@
       </el-collapse-transition>
         <el-collapse-transition>
           <div v-show="!State">
-            <el-form :label-position="labelPosition1"  :model="user0" ref="user0"  style="width: 80%;margin: 3% auto" :status-icon="true">
+            <el-form :label-position="labelPosition1"  :model="user0" ref="user0"  style="width: 80%;margin: 3% auto" :status-icon="true" :rules="rules0">
               <el-form-item  prop="username" class="item4login">
                 <el-input v-model="user0.username" placeholder="请输入手机号" prefix-icon="iconfont icon-shoujihao icon4form" ></el-input>
               </el-form-item>
-              <el-form-item  prop="password" class="item4login">
+              <el-form-item  prop="password" class="item4login" >
                 <el-input v-model="user0.password" type="password"  placeholder="请输入密码" prefix-icon="iconfont icon-mima icon4form"></el-input>
               </el-form-item>
             <el-form-item  prop="passwordRepeat" class="item4login">
@@ -87,7 +87,7 @@
             </el-form-item>
               <el-form-item  prop="identifyingCode" class="item4login">
                 <el-input v-model="user0.identifyingCode"  placeholder="请输入验证码" prefix-icon="iconfont icon-yanzhengma icon4form">
-                  <el-button slot="append">发送手机验证码</el-button>
+                  <el-button slot="append" @click="getPhoneMessage('user0')">发送手机验证码</el-button>
                 </el-input>
               </el-form-item>
               <el-tooltip placement="right" effect="light">
@@ -139,6 +139,24 @@ export default {
       }
     }
 
+    var checkLogPassRepeat=(rule,value,callback)=>{
+      if(!value){
+        callback(new Error('请再次输入密码'));
+      }else if(this.$data.user0.password!==value){
+        callback(new Error('两次密码输入不一致'));
+      }else{
+        callback();
+      }
+    }
+    var checkImageCode=(rule,value,callback)=>{
+      if(!value){
+        callback(new Error('请输入图形验证码'))
+      }else{
+        callback();
+      }
+    }
+
+
     return {
       activeIndex: '1',
       State: true,
@@ -166,6 +184,21 @@ export default {
         ],
         password:[
           {validator:checkLogPass,trigger:'change'}
+        ],
+      },
+      rules0:{
+        username:[
+          {validator:checkPhoneNum,trigger:'change'}
+        ],
+        password:[
+          {validator:checkLogPass,trigger:'change'},
+          {min:6,max:18,message:'密码应在6-18位间',trigger:'change'}
+        ],
+        passwordRepeat:[
+          {validator:checkLogPassRepeat,trigger:'blur'}
+        ],
+        identifyingCode:[
+          {validator:checkImageCode,trigger:'blur'}
         ]
       },
       mine: [{path: '', text: '个人中心'},
@@ -212,6 +245,13 @@ export default {
     })
   },
   methods: {
+    getPhoneMessage(formName){  //获取短信验证码前验证手机号等是否已填
+      this.$refs[formName].validate((valid)=>{
+        if(valid){
+          console.log('success');
+        }
+      })
+    },
     refreshImg(){
       let _this = this
       this.$axios({
@@ -223,11 +263,16 @@ export default {
       }).catch(function(error) {
       })
     },
-    Register(){
-      if(this.$data.State) {
-        this.$data.State = !this.$data.State
-        return
-      }
+    Register(formName){
+      this.$refs[formName].validate((valid)=>{
+        if(valid){
+          if(this.$data.State) {
+            this.$data.State = !this.$data.State
+            return
+          }
+        }
+      })
+
     },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
