@@ -1,6 +1,8 @@
 <template>
-  <div id="MyJobApplication" class="animated bounceInLeft" style="height: 500px;width: 1300px;margin:0% auto;">
+  <div id="MyJobApplication" class="animated bounceInLeft" style="min-height: 500px;width: 1300px;margin:3% auto;">
+    <div class="blockDiv"></div>
     <div style="height: 350px;width: 1100px;margin:5% auto" >
+      <div class="line" ></div>
       <el-table
         :data="tableData"
         stripe
@@ -8,29 +10,33 @@
         <el-table-column
           prop="positionName"
           label="申请职位"
-          width="260">
+          width="200">
         </el-table-column>
         <el-table-column
           prop="recruitmentType"
           label="职位类型"
-          width="260">
+          width="200">
         </el-table-column>
         <el-table-column
-          prop="recruitmentState"
-          label="投递状态"
-          width="260">
+          prop=""
+          label=""
+          width="500">
+          <template slot-scope="scope">
+            <a v-bind:class="scope.row.state[0].iconClass"><i v-bind:class="scope.row.state[0].iconName"></i>{{scope.row.state[0].stateText}}</a>
+            <div style="display: inline" v-for="(item,index) in scope.row.state" v-if="index!=0">
+            <i class="el-icon-arrow-right"></i>
+            <a v-bind:class="item.iconClass"><i v-bind:class="item.iconName"></i>{{item.stateText}}</a>
+            </div>
+          </template>
         </el-table-column>
         <el-table-column
           label="操作"
           fixed="right"
-          width="150"
+          width="200"
         >
           <template slot-scope="scope">
-            <el-button circle @click="handleClick(scope.row)" type="primary" size="middle">
-              <el-icon class="el-icon-zoom-in"></el-icon>
-            </el-button>
-            <el-button circle type="danger" size="middle">
-              <el-icon class="el-icon-delete"></el-icon>
+            <el-button type="primary" class="button4details" size="middle">
+              {{scope.row.state[scope.row.state.length-1].stateText==='待审核'?'撤回申请':'查看详情'}}
             </el-button>
           </template>
         </el-table-column>
@@ -62,8 +68,45 @@ export default {
           item['index'] = index
           item['recruitmentType'] = item['recruitmentType'] === '1' ? '校园招聘'
             : item['recruitmentType'] === '2' ? '社会招聘' : '实习生招聘'
-          item['recruitmentState'] = item['recruitmentState'] === '0' ? '审核中'
-            : item['recruitmentState'] === '1' ? '已通过' : '已回绝'
+          item['state'] = []
+          var i = 0
+          for ( i = 0 ; i<item['recruitmentState'].length ; i++ ){
+            var now = item['recruitmentState'][i].toString()
+            var state0 = {
+              iconClass: '',
+              iconName: '',
+              stateText: ''
+            }
+            console.log(now)
+            switch (now){
+              case '1':state0.iconClass='state-default'
+                state0.iconName='icon iconfont icon-' + (i + 1).toString()
+                state0.stateText='待审核'
+                break
+              case '2':state0.iconClass='state-default'
+                state0.iconName='icon iconfont icon-' + (i + 1).toString()
+                state0.stateText='待审核'
+                break
+              case '3':state0.iconClass='state-failure'
+                state0.iconName='icon iconfont icon-' + 'shibai'
+                state0.stateText=now==='3'?'HR面试':'部门面试'
+                break
+              case '4':state0.iconClass='state-failure'
+                state0.iconName='icon iconfont icon-' + 'shibai'
+                state0.stateText=now==='3'?'HR面试':'部门面试'
+                break
+              case '5':state0.iconClass='state-success'
+                state0.iconName='icon iconfont icon-' + 'chenggong'
+                state0.stateText=now==='5'?'HR面试':'部门面试'
+                break
+              case '6':state0.iconClass='state-success'
+                state0.iconName='icon iconfont icon-' + 'chenggong'
+                state0.stateText=now==='5'?'HR面试':'部门面试'
+                break
+            }
+            console.log(state0)
+            item['state'].push(state0)
+          }
           _this.$data.tableData.push(item)
         })
         console.log(_this.$data.tableData)
@@ -82,14 +125,93 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  MyResume {
+<style lang="less">
+
+  #MyJobApplication {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #2c3e50;
     margin-top: 60px;
+    .iconfont{
+      font-size: 20px;
+    }
+    .has-gutter th{
+      padding:20px 0;
+    }
+    .el-table__fixed-header-wrapper th{
+      padding:20px 0;
+    }
+    .state-failure {
+      color: #77C490;
+    }
+    .state-default {
+      color: #707070
+    }
+    .state-success {
+      color: #E01B2F;
+    }
+    .icon-1:before{
+      content: '① ';
+    }
+    .icon-2:before{
+      content: '② ';
+    }
+    .icon-3:before{
+      content: '③ ';
+    }
+    .icon-4:before{
+      content: '④ ';
+    }
+    .icon-5:before{
+      content: '⑤ ';
+    }
+    .icon-6:before{
+      content: '⑥ ';
+    }
+    .button4details {
+      border-radius: 40px !important;
+      border: solid 1px #2480C3;
+      background: inherit;
+      color: #2480C3;
+      width: 100px
+    }
+    .line {
+      border: solid 1px #1476C1;
+      margin-top: 0;
+    }
+    .el-row {
+      margin-bottom: 0;
+    }
+    .el-col {
+      margin-bottom: 0;
+      height: 30px
+    }
+    .el-table th {
+      text-align: center;
+    }
+    .el-table__row {
+      text-align: center;
+    }
+    .el-table__header {
+      font-size: 15px;
+      .cell {
+        font-weight: 900;
+        color: #2c3e50;
+      }
+    }
+    .el-table__body {
+      font-size: 15px;
+      .el-table__row {
+        background: #F6F7FB;
+      }
+      .el-table__row--striped {
+        background: #ffffff !important;
+        td {
+          background: #ffffff !important;
+        }
+      }
+    }
   }
-
-</style>
+  </style>

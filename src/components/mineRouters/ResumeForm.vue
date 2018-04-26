@@ -1,16 +1,17 @@
 <template>
   <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;" class="animated bounceInLeft">
+    <div class="blockDiv"></div>
     <div style="margin:0 auto;text-align: center">
       <el-radio-group v-model="resumes_form" size="large" @change="changeType">
         <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
         <el-radio class="radio4forms" label="2" border isText >社会招聘简历</el-radio>
         <el-radio class="radio4forms" label="3" border isText >实习招聘简历</el-radio>
       </el-radio-group>
-      <div style=" width:640px;margin:0 auto">
+      <div style=" width:640px;margin:0 auto;color: #707070;">
       <transition >
-      <h3 v-if="resumes_form==1" style="text-align: left">校园招聘简历只能投递校园招聘职位</h3>
-      <h3 v-else-if="resumes_form==2">社会招聘简历只能投递社会招聘职位</h3>
-      <h3 v-else  style="text-align: right">实习招聘简历只能投递实习职位</h3>
+      <h3 v-if="resumes_form==1" style="text-align: left;color: #707070;font-weight: normal">校园招聘简历只能投递校园招聘职位</h3>
+      <h3 v-else-if="resumes_form==2" style="color: #707070;font-weight: normal">社会招聘简历只能投递社会招聘职位</h3>
+      <h3 v-else  style="text-align: right;color: #707070;font-weight: normal">实习招聘简历只能投递实习职位</h3>
       </transition>
       </div>
     </div>
@@ -21,9 +22,9 @@
     <el-menu
       :default-active="formNow"
       @select="handleSelect"
-      background-color="#ffffff"
+      background-color="#fafafa"
       text-color="#444444"
-      active-text-color="#ffffff"
+      active-text-color="#fafafa"
       active-background-color="#1476C1"
       class="el-menu-vertical-demo"
       :router="true"
@@ -169,6 +170,7 @@ export default {
       font-size: 20px;
       width: 70%;
       color: #E01B2F;
+      background: #fafafa;
       border-radius: 50px;
       transition: all 0.3s;
       &:hover{

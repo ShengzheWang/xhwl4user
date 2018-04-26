@@ -49,11 +49,11 @@ export default {
   mounted () {
     var banenr2 = new FragmentBanner({
       container: '#banner4home',
-      imgs: ['../../../static/img/a1.png', '../../../static/img/a2.png',
-        '../../../static/img/a3.png', '../../../static/img/a4.png', '../../../static/img/a5.png'],
+      imgs: ['../../../static/img/1.jpg', '../../../static/img/2.png',
+        '../../../static/img/3.png'],
       size: {
         width : document.body.scrollWidth,
-        height : document.body.scrollWidth*1/3
+        height : document.body.scrollWidth*1/2
       },//容器的大小 可选
       //行数与列数 可选
       grid : {

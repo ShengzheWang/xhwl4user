@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="min-width:1200px">
     <XhwlHeader></XhwlHeader>
-    <router-view></router-view>
+    <router-view style="background: #fafafa"></router-view>
     <xhwl-footer></xhwl-footer>
   </div>
 </template>
