@@ -60,7 +60,7 @@
       </div>
     <div class="line"></div>
 
-    <el-dialog  id="form4login" :visible.sync="dialogFormVisible1" style="width: 50%;margin:auto auto" :lock-scroll="false">
+    <el-dialog  id="form4login" :visible.sync="dialogFormVisible1" style="margin:auto auto;width: 1000px" :lock-scroll="false">
       <el-collapse-transition>
         <div v-show="State">
       <el-form :label-position="labelPosition1"  :model="user" ref="user" :rules="rules" style="width: 80%;margin: 3% auto" :status-icon="true">
