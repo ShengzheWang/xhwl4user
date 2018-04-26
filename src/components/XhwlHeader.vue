@@ -1,12 +1,12 @@
 <template>
   <div id="Xhwlheader" style="height:120px;border-bottom: solid 1px #dddddd;">
-    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;">
+    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">
        <img
         src="../../static/img/logoMain.png" style="height:65px;width: auto;">
       </div>
     </div>
-     <div style="display: inline-block;width: 48%;text-align: center;height: 60px">
+     <div style="display: inline-block;width: 48%;text-align: center;height: 60px" class="animated fadeInDown">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true'
                text-color="#444444"
@@ -27,7 +27,7 @@
         <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
   </div>
-    <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login">
+    <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login" class="animated fadeInDown">
       <div style="margin: 5% auto">
         <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-      <div style="width:25%;display:inline-block;height: 80px;text-align: center;vertical-align: top" v-else>
+      <div style="width:25%;display:inline-block;height: 80px;text-align: center;vertical-align: top" class="animated fadeInDown" v-else>
         <div style="margin-top:20px;">
       <el-dropdown >
         <el-badge :value="mine[2].messageNum" class="item">

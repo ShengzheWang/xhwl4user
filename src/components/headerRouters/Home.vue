@@ -1,6 +1,6 @@
 <template>
   <div id="Home">
-      <div class="banner" id="banner4home" style="margin: 1% auto;">
+      <div class="banner animated fadeInUp" id="banner4home" style="margin: 1% auto;">
         <div class="banner-view"></div>
         <div class="banner-btn"></div>
         <div class="banner-number"></div>
@@ -14,7 +14,7 @@
     <!--<div class="show-rectangle-sw">3</div>-->
     <!--<div class="show-rectangle-se">4</div>-->
     <!--</div>-->
-    <div style="width: 620px;margin:3% auto;">
+    <div style="width: 620px;margin:3% auto;" class="animated fadeInUp">
       <el-form>
         <el-form-item>
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;margin-left: -1%">
