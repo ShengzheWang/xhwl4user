@@ -7,7 +7,7 @@
       <div style="width:100%;height:10px">
       </div>
       <div v-for="(formWorkExp,index) in formsWorkExp">
-        <el-form label-position="labelPosition" label-width="260px" :status-icon="true" class="animated fadeIn" :rules="rules"
+        <el-form label-position="labelPosition" label-width="300px" :status-icon="true" class="animated fadeIn" :rules="rules"
                  :model="formWorkExp" ref="formsWorkExp">
           <el-form-item label="起始日期" prop="startTime">
             <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.startTime"
@@ -27,14 +27,14 @@
             <el-input type="textarea" rows="7" v-model="formWorkExp.description"></el-input>
             <span>{{formWorkExp.description.length}}/200</span>
           </el-form-item>
-          <el-form-item label="" style="width: 50%">
+          <el-form-item label="" style="width: 70%">
             <el-button type="primary" @click="saveOne(index,'formsWorkExp')">保存</el-button>
             <el-button type="info" @click="deleteOne(formWorkExp.id,index)">删除</el-button>
           </el-form-item>
           <div class="needMarginBorder"></div>
         </el-form>
       </div>
-      <el-form label-position="labelPosition" label-width="260px" >
+      <el-form label-position="labelPosition" label-width="300px" >
         <el-form-item label="还有其他工作经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

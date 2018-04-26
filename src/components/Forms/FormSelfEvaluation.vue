@@ -6,7 +6,7 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">自我评价</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :status-icon="true"
+      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :status-icon="true"
                :model="formSelfEvaluation" ref="formSelfEvaluation" :rules="rules" >
         <el-form-item label="自我评价" style="width: 70%" prop="selfAssessment" >
           <el-input

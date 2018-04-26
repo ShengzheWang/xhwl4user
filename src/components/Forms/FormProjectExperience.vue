@@ -7,7 +7,7 @@
       <div style="width:100%;height:10px">
       </div>
       <div v-for="(formProject,index) in formsProject">
-      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :model="formProject" :status-icon="true" ref="formsProject" :rules="rules">
+      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :model="formProject" :status-icon="true" ref="formsProject" :rules="rules">
         <el-form-item label="项目名称" style="width: 50%" prop="projectName" >
           <el-input v-model="formProject.projectName"></el-input>
         </el-form-item>
@@ -23,7 +23,7 @@
           </el-input>
           <span>{{formProject.projectDescription.length}}/200</span>
         </el-form-item>
-        <el-form-item label="" style="width: 50%">
+        <el-form-item label="" style="width: 70%">
           <el-button type="primary" @click="saveOne(index,'formsProject')">保存</el-button>
           <el-button type="info" @click="deleteOne(formProject.id,index)">删除</el-button>
         </el-form-item>
@@ -31,7 +31,7 @@
       </el-form>
       </div>
       <div>
-      <el-form  label-position="labelPosition" label-width="260px">
+      <el-form  label-position="labelPosition" label-width="300px">
         <el-form-item label="还有其他项目经历？" style="width: 50%">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>

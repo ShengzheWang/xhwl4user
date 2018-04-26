@@ -6,7 +6,7 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">求职意向</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="260px" class="animated fadeIn" :rules="rules" :status-icon="true" :model="formsIntention" ref="formsIntention">
+      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :rules="rules" :status-icon="true" :model="formsIntention" ref="formsIntention">
         <el-form-item label="可到岗时间" prop="expectedTimeForDuty">
           <el-date-picker type="date" placeholder="选择日期" v-model="formsIntention.expectedTimeForDuty"
                           class="input-date"></el-date-picker>
@@ -18,7 +18,9 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="期望薪资" style="width: 50%" prop="salary">
-          <el-input v-model.number="formsIntention.salary"></el-input>
+          <el-input v-model.number="formsIntention.salary">
+            <template slot="append">元/月</template>
+          </el-input>
         </el-form-item>
         <div class="needMarginBorder"></div>
         <el-form-item  style="width: 25%">

@@ -6,27 +6,27 @@
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">上传附件</h2>
       <div style="width:100%;height:10px">
       </div>
-      <el-form label-position="labelPosition" label-width="260px">
+      <el-form label-position="labelPosition" label-width="300px">
         <el-form-item  style="width: 45%" label="上传简历">
         <el-upload
           class="upload-demo"
           :show-file-list="true"
           :headers="header"
           accept="pdf,doc,docx"
+          :limit="1"
           :on-success="uploadSuccess1"
           :action="$axios.defaults.baseURL+'upload-resume'">
-          <el-button size="small" type="primary" plain>点击上传</el-button>
+          <el-button size="middle" plain>点击上传简历文档</el-button>
         </el-upload>
         </el-form-item>
         <el-form-item  style="width: 25%" label="上传其他材料">
           <el-upload
             class="upload-demo"
             :headers="header"
+            :limit="1"
             :on-success="uploadSuccess2"
-            drag
             :action="$axios.defaults.baseURL+'upload-support-detail'">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <el-button size="middle"  plain>点击上传辅助材料</el-button>
           </el-upload>
         </el-form-item>
         <div class="needMarginBorder"></div>

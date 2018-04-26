@@ -90,19 +90,26 @@
                   <el-button slot="append">发送手机验证码</el-button>
                 </el-input>
               </el-form-item>
-              <!--<el-form-item class="item4login" style="text-align: center">-->
-              <!--<img :src="indentifyingImg" style="height: 48px">-->
-                <!--<el-button icon="el-icon-refresh" type="text"></el-button>-->
-              <!--</el-form-item>-->
-              <!--<el-form-item  prop="telephoneIdentifyingCode" class="item4login">-->
-                <!--<el-input v-model="user0.telephoneIdentifyingCode" type="password"  placeholder="请输入手机验证码" prefix-icon="iconfont icon-querenmima icon4form"></el-input>-->
-              <!--</el-form-item>-->
+              <el-tooltip placement="right" effect="light">
+                <div slot="content">
+                  <div style="height: 200px;width: 400px;text-align: center;vertical-align: middle">
+                    <img :src="indentifyingImg" style="height: 150px;display: inline-block;margin:25px 50px">
+                  </div>
+                </div>
+                <el-form-item class="item4login" style="text-align: right">
+                  <img :src="indentifyingImg" style="height: 48px">
+                  <el-button icon="el-icon-refresh" type="text" @click="refreshImg()"></el-button>
+                </el-form-item>
+              </el-tooltip>
+              <el-form-item  prop="telephoneIdentifyingCode" class="item4login">
+                <el-input v-model="user0.telephoneIdentifyingCode"  placeholder="请输入手机验证码" prefix-icon="iconfont icon-guanbi icon4form"></el-input>
+              </el-form-item>
             </el-form>
           </div>
         </el-collapse-transition>
       <div class="foot4login" style="margin: 3% auto;width: 80%">
-        <el-button v-bind:class="'button4forms now'+(State == true?'Login':'Register')+'-register'" @click="Register('user0')">注册</el-button>
-        <el-button v-bind:class="'button4forms now'+(State == true?'Login':'Register')+'-login'" @click="login('user');">登录</el-button>
+        <el-button v-bind:class="'button4login now'+(State == true?'Login':'Register')+'-register'" @click="Register('user0')">注册</el-button>
+        <el-button v-bind:class="'button4login now'+(State == true?'Login':'Register')+'-login'" @click="login('user');">登录</el-button>
       </div>
     </el-dialog>
   </div>
@@ -196,6 +203,17 @@ export default {
     })
   },
   methods: {
+    refreshImg(){
+      let _this = this
+      this.$axios({
+        method: 'get',
+        url: '/register'
+      }).then(function (response) {
+        console.log(_this.$data.indentifyingImg)
+        _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+      }).catch(function(error) {
+      })
+    },
     Register(){
       if(this.$data.State) {
         this.$data.State = !this.$data.State
@@ -287,74 +305,83 @@ export default {
       height:54px;
       width: 48px;
     }
-    .el-button{
+    .button4login{
       transition: all 0.2s;
+      letter-spacing: 2px!important;
+      border-radius: 46px!important;
+      font-size: 20px!important;
     }
-  }
-  .item4login{
-    height:54px;
-    transition: all 0.6s;
-    &:hover {
-      transform: scale(1.05);
+    .button4login{
+      transition: all 0.2s;
+      letter-spacing: 2px!important;
+      border-radius: 46px!important;
+      font-size: 20px!important;
     }
-    &:active {
-      transform: scale(1.05);
+    .item4login{
+      height:54px;
+      transition: all 0.6s;
+      &:hover {
+        transform: scale(1.05);
+      }
+      &:focus {
+        transform: scale(1.05);
+      }
     }
-  }
-  .nowLogin-login{
-    margin-left: 3% !important;
-    width: 65% !important;
-    font-weight: 500;
-    background: #E01B2F!important ;
-    color:#ffffff  !important;
-    border:solid 2px #E01B2F !important;
-    &:hover {
-      transform: scale(1.05);
-      background: #E01B2F;
-      color:#ffffff  ;
-      border:solid 2px #E01B2F;
+    .nowLogin-login{
+      margin-left: 3% !important;
+      width: 65% !important;
+      font-weight: 500;
+      background: #E01B2F!important ;
+      color:#ffffff  !important;
+      border:solid 2px #E01B2F !important;
+      &:hover {
+        transform: scale(1.05);
+        background: #E01B2F;
+        color:#ffffff  ;
+        border:solid 2px #E01B2F;
+      }
     }
-  }
-  .nowRegister-login{
-    margin-left: 3% !important;
-    width: 30% !important;
-    background: #ffffff;
-    color:#E01B2F  ;
-    border:solid 2px #E01B2F;
-    font-weight: 500;
-    &:hover {
-      transform: scale(1.05);
-      background: #E01B2F;
-      color:#ffffff  ;
-      border:solid 2px #E01B2F;
+    .nowRegister-login{
+      margin-left: 3% !important;
+      width: 30% !important;
+      background: #ffffff !important;
+      color:#E01B2F !important ;
+      border:solid 2px #E01B2F!important;
+      font-weight: 500;
+      &:hover {
+        transform: scale(1.05);
+        background: #E01B2F!important;;
+        color:#ffffff!important;  ;
+        border:solid 2px #E01B2F!important;;
+      }
     }
-  }
-  .nowLogin-register{
-    margin-left: 0 !important;
-    width: 30% !important;
-    background: #ffffff;
-    color:#a4a4a4  ;
-    border:solid 2px #a4a4a4;
-    font-weight: 500;
-    &:hover {
-      transform: scale(1.05);
-      background: #a4a4a4;
-      color:#ffffff  ;
-      border:solid 2px #ffffff;
+    .nowLogin-register{
+      margin-left: 0 !important;
+      width: 30% !important;
+      background: #ffffff !important;
+      color:#a4a4a4 !important ;
+      border:solid 2px #a4a4a4 !important;
+      font-weight: 500;
+      &:hover {
+        transform: scale(1.05);
+        background: #a4a4a4!important;;
+        color:#ffffff !important; ;
+        border:solid 2px #ffffff!important;;
+      }
     }
-  }
-  .nowRegister-register{
-    margin-left: 0 !important;
-    width: 65% !important;
-    color:#ffffff  !important;
-    border:solid 2px #a4a4a4 !important;
-    background: #a4a4a4 !important;
-    font-weight: 500;
-    &:hover {
-      transform: scale(1.05);
-      color:#ffffff  ;
-      border:solid 2px #a4a4a4;
-      background: #a4a4a4;
+    .nowRegister-register{
+      margin-left: 0 !important;
+      width: 65% !important;
+      color:#ffffff  !important;
+      border:solid 2px #a4a4a4 !important;
+      background: #a4a4a4 !important;
+      font-weight: 500;
+      &:hover {
+        transform: scale(1.05);
+        color:#ffffff;
+        border:solid 2px #a4a4a4;
+        background: #a4a4a4;
+      }
     }
   }
   .icon4form{
