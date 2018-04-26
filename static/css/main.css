@@ -51,6 +51,10 @@ ol, ul {
   border-radius: 26px !important;
   width: 160px !important;
   margin: 0 50px;
+  transition: all 0.6s;
+}
+.radio4forms:hover {
+  transform: scale(1.05);
 }
 .button4plain{
   border: 1px solid #707070;border-radius:14px;color:#707070;font-size: 16px;
@@ -69,6 +73,7 @@ ol, ul {
   background: #ffffff !important;
   color:#484848
 }
+
 .item4menu:hover{
   background: #ffffff !important;
   color:#1376BE !important;
@@ -86,13 +91,13 @@ ol, ul {
 }
 .el-form-item{
   font-size:16px;
-  transition: all 0.6s;
+  transition:all 0.3s;
 }
 .el-form-item:focus {
-   transform: scale(1.05);
+   transform: scale(1.01);
  }
-.el-form-item:hover {
-  transform: scale(1.05);
+.el-form-item:hover  {
+  transform: scale(1.01);
 }
 .button4forms{
   background: #E01B2F;

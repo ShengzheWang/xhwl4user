@@ -126,7 +126,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+  #PostCard {
+  }
   .transition-box {
     margin-bottom: 10px;
     width: 200px;

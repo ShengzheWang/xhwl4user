@@ -1,27 +1,27 @@
 <template>
   <div id="Selector" class="animated fadeIn">
 
-    <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px">
+    <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px" class="select-button">
       <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
     </el-input>
 
 <div style="margin-top: 3%;margin-left:2%;animation-delay:0.2s" >
   <h3 style="display: inline;margin-right: 3%">工作地点</h3>
 
-  <el-radio-group v-model="placeChosen" text-color="#ffffff" fill="#1476C1">
+  <el-radio-group v-model="placeChosen" text-color="#ffffff" fill="#1476C1" class="select-button">
     <el-radio-button v-for="item in places"  :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 
 </div>
 <div style="margin-top: 2%;margin-left:2%;animation-delay:0.4s"  >
   <h3 style="display: inline;margin-right: 3%">职位类型</h3>
-  <el-radio-group v-model="classChosen" text-color="#ffffff" fill="#1476C1">
+  <el-radio-group v-model="classChosen" text-color="#ffffff" fill="#1476C1" class="select-button">
     <el-radio-button v-for="item in classes" :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 </div>
 <div style="margin-top: 2%;margin-left:2%;animation-delay:0.6s" >
   <h3 style="display: inline;margin-right: 3%">招聘类型</h3>
-  <el-radio-group v-model="postChosen" text-color="#ffffff" fill="#1476C1">
+  <el-radio-group v-model="postChosen" text-color="#ffffff" fill="#1476C1" class="select-button">
     <el-radio-button v-for="item in posts" :label="item.text" :key="item.value"></el-radio-button>
   </el-radio-group>
 </div>
@@ -77,6 +77,12 @@ export default {
 <style lang="less">
    #Selector{
      font-size: 15px;
+     .select-button{
+       transition: all 0.6s;
+       &:hover{
+         transform: scale(1.02);
+       }
+     }
      .el-input__inner{
        border:4px solid #1476C1;
        border-radius:100px 0 0 100px;
