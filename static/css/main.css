@@ -20,6 +20,9 @@ body {
 a:link {
     text-decoration: none;
 }
+.el-badge.item{
+  min-width:65px;
+}
 .el-header,.el-footer{
     color:#333;
     background: #ffffff;

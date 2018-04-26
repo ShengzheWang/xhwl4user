@@ -170,7 +170,7 @@ export default {
       },
       mine: [{path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 3}]
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}]
     }
   },
   beforeMount () {
@@ -185,6 +185,15 @@ export default {
       }).then(function (response) {
         _this.$message('欢迎回来')
         _this.$data.Need2Login = false
+        _this.$axios({
+          method: 'get',
+          url: '/deliver'
+        }).then(function (response) {
+          _this.$nextTick(() => {
+            _this.$data.mine[2].messageNum = response.data.length
+            console.log(_this.$data.mine[2].messageNum)
+          })
+        })
       }).catch(function(error) {
         _this.$message('用户凭证已过期，请重新登陆')
         delete _this.$axios.defaults.headers['Authorization']
@@ -238,9 +247,11 @@ export default {
         this.$data.State = !this.$data.State
         return
       }
+      let _this = this
+
       this.$refs[formName].validate((valid)=>{
         if(valid){
-          let _this = this
+
           this.$axios({
             method: 'post',
             url: '/login',
@@ -257,6 +268,15 @@ export default {
                 _this.$message({
                   message: '登陆成功',
                   type: 'success'
+                })
+                _this.$axios({
+                  method: 'get',
+                  url: '/deliver'
+                }).then(function (response) {
+                  _this.$nextTick(() => {
+                    _this.$data.mine[2].messageNum = response.data.length
+                    console.log(_this.$data.mine[2].messageNum)
+                  })
                 })
                 break
               case 500:
@@ -278,7 +298,6 @@ export default {
           })
         }
       })
-
     }
   }
 }
