@@ -137,6 +137,32 @@ export default {
     .iconfont{
       font-size:30px
     }
+    .el-button--primary{
+      border-radius: 40px;
+      font-size: 16px;
+    }
+    .el-button--info{
+      border-radius: 40px;
+      font-size: 16px;
+    }
+    .button4forms{
+      background: #E01B2F;
+      border: 1px solid #E01B2F;
+      /* 保存并进行下一步: */
+      font-family: MicrosoftYaHei-Bold;
+      color: #FFFFFF;
+      letter-spacing: 2px;
+      border-radius: 46px;
+      font-size: 20px;
+
+    }
+    .button4forms:hover {
+      background: #E01B2F;
+      border: 1px solid #E01B2F;
+      /* 保存并进行下一步: */
+      font-family: MicrosoftYaHei-Bold;
+      color: #FFFFFF;
+    }
     .button4details{
       border: solid 2px #E01B2F;
       height:50px;
@@ -144,9 +170,11 @@ export default {
       width: 70%;
       color: #E01B2F;
       border-radius: 50px;
+      transition: all 0.3s;
       &:hover{
         color:#ffffff;
         background:#E01B2F;
+        transform: scale(1.05);
       }
     }
   }

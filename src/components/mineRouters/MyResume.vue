@@ -20,7 +20,7 @@
       <div @click="createAResume(3)" v-bind:class="'animated bounce'+show" id="circle3"
            v-bind:style="'animation-delay:'+time[2]+'s'">
         <img
-          src="../../../static/img/trainee.png">
+          src="../../../static/img/trainee.png" style="height: auto;width: auto">
       </div>
         </el-tooltip>
     </div>
@@ -96,35 +96,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  #circle1{
-    display:inline-block;
-    width:300px;
-    height:300px;
-    border-radius:300px;
-    background:url(../../../static/img/plus.png)no-repeat;
-    background-size: 100% 100%
-  }
-  #circle2{
-    display:inline-block;
-    width:300px;
-    height:300px;
-    background:url(../../../static/img/plus.png)no-repeat;
-    background-size: 100% 100%;
-    border-radius:300px;
-    position:relative;
-    left:100px
-  }
-  #circle3{
-    display:inline-block;
-    width:300px;
-    height:300px;
-    background:url(../../../static/img/plus.png)no-repeat;
-    background-size: 100% 100%;
-    border-radius:300px;
-    position:relative;
-    left:200px
-  }
+<style lang="less">
   #MyResume {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -132,6 +104,49 @@ export default {
     text-align: left;
     color: #2c3e50;
     margin-top: 60px;
+    #circle1{
+      display:inline-block;
+      width:300px;
+      height:300px;
+      border-radius:300px;
+      background:url(../../../static/img/plus.png)no-repeat;
+      background-size: 100% 100%;
+      transition: all 0.6s;
+      &:hover{
+      width: 320px;
+      height: 320px;
+    }
+    }
+    #circle2{
+      display:inline-block;
+      width:300px;
+      height:300px;
+      background:url(../../../static/img/plus.png)no-repeat;
+      background-size: 100% 100%;
+      border-radius:300px;
+      position:relative;
+      left:100px;
+      transition: all 0.6s;
+      &:hover{
+        width: 320px;
+        height: 320px;
+      }
+    }
+    #circle3{
+      display:inline-block;
+      width:300px;
+      height:300px;
+      background:url(../../../static/img/plus.png)no-repeat;
+      background-size: 100% 100%;
+      border-radius:300px;
+      position:relative;
+      left:200px;
+      transition: all 0.6s;
+      &:hover{
+      width: 320px;
+      height: 320px;
+    }
+    }
   }
 
 </style>

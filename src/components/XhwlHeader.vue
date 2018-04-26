@@ -1,6 +1,6 @@
 <template>
   <div id="Xhwlheader" style="height:120px;border-bottom: solid 1px #dddddd;">
-    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;" class="animated fadeInDown">
+    <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">
        <img
         src="../../static/img/logoMain.png" style="height:65px;width: auto;">
