@@ -1,7 +1,7 @@
 <template>
-  <div id="PostCard">
+  <div id="PostCard" style="min-height: 600px">
     <el-card v-for="item in cardInfo" class="box-card animated fadeInLeft" v-bind:key="item.index"
-             v-bind:style="'margin-top:2%;width:100%;background-color:#f8f8f8;animation-delay:'+(item.index+4)*0.2+'s'">
+             v-bind:style="'margin-top:2%;width:100%;background-color:#f8f8f8;animation-delay:'+(item.index)*0.2+'s'">
       <div>
         <span style="font-size:25px;font-weight: bold" class="name"><i class="el-icon-document"/> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  | {{item.positionType}}</span>

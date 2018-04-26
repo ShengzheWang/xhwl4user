@@ -2,7 +2,7 @@
   <div id="Campus">
     <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
-      <selector></selector>
+      <selector resume-form="1"></selector>
       <post-card resume-form="1"></post-card>
     </div>
     </div>

@@ -2,7 +2,7 @@
   <div id="Social">
     <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
-      <selector></selector>
+      <selector  resume-form="2"></selector>
       <post-card resume-form="2"></post-card>
     </div>
       <!--<el-switch-->

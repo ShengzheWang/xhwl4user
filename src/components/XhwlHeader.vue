@@ -1,9 +1,9 @@
 <template>
   <div id="Xhwlheader" style="height:120px;border-bottom: solid 1px #dddddd;">
-    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;vertical-align: middle">
-      <div style="display: block;margin: 4% auto">
+    <div style="display: inline-block;width: 26%;height: 160px;text-align: center;">
+      <div style="display: inline-block;margin-top: 3%">
        <img
-        src="../../static/img/logoMain.png" style="height:auto;width: 70%;">
+        src="../../static/img/logoMain.png" style="height:65px;width: auto;">
       </div>
     </div>
      <div style="display: inline-block;width: 48%;text-align: center;height: 60px">
@@ -28,7 +28,7 @@
       </el-menu>
   </div>
     <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login">
-      <div style="margin: 4% auto">
+      <div style="margin: 5% auto">
         <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
         <el-button plain @click="dialogFormVisible1 = true; State = true" class="button4plain"

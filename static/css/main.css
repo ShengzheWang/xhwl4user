@@ -38,6 +38,8 @@ ol, ul {
 
 .button4plain{
   background: #ffffff;
+  font-size: 18px !important;
+
 }
 .el-button--primary{
   background:#1476C1;

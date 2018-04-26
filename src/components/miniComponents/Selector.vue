@@ -1,5 +1,5 @@
 <template>
-  <div id="Selector" >
+  <div id="Selector" class="animated fadeIn">
 
     <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px">
       <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
@@ -31,6 +31,9 @@
 <script>
 export default {
   name: 'Selector',
+  props: {
+    resumeForm: ''
+  },
   data () {
     return {
       postChosen: '',
@@ -60,6 +63,11 @@ export default {
       ]
 
     }
+  },
+  created () {
+    console.log(this.$props.resumeForm)
+    this.$data.placeChosen = '全部'
+    this.$data.postChosen = this.$props.resumeForm==='1'?'校园招聘':this.$props.resumeForm==='2'?'社会招聘':'实习生招聘'
   },
   methods: {
 

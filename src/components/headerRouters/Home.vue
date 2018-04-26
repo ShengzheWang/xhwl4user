@@ -15,21 +15,21 @@
     <!--<div class="show-rectangle-se">4</div>-->
     <!--</div>-->
     <div style="width: 620px;margin:3% auto;">
+      <el-form>
+        <el-form-item>
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;margin-left: -1%">
         <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
       </el-input>
-
+        </el-form-item>
       <div style="margin-top: 4%;margin-left:2%">
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
-
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
-
       </div>
       <div style="margin-top: 2%;margin-left:2%">
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
       </div>
-
+      </el-form>
       <!--<el-switch-->
       <!--v-model="value3"-->
       <!--active-text="校园招聘"-->
@@ -41,7 +41,10 @@
 
 <script>
 
+import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
+
 export default {
+  components: {ElFormItem},
   name: 'Home',
   mounted () {
     var banenr2 = new FragmentBanner({

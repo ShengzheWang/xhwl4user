@@ -2,7 +2,7 @@
   <div id="Trainee">
     <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
-      <selector></selector>
+      <selector resume-form="3"></selector>
       <post-card resume-form="3"></post-card>
     </div>
     <!--<el-switch-->
