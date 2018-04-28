@@ -1,5 +1,7 @@
 <template>
-  <div id="Xhwlheader" style="width:100%;opacity:0.94;height:110px;border-bottom: solid 2px #dddddd;background: #ffffff;z-index:1;position: fixed;left: 0;top:0">
+  <div id="Xhwlheader"
+       style="width:100%;min-width:1100px;opacity:0.95;height:110px;border-bottom: solid 1px #dddddd;
+       background: #ffffff;z-index:1;position: fixed;left: 0;top:0;right: 0" >
     <div class=""></div>
     <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">
@@ -14,7 +16,7 @@
                background-color="#ffffff"
                active-text-color='#1476C1'
                active-background-color="#ffffff"
-               style="width:598px;margin:0 auto;height:60px;display: inline-block">
+               style="width:598px;margin:0 auto;height:62px;display: inline-block">
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
@@ -29,7 +31,7 @@
       </el-menu>
   </div>
     <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login" class="animated fadeInDown">
-      <div style="margin: 5% auto">
+      <div style="margin: 17px auto">
         <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
         <el-button plain @click="dialogFormVisible1 = true; State = true" class="button4plain"
@@ -168,6 +170,7 @@ export default {
       labelPosition: 'left',
       labelPosition1: 'left',
       Need2Login: true,
+      headerWidth:0,
       indentifyingImg: '',
       user: {
         username: '',
@@ -266,6 +269,10 @@ export default {
       })
     },
     Register(formName){
+      if(this.$data.State) {
+        this.$data.State = !this.$data.State
+        return
+      }
       this.$refs[formName].validate((valid)=>{
         if(valid){
           if(this.$data.State) {

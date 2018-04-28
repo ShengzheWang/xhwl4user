@@ -135,6 +135,7 @@ export default {
       /* 保存并进行下一步: */
       font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF !important;
+      transition: all 0.3s;
     }
     .button-red:hover {
       background: #E01B2F;
@@ -142,6 +143,10 @@ export default {
       /* 保存并进行下一步: */
       font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF;
+      transform: scale(1.05);
+    }
+    .box-card{
+      transition: all 0.6s;
     }
   }
   .transition-box {

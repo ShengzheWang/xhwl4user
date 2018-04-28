@@ -22,12 +22,16 @@
       </el-input>
         </el-form-item>
       <div style="margin-top: 4%;margin-left:2%">
+        <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        </el-form-item>
       </div>
       <div style="margin-top: 2%;margin-left:2%">
+        <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        </el-form-item>
       </div>
       </el-form>
       <!--<el-switch-->
@@ -49,11 +53,11 @@ export default {
   mounted () {
     var banenr2 = new FragmentBanner({
       container: '#banner4home',
-      imgs: ['../../../static/img/1.jpg', '../../../static/img/2.png',
-        '../../../static/img/3.png'],
+      imgs: ['../../../static/img/1.jpg',
+        '../../../static/img/3.jpg'],
       size: {
-        width : document.body.scrollWidth,
-        height : document.body.scrollWidth*1/2
+        width : document.body.clientWidth,
+        height : document.body.clientWidth*1/2
       },//容器的大小 可选
       //行数与列数 可选
       grid : {

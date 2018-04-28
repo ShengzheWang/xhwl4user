@@ -6,7 +6,7 @@
       <el-table
         :data="tableData"
         stripe
-        style="width: 100%">
+        style="width: 100%" v-loading="loading">
         <el-table-column
           prop="positionName"
           label="申请职位"
@@ -36,7 +36,7 @@
         >
           <template slot-scope="scope">
             <el-button type="primary" class="button4details" size="middle">
-              {{scope.row.state[scope.row.state.length-1].stateText==='待审核'?'撤回申请':'查看详情'}}
+              {{scope.row.state[scope.row.state.length-1].stateText==='待审核 '?'撤回申请':'查看详情'}}
             </el-button>
           </template>
         </el-table-column>
@@ -53,7 +53,8 @@ export default {
   name: 'MyJobApplication',
   data () {
     return {
-      tableData: []
+      tableData: [],
+      loading: true
 
     }
   },
@@ -81,11 +82,11 @@ export default {
             switch (now){
               case '1':state0.iconClass='state-default'
                 state0.iconName='icon iconfont icon-' + (i + 1).toString()
-                state0.stateText='待审核'
+                state0.stateText='待审核 '
                 break
               case '2':state0.iconClass='state-default'
                 state0.iconName='icon iconfont icon-' + (i + 1).toString()
-                state0.stateText='待审核'
+                state0.stateText='待审核 '
                 break
               case '3':state0.iconClass='state-failure'
                 state0.iconName='icon iconfont icon-' + 'shibai'
@@ -109,6 +110,7 @@ export default {
           }
           _this.$data.tableData.push(item)
         })
+        _this.$data.loading = false
         console.log(_this.$data.tableData)
       })
     })

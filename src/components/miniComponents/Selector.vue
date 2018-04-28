@@ -2,20 +2,27 @@
   <div id="Selector" class="animated fadeIn">
     <div class="blockDiv"></div>
     <div style="width:50%;display: inline-block">
+      <el-form>
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px;margin-top: 5%"
                 class="select-button">
         <el-button slot="append"><img src="../../../static/img/search.png"></el-button>
       </el-input>
 
       <div style="margin-top: 4%;margin-left:2%">
+        <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        </el-form-item>
       </div>
       <div style="margin-top: 2%;margin-left:2%">
+        <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
         <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        </el-form-item>
       </div>
+      </el-form>
     </div>
+
     <div style="width:49%;display: inline-block;text-align: right;vertical-align: top">
       <h1 style="margin-top: 7%;font-size: 36px">{{postChosen}}</h1>
     </div>
@@ -23,7 +30,10 @@
 </template>
 
 <script>
+import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
+
 export default {
+  components: {ElFormItem},
   name: 'Selector',
   props: {
     resumeForm: ''
