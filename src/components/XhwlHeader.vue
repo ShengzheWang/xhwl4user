@@ -1,6 +1,6 @@
 <template>
   <div id="Xhwlheader"
-       style="width:100%;min-width:1100px;opacity:0.95;height:110px;border-bottom: solid 1px #dddddd;
+       style="width:100%;min-width:1100px;opacity:0.90;height:110px;border-bottom: solid 1px #dddddd;
        background: #ffffff;z-index:1;position: fixed;left: 0;top:0;right: 0" >
     <div class=""></div>
     <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
@@ -64,7 +64,7 @@
     <div class="line"></div>
 
     <el-dialog  id="form4login" :visible.sync="dialogFormVisible1" style="margin:auto auto;width: 1000px"
-                :modal-append-to-body="false" :lock-scroll="false">
+                :modal-append-to-body="false"  :append-to-body="true" :lock-scroll="false">
       <el-collapse-transition>
         <div v-show="State">
       <el-form :label-position="labelPosition1"  :model="user" ref="user" :rules="rules" style="width: 80%;margin: 3% auto" :status-icon="true">

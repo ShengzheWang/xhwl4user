@@ -78,6 +78,7 @@ export default {
         response.data.forEach((item, index) => {
           item['index'] = index
           item['Ashow'] = false
+          item['department'] = _this.$data.typeTable[item['department']-1]
           _this.$data.cardInfo.push(item)
         })
         console.log(_this.$data.cardInfo)
@@ -88,7 +89,10 @@ export default {
   data () {
     return {
       kind: '',
-      cardInfo: []
+      cardInfo: [],
+      typeTable:['人事行政部', '财务管理部', '部门管理部', '市场开发部', '工程技术部',
+        '运维及质量安全部', '研发设计部', '华南办事处', '深圳办事处', '北方办事处',
+        '西部办事处', '华东办事处', '华中办事处', '华北办事处']
     }
   },
   methods: {
