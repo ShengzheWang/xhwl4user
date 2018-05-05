@@ -1,11 +1,11 @@
 <template>
-  <div id="PostCard" style="min-height: 600px">
-    <el-card v-for="item in cardInfo" class="box-card animated fadeInLeft" v-bind:key="item.index"
+  <div id="PostCard" style="">
+    <el-card v-for="item in cardInfo" class="box-card animated fadeIn" v-bind:key="item.index"
              v-bind:style="'margin-top:2%;width:100%;padding:10px 10px;background-color:#ffffff;animation-delay:'+(item.index)*0.2+'s'">
       <div>
         <span style="font-size:32px;font-weight: bold" class="name"> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  {{item.positionType}}</span>
-        <span style="float:right;font-size:25px;margin-top: 10px">发布于 {{item.publishDate}}</span>
+        <span style="float:right;font-size:26px;margin-top: 10px">发布于 {{item.publishDate}}</span>
       </div>
 
       <div style="height:20px;" class="blank"></div>

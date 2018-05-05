@@ -1,12 +1,12 @@
 <template>
   <div id="Xhwlheader"
-       style="width:100%;min-width:1100px;opacity:0.90;height:110px;border-bottom: solid 1px #dddddd;
+       style="width:100%;min-width:1100px;opacity:0.90;height:80px;border-bottom: solid 1px #dddddd;
        background: #ffffff;z-index:1;position: fixed;left: 0;top:0;right: 0" >
     <div class=""></div>
     <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">
        <img
-        src="../../static/img/logoMain.png" style="height:65px;width: auto;">
+        src="../../static/img/logoMain.png" style="height:50px;width: auto;">
       </div>
     </div>
      <div style="display: inline-block;width: 48%;text-align: center;height: 60px" class="animated fadeInDown">
@@ -16,7 +16,7 @@
                background-color="#ffffff"
                active-text-color='#1476C1'
                active-background-color="#ffffff"
-               style="width:598px;margin:0 auto;height:62px;display: inline-block">
+               style="width:570px;margin:0 auto;height:58px;display: inline-block;font-size: 18px">
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
@@ -31,7 +31,7 @@
       </el-menu>
   </div>
     <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login" class="animated fadeInDown">
-      <div style="margin: 17px auto">
+      <div style="margin: 21px auto">
         <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
         <el-button plain @click="dialogFormVisible1 = true; State = true" class="button4plain"
@@ -39,12 +39,12 @@
       </div>
     </div>
 
-      <div style="width:25%;display:inline-block;height: 80px;text-align: center;vertical-align: top" class="animated fadeInDown" v-else>
-        <div style="margin-top:20px;">
+      <div style="width:25%;display:inline-block;height: 90px;text-align: center;vertical-align: top;font-size: 14px" class="animated fadeInDown" v-else>
+        <div style="margin-top:14px;">
       <el-dropdown >
-        <el-badge :value="mine[2].messageNum" class="item">
+        <el-badge  style="font-size: 8px" :value="mine[2].messageNum" class="item">
       <el-button  type="text" ><img
-        src="../../static/img/Default.png"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        src="../../static/img/Default.png" style="width: 24px;"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
         </el-badge>
         <el-dropdown-menu slot="dropdown" >
           <el-dropdown-item v-for="(item, index) in mine" v-bind:key="index">
@@ -483,5 +483,7 @@ export default {
       letter-spacing: 2.5px;
     }
   }
-
+  .el-badge__content {
+    font-size: 8px;
+  }
 </style>

@@ -44,7 +44,7 @@ ol, ul {
 
 .button4plain{
   background: #ffffff;
-  font-size: 18px !important;
+  font-size: 14px !important;
 
 }
 .el-button--primary{
@@ -74,9 +74,9 @@ ol, ul {
   font-size: 17px;
 }
 .button4plain{
-  border: 1px solid #707070;border-radius:14px;color:#707070;font-size: 16px;
-  height: 28px;
-  width: 60px;
+  border: 1px solid #707070;border-radius:14px;color:#707070;font-size: 14px;
+  height: 26px;
+  width: 50px;
   line-height: 0;
   padding: 0;
 }
@@ -97,6 +97,7 @@ ol, ul {
 }
 .item4menu.is-active{
   color:#1A72B7 !important;
+  font-weight: 600;
 }
 .el-form-item__label{
   font-size:16px;
@@ -111,11 +112,11 @@ ol, ul {
   transition:all 0.3s;
 }
 
-.el-form-item:focus {
-   transform: scale(1.01);
+.el-form-item .el-button:focus {
+   transform: scale(1.05);
  }
-.el-form-item:hover  {
-  transform: scale(1.01);
+.el-form-item .el-button:hover  {
+  transform: scale(1.05);
 }
 .blockDiv{
   width: 100%;
@@ -143,7 +144,7 @@ ol, ul {
   margin-top: 3%
 }
 .el-menu-item{
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .el-submenu__title{

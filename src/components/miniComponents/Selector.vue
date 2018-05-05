@@ -3,21 +3,21 @@
     <div class="blockDiv"></div>
     <div style="width:50%;display: inline-block">
       <el-form>
-      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 17px;height: 60px;margin-left: 5px;margin-top: 5%"
+      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 16px;height: 50px;margin-left: 5px;margin-top: 5%"
                 class="select-button">
         <el-button slot="append"><img src="../../../static/img/search.png"></el-button>
       </el-input>
 
-      <div style="margin-top: 4%;margin-left:2%">
-        <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+      <div style="margin-top: 4%;margin-left:23px">
+        <el-form-item style="margin-bottom: 1%">
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 16px">工作地点：</h3>
+        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 16px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
       </div>
-      <div style="margin-top: 2%;margin-left:2%">
+      <div style="margin-top: 0%;margin-left:23px">
         <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 16px">职位类型：</h3>
+        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 16px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
       </div>
       </el-form>
@@ -90,7 +90,7 @@ export default {
      .el-input__inner{
        border:4px solid #1476C1;
        border-radius:100px 0 0 100px;
-       height: 60px;
+       height: 50px;
      }
      .el-input-group__append{
        border:1px solid #1476C1;

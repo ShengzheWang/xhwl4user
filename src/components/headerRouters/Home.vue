@@ -1,11 +1,14 @@
 <template>
   <div id="Home">
-      <div class="banner animated fadeInUp" id="banner4home" style="margin: 1% auto;">
-        <div class="banner-view"></div>
-        <div class="banner-btn"></div>
-        <div class="banner-number"></div>
-        <div class="banner-progres"></div>
+      <div class="banner animated fadeInUp"  style="margin: 1% auto;">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="item in 3" v-if="item!=2"><img :src="'../../../static/img/'+item+'.jpg'" style="width: 100%;height: auto"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
       </div>
+
 
     <!--<div class="show-rectangle">-->
     <!--<div class="show-rectangle-big" >5</div>-->
@@ -46,28 +49,23 @@
 <script>
 
 import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
-
+import Swiper from 'swiper'
+import 'swiper/dist/css/swiper.min.css'
 export default {
   components: {ElFormItem},
   name: 'Home',
+  created(){
+
+  },
   mounted () {
-    var banenr2 = new FragmentBanner({
-      container: '#banner4home',
-      imgs: ['../../../static/img/1.jpg',
-        '../../../static/img/3.jpg'],
-      size: {
-        width : document.body.clientWidth,
-        height : document.body.clientWidth*1/2
-      },//容器的大小 可选
-      //行数与列数 可选
-      grid : {
-        line : 4,
-        list : 8
+    var mySwiper = new Swiper('.swiper-container', {
+      autoplay: true,//可选选项，自动滑动
+      grabCursor : true,
+
+      speed: 2000,
+      pagination: {
+        el: '.swiper-pagination',
       },
-      index: 0,//图片集合的索引位置 可选
-      type : 2,//切换类型 1 ， 2 可选
-      boxTime : 5000,//小方块来回运动的时长 可选
-      fnTime: 10000
     })
   },
   data () {
@@ -75,6 +73,7 @@ export default {
       input3: '',
       value3: '',
       postChosen: '',
+      documentBodyClientWidth: 0,
       items: [
         {text: '展示示例一'},
         {text: '展示示例二'},
@@ -122,6 +121,7 @@ export default {
     border-radius:100px 0 0 100px;
     height: 60px;
   }
+
   .el-input-group__append{
     border:1px solid #1476C1;
     border-radius:0px 100px 100px 0;
