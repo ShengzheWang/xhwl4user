@@ -1,7 +1,7 @@
 <template>
   <div id="Xhwlheader"
        style="width:100%;min-width:1100px;opacity:0.90;height:80px;border-bottom: solid 1px #dddddd;
-       background: #ffffff;z-index:1;position: fixed;left: 0;top:0;right: 0" >
+       background: #ffffff;z-index:1" >
     <div class=""></div>
     <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">

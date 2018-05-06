@@ -1,6 +1,5 @@
 <template>
   <div id="ResumeDetails">
-    <div class="blockDiv"></div>
     <div class="block" v-loading="loading">
       <div style="width:1200px;margin: 0% auto 0 auto">
         <h1 class="resume-header">{{formBasic.name}} 简历预览</h1>

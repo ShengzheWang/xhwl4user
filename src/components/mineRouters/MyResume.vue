@@ -1,6 +1,5 @@
 <template>
   <div ref="c" id="MyResume" style="height: 700px;width: 1300px;margin:0% auto;" v-loading="loading">
-    <div class="blockDiv"></div>
     <h1 v-bind:class="'animated fade'+show2" style="animation-delay:0.6s;width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
     <div style="height: 350px;width: 1100px;margin:5% auto">
       <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end" >

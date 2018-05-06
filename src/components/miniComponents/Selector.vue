@@ -1,6 +1,5 @@
 <template>
   <div id="Selector" class="animated fadeIn">
-    <div class="blockDiv"></div>
     <div style="width:50%;display: inline-block">
       <el-form>
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 16px;height: 50px;margin-left: 5px;margin-top: 5%"

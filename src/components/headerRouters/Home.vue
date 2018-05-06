@@ -66,7 +66,10 @@ export default {
       pagination: {
         el: '.swiper-pagination',
       },
+
     })
+    console.log(document.body.scrollWidth)
+    //2185115
   },
   data () {
     return {

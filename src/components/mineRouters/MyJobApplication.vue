@@ -1,6 +1,5 @@
 <template>
   <div id="MyJobApplication" class="animated bounceInLeft" style="min-height: 500px;width: 1300px;margin:3% auto;">
-    <div class="blockDiv"></div>
     <div style="height: 350px;width: 1100px;margin:5% auto" >
       <div class="line" ></div>
       <el-table

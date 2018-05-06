@@ -1,6 +1,5 @@
 <template>
   <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;" class="animated bounceInLeft">
-    <div class="blockDiv"></div>
     <div style="margin:0 auto;text-align: center">
       <el-radio-group v-model="resumes_form" size="large" @change="changeType">
         <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
