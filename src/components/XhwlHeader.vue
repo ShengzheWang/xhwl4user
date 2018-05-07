@@ -242,10 +242,10 @@ export default {
     }
     this.$axios({
       method: 'get',
-      url: '/register'
+      url: '/createPictureCaptcha'
     }).then(function (response) {
       console.log(_this.$data.indentifyingImg)
-      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
     }).catch(function(error) {
     })
   },
@@ -264,7 +264,7 @@ export default {
         url: '/register'
       }).then(function (response) {
         console.log(_this.$data.indentifyingImg)
-        _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+        _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
       }).catch(function(error) {
       })
     },
