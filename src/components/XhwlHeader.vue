@@ -305,7 +305,9 @@ export default {
       }).then(function (response) {
         console.log(_this.$data.indentifyingImg)
         _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
+
         _this.$data.uuid=response.data.uuid;
+
       }).catch(function(error) {
       })
     },
