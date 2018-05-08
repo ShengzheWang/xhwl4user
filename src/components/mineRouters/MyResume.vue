@@ -37,11 +37,9 @@ export default {
       url: '/resume'
     }).then(function (response) {
       console.log(response.data)
-      if (response.data.id === null) {
+      if (response.data.id === undefined) {
       } else {
-        _this.$router.push({ name: 'ResumeForm', params: {
-          resumes_form_selected: response.data.resumesForm.toString(),
-        } })
+        _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: response.data.resumesForm.toString()} })
       }
     })
   },
@@ -69,6 +67,7 @@ export default {
   },
   methods: {
     createAResume (whichOne) {
+      let _this = this
       switch (whichOne) {
         case 1:break
         case 2:this.$data.time = [0.2, 0, 0.4]

@@ -243,7 +243,7 @@ export default {
     })
       .then(function (response) {
         console.log(response.data)
-        if(response.data.length!=0) {
+        if(response.data.length!==0) {
           _this.$data.imageUrl = 'data:image/png;base64,' + btoa(
             new Uint8Array(response.data)
               .reduce((data, byte) => data + String.fromCharCode(byte), '')
