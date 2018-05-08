@@ -91,7 +91,10 @@
             </el-form-item>
               <el-form-item  prop="identifyingCode" class="item4login">
                 <el-input v-model="user0.identifyingCode"  placeholder="请输入验证码" prefix-icon="iconfont icon-yanzhengma icon4form">
-                  <el-button slot="append" @click="getPhoneMessage('user0')">发送手机验证码</el-button>
+                  <el-button slot="append" >
+                    <span v-show="timeShow" @click="getPhoneMessage('user0')">获取验证码</span>
+                    <span v-show="!timeShow" class="count">{{timeCount}} s</span>
+                  </el-button>
                 </el-input>
               </el-form-item>
               <el-tooltip placement="right" effect="light">
@@ -152,16 +155,13 @@ export default {
         callback();
       }
     }
-    var checkImageCode=(rule,value,callback)=>{
-      if(!value){
-        callback(new Error('请输入图形验证码'))
-      }else{
-        callback();
-      }
-    }
 
 
     return {
+      timeCount:'',
+      timeShow:true,
+      timer:null,
+      formRes:'',
       activeIndex: '1',
       State: true,
       dialogFormVisible: false,
@@ -172,9 +172,15 @@ export default {
       Need2Login: true,
       headerWidth:0,
       indentifyingImg: '',
+      uuid:'',
       user: {
         username: '',
         password: ''
+      },
+      formSend:{
+        username:'',
+        captcha:'',
+        uuid:''
       },
       user0: {
         username: '',
@@ -201,9 +207,6 @@ export default {
         ],
         passwordRepeat:[
           {validator:checkLogPassRepeat,trigger:'blur'}
-        ],
-        identifyingCode:[
-          {validator:checkImageCode,trigger:'blur'}
         ]
       },
       mine: [{path: '', text: '个人中心'},
@@ -242,33 +245,71 @@ export default {
     }
     this.$axios({
       method: 'get',
-      url: '/register'
+      url: '/createPictureCaptcha'
     }).then(function (response) {
       console.log(_this.$data.indentifyingImg)
-      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
+      _this.$data.uuid=response.data.uuid;
     }).catch(function(error) {
     })
   },
   methods: {
     getPhoneMessage(formName){  //获取短信验证码前验证手机号等是否已填
+      let flag=false;
+      const TIME_COUNT = 60;    //验证码获取时间间隔
       this.$refs[formName].validate((valid)=>{
         if(valid){
-          console.log('success');
+
+          this.$data.formSend.captcha=this.$data.user0.identifyingCode;
+          this.$data.formSend.uuid=this.$data.uuid;
+          this.$data.formSend.username=this.$data.user0.username;
+          let _this=this;
+          this.$axios({
+            method:'post',
+            url:'/createPhoneCaptcha',
+            data:_this.$qs.stringify(_this.$data.formSend)
+          }).then(function (response) {
+            _this.$message({
+              type:'success',
+              message:'验证码已成功发送！请留意手机短信'
+            })
+            flag=true;
+          }).catch(function (error) {
+            console.log(error);
+            _this.$message({
+              type:'error',
+              message:'验证码输入出问题了哦'
+            })
+          })
         }
       })
+      if (!this.timer) {
+        this.timeCount = TIME_COUNT;
+        this.timeShow = false;
+        this.timer = setInterval(() => {
+          if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+            this.timeCount--;
+          } else {
+            this.timeShow = true;
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000)
+      }
     },
-    refreshImg(){
+    refreshImg(){           //刷新图形验证码
       let _this = this
       this.$axios({
         method: 'get',
-        url: '/register'
+        url: '/createPictureCaptcha'
       }).then(function (response) {
         console.log(_this.$data.indentifyingImg)
-        _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data
+        _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
+        _this.$data.uuid=response.data.uuid;
       }).catch(function(error) {
       })
     },
-    Register(formName){
+    Register(formName){     //注册
       if(this.$data.State) {
         this.$data.State = !this.$data.State
         return
@@ -277,8 +318,35 @@ export default {
         if(valid){
           if(this.$data.State) {
             this.$data.State = !this.$data.State
-            return
           }
+
+          let _this=this;
+          this.$axios({
+            method:'post',
+            url:'/register',
+            data:_this.$qs.stringify({
+              username:_this.$data.user0.username,
+              password:_this.$data.user0.password,
+              phoneCaptcha:_this.$data.user0.telephoneIdentifyingCode,
+            })
+          }).then(function (response) {
+              _this.$message({
+                type:'success',
+                message:'注册成功！'
+              })
+            _this.$data.State=!_this.$data.State;
+            _this.$data.user0.username='';
+            _this.$data.user0.password='';
+            _this.$data.user0.passwordRepeat='';
+            _this.$data.user0.identifyingCode='';
+            _this.$data.user0.telephoneIdentifyingCode='';
+          }).catch(function (error) {
+            _this.$message({
+              type:'error',
+              message:error.response.data.msg
+            })
+          })
+
         }
       })
 
@@ -286,7 +354,7 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
-    logout() {
+    logout() {                //注销
       this.$data.Need2Login = true
       delete this.$axios.defaults.headers['Authorization']
       document.cookie = ''
@@ -296,7 +364,7 @@ export default {
       })
       this.$router.push('/')
     },
-    login (formName) {
+    login (formName) {        //登录
       if(!this.$data.State) {
         this.$data.State = !this.$data.State
         return
