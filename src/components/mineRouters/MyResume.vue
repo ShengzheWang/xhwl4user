@@ -24,7 +24,6 @@
       </div>
         </el-tooltip>
     </div>
-    <div class="blockDiv"></div>
   </div>
 </template>
 
@@ -42,7 +41,6 @@ export default {
       } else {
         _this.$router.push({ name: 'ResumeForm', params: {
           resumes_form_selected: response.data.resumesForm.toString(),
-          resumesId: response.data.id.toString()
         } })
       }
     })
@@ -85,7 +83,7 @@ export default {
         url: '/resume?form=' + whichOne
       }).then(function (response) {
         setTimeout(() => {
-          this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: whichOne.toString()} })
+          _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: whichOne.toString()} })
         }, 1000)
       })
     },
