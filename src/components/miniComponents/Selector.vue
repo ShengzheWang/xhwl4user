@@ -4,7 +4,7 @@
       <el-form>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  prefix-icon="icon iconfont icon4form icon-gongzuodidian"  placeholder="工作地点" class="input4selector" >
+            <el-input  prefix-icon="icon iconfont icon4form icon-gongzuodidian" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
             </el-input>
           </el-form-item>
         </el-col>
@@ -13,7 +13,7 @@
         </el-col>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  prefix-icon="icon iconfont icon4form icon-zhiweileixing" placeholder="职位类型" class="input4selector">
+            <el-input  prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
             </el-input>
           </el-form-item>
         </el-col>
@@ -119,6 +119,11 @@ export default {
        .el-input__prefix{
          display: inline-block;
          width: 50px;
+       }
+       .el-input__suffix{
+         display: inline-block;
+         width: 50px;
+         margin-top: 3px;
        }
        .el-input__inner{
          height:50px;

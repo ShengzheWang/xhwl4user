@@ -30,7 +30,7 @@
               <a style="font-size: 20px">岗位描述：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
-              <a style="white-space:pre-wrap">{{item.jobResponsibilities}}</a>
+              <a style="white-space:pre-wrap;font-size: 20px">{{item.jobResponsibilities}}</a>
               </div>
             </div>
             <div style="margin-top: 1%">
@@ -39,7 +39,7 @@
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
-                <a style="white-space:pre-wrap">{{item.jobRequirements}}</a>
+                <a style="white-space:pre-wrap;font-size: 20px">{{item.jobRequirements}}</a>
               </div>
             </div>
           </div>
