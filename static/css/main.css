@@ -109,6 +109,7 @@ ol, ul {
 }
 .el-submenu__title:hover{
   background: #ffffff !important;
+  color:#1376BE !important;
 }
 .el-form-item__label{
   font-size:16px;
@@ -156,6 +157,7 @@ ol, ul {
 }
 .el-menu-item{
   font-size: 16px;
+  background-color:#ffffff !important;
 }
 
 .el-submenu__title{
