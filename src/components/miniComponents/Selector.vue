@@ -1,29 +1,41 @@
 <template>
   <div id="Selector" class="animated fadeIn">
-    <div style="width:50%;display: inline-block">
+    <div style="width:100%;display: inline-block;margin-top: 50px">
       <el-form>
-      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 16px;height: 50px;margin-left: 5px;margin-top: 5%"
-                class="select-button">
-        <el-button slot="append"><img src="../../../static/img/search.png"></el-button>
-      </el-input>
+        <el-col style="width: 27%">
+          <el-form-item >
+            <el-input  prefix-icon="icon iconfont icon4form icon-gongzuodidian"  placeholder="工作地点" class="input4selector" >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col style="width: 2%">
+          <div style="width: 100%;display: inline-block"></div>
+        </el-col>
+        <el-col style="width: 27%">
+          <el-form-item >
+            <el-input  prefix-icon="icon iconfont icon4form icon-zhiweileixing" placeholder="职位类型" class="input4selector">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col style="width: 2%">
+          <div style="width: 100%;display: inline-block"></div>
+        </el-col>
+        <el-col style="width: 27%">
+          <el-form-item >
+            <el-input  prefix-icon="icon iconfont icon4form icon-zhiweimingcheng" placeholder="职位名称" class="input4selector">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col style="width: 2%">
+          <div style="width: 100%;display: inline-block"></div>
+        </el-col>
+        <el-col style="width: 13%">
+          <el-form-item >
+            <el-button class="button4choose">筛选</el-button>
+          </el-form-item>
+        </el-col>
 
-      <div style="margin-top: 4%;margin-left:23px">
-        <el-form-item style="margin-bottom: 1%">
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 16px">工作地点：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 16px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
-        </el-form-item>
-      </div>
-      <div style="margin-top: 0%;margin-left:23px">
-        <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 16px">职位类型：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 16px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
-        </el-form-item>
-      </div>
       </el-form>
-    </div>
-
-    <div style="width:49%;display: inline-block;text-align: right;vertical-align: top">
-      <h1 style="margin-top: 7%;font-size: 36px">{{postChosen}}</h1>
     </div>
   </div>
 </template>
@@ -79,22 +91,49 @@ export default {
 </script>
 <style lang="less">
    #Selector{
+     .button4choose{
+       background: #E01B2F;
+       color: #ffffff;
+       width: 100%;
+       height: 54px;
+       border: solid 2px #E01B2F;
+       border-radius: 50px;
+       font-size: 20px;
+     }
+     .input-name{
+       border-radius: 50px;
+     }
+     .input-classes{
+       border-radius: 50px;
+     }
+     .input4selector{
+       border-radius: 50px;
+     }
+     .el-form{
+       .el-input{
+         border:#1476C1 solid 2px;
+         width: 100%;
+         font-size: 20px;
+         background-color: #ffffff;
+       }
+       .el-input__prefix{
+         display: inline-block;
+         width: 50px;
+       }
+       .el-input__inner{
+         height:50px;
+         border:none;
+         border-radius: 50px;
+         background: inherit;
+         padding-left:50px;
+       }
+     }
      font-size: 15px;
      .select-button{
        transition: all 0.6s;
        &:hover{
          transform: scale(1.02);
        }
-     }
-     .el-input__inner{
-       border:4px solid #1476C1;
-       border-radius:100px 0 0 100px;
-       height: 50px;
-     }
-     .el-input-group__append{
-       border:1px solid #1476C1;
-       border-radius:0px 100px 100px 0;
-       background: #1476C1;
      }
    }
 </style>

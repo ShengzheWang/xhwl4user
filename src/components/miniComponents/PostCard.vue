@@ -3,18 +3,18 @@
     <el-card v-for="item in cardInfo" class="box-card animated fadeIn" v-bind:key="item.index"
              v-bind:style="'margin-top:2%;width:100%;padding:10px 10px;background-color:#ffffff;animation-delay:'+(item.index)*0.2+'s'">
       <div>
-        <span style="font-size:32px;font-weight: bold" class="name"> {{item.positionName}}</span>
+        <span style="font-size:24px;font-weight: bold" class="name"> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  {{item.positionType}}</span>
-        <span style="float:right;font-size:26px;margin-top: 10px">发布于 {{item.publishDate}}</span>
+        <span style="float:right;font-size:14px;margin-top: 10px">发布于 {{item.publishDate}}</span>
       </div>
 
       <div style="height:20px;" class="blank"></div>
 
-      <div class="brief" style="font-weight:normal;font-size:15px;">
+      <div class="brief" style="font-weight:normal;font-size:16px;">
         <div style="margin-top: 1%">
-          <a style="font-size: 20px">      工作地点：{{item.workPlace}}</a>
+          <a style="font-size: 20px"> <i class="icon iconfont icon-gongzuodidian-shixin icon4card"></i>     工作地点：{{item.workPlace}}</a>
         </div>
-        <div style="margin-top: 1%">
+        <div style="margin-top: 1%;"> <i class="icon iconfont icon-suozaibumen- icon4card"></i>
           <a  style="font-size: 20px">      所属部门：{{item.department}}</a>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <div v-show="item.Ashow" >
             <div style="margin-top: 1%">
               <div style="display:block">
-
+                <i class="icon iconfont icon-chakanxiangqing icon4card"></i>
               <a style="font-size: 20px">岗位描述：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
@@ -35,7 +35,7 @@
             </div>
             <div style="margin-top: 1%">
               <div style="display:block">
-
+                <i class="icon iconfont icon-gongzuoyaoqiu icon4card"></i>
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
               <div style="display: block;margin-top: 1%;margin-left:120px">
@@ -47,9 +47,9 @@
         </el-collapse-transition>
       </div>
       <div style="position: relative;margin-bottom:2%;margin-top: 2%;float: right" >
-        <el-button type="text"  round  @click="item.Ashow=!item.Ashow;"
-                   :icon="item.Ashow?'el-icon-arrow-up':'el-icon-arrow-down'" >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
-        <el-button class="button-red" round icon="el-icon-message" @click="send(item.index)">立即申请</el-button>
+        <el-button type="text"   @click="item.Ashow=!item.Ashow;" style="font-size: 20px"
+                    >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
+        <el-button class="button-red" @click="send(item.index)" >立即申请</el-button>
 
       </div>
     </el-card>
@@ -134,18 +134,19 @@ export default {
 <style lang="less">
   #PostCard {
     .button-red{
+      border-radius: 54px;
       background: #E01B2F !important;
       border: 1px solid #E01B2F;
       /* 保存并进行下一步: */
-      font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF !important;
+      font-size: 20px;
       transition: all 0.3s;
+      padding: 10px 40px;
     }
     .button-red:hover {
       background: #E01B2F;
       border: 1px solid #E01B2F;
       /* 保存并进行下一步: */
-      font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF;
       transform: scale(1.05);
     }

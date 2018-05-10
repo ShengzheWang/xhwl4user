@@ -1,6 +1,6 @@
 <template>
   <div id="Home">
-      <div class="banner animated fadeInUp"  style="margin: 1% auto;">
+      <div class="banner"  style="margin: 1% auto;">
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="item in 3" v-if="item!=2"><img :src="'../../../static/img/'+item+'.jpg'" style="width: 100%;height: auto"></div>

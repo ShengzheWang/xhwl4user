@@ -553,6 +553,19 @@ export default {
       letter-spacing: 2.5px;
     }
   }
+  .el-menu--popup-bottom-start{
+    .el-menu-item {
+      &:hover {
+        background: #ffffff !important;
+        color: #1376BE !important;
+      }
+      &.is-active {
+        color: #1A72B7 !important;
+        font-weight: 600;
+        background: #ffffff !important;
+      }
+    }
+  }
   .el-badge__content {
     font-size: 8px;
   }

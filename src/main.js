@@ -75,7 +75,7 @@ new Vue({
   el: '#app',
   router,
   created () {
-    this.$axios.defaults.baseURL = 'http://119.29.16.250:8080/'
+    this.$axios.defaults.baseURL = 'http://121.42.166.132:8080'
   },
   components: { App },
   template: '<App/>'

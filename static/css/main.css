@@ -70,6 +70,14 @@ ol, ul {
 
   color: #1476C1;
 }
+.icon4card{
+  color:#1476C1;
+  font-size: 24px !important;
+}
+.icon4form{
+  color:#1476C1;
+  font-size: 30px !important;
+}
 .el-radio__input+.el-radio__label{
   font-size: 17px;
 }
@@ -98,6 +106,9 @@ ol, ul {
 .item4menu.is-active{
   color:#1A72B7 !important;
   font-weight: 600;
+}
+.el-submenu__title:hover{
+  background: #ffffff !important;
 }
 .el-form-item__label{
   font-size:16px;
@@ -149,7 +160,7 @@ ol, ul {
 
 .el-submenu__title{
   font-size: 16px;
-  border-bottom: none;
+  border-bottom: none !important;
 }
 .el-carousel__item h3 {
     color: #475669;
