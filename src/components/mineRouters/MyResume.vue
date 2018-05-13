@@ -82,7 +82,7 @@ export default {
         url: '/resume?form=' + whichOne
       }).then(function (response) {
         setTimeout(() => {
-          _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: whichOne.toString()} })
+          _this.$router.push({ name: 'ResumeForm', query: {resumes_form_selected: whichOne.toString()} })
         }, 1000)
       })
     },
