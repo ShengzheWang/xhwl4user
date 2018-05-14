@@ -12,11 +12,11 @@
           class="upload-demo"
           :show-file-list="true"
           :headers="header"
-          accept="pdf,doc,docx"
+          accept="application/pdf"
           :limit="1"
           :on-success="uploadSuccess1"
           :action="$axios.defaults.baseURL+'/upload-resume'">
-          <el-button size="middle" plain>点击上传简历文档</el-button>
+          <el-button size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
         </el-upload>
         </el-form-item>
         <el-form-item  style="width: 55%" label="上传其他材料">
@@ -24,11 +24,11 @@
             class="upload-demo"
             :show-file-list="true"
             :headers="header"
-            accept="pdf,doc,docx"
+            accept="application/zip"
             :limit="1"
             :on-success="uploadSuccess2"
             :action="$axios.defaults.baseURL+'/upload-support-detail'">
-            <el-button size="middle"  plain>点击上传辅助材料</el-button>
+            <el-button size="middle"  plain>点击上传辅助材料（支持ZIP格式）</el-button>
           </el-upload>
         </el-form-item>
         <div class="needMarginBorder"></div>

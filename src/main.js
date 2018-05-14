@@ -65,7 +65,7 @@ const routes = [
       {path: '/ResumeForm/7', component: FormRewardsAndActivities},
       {path: '/ResumeForm/8', component: FormJobIntention},
       {path: '/ResumeForm/9', component: FormSelfEvaluation},
-      {path: '/ResumeForm/10', component: FormAttachment}]
+      {path: '/ResumeForm/a', component: FormAttachment}]
   }
 ]
 const router = new Router({

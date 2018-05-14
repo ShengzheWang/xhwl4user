@@ -86,7 +86,7 @@ export default {
         {index: '7', name: '奖励活动', iconName: 'jianglihuodong', isNecessary: false},
         {index: '8', name: '求职意向', iconName: 'qiuzhiyixiang', isNecessary: true},
         {index: '9', name: '自我评价', iconName: 'ziwopingjia', isNecessary: false},
-        {index: '10', name: '上传附件', iconName: 'shangchuanfujian', isNecessary: true}
+        {index: 'a', name: '上传附件', iconName: 'shangchuanfujian', isNecessary: true}
       ],
       items: [
         {text: '展示示例一'},
@@ -118,8 +118,6 @@ export default {
       this.$data.formNow = str.charAt(str.length - 1)
     },
     handleSelect (key, keyPath) {
-      this.$data.formNow = key
-
     },
     changeType(whichOne) {
       let _this = this
