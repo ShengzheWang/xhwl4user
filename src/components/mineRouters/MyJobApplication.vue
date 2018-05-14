@@ -69,43 +69,223 @@ export default {
           item['recruitmentType'] = item['recruitmentType'] === '1' ? '校园招聘'
             : item['recruitmentType'] === '2' ? '社会招聘' : '实习生招聘'
           item['state'] = []
-          var i = 0
-          for ( i = 0 ; i<item['recruitmentState'].length ; i++ ){
-            var now = item['recruitmentState'][i].toString()
-            var state0 = {
-              iconClass: '',
-              iconName: '',
-              stateText: ''
-            }
-            console.log(now)
-            switch (now){
-              case '1':state0.iconClass='state-default'
-                state0.iconName='icon iconfont icon-' + (i + 1).toString()
-                state0.stateText='待审核 '
-                break
-              case '2':state0.iconClass='state-default'
-                state0.iconName='icon iconfont icon-' + (i + 1).toString()
-                state0.stateText='待审核 '
-                break
-              case '3':state0.iconClass='state-failure'
-                state0.iconName='icon iconfont icon-' + 'shibai'
-                state0.stateText=now==='3'?'HR面试':'部门面试'
-                break
-              case '4':state0.iconClass='state-failure'
-                state0.iconName='icon iconfont icon-' + 'shibai'
-                state0.stateText=now==='3'?'HR面试':'部门面试'
-                break
-              case '5':state0.iconClass='state-success'
-                state0.iconName='icon iconfont icon-' + 'chenggong'
-                state0.stateText=now==='5'?'HR面试':'部门面试'
-                break
-              case '6':state0.iconClass='state-success'
-                state0.iconName='icon iconfont icon-' + 'chenggong'
-                state0.stateText=now==='5'?'HR面试':'部门面试'
-                break
-            }
-            console.log(state0)
-            item['state'].push(state0)
+          switch (item['recruitmentState']) {
+            case '1':
+              item['state'] = [{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-1',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-2',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-3',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '-1':
+              item['state'] = [{
+                iconClass:'state-failure',
+                iconName:'icon iconfont icon-shibai',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-2',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-3',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '2':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-2',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-3',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '-2':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-failure',
+                iconName:'icon iconfont icon-shibai',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-3',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '3':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-failure',
+                iconName:'icon iconfont icon-shibai',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '-3':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-failure',
+                iconName:'icon iconfont icon-shibai',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '4':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-4',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '-4':
+              item['state'] = [{
+                iconClass:'state-failed',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-failure',
+                iconName:'icon iconfont icon-shibai',
+                stateText:'HR面试'
+              },{
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-5',
+                stateText:'Offer'
+              }
+              ]
+              break
+            case '5':
+              item['state'] = [{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'简历审核'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门笔试'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'部门面试'
+              },{
+                iconClass:'state-success',
+                iconName:'icon iconfont icon-chenggong',
+                stateText:'HR面试'
+              },{
+                  iconClass:'state-success',
+                  iconName:'icon iconfont icon-chenggong',
+                  stateText:'Offer'
+                }
+              ]
+              break
           }
           _this.$data.tableData.push(item)
         })
@@ -145,13 +325,13 @@ export default {
       padding:20px 0;
     }
     .state-failure {
-      color: #77C490;
+      color: #E01B2F;
     }
     .state-default {
       color: #707070
     }
     .state-success {
-      color: #E01B2F;
+      color: #77C490;
     }
     .icon-1:before{
       content: '① ';
