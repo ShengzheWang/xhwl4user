@@ -564,7 +564,7 @@ export default {
     }
     .el-input__inner{
       height:54px;
-      padding-left:48px;
+      padding-left:48px !important;
     }
     .el-input__prefix{
       height:54px;
