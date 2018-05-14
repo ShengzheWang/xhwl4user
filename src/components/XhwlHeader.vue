@@ -63,7 +63,7 @@
       </div>
     <div class="line"></div>
 
-    <el-dialog  id="form4login" :visible.sync="dialogFormVisible1" style="margin:auto auto;width: 1000px"
+    <el-dialog  class="form4login" :visible.sync="dialogFormVisible1" style="margin:auto auto;width: 1000px"
                 :modal-append-to-body="false"  :append-to-body="true" :lock-scroll="false">
       <el-collapse-transition>
         <div v-show="State">
@@ -74,6 +74,9 @@
         <el-form-item  prop="password" class="item4login">
           <el-input v-model="user.password" type="password"  placeholder="请输入密码" prefix-icon="iconfont icon-mima icon4form"></el-input>
         </el-form-item>
+        <div style="width: 100%;text-align: right">
+        <el-button type="text" @click="dialogFormVisible2 = true">忘记密码？</el-button>
+        </div>
       </el-form>
         </div>
       </el-collapse-transition>
@@ -117,6 +120,48 @@
       <div class="foot4login" style="margin: 3% auto;width: 80%">
         <el-button v-bind:class="'button4login now'+(State == true?'Login':'Register')+'-register'" @click="Register('user0')">注册</el-button>
         <el-button v-bind:class="'button4login now'+(State == true?'Login':'Register')+'-login'" @click="login('user');">登录</el-button>
+      </div>
+    </el-dialog>
+
+
+    <el-dialog  class="form4login" :visible.sync="dialogFormVisible2" style="margin:auto auto;width: 1000px"
+                :modal-append-to-body="false"  :append-to-body="true" :lock-scroll="false">
+          <el-form :label-position="labelPosition1"  :model="user0" ref="user0"  style="width: 80%;margin: 3% auto" :status-icon="true" :rules="rules0">
+            <el-form-item  prop="username" class="item4login">
+              <el-input v-model="user0.username" placeholder="请输入手机号" prefix-icon="iconfont icon-shoujihao icon4form" ></el-input>
+            </el-form-item>
+            <el-form-item  prop="password" class="item4login" >
+              <el-input v-model="user0.password" type="password"  placeholder="请输入新密码" prefix-icon="iconfont icon-mima icon4form"></el-input>
+            </el-form-item>
+            <el-form-item  prop="passwordRepeat" class="item4login">
+              <el-input v-model="user0.passwordRepeat" type="password"  placeholder="请重复新密码" prefix-icon="iconfont icon-querenmima icon4form"></el-input>
+            </el-form-item>
+            <el-form-item  prop="identifyingCode" class="item4login">
+              <el-input v-model="user0.identifyingCode"  placeholder="请输入验证码" prefix-icon="iconfont icon-yanzhengma icon4form">
+                <el-button slot="append" >
+                  <span v-show="timeShow" @click="getPhoneMessage('user0')">获取验证码</span>
+                  <span v-show="!timeShow" class="count">{{timeCount}} s</span>
+                </el-button>
+              </el-input>
+            </el-form-item>
+            <el-tooltip placement="right" effect="light">
+              <div slot="content">
+                <div style="height: 200px;width: 400px;text-align: center;vertical-align: middle">
+                  <img :src="indentifyingImg" style="height: 150px;display: inline-block;margin:25px 50px">
+                </div>
+              </div>
+              <el-form-item class="item4login" style="text-align: right">
+                <img :src="indentifyingImg" style="height: 48px">
+                <el-button icon="el-icon-refresh" type="text" @click="refreshImg()"></el-button>
+              </el-form-item>
+            </el-tooltip>
+            <el-form-item  prop="telephoneIdentifyingCode" class="item4login">
+              <el-input v-model="user0.telephoneIdentifyingCode"  placeholder="请输入手机验证码" prefix-icon="iconfont icon-guanbi icon4form"></el-input>
+            </el-form-item>
+          </el-form>
+      <div class="foot4login" style="margin: 3% auto;width: 80%">
+        <el-button v-bind:class="'button4login nowLogin-register'" @click="dialogFormVisible2 = false">取消</el-button>
+        <el-button v-bind:class="'button4login nowLogin-login'" @click="Reset('user0');">确认修改</el-button>
       </div>
     </el-dialog>
   </div>
@@ -198,7 +243,7 @@ export default {
       formRes:'',
       activeIndex: '1',
       State: true,
-      dialogFormVisible: false,
+      dialogFormVisible2: false,
       dialogFormVisible1: false,
       formLabelWidth: '14%',
       labelPosition: 'left',
@@ -374,11 +419,51 @@ export default {
                 message:'注册成功！'
               })
             _this.$data.State=!_this.$data.State;
+            _this.$data.user.username = _this.$data.user0.username
+            _this.$data.user.password = _this.$data.user0.password
             _this.$data.user0.username='';
             _this.$data.user0.password='';
             _this.$data.user0.passwordRepeat='';
             _this.$data.user0.identifyingCode='';
             _this.$data.user0.telephoneIdentifyingCode='';
+          }).catch(function (error) {
+            _this.$message({
+              type:'error',
+              message:error.response.data.msg
+            })
+          })
+
+        }
+      })
+
+    },
+    Reset(formName){     //修改密码
+      this.$refs[formName].validate((valid)=>{
+        if(valid){
+
+          let _this=this;
+          this.$axios({
+            method:'post',
+            url:'/resetPassword',
+            data:_this.$qs.stringify({
+              username:_this.$data.user0.username,
+              password:_this.$data.user0.password,
+              phoneCaptcha:_this.$data.user0.telephoneIdentifyingCode,
+            })
+          }).then(function (response) {
+            _this.$message({
+              type:'success',
+              message:'修改成功！'
+            })
+            _this.$data.State=true
+            _this.$data.user.username = _this.$data.user0.username
+            _this.$data.user.password = _this.$data.user0.password
+            _this.$data.user0.username='';
+            _this.$data.user0.password='';
+            _this.$data.user0.passwordRepeat='';
+            _this.$data.user0.identifyingCode='';
+            _this.$data.user0.telephoneIdentifyingCode='';
+            _this.$data.dialogFormVisible2 = false
           }).catch(function (error) {
             _this.$message({
               type:'error',
@@ -466,7 +551,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-  #form4login{
+  .form4login{
     .is-error{
       .icon4form{
         color:#f56c6c;
