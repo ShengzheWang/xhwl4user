@@ -57,7 +57,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="工作年限" style="width: 50%" prop="workSeniority">
-          <el-input v-model="formBasic.workSeniority"></el-input>
+          <el-input type="number" v-model="formBasic.workSeniority"></el-input>
         </el-form-item>
         <el-form-item label="政治面貌" style="width: 50%" prop="politicalStatus">
           <el-input v-model="formBasic.politicalStatus"></el-input>
@@ -118,6 +118,13 @@ var checkName = (rule, value, callback) => {
   }
 }
 
+var checkWorkSeniority=(rule,value,callback)=>{
+  if(value < 0)
+    callback(new Error('请输入正确的工作年限！'))
+  else
+    callback()
+}
+
 export default {
 
   data () {
@@ -152,14 +159,6 @@ export default {
       }
     }
 
-    var checkWorkSeniority=(rule,value,callback)=>{
-      var num=parseInt(value);
-      if(value==="0"){
-          callback();
-        }else if(num>20){
-          callback(new Error('请输入正确的工作年限'))
-        }
-    }
 
     return {
       header: {
@@ -202,7 +201,6 @@ export default {
         ],
         workSeniority: [
           {required: true, message: '请输入工作年限', trigger: 'blur'},
-          {pattern:/^\d{1,2}$/ ,trigger:'change',message:'请输入正确的工作年限'},
           {validator:checkWorkSeniority,trigger:'change'}
         ],
         idNumber: [
