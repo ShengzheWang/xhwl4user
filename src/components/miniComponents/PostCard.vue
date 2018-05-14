@@ -118,13 +118,13 @@ export default {
             type: 'success',
             message: '提交投递成功!'
           })
-        }).catch(() => {
+        }).catch(function (error) {
           _this.$message({
-            type: 'warning',
-            message: '提交失败，请检查你的简历类型!'
+            type: 'error',
+            message: error.response.data.msg
           })
+
         })
-      }).catch(() => {
       })
     }
   }
