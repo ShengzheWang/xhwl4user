@@ -158,7 +158,9 @@ export default {
           callback();
         }else if(num>20){
           callback(new Error('请输入正确的工作年限'))
-        }
+        }else{
+        callback();
+      }
     }
 
     return {

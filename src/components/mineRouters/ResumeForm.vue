@@ -56,8 +56,15 @@ export default {
   name: 'ResumeForm',
   created () {
     console.log(this.$route.params)
-    this.$data.resumes_form = this.$route.params.resumes_form_selected
+    this.$data.resumes_form = this.$route.query.resumes_form_selected
     this.$router.push('/ResumeForm/1')
+    let _this=this;
+    this.$axios({
+      method:'get',
+      url:'/resume'
+    }).then(function (response) {
+      _this.$data.resumes_form=response.data.resumesForm.toString();
+    })
   },
   watch: {
     '$route.path': 'changeActive'

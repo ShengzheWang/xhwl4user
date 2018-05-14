@@ -274,6 +274,19 @@ export default {
               message:'验证码已成功发送！请留意手机短信'
             })
             flag=true;
+            if (!_this.timer) {
+              _this.timeCount = TIME_COUNT;
+              _this.timeShow = false;
+              _this.timer = setInterval(() => {
+                if (_this.timeCount > 0 && _this.timeCount <= TIME_COUNT) {
+                  _this.timeCount--;
+                } else {
+                  _this.timeShow = true;
+                  clearInterval(_this.timer);
+                  _this.timer = null;
+                }
+              }, 1000)
+            }
           }).catch(function (error) {
             console.log(error);
             _this.$message({
@@ -283,19 +296,9 @@ export default {
           })
         }
       })
-      if (!this.timer) {
-        this.timeCount = TIME_COUNT;
-        this.timeShow = false;
-        this.timer = setInterval(() => {
-          if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
-            this.timeCount--;
-          } else {
-            this.timeShow = true;
-            clearInterval(this.timer);
-            this.timer = null;
-          }
-        }, 1000)
-      }
+      console.log(flag);
+        this.refreshImg();
+
     },
     refreshImg(){           //刷新图形验证码
       let _this = this

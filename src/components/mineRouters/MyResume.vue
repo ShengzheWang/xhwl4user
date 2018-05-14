@@ -3,14 +3,14 @@
     <h1 v-bind:class="'animated fade'+show2" style="animation-delay:0.6s;width: 1100px;margin:5% auto"> 你还未创建过简历，请单击你想创建的简历类型开始填写简历</h1>
     <div style="height: 350px;width: 1100px;margin:5% auto">
       <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end" >
-      <div @click="createAResume(1)" v-bind:class="'animated bounce'+show" id="circle1"
+      <div @click="createAResume(2)" v-bind:class="'animated bounce'+show" id="circle1"
            v-bind:style="'animation-delay:'+time[0]+'s'">
         <img
           src="../../../static/img/social.png">
       </div>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="创建校园招聘简历" placement="top-end">
-      <div @click="createAResume(2)" v-bind:class="'animated bounce'+show" id="circle2"
+      <div @click="createAResume(1)" v-bind:class="'animated bounce'+show" id="circle2"
            v-bind:style="'animation-delay:'+time[1]+'s'">
         <img
           src="../../../static/campus.png">
@@ -82,7 +82,7 @@ export default {
         url: '/resume?form=' + whichOne
       }).then(function (response) {
         setTimeout(() => {
-          _this.$router.push({ name: 'ResumeForm', params: {resumes_form_selected: whichOne.toString()} })
+          _this.$router.push({ name: 'ResumeForm', query: {resumes_form_selected: whichOne.toString()} })
         }, 1000)
       })
     },
