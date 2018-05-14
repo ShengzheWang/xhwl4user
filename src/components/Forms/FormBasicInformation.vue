@@ -56,8 +56,8 @@
             <el-option label="未婚" :value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="工作年限" style="width: 50%" prop="workSeniority">
-          <el-input type="number" v-model="formBasic.workSeniority"></el-input>
+        <el-form-item label="工作年限" style="width: 50%;padding-right: 30px" prop="workSeniority">
+          <el-input-number v-model="formBasic.workSeniority"></el-input-number>
         </el-form-item>
         <el-form-item label="政治面貌" style="width: 50%" prop="politicalStatus">
           <el-input v-model="formBasic.politicalStatus"></el-input>

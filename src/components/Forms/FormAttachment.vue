@@ -7,7 +7,7 @@
       <div style="width:100%;height:10px">
       </div>
       <el-form label-position="labelPosition" label-width="300px">
-        <el-form-item  style="width: 45%" label="上传简历">
+        <el-form-item  style="width: 55%" label="上传简历">
         <el-upload
           class="upload-demo"
           :show-file-list="true"
@@ -15,17 +15,19 @@
           accept="pdf,doc,docx"
           :limit="1"
           :on-success="uploadSuccess1"
-          :action="$axios.defaults.baseURL+'upload-resume'">
+          :action="$axios.defaults.baseURL+'/upload-resume'">
           <el-button size="middle" plain>点击上传简历文档</el-button>
         </el-upload>
         </el-form-item>
-        <el-form-item  style="width: 25%" label="上传其他材料">
+        <el-form-item  style="width: 55%" label="上传其他材料">
           <el-upload
             class="upload-demo"
+            :show-file-list="true"
             :headers="header"
+            accept="pdf,doc,docx"
             :limit="1"
             :on-success="uploadSuccess2"
-            :action="$axios.defaults.baseURL+'upload-support-detail'">
+            :action="$axios.defaults.baseURL+'/upload-support-detail'">
             <el-button size="middle"  plain>点击上传辅助材料</el-button>
           </el-upload>
         </el-form-item>
@@ -46,7 +48,8 @@ export default {
       select: '',
       imageUrl: '',
       header: '',
-      fileName1: null
+      fileName1: null,
+      fileName2: null
     }
   },
   created() {
@@ -67,6 +70,7 @@ export default {
         type: 'success',
         message: '上传辅助材料成功'
       })
+      this.$data.fileName2 = file.name
     },
     nextStep () {
       this.$message({
