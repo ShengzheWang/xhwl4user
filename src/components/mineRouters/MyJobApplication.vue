@@ -35,7 +35,7 @@
         >
           <template slot-scope="scope">
             <el-button type="primary" class="button4details" size="middle">
-              {{scope.row.state[scope.row.state.length-1].stateText==='待审核 '?'撤回申请':'查看详情'}}
+              {{(scope.row.recruitmentState <= 0||scope.row.recruitmentState>4)?'查看详情':'撤回申请'}}
             </el-button>
           </template>
         </el-table-column>

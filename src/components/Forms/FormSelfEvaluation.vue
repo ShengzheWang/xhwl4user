@@ -76,7 +76,7 @@ export default {
             })
 
           });
-          this.$router.push('/ResumeForm/10')
+          this.$router.push('/ResumeForm/a')
         }else{
           console.log('提交失败！');
         }

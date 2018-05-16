@@ -80,13 +80,13 @@ export default {
         {index: '1', name: '个人信息', iconName: 'gerenxinxi', isNecessary: true},
         {index: '2', name: '教育经历', iconName: 'jiaoyujingli', isNecessary: true},
         {index: '3', name: '培训经历', iconName: 'peixunjingli', isNecessary: false},
-        {index: '4', name: '项目经历', iconName: 'xiangmujingli', isNecessary: true},
+        {index: '4', name: '项目经历', iconName: 'xiangmujingli', isNecessary: false},
         {index: '5', name: '工作经历', iconName: 'gongzuojingli', isNecessary: false},
         {index: '6', name: '实习经历', iconName: 'shixijingli', isNecessary: false},
         {index: '7', name: '奖励活动', iconName: 'jianglihuodong', isNecessary: false},
         {index: '8', name: '求职意向', iconName: 'qiuzhiyixiang', isNecessary: true},
         {index: '9', name: '自我评价', iconName: 'ziwopingjia', isNecessary: false},
-        {index: 'a', name: '上传附件', iconName: 'shangchuanfujian', isNecessary: true}
+        {index: 'a', name: '上传附件', iconName: 'shangchuanfujian', isNecessary: false}
       ],
       items: [
         {text: '展示示例一'},

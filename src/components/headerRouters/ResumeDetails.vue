@@ -188,16 +188,16 @@ export default {
     return {
       loading: true,
       formBasicItem: [
-        {label: '性别', name: 'sex', info: '男'},
-        {label: '证件类型', name: 'idType', info: '身份证'},
-        {label: '证件号码', name: 'idNumber', info: '5107811998020589128'},
-        {label: '出生日期', name: 'birthday', info: '1998-02-05'},
-        {label: '邮箱', name: 'email', info: '1034298388@qq.com'},
-        {label: '联系方式', name: 'telephone', info: '18859233971'},
-        {label: '婚姻状况', name: 'maritalStatus', info: '未婚'},
-        {label: '工作年限', name: 'workSeniority', info: '零'},
-        {label: '政治面貌', name: 'politicalStatus', info: '团员'},
-        {label: '现居住地', name: 'presentAddress', info: '厦门大学'}
+        {label: '性别', name: 'sex', info: ''},
+        {label: '证件类型', name: 'idType', info: ''},
+        {label: '证件号码', name: 'idNumber', info: ''},
+        {label: '出生日期', name: 'birthday', info: ''},
+        {label: '邮箱', name: 'email', info: ''},
+        {label: '联系方式', name: 'telephone', info: ''},
+        {label: '婚姻状况', name: 'maritalStatus', info: ''},
+        {label: '工作年限', name: 'workSeniority', info: ''},
+        {label: '政治面貌', name: 'politicalStatus', info: ''},
+        {label: '现居住地', name: 'presentAddress', info: ''}
       ],
       formBasic: {name: ''},
       imgUrl: null,
@@ -222,7 +222,7 @@ export default {
       formIntention: [
 //        {workPlace: '深圳', salary: '20000', expectedTimeForDuty: '2019-10-10'}
       ],
-      selfAssessment: '聪明可爱又伶俐'
+      selfAssessment: ''
     }
   },
   created () {
