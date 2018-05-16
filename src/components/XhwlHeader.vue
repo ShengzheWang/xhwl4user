@@ -493,7 +493,7 @@ export default {
       })
       this.$router.push('/')
     },
-    login (formName) {        //登录
+      login (formName) {        //登录
       if(!this.$data.State) {
         this.$data.State = !this.$data.State
         return
@@ -531,24 +531,20 @@ export default {
                   })
                 })
                 break
-              case 500:
-                _this.$message({
-                  message: '用户名或密码错误，请重试',
-                  type: 'warning',
-                  showClose:true
-                })
-                _this.$data.user.password = ''
-                break
-              case 401:
-                break
             }
           }).catch(function(error){
-            console.log(error)
-            _this.$message({
-              message: '用户名或密码错误，请重试',
-              type: 'warning',
-              showClose:true
-            })
+              if(error.response.data.code===500){
+                _this.$message({
+                  type:'error',
+                  message:'用户不存在'
+                })
+              }else if(error.response.data.code===401){
+                _this.$message({
+                  type:'error',
+                  message:'密码错误'
+                })
+                _this.$data.user.password='';
+              }
           })
         }
       })
