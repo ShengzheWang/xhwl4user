@@ -52,8 +52,8 @@
         </el-form-item>
         <el-form-item label="婚姻状况" prop="maritalStatus">
           <el-select placeholder="请选择" v-model="formBasic.maritalStatus">
-            <el-option label="已婚" :value="1"></el-option>
-            <el-option label="未婚" :value="2"></el-option>
+            <el-option label="已婚" :value="2"></el-option>
+            <el-option label="未婚" :value="1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="工作年限" style="width: 50%;padding-right: 30px" prop="workSeniority">
