@@ -2,8 +2,8 @@
   <div id="Social">
     <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
-      <selector  resume-form="2"></selector>
-      <post-card resume-form="2"></post-card>
+      <selector  resume-form="2" @ChangeSearch="ChangePositions"></selector>
+      <post-card resume-form="2"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen" ></post-card>
     </div>
       <!--<el-switch-->
       <!--v-model="value3"-->
@@ -52,6 +52,11 @@ export default {
     }
   },
   methods: {
+    ChangePositions(data){
+      this.$data.classChosen=data.classChosen;
+      this.$data.postChosen=data.postChosen;
+      this.$data.placeChosen=data.placeChosen;
+    }
 
   },
   components: {Selector, PostCard}
