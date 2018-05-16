@@ -36,7 +36,7 @@
           <i v-if="item.isNecessary"  class="img4forms icon iconfont icon-xinghao" style="margin-left: 15px;font-size: 16px"></i>
         </template>
       </el-menu-item>
-      <div style="width: 100%;text-align: center;margin-top: 20%;margin-left: 4px">
+      <div style="width: 100%;text-align: center;margin-top: 20%">
       <el-button class="button4details" @click="details()">预览简历</el-button>
       </div>
     </el-menu>
