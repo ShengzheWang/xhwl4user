@@ -416,7 +416,8 @@ export default {
           }).then(function (response) {
               _this.$message({
                 type:'success',
-                message:'注册成功！'
+                message:'注册成功！',
+                showClose:true
               })
             _this.$data.State=!_this.$data.State;
             _this.$data.user.username = _this.$data.user0.username
@@ -429,7 +430,8 @@ export default {
           }).catch(function (error) {
             _this.$message({
               type:'error',
-              message:error.response.data.msg
+              message:error.response.data.msg,
+              showClose:true
             })
           })
 
@@ -453,7 +455,8 @@ export default {
           }).then(function (response) {
             _this.$message({
               type:'success',
-              message:'修改成功！'
+              message:'修改成功！',
+              showClose:true
             })
             _this.$data.State=true
             _this.$data.user.username = _this.$data.user0.username
@@ -467,7 +470,8 @@ export default {
           }).catch(function (error) {
             _this.$message({
               type:'error',
-              message:error.response.data.msg
+              message:error.response.data.msg,
+              showClose:true
             })
           })
 
@@ -484,7 +488,8 @@ export default {
       document.cookie = ''
       this.$message({
         message: '注销成功，已返回首页，请重新登录',
-        type: 'success'
+        type: 'success',
+        showClose:true
       })
       this.$router.push('/')
     },
@@ -513,7 +518,8 @@ export default {
                 document.cookie = token
                 _this.$message({
                   message: '登陆成功',
-                  type: 'success'
+                  type: 'success',
+                  showClose:true
                 })
                 _this.$axios({
                   method: 'get',

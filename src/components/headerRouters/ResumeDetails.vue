@@ -6,7 +6,7 @@
         <div>
           <h1 class="resume-item-header">个人信息</h1>
           <div class="line"></div>
-          <div style="position: absolute;left: 60%;height:300px;">
+          <div style="position: absolute;right: 20%;height:300px;">
           <img style="height:300px" v-if="imgUrl" :src="imgUrl">
           </div>
           <div style="width:90%;margin: 0% auto 0 auto">
@@ -251,6 +251,8 @@ export default {
     })
       .then(function (response) {
         console.log(response.data)
+        if(response.data.byteLength === 0 )
+          return
         _this.$data.imgUrl = 'data:image/png;base64,' + btoa(
           new Uint8Array(response.data)
             .reduce((data, byte) => data + String.fromCharCode(byte), '')
