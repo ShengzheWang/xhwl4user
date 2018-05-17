@@ -5,7 +5,7 @@
       <div @click="createAResume(1)" v-bind:class="'animated bounce'+show" id="circle1"
            v-bind:style="'animation-delay:'+time[0]+'s'">
         <img
-          src="../../../static/campus.png">
+          src="../../../static/img/campus.png">
       </div>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="创建社会招聘简历" placement="top-end">

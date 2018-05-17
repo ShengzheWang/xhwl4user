@@ -34,7 +34,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '../static/css/animate.css'
 import '../static/css/main.css'
 import '../static/css/iconfont.css'
-import '../static/css/banner.css'
+import '../static/css/reformat.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -80,3 +80,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+

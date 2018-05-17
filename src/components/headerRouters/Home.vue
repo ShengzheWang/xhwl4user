@@ -1,47 +1,39 @@
 <template>
   <div id="Home">
-      <div class="banner"  style="margin: 1% auto;">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in 3" v-if="item!=2"><img :src="'../../../static/img/'+item+'.jpg'" style="width: 100%;height: auto"></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-
-
-    <!--<div class="show-rectangle">-->
-    <!--<div class="show-rectangle-big" >5</div>-->
-    <!--<div class="show-rectangle-nw">1</div>-->
-    <!--<div class="show-rectangle-ne">2</div>-->
-    <!--<div class="show-rectangle-sw">3</div>-->
-    <!--<div class="show-rectangle-se">4</div>-->
-    <!--</div>-->
-    <div style="width: 620px;margin:3% auto;" class="animated fadeInUp">
-      <el-form>
+    <div id="canvas-frame" style="margin-top:-80px"></div>
+      <!--<div class="banner"  style="margin: 1% auto;">-->
+        <!--<div class="swiper-container">-->
+          <!--<div class="swiper-wrapper">-->
+            <!--<div class="swiper-slide" v-for="item in 3" v-if="item!=2"><img :src="'../../../static/img/'+item+'.jpg'" style="width: 100%;height: auto"></div>-->
+          <!--</div>-->
+          <!--<div class="swiper-pagination"></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <div style="width: 100%;height: 100%;text-align: center;">
+      <div style="width: 26%;display: inline-block;top:40%;left:37%;position: absolute">
+      <el-form style="text-align: left;">
         <el-form-item>
-      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;margin-left: -1%">
-        <el-button slot="append"><img src="../../../static/img/search.png"> </el-button>
+          <div style="display: inline-block;width:100%;padding: 5px;border-radius: 62px;">
+      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;width:100%">
+        <el-button slot="append"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
       </el-input>
+          </div>
         </el-form-item>
-      <div style="margin-top: 4%;margin-left:2%">
+      <div style="margin-top: 4%;margin-left:4.5%">
         <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">工作地点：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">工作地点：</h3>
+        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
       </div>
-      <div style="margin-top: 2%;margin-left:2%">
+      <div style="margin-top: 2%;margin-left:4.5%">
         <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #2A2A2A;font-size: 18px">职位类型：</h3>
-        <el-button type="text" style="color: #000000;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">职位类型：</h3>
+        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
       </div>
       </el-form>
-      <!--<el-switch-->
-      <!--v-model="value3"-->
-      <!--active-text="校园招聘"-->
-      <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
-      <!--</el-switch>-->
+    </div>
+
   </div>
   </div>
 </template>
@@ -51,6 +43,7 @@
 import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
+import * as THREE from 'three'
 export default {
   components: {ElFormItem},
   name: 'Home',
@@ -70,6 +63,166 @@ export default {
     })
     console.log(document.body.scrollWidth)
     //2185115
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+    scene.add( light );
+    var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.getElementById('canvas-frame').appendChild( renderer.domElement );
+    renderer.setClearColor(0x1476C1,0.2);
+    var loader = new THREE.TextureLoader()
+    var texture =loader.load('../../../static/img/campus.png');//加载纹理贴图
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    var material=new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+
+      emissive:0xffffff
+    });//材质对象
+
+    window.onresize = function temp() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    var circles = []
+    var cs = []
+    var positions = [new THREE.Vector3(-1.5, 2, 0),new THREE.Vector3(-3.5, -2.5, 0),new THREE.Vector3(3.7, 0.5, 0)]
+    var lines = []
+
+    var pointPosition1=[]
+    var pointPosition2=[]
+    for(var i=0;i<=2;i++) {
+      cs[i] = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.01, 100, 100, Math.PI * 2), material);
+      circles[i] = new THREE.Mesh(new THREE.CircleGeometry(0.5, 100, 0, Math.PI * 2), material)
+      circles[i].position.set(positions[i].x, positions[i].y, positions[i].z)
+      cs[i].position.set(positions[i].x, positions[i].y, positions[i].z)
+      geometry = new THREE.Geometry();
+      pointPosition1[i] = new THREE.Vector3(
+        positions[i].x-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
+        positions[i].y-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
+        positions[i].z
+      )
+      pointPosition2[i] = new THREE.Vector3(
+        positions[(i+1)%3].x+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
+        positions[(i+1)%3].y+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
+        positions[(i+1)%3].z
+      )
+      geometry.vertices.push(pointPosition1[i]);
+      geometry.vertices.push(pointPosition2[i]);
+
+      lines[i] = new THREE.Line( geometry, new THREE.LineDashedMaterial( {
+        scale:1,
+        color: 0xffffff,
+        dashSize: 1,
+        gapSize: 1 } ) );
+
+    }
+//    var c2 = new THREE.Mesh(new THREE.TorusGeometry(0.6,0.05,100,100,Math.PI*2) ,material);
+//    var circle2 = new THREE.Mesh( new THREE.CircleGeometry(0.5,200,0,Math.PI*2) ,material)
+//    var position2 = new THREE.Vector3(-3,-2,0)
+//    circle2.position.set(position2.x,position2.y,position2.z)
+//    c2.position.set(position2.x,position2.y,position2.z)
+//
+//    var c3 = new THREE.Mesh(new THREE.TorusGeometry(0.6,0.05,100,100,Math.PI*2) ,material);
+//    var circle3 = new THREE.Mesh( new THREE.CircleGeometry(0.5,200,0,Math.PI*2) ,material)
+//    var position3 = new THREE.Vector3(3,0,0)
+//    circle3.position.set(position3.x,position3.y,position3.z)
+//    c3.position.set(position3.x,position3.y,position3.z)
+    circles.forEach( circle => {
+      scene.add(circle)}
+    )
+    cs.forEach( c => {
+      scene.add(c)}
+    )
+    lines.forEach( line => {
+      scene.add(line)}
+    )
+    var positionsNext = positions
+    camera.position.z = 5;
+    const speed = 0.0005
+    console.log(lines)
+    var change = 0
+    var angle
+    var wait2up = -1
+    var render = function () {
+      requestAnimationFrame( render );
+      if(change === 0)
+        angle=[Math.random()*2*Math.PI,Math.random()*2*Math.PI,Math.random()*2*Math.PI]
+
+
+      change = (change+1)%200 //
+
+      for (i = 0;i<=2;i++) {
+        positionsNext[i] = positionsNext[i].add(new THREE.Vector3(speed * Math.sin(angle[i]), speed * Math.cos(angle[i]),
+          wait2up===i?(positionsNext[i].z>=0.5?0:0.01):(positionsNext[i].z>0?-0.01:0)
+        ))
+      }
+
+      for(i=0;i<=2;i++) {
+        scene.remove(lines[i])
+        circles[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
+        cs[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
+        geometry = new THREE.Geometry();
+        pointPosition1[i] = new THREE.Vector3(
+          positions[i].x-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
+          positions[i].y-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
+          positions[i].z
+        )
+        pointPosition2[i] = new THREE.Vector3(
+          positions[(i+1)%3].x+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
+          positions[(i+1)%3].y+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
+          positions[(i+1)%3].z
+        )
+        geometry.vertices.push(pointPosition1[i]);
+        geometry.vertices.push(pointPosition2[i]);
+
+        lines[i] = new THREE.Line( geometry, new THREE.LineDashedMaterial( {
+          scale:1,
+          color: 0xffffff,
+          dashSize: 1,
+          gapSize: 1 } ) );
+
+      }
+      lines.forEach( line => {
+        scene.add(line)}
+      )
+      renderer.render(scene, camera);
+    };
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    function onMouseClick( event ) {
+
+      //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
+
+      mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+      mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+      // 通过鼠标点的位置和当前相机的矩阵计算出raycaster
+      raycaster.setFromCamera( mouse, camera );
+
+      // 获取raycaster直线和所有模型相交的数组集合
+      var intersects = raycaster.intersectObjects( scene.children );
+
+
+      //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
+      console.log(intersects)
+      intersects.forEach((intersect) => {
+        if(intersect.object.type === 'Mesh'){
+          circles.forEach( (circle,index) => {
+            if(intersect.object === circle) {
+              wait2up = index
+              }
+            }
+          )
+        }
+      })
+      console.log(wait2up)
+
+    }
+
+    window.addEventListener( 'click', onMouseClick, false );
+    render();
   },
   data () {
     return {
@@ -106,7 +259,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -119,16 +271,20 @@ export default {
     color: #2c3e50;
     margin-top: -20px;
     font-size: 18px;
+    #canvas-frame { width: 100%; height: 100%;background: url('../../../static/img/4.gif');
+      background-size:100% 100%}
   .el-input__inner{
-    border:4px solid #1476C1;
+    border:2px solid #fafafa;
     border-radius:100px 0 0 100px;
     height: 60px;
+    color:#ffffff;
+    background: transparent !important;
   }
 
   .el-input-group__append{
-    border:1px solid #1476C1;
+    border:1px solid #fafafa;
     border-radius:0px 100px 100px 0;
-    background: #1476C1;
+    background: #ffffff;
   }
   }
 </style>

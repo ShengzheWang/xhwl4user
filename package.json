@@ -20,6 +20,8 @@
     "less-loader": "^4.1.0",
     "qs": "^6.5.1",
     "swiper": "^4.2.6",
+    "three": "^0.92.0",
+    "three.interaction": "0.0.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -74,7 +76,8 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "three.interaction": "latest"
   },
   "engines": {
     "node": ">= 6.0.0",

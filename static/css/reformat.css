@@ -1,0 +1,8 @@
+#Xhwlheader {
+  width: 100%;
+  opacity: 0.90;
+  height: 80px;
+  border-bottom: solid 1px #dddddd;
+  background: #ffffff !important;
+  z-index: 2000
+}

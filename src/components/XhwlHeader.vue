@@ -1,22 +1,20 @@
 <template>
-  <div id="Xhwlheader"
-       style="width:100%;min-width:1100px;opacity:0.90;height:80px;border-bottom: solid 1px #dddddd;
-       background: #ffffff;z-index:1" >
+  <div id="Xhwlheader">
     <div class=""></div>
     <div style="display: inline-block;width: 26%;height: 8px;text-align: center;" class="animated fadeInDown">
       <div style="display: inline-block;margin-top: 3%">
        <img
-        src="../../static/img/logoMain.png" style="height:50px;width: auto;">
+        src="../../static/img/logoMain.png" style="height:4em;width: auto;">
       </div>
     </div>
-     <div style="display: inline-block;width: 48%;text-align: center;height: 60px" class="animated fadeInDown">
+     <div style="display: inline-block;width: 48%;text-align: center;height: 3.33em" class="animated fadeInDown">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true'
                text-color="#444444"
                background-color="#ffffff"
                active-text-color='#1476C1'
                active-background-color="#ffffff"
-               style="width:570px;margin:0 auto;height:58px;display: inline-block;font-size: 18px">
+               style="width:50em;margin:0 auto;height:4.75em;display: inline-block;font-size: 1em">
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
