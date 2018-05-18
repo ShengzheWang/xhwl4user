@@ -33,8 +33,23 @@
   </div>
 </template>
 <script>
+
+
 export default {
+
   data () {
+    var checkSalary=(rule,value,callback)=>{
+        if(!value){
+          callback();
+        }else{
+          if(!Number.isNaN(Number(value))){
+            callback()
+          }else{
+            callback(new Error('请输入正确的薪资'))
+          }
+        }
+    }
+
     return {
       loading: true,
       formsIntention: {
@@ -42,11 +57,12 @@ export default {
         resumeId: '',
         workPlace: '',
         salary: '',
-        expectedTimeForDuty: ''
+        expectedTimeForDuty: null
       },
       rules: {
         salary:[
-          {type:'number',message:'请输入正确薪资',trigger:'change'},
+          //{type:'number',message:'请输入正确薪资',trigger:'change'},
+          {validator:checkSalary,type:'string',trigger:'change'}
         ],
         workPlace:[
           {required:true,message:'请选择城市',trigger:'blur'}
