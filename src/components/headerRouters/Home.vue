@@ -12,21 +12,21 @@
     <div style="width: 100%;height: 100%;text-align: center;">
       <div style="width: 26%;display: inline-block;top:40%;left:37%;position: absolute">
       <el-form style="text-align: left;">
-        <el-form-item>
-          <div style="display: inline-block;width:100%;padding: 5px;border-radius: 62px;">
-      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;width:100%">
+        <el-form-item style="margin-bottom:10px">
+          <div style="display: inline-block;width:100%;padding: 5px;border-radius: 52px;">
+      <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 50px;width:100%">
         <el-button slot="append"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
       </el-input>
           </div>
         </el-form-item>
-      <div style="margin-top: 4%;margin-left:4.5%">
-        <el-form-item>
-        <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">工作地点：</h3>
+      <div style="margin-left:4.5%">
+        <el-form-item style="margin-bottom:10px">
+        <h3 style="display: inline;;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">工作地点：</h3>
         <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
       </div>
-      <div style="margin-top: 2%;margin-left:4.5%">
-        <el-form-item>
+      <div style="margin-left:4.5%">
+        <el-form-item style="margin-bottom:10px">
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">职位类型：</h3>
         <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
         </el-form-item>
@@ -41,8 +41,8 @@
 <script>
 
 import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
-import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.min.css'
+//import Swiper from 'swiper'
+//import 'swiper/dist/css/swiper.min.css'
 import * as THREE from 'three'
 export default {
   components: {ElFormItem},
@@ -51,16 +51,16 @@ export default {
 
   },
   mounted () {
-    var mySwiper = new Swiper('.swiper-container', {
-      autoplay: true,//可选选项，自动滑动
-      grabCursor : true,
-
-      speed: 2000,
-      pagination: {
-        el: '.swiper-pagination',
-      },
-
-    })
+//    var mySwiper = new Swiper('.swiper-container', {
+//      autoplay: true,//可选选项，自动滑动
+//      grabCursor : true,
+//
+//      speed: 2000,
+//      pagination: {
+//        el: '.swiper-pagination',
+//      },
+//
+//    })
     console.log(document.body.scrollWidth)
     //2185115
     var scene = new THREE.Scene();
@@ -74,10 +74,16 @@ export default {
     var loader = new THREE.TextureLoader()
     var texture =loader.load('../../../static/img/campus.png');//加载纹理贴图
     var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material=new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+    var material =[new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+      emissive:0xffffff
+    }),new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
 
       emissive:0xffffff
-    });//材质对象
+    }),new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+
+      emissive:0xffffff
+    })
+    ]
 
     window.onresize = function temp() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -93,8 +99,8 @@ export default {
     var pointPosition1=[]
     var pointPosition2=[]
     for(var i=0;i<=2;i++) {
-      cs[i] = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.01, 100, 100, Math.PI * 2), material);
-      circles[i] = new THREE.Mesh(new THREE.CircleGeometry(0.5, 100, 0, Math.PI * 2), material)
+      cs[i] = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.01, 100, 100, Math.PI * 2), material[i]);
+      circles[i] = new THREE.Mesh(new THREE.CircleGeometry(0.5, 100, 0, Math.PI * 2), material[i])
       circles[i].position.set(positions[i].x, positions[i].y, positions[i].z)
       cs[i].position.set(positions[i].x, positions[i].y, positions[i].z)
       geometry = new THREE.Geometry();
@@ -191,7 +197,7 @@ export default {
     };
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
-    function onMouseClick( event ) {
+    function onMouseHover( event ) {
 
       //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
 
@@ -221,7 +227,7 @@ export default {
 
     }
 
-    window.addEventListener( 'click', onMouseClick, false );
+    window.addEventListener( 'mousemove', onMouseHover, false );
     render();
   },
   data () {
@@ -276,7 +282,7 @@ export default {
   .el-input__inner{
     border:2px solid #fafafa;
     border-radius:100px 0 0 100px;
-    height: 60px;
+    height: 50px;
     color:#ffffff;
     background: transparent !important;
   }

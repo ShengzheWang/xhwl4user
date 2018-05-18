@@ -7,7 +7,7 @@
         src="../../static/img/logoMain.png" style="height:4em;width: auto;">
       </div>
     </div>
-     <div style="display: inline-block;width: 48%;text-align: center;height: 3.33em" class="animated fadeInDown">
+     <div style="display: inline-block;width: 48%;text-align: center;height: 2.33em" class="animated fadeInDown">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
                :router='true'
                text-color="#444444"
