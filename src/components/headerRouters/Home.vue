@@ -64,24 +64,38 @@
       console.log(document.body.scrollWidth)
       //2185115
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-      var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000 );
+      var light = new THREE.AmbientLight( 0x000000 ); // soft white light
       scene.add( light );
       var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
       renderer.setSize( window.innerWidth, window.innerHeight );
       document.getElementById('canvas-frame').appendChild( renderer.domElement );
       renderer.setClearColor(0x1476C1,0.2);
       var loader = new THREE.TextureLoader()
-      var texture =loader.load('../../../static/img/campus.png');//加载纹理贴图
+      var texture =[loader.load('../../../static/img/homeImg/she.png'),
+        loader.load('../../../static/img/homeImg/xiao.png'),loader.load('../../../static/img/homeImg/shi.png')
+      ]
       var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      var material =[new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
-        emissive:0xffffff
-      }),new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+      var material =[new THREE.MeshLambertMaterial({//贴图通过材质添加给几何体
+        emissive:0xffffff,
+//        emissiveMap:texture[0],
+        transparent:true,
+        alphaMap:texture[0],
+        opacity:0.9
 
-        emissive:0xffffff
-      }),new THREE.MeshStandardMaterial({//贴图通过材质添加给几何体
+      }),new THREE.MeshLambertMaterial({//贴图通过材质添加给几何体
 
-        emissive:0xffffff
+        emissive:0xffffff,
+//        emissiveMap:texture[0],
+        transparent:true,
+        alphaMap:texture[1],
+        opacity:0.5
+      }),new THREE.MeshLambertMaterial({//贴图通过材质添加给几何体
+        emissive:0xffffff,
+//        emissiveMap:texture[0],
+        transparent:true,
+        alphaMap:texture[2],
+        opacity:0.5
       })
       ]
 
@@ -93,7 +107,7 @@
 
       var circles = []
       var cs = []
-      var positions = [new THREE.Vector3(-1.5, 2, 0),new THREE.Vector3(-3.5, -2.5, 0),new THREE.Vector3(3.7, 0.5, 0)]
+      var positions = [new THREE.Vector3(-1.5, 2, 0.5),new THREE.Vector3(-3.5, -2.5, 0),new THREE.Vector3(3.7, 0.5, 0)]
       var lines = []
 
       var pointPosition1=[]
@@ -151,6 +165,7 @@
       var change = 0
       var angle
       var wait2up = 0
+      var wait2turn = 0
       let _this = this
       var render = function () {
         requestAnimationFrame( render );
@@ -165,7 +180,11 @@
             wait2up===i?(positionsNext[i].z>=0.5?0:0.01):(positionsNext[i].z>0?-0.01:0)
           ))
         }
-
+        for (i = 0;i<=2;i++){
+          const last = material[i].opacity
+          material[i].opacity = last + (wait2turn === i?(last < 0.9?0.01:0): (last <= 0.5?0:-0.01))
+        }
+        console.log(material[0].opacity)
         for(i=0;i<=2;i++) {
           scene.remove(lines[i])
           circles[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
@@ -198,7 +217,7 @@
       };
       var raycaster = new THREE.Raycaster();
       var mouse = new THREE.Vector2();
-      function onMouseHover( event ) {
+      function onMouseClick( event ) {
 
         //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
 
@@ -218,17 +237,45 @@
           if(intersect.object.type === 'Mesh'){
             circles.forEach( (circle,index) => {
                 if(intersect.object === circle) {
+                  wait2turn = index
                   wait2up = index
-                  _this.$data.resumeChosen = wait2up
+                  _this.$data.resumeChosen = wait2turn
                 }
               }
             )
           }
         })
-        console.log(wait2up)
 
       }
+      function onMouseHover( event ) {
 
+        //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
+
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+        // 通过鼠标点的位置和当前相机的矩阵计算出raycaster
+        raycaster.setFromCamera( mouse, camera );
+
+        // 获取raycaster直线和所有模型相交的数组集合
+        var intersects = raycaster.intersectObjects( scene.children );
+
+        wait2turn = wait2up
+        //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
+        console.log(intersects)
+        intersects.forEach((intersect) => {
+          if(intersect.object.type === 'Mesh'){
+            circles.forEach( (circle,index) => {
+                if(intersect.object === circle) {
+                  wait2turn = index
+                }
+              }
+            )
+          }
+        })
+
+      }
+      window.addEventListener( 'click', onMouseClick, false );
       window.addEventListener( 'mousemove', onMouseHover, false );
       render();
     },
