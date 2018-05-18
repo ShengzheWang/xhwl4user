@@ -173,20 +173,25 @@ export default {
     $route(to, from) {
       switch(to.path){
         case '/':
+          this.$data.activeIndex = '1'
           break
         case '/Social':
-          break
-        case '/Campus':
+          this.$data.activeIndex = '2'
           break
         case '/Trainee':
+          this.$data.activeIndex = '4'
           break
         case '/Campus/Post':
+          this.$data.activeIndex = '3-1'
           break
         case '/Campus/Procedure':
+          this.$data.activeIndex = '3-2'
           break
         case '/Campus/Plan':
+          this.$data.activeIndex = '3-3'
           break
         case '/AboutUs':
+          this.$data.activeIndex = '5'
           break
         default:
           this.$data.activeIndex = ''

@@ -150,7 +150,8 @@
       console.log(lines)
       var change = 0
       var angle
-      var wait2up = -1
+      var wait2up = 0
+      let _this = this
       var render = function () {
         requestAnimationFrame( render );
         if(change === 0)
@@ -218,6 +219,7 @@
             circles.forEach( (circle,index) => {
                 if(intersect.object === circle) {
                   wait2up = index
+                  _this.$data.resumeChosen = wait2up
                 }
               }
             )
@@ -265,15 +267,13 @@
       },
       choosePlace(item){
         this.$data.placeChosen=item;
-        console.log(this.$data.placeChosen);
       },
       chooseType(item){
         this.$data.postChosen=item;
       },
       searchPositions(){
-        this.$data.resumeChosen=2;
         console.log(this.$data.resumeChosen);
-        if(this.$data.resumeChosen===0){
+        if(this.$data.resumeChosen===1){
           this.$router.push({
             path:'/Campus/Post',
             query:{
@@ -283,7 +283,7 @@
             }
           })
         }
-        if(this.$data.resumeChosen===1){
+        if(this.$data.resumeChosen===0){
           this.$router.push({
             path:'/Social',
             query:{
