@@ -15,20 +15,20 @@
         <el-form-item>
           <div style="display: inline-block;width:100%;padding: 5px;border-radius: 62px;">
       <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 60px;width:100%">
-        <el-button slot="append"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
+        <el-button slot="append" @click="searchPositions"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
       </el-input>
           </div>
         </el-form-item>
       <div style="margin-top: 4%;margin-left:4.5%">
         <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">工作地点：</h3>
-        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value">{{item.text}}</el-button>
+        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in places" :key="item.value" @click="choosePlace(item.text)">{{item.text}}</el-button>
         </el-form-item>
       </div>
       <div style="margin-top: 2%;margin-left:4.5%">
         <el-form-item>
         <h3 style="display: inline;margin-right: 3%;font-weight:normal;color: #ffffff;font-size: 18px">职位类型：</h3>
-        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value">{{item.text}}</el-button>
+        <el-button type="text" style="color: #ffffff;font-weight:normal;font-size: 18px" v-for="item in classes" :key="item.value" @click="chooseType(item.text)">{{item.text}}</el-button>
         </el-form-item>
       </div>
       </el-form>
@@ -44,6 +44,8 @@ import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import * as THREE from 'three'
+
+let kkk=0;
 export default {
   components: {ElFormItem},
   name: 'Home',
@@ -191,8 +193,8 @@ export default {
     };
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
+    let _this=this;
     function onMouseClick( event ) {
-
       //通过鼠标点击的位置计算出raycaster所需要的点的位置，以屏幕中心为原点，值的范围为-1到1.
 
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -204,20 +206,20 @@ export default {
       // 获取raycaster直线和所有模型相交的数组集合
       var intersects = raycaster.intersectObjects( scene.children );
 
-
       //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
-      console.log(intersects)
+      //console.log(intersects)
       intersects.forEach((intersect) => {
         if(intersect.object.type === 'Mesh'){
           circles.forEach( (circle,index) => {
             if(intersect.object === circle) {
-              wait2up = index
+              wait2up = index;
+
               }
             }
           )
         }
       })
-      console.log(wait2up)
+      // console.log(wait2up)
 
     }
 
@@ -228,7 +230,9 @@ export default {
     return {
       input3: '',
       value3: '',
+      resumeChosen:0,
       postChosen: '',
+      placeChosen:'',
       documentBodyClientWidth: 0,
       items: [
         {text: '展示示例一'},
@@ -238,13 +242,12 @@ export default {
       ],
       places: [
         {text: '深圳'},
-        {text: '全部'}
+
       ],
       classes: [
         {text: '研发'},
         {text: '设计'},
         {text: '产品'},
-        {text: '全部'}
       ],
       posts: [
         {text: '校园招聘'},
@@ -254,8 +257,50 @@ export default {
     }
   },
   methods: {
+    choosePlace(item){
+      this.$data.placeChosen=item;
+      console.log(this.$data.placeChosen);
+    },
+    chooseType(item){
+      this.$data.postChosen=item;
+    },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    searchPositions(){
+      this.$data.resumeChosen=0;
+      console.log(this.$data.resumeChosen);
+    if(this.$data.resumeChosen===0){
+      this.$router.push({
+        path:'/Campus/Post',
+        query:{
+          typeChosen:this.$data.postChosen,
+          positionName:this.$data.input3,
+          placeChosen:this.$data.placeChosen
+        }
+      })
+    }
+    if(this.$data.resumeChosen===1){
+      this.$router.push({
+        path:'/Social',
+        query:{
+          typeChosen:this.$data.postChosen,
+          positionName:this.$data.input3,
+          placeChosen:this.$data.placeChosen
+        }
+      })
+    }
+    if(this.$data.resumeChosen===2){
+      this.$router.push({
+        path:'/Trainee',
+        query:{
+          typeChosen:this.$data.postChosen,
+          positionName:this.$data.input3,
+          placeChosen:this.$data.placeChosen
+        }
+      })
+    }
+
     }
   }
 }
