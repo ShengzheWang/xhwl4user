@@ -21,6 +21,15 @@ export default {
   name: 'Social',
   created () {
     let _this = this
+    if(this.$route.query.typeChosen){
+      this.$data.classChosen=this.$route.query.typeChosen
+    }
+    if(this.$route.query.positionName){
+      this.$data.postChosen=this.$route.query.positionName
+    }
+    if(this.$route.query.placeChosen){
+      this.$data.placeChosen=this.$oute.query.placeChosen
+    }
   },
   data () {
     return {
