@@ -4,7 +4,7 @@
       <el-form>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="placeChosen" prefix-icon="icon iconfont icon4form icon-gongzuodidian" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
+            <el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
             </el-input>
           </el-form-item>
         </el-col>
@@ -13,7 +13,7 @@
         </el-col>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="classChosen" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
+            <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
             </el-input>
           </el-form-item>
         </el-col>
@@ -22,7 +22,7 @@
         </el-col>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="postChosen" prefix-icon="icon iconfont icon4form icon-zhiweimingcheng" placeholder="职位名称" class="input4selector">
+            <el-input  v-model="postChosen1" prefix-icon="icon iconfont icon4form icon-zhiweimingcheng" placeholder="职位名称" class="input4selector">
             </el-input>
           </el-form-item>
         </el-col>
@@ -47,13 +47,16 @@
     components: {ElFormItem},
     name: 'Selector',
     props: {
+      postChosen:'',
+      classChosen:'',
+      placeChosen:'',
       resumeForm: '',
     },
     data () {
       return {
-          postChosen: '',
-          classChosen: '',
-          placeChosen: '',
+          postChosen1: '',
+          classChosen1: '',
+          placeChosen1: '',
           input3: '',
         items: [
           {text: '展示示例一'},
@@ -82,13 +85,16 @@
     created () {
       // this.$data.placeChosen = '全部'
      // this.$data.postChosen = this.$props.resumeForm==='1'?'校园招聘':this.$props.resumeForm==='2'?'社会招聘':'实习生招聘'
+      this.$data.classChosen1=this.$props.classChosen;
+      this.$data.postChosen1=this.$props.postChosen;
+      this.$data.placeChosen1=this.$props.placeChosen;
     },
     methods: {
       SearchPositions(){
        let data={
-         classChosen:this.$data.classChosen,
-         postChosen:this.$data.postChosen,
-         placeChosen:this.$data.placeChosen
+         classChosen:this.$data.classChosen1,
+         postChosen:this.$data.postChosen1,
+         placeChosen:this.$data.placeChosen1
        }
        this.$emit('ChangeSearch',data);
       }

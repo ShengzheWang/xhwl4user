@@ -2,7 +2,7 @@
   <div id="Social">
     <div class="block">
     <div style="width: 60%;margin:0% auto;height: auto">
-      <selector  resume-form="2" @ChangeSearch="ChangePositions"></selector>
+      <selector  resume-form="2" @ChangeSearch="ChangePositions"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen"></selector>
       <post-card resume-form="2"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen" ></post-card>
     </div>
       <!--<el-switch-->
@@ -28,7 +28,7 @@ export default {
       this.$data.postChosen=this.$route.query.positionName
     }
     if(this.$route.query.placeChosen){
-      this.$data.placeChosen=this.$oute.query.placeChosen
+      this.$data.placeChosen=this.$route.query.placeChosen
     }
   },
   data () {
