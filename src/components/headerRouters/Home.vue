@@ -238,6 +238,7 @@
         value3: '',
         postChosen: '',
         placeChosen:'',
+        resumeChosen:0,
         documentBodyClientWidth: 0,
         items: [
           {text: '展示示例一'},
@@ -267,9 +268,11 @@
       },
       choosePlace(item){
         this.$data.placeChosen=item;
+        this.searchPositions()
       },
       chooseType(item){
         this.$data.postChosen=item;
+        this.searchPositions()
       },
       searchPositions(){
         console.log(this.$data.resumeChosen);
