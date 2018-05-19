@@ -121,7 +121,6 @@
       </div>
     </el-dialog>
 
-
     <el-dialog  class="form4login" :visible.sync="dialogFormVisible2" style="margin:auto auto;width: 1000px"
                 :modal-append-to-body="false"  :append-to-body="true" :lock-scroll="false">
           <el-form :label-position="labelPosition1"  :model="user0" ref="user0"  style="width: 80%;margin: 3% auto" :status-icon="true" :rules="rules0">
@@ -137,8 +136,8 @@
             <el-form-item  prop="identifyingCode" class="item4login">
               <el-input v-model="user0.identifyingCode"  placeholder="请输入验证码" prefix-icon="iconfont icon-yanzhengma icon4form">
                 <el-button slot="append" >
-                  <span v-show="timeShow" @click="getPhoneMessage('user0')">获取验证码</span>
-                  <span v-show="!timeShow" class="count">{{timeCount}} s</span>
+                  <span v-show="timeShowForReset" @click="getPhoneMessageForReset('user0')">获取验证码</span>
+                  <span v-show="!timeShowForReset" class="count">{{timeCountForReset}} s</span>
                 </el-button>
               </el-input>
             </el-form-item>
@@ -171,7 +170,7 @@ export default {
   name: 'XhwlHeader',
   watch: {
     $route(to, from) {
-      console.log(to.path)
+      //console.log(to.path)
       switch(to.path){
         case '/':
           this.$data.activeIndex = '1'
@@ -241,6 +240,9 @@ export default {
 
 
     return {
+      timeCountForReset:'',
+      timeShowForReset:true,
+      timerForReset:null,
       timeCount:'',
       timeShow:true,
       timer:null,
@@ -261,6 +263,11 @@ export default {
         password: ''
       },
       formSend:{
+        username:'',
+        captcha:'',
+        uuid:''
+      },
+      formReset:{
         username:'',
         captcha:'',
         uuid:''
@@ -371,7 +378,53 @@ export default {
     }).catch(function(error) {
     })
   },
+
   methods: {
+    getPhoneMessageForReset(formName){
+      let flag=false;
+      const TIME_COUNT = 60;    //验证码获取时间间隔
+      this.$refs[formName].validate((valid)=>{
+        if(valid){
+          this.$data.formSend.captcha=this.$data.user0.identifyingCode;
+          this.$data.formSend.uuid=this.$data.uuid;
+          this.$data.formSend.username=this.$data.user0.username;
+          let _this=this;
+          this.$axios({
+            method:'post',
+            url:'/createPhoneCaptchaResetPassword',
+            data:_this.$qs.stringify(_this.$data.formSend)
+          }).then(function (response) {
+            _this.$message({
+              type:'success',
+              message:'验证码已成功发送！请留意手机短信'
+            })
+            flag=true;
+            if (!_this.timerForReset) {
+              _this.timeCountForReset = TIME_COUNT;
+              _this.timeShowForReset = false;
+              _this.timerForReset = setInterval(() => {
+                if (_this.timeCountForReset > 0 && _this.timeCountForReset <= TIME_COUNT) {
+                  _this.timeCountForReset--;
+                } else {
+                  _this.timeShowForReSet = true;
+                  clearInterval(_this.timerForReset);
+                  _this.timerForReset = null;
+                }
+              }, 1000)
+            }
+          }).catch(function (error) {
+            console.log(error);
+            _this.$message({
+              type:'error',
+              message:'验证码输入出问题了哦'
+            })
+          })
+        }
+      })
+      console.log(flag);
+      this.refreshImg();
+
+    },
     getPhoneMessage(formName){  //获取短信验证码前验证手机号等是否已填
       let flag=false;
       const TIME_COUNT = 60;    //验证码获取时间间隔
@@ -384,7 +437,7 @@ export default {
           let _this=this;
           this.$axios({
             method:'post',
-            url:'/createPhoneCaptcha',
+            url:'/createPhoneCaptchaForLogin',
             data:_this.$qs.stringify(_this.$data.formSend)
           }).then(function (response) {
             _this.$message({
