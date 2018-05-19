@@ -64,7 +64,7 @@
       console.log(document.body.scrollWidth)
       //2185115
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000 );
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
       var light = new THREE.AmbientLight( 0x000000 ); // soft white light
       scene.add( light );
       var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
@@ -160,7 +160,7 @@
       )
       var positionsNext = positions
       camera.position.z = 5;
-      const speed = 0.0005
+      const speed = 0.00055
       console.log(lines)
       var change = 0
       var angle
@@ -369,7 +369,7 @@
     color: #2c3e50;
     margin-top: -20px;
     font-size: 18px;
-    #canvas-frame { width: 100%; height: 100%;background: url('../../../static/img/4.gif');
+    #canvas-frame { width: 100%; height: 100%;background: url('../../../static/img/main1.jpg');
       background-size:100% 100%}
     .el-input__inner{
       border:2px solid #fafafa;
