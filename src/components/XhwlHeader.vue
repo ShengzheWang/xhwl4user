@@ -416,7 +416,7 @@ export default {
             console.log(error);
             _this.$message({
               type:'error',
-              message:'验证码输入出问题了哦'
+              message:error.response.data.msg
             })
           })
         }
@@ -462,7 +462,7 @@ export default {
             console.log(error);
             _this.$message({
               type:'error',
-              message:'验证码输入出问题了哦'
+              message:error.response.data.msg
             })
           })
         }
