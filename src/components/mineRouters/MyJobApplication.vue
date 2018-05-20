@@ -240,15 +240,15 @@ export default {
               break
             case '-4':
               item['state'] = [{
-                iconClass:'state-failed',
+                iconClass:'state-success',
                 iconName:'icon iconfont icon-chenggong',
                 stateText:'简历审核'
               },{
-                iconClass:'state-default',
+                iconClass:'state-success',
                 iconName:'icon iconfont icon-chenggong',
                 stateText:'部门笔试'
               },{
-                iconClass:'state-default',
+                iconClass:'state-success',
                 iconName:'icon iconfont icon-chenggong',
                 stateText:'部门面试'
               },{

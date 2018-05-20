@@ -10,7 +10,7 @@
     <!--</div>-->
     <!--</div>-->
     <div style="width: 100%;height: 100%;text-align: center;">
-      <div style="width: 26%;display: inline-block;top:40%;left:37%;position: absolute">
+      <div style="width: 26%;min-width:300px;display: inline-block;top:40%;left:37%;position: absolute">
         <el-form style="text-align: left;">
           <el-form-item style="margin-bottom:10px">
             <div style="display: inline-block;width:100%;padding: 5px;border-radius: 52px;">
@@ -61,7 +61,6 @@
 //      },
 //
 //    })
-      console.log(document.body.scrollWidth)
       //2185115
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
@@ -161,7 +160,6 @@
       var positionsNext = positions
       camera.position.z = 5;
       const speed = 0.00055
-      console.log(lines)
       var change = 0
       var angle
       var wait2up = 0
@@ -184,7 +182,6 @@
           const last = material[i].opacity
           material[i].opacity = last + (wait2turn === i?(last < 0.9?0.01:0): (last <= 0.5?0:-0.01))
         }
-        console.log(material[0].opacity)
         for(i=0;i<=2;i++) {
           scene.remove(lines[i])
           circles[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
@@ -232,7 +229,6 @@
 
 
         //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
-        console.log(intersects)
         intersects.forEach((intersect) => {
           if(intersect.object.type === 'Mesh'){
             circles.forEach( (circle,index) => {
@@ -262,7 +258,6 @@
 
         wait2turn = wait2up
         //将所有的相交的模型的颜色设置为红色，如果只需要将第一个触发事件，那就数组的第一个模型改变颜色即可
-        console.log(intersects)
         intersects.forEach((intersect) => {
           if(intersect.object.type === 'Mesh'){
             circles.forEach( (circle,index) => {
@@ -369,8 +364,7 @@
     color: #2c3e50;
     margin-top: -20px;
     font-size: 18px;
-    #canvas-frame { width: 100%; height: 100%;background: url('../../../static/img/main1.jpg');
-      background-size:100% 100%}
+    #canvas-frame { width: 100%; height: 100%;background:url('../../../static/img/main1.jpg') no-repeat;background-size:100% 100%}
     .el-input__inner{
       border:2px solid #fafafa;
       border-radius:100px 0 0 100px;
