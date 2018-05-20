@@ -13,7 +13,7 @@
     </div>
 
     <div class="block" v-loading="loading" style="width:100%;background: transparent;z-index: 999">
-      <div style="width:75%;min-width:1200px;margin: -270px auto 0 auto;background: #ffffff;position:relative;z-index: 999;">
+      <div style="width:1200px;margin: -270px auto 0 auto;background: #ffffff;position:relative;z-index: 999;">
         <div class="resume-inner" style="text-align: center;">
           <div style="width: 80%;display: inline-block;vertical-align: top;text-align: left">
             <div style="width: 35%;display: inline-block">
@@ -96,13 +96,13 @@
             <div v-for="item in formsTraining">
               <h1 class="resume-item-middle" style="width: 33%">{{item.startTime}}~{{item.endTime}}</h1>
               <h1 class="resume-item-middle" style="width: 33%;text-align: center">
-                培训机构：{{item.trainingContent}}</h1>
+               {{item.trainingContent}}</h1>
               <h1 class="resume-item-middle" style="width: 33%;text-align: right">
-                培训内容：{{item.trainingInstitutions}}</h1>
+                {{item.trainingInstitutions}}</h1>
               <div style="width: 100%;margin:0 auto;">
                 <div style="display: inline-block">
                   <span class="resume-item-label-2">详细描述：</span>
-                  <span class="resume-item-info" style="width: 924px;float: right;vertical-align: top;">{{item.description}}</span>
+                  <span class="resume-item-info" style="width: 800px;float: right;vertical-align: top;">{{item.description}}</span>
                 </div>
               </div>
             </div>
@@ -493,18 +493,18 @@ export default {
       font-size: 14px;
       color: #707070;
       vertical-align: middle;
-      line-height: 16px;
       width: 70px;
       text-align: left;
       margin-top: 12px;
       margin-bottom: 12px;
+      line-height: 1.8;
     }
     .resume-item-label-2 {
       display: inline-block;
       font-size: 14px;
       color: #707070;
       vertical-align: middle;
-      line-height: 16px;
+      line-height: 1.8;
       width: 100px;
       text-align: left;
       margin-top: 12px;
