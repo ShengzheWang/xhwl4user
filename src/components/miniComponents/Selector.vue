@@ -1,6 +1,9 @@
 <template>
   <div id="Selector" class="animated fadeIn">
     <div style="width:100%;display: inline-block;margin-top: 50px">
+      <p>{{resumeType === -1?'你还未登录，不能进行投递哦':resumeType === 0?'你还未创建简历，不能进行投递哦':('你目前的简历类型为  '+
+      (resumeType===1?'社招简历':resumeType===2?'校招简历':'实习生简历'))}}</p>
+
       <el-form>
         <el-col style="width: 27%">
           <el-form-item >
@@ -57,6 +60,7 @@
           postChosen1: '',
           classChosen1: '',
           placeChosen1: '',
+          resumeType:-1,
           input3: '',
         items: [
           {text: '展示示例一'},
@@ -88,6 +92,30 @@
       this.$data.classChosen1=this.$props.classChosen;
       this.$data.postChosen1=this.$props.postChosen;
       this.$data.placeChosen1=this.$props.placeChosen;
+      const token = document.cookie.split(';')[0]
+      console.log(token)
+      let _this = this
+      if (token) {
+        this.$axios({
+          method: 'get',
+          url: '/tokenCheck',
+        }).then(function (response) {
+          _this.$axios({
+            method: 'get',
+            url: '/resume'
+          }).then(function (response) {
+            console.log(response.data)
+            if (response.data.id === undefined) {
+              _this.$data.resumeType = 0
+            } else {
+              _this.$data.resumeType = (response.data.resumesForm)
+
+            }
+          })
+        }).catch(function(error) {
+          _this.$data.resumeType = -1
+        })
+      }
     },
     methods: {
       SearchPositions(){
