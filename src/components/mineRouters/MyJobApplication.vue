@@ -176,8 +176,8 @@ export default {
                 iconName:'icon iconfont icon-chenggong',
                 stateText:'部门笔试'
               },{
-                iconClass:'state-failure',
-                iconName:'icon iconfont icon-shibai',
+                iconClass:'state-default',
+                iconName:'icon iconfont icon-3',
                 stateText:'部门面试'
               },{
                 iconClass:'state-default',

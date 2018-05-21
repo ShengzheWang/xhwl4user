@@ -4,7 +4,7 @@
       <el-form>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
+            <el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
             </el-input>
           </el-form-item>
         </el-col>
