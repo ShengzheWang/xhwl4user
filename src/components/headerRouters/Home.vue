@@ -14,7 +14,7 @@
         <el-form style="text-align: left;">
           <el-form-item style="margin-bottom:10px">
             <div style="display: inline-block;width:100%;padding: 5px;border-radius: 52px;">
-              <el-input placeholder="立即搜索" v-model="input3" style="font-size: 18px;height: 50px;width:100%">
+              <el-input :placeholder="resumeChosen==0?'你的搜索将基于 -  社会招聘  -':resumeChosen==1?'你的搜索将基于 -  校园招聘  -':'你的搜索将基于 -  实习生招聘  -'" v-model="input3" style="font-size: 18px;height: 50px;width:100%">
                 <el-button slot="append" @click="searchPositions"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
               </el-input>
             </div>
@@ -47,7 +47,13 @@
   export default {
     components: {ElFormItem},
     name: 'Home',
-    created(){
+    beforeDestroy(){
+      cancelAnimationFrame("canvas-frame");// Stop the animation
+      window.addEventListener('click', null, false); //remove listener to render
+      window.addEventListener('mousemove', null, false);
+      this.$data.scene = null;
+      this.$data.renderer = null;
+      this.$data.camera = null;
 
     },
     mounted () {
@@ -62,11 +68,14 @@
 //
 //    })
       //2185115
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
+      let scene = this.$data.scene
+      let renderer = this.$data.renderer
+      let camera = this.$data.camera
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
       var light = new THREE.AmbientLight( 0x000000 ); // soft white light
       scene.add( light );
-      var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
+      renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
       renderer.setSize( window.innerWidth, window.innerHeight );
       document.getElementById('canvas-frame').appendChild( renderer.domElement );
       renderer.setClearColor(0x1476C1,0.2);
@@ -165,6 +174,7 @@
       var wait2up = 0
       var wait2turn = 0
       let _this = this
+
       var render = function () {
         requestAnimationFrame( render );
         if(change === 0)
@@ -281,6 +291,9 @@
         postChosen: '',
         placeChosen:'',
         resumeChosen:0,
+        scene: null,
+        camera:null,
+        renderer: null,
         documentBodyClientWidth: 0,
         items: [
           {text: '展示示例一'},
