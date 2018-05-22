@@ -280,6 +280,7 @@
       window.addEventListener( 'click', onMouseClick, false );
       window.addEventListener( 'mousemove', onMouseHover, false );
       render();
+
     },
     data () {
       return {

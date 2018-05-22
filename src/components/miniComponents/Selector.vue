@@ -208,6 +208,9 @@
     }
     .input4selector{
       border-radius: 50px;
+      .el-input {
+        border-radius: 50px;
+      }
     }
     .el-form{
       .el-input{
