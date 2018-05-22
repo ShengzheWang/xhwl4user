@@ -7,8 +7,15 @@
       <el-form>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
-            </el-input>
+            <el-autocomplete class="input4selector"
+                             v-model="placeChosen1"
+                             :fetch-suggestions="querySearchForPlace"
+                             placeholder="请输入地点"
+                             @select="handleSelectForPlace" :clearable="true"
+                             prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom"
+            ></el-autocomplete>
+            <!--<el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
+            </el-input>-->
           </el-form-item>
         </el-col>
         <el-col style="width: 2%">
@@ -16,8 +23,15 @@
         </el-col>
         <el-col style="width: 27%">
           <el-form-item >
-            <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
-            </el-input>
+            <el-autocomplete class="input4selector"
+                             v-model="classChosen1"
+                             :fetch-suggestions="querySearchForType"
+                             placeholder="请输入类型"
+                             @select="handleSelectForType" :clearable="true"
+                             prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom"
+            ></el-autocomplete>
+           <!-- <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
+            </el-input>-->
           </el-form-item>
         </el-col>
         <el-col style="width: 2%">
@@ -76,7 +90,8 @@
           {text: '研发'},
           {text: '设计'},
           {text: '产品'},
-          {text: '全部'}
+          {text: '销售'},
+          {text: '人事'}
         ],
         posts: [
           {text: '校园招聘'},
@@ -87,8 +102,6 @@
       }
     },
     created () {
-      // this.$data.placeChosen = '全部'
-     // this.$data.postChosen = this.$props.resumeForm==='1'?'校园招聘':this.$props.resumeForm==='2'?'社会招聘':'实习生招聘'
       this.$data.classChosen1=this.$props.classChosen;
       this.$data.postChosen1=this.$props.postChosen;
       this.$data.placeChosen1=this.$props.placeChosen;
@@ -125,8 +138,54 @@
          placeChosen:this.$data.placeChosen1
        }
        this.$emit('ChangeSearch',data);
+      },
+      handleSelectForType(item) {       //部门选择
+        this.$data.classChosen1=item.value;
+      },
+      querySearchForType(queryString, cb) {
+        var AllTypes = this.classes;
+        var results = queryString ? AllTypes.filter(this.createFilter(queryString)) : AllTypes;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilterPlaces(queryString) {
+        return (department) => {
+          return (department.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleSelectForPlace(item) {       //部门选择
+        this.$data.placeChosen1=item.value;
+      },
+      querySearchForPlace(queryString, cb) {
+        var AllTypes = this.places;
+        var results = queryString ? AllTypes.filter(this.createFilterPlaces(queryString)) : AllTypes;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (department) => {
+          return (department.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      loadAllTypes() {
+        return [
+          {"value":"产品","index":"1"},
+          {"value":"设计","index":"2"},
+          {"value":"研发","index":"3"},
+          {"value":"销售","index":"4"},
+          {"value":"人事","index":"5"},
+        ];
+      },
+      loadAllPlaces(){
+        return [
+          {"value":"深圳"},
+        ];
       }
 
+    },
+    mounted(){
+      this.classes=this.loadAllTypes();
+      this.places=this.loadAllPlaces();
     }
   }
 </script>
