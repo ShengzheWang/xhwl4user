@@ -51,9 +51,8 @@
       cancelAnimationFrame("canvas-frame");// Stop the animation
       window.addEventListener('click', null, false); //remove listener to render
       window.addEventListener('mousemove', null, false);
-      this.$data.scene = null;
-      this.$data.renderer = null;
-      this.$data.camera = null;
+
+      THREE.Cache.clear()
 
     },
     mounted () {
@@ -68,14 +67,12 @@
 //
 //    })
       //2185115
-      let scene = this.$data.scene
-      let renderer = this.$data.renderer
-      let camera = this.$data.camera
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
       var light = new THREE.AmbientLight( 0x000000 ); // soft white light
       scene.add( light );
-      renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
+      var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
       renderer.setSize( window.innerWidth, window.innerHeight );
       document.getElementById('canvas-frame').appendChild( renderer.domElement );
       renderer.setClearColor(0x1476C1,0.2);
