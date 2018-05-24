@@ -47,12 +47,17 @@
   export default {
     components: {ElFormItem},
     name: 'Home',
-    beforeDestroy(){
-      cancelAnimationFrame("canvas-frame");// Stop the animation
-      window.addEventListener('click', null, false); //remove listener to render
-      window.addEventListener('mousemove', null, false);
-
-      THREE.Cache.clear()
+    beforeRouteLeave(to,from,next){
+//      cancelAnimationFrame("canvas-frame");// Stop the animation
+//      window.addEventListener('click', null, false); //remove listener to render
+//      window.addEventListener('mousemove', null, false);
+//      this.$data.scene= null
+//      this.$data.camera= null
+//      this.$data.renderer= null
+//      this.$data.texture= null
+//      this.$data.material= null
+//      THREE.Cache.clear()
+        next()
 
     },
     mounted () {
@@ -67,21 +72,24 @@
 //
 //    })
       //2185115
-
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
-      var light = new THREE.AmbientLight( 0x000000 ); // soft white light
+      let scene = this.$data.scene
+      let camera = this.$data.camera
+      let renderer = this.$data.renderer
+      let texture = this.$data.texture
+      let material = this.$data.material
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 4, 10000 );
+      const light = new THREE.AmbientLight( 0x000000 ); // soft white light
       scene.add( light );
-      var renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
+      renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,});
       renderer.setSize( window.innerWidth, window.innerHeight );
       document.getElementById('canvas-frame').appendChild( renderer.domElement );
       renderer.setClearColor(0x1476C1,0.2);
       var loader = new THREE.TextureLoader()
-      var texture =[loader.load('../../../static/img/homeImg/she.png'),
+      texture =[loader.load('../../../static/img/homeImg/she.png'),
         loader.load('../../../static/img/homeImg/xiao.png'),loader.load('../../../static/img/homeImg/shi.png')
       ]
-      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      var material =[new THREE.MeshLambertMaterial({//贴图通过材质添加给几何体
+      material =[new THREE.MeshLambertMaterial({//贴图通过材质添加给几何体
         emissive:0xffffff,
 //        emissiveMap:texture[0],
         transparent:true,
@@ -114,15 +122,20 @@
       var cs = []
       var positions = [new THREE.Vector3(-1.5, 2, 0.5),new THREE.Vector3(-3.5, -2.5, 0),new THREE.Vector3(3.7, 0.5, 0)]
       var lines = []
-
+      const lineMaterial = new THREE.LineDashedMaterial( {
+        scale:1,
+        color: 0xffffff,
+        dashSize: 1,
+        gapSize: 1 }  );
       var pointPosition1=[]
       var pointPosition2=[]
+      var geometry=[]
       for(var i=0;i<=2;i++) {
         cs[i] = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.01, 100, 100, Math.PI * 2), material[i]);
         circles[i] = new THREE.Mesh(new THREE.CircleGeometry(0.5, 100, 0, Math.PI * 2), material[i])
         circles[i].position.set(positions[i].x, positions[i].y, positions[i].z)
         cs[i].position.set(positions[i].x, positions[i].y, positions[i].z)
-        geometry = new THREE.Geometry();
+        geometry[i] = new THREE.Geometry();
         pointPosition1[i] = new THREE.Vector3(
           positions[i].x-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
           positions[i].y-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
@@ -133,14 +146,10 @@
           positions[(i+1)%3].y+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
           positions[(i+1)%3].z
         )
-        geometry.vertices.push(pointPosition1[i]);
-        geometry.vertices.push(pointPosition2[i]);
-
-        lines[i] = new THREE.Line( geometry, new THREE.LineDashedMaterial( {
-          scale:1,
-          color: 0xffffff,
-          dashSize: 1,
-          gapSize: 1 } ) );
+        geometry[i].vertices.push(pointPosition1[i]);
+        geometry[i].vertices.push(pointPosition2[i]);
+        geometry[i].verticesNeedUpdate = true
+        lines[i] = new THREE.Line( geometry[i], lineMaterial );
 
       }
 //    var c2 = new THREE.Mesh(new THREE.TorusGeometry(0.6,0.05,100,100,Math.PI*2) ,material);
@@ -190,33 +199,20 @@
           material[i].opacity = last + (wait2turn === i?(last < 0.9?0.01:0): (last <= 0.5?0:-0.01))
         }
         for(i=0;i<=2;i++) {
-          scene.remove(lines[i])
           circles[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
           cs[i].position.set(positionsNext[i].x, positionsNext[i].y, positionsNext[i].z)
-          geometry = new THREE.Geometry();
-          pointPosition1[i] = new THREE.Vector3(
+          geometry[i].vertices[0].set(
             positions[i].x-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
             positions[i].y-0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
             positions[i].z
           )
-          pointPosition2[i] = new THREE.Vector3(
+          geometry[i].vertices[1].set(
             positions[(i+1)%3].x+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].x-positions[(i+1)%3].x),
             positions[(i+1)%3].y+0.55/Math.sqrt(Math.pow((positions[i].x-positions[(i+1)%3].x),2)+Math.pow((positions[i].y-positions[(i+1)%3].y),2))*(positions[i].y-positions[(i+1)%3].y),
             positions[(i+1)%3].z
           )
-          geometry.vertices.push(pointPosition1[i]);
-          geometry.vertices.push(pointPosition2[i]);
-
-          lines[i] = new THREE.Line( geometry, new THREE.LineDashedMaterial( {
-            scale:1,
-            color: 0xffffff,
-            dashSize: 1,
-            gapSize: 1 } ) );
-
+          geometry[i].verticesNeedUpdate = true;
         }
-        lines.forEach( line => {
-          scene.add(line)}
-        )
         renderer.render(scene, camera);
       };
       var raycaster = new THREE.Raycaster();
@@ -292,6 +288,8 @@
         scene: null,
         camera:null,
         renderer: null,
+        material:null,
+        texture:null,
         documentBodyClientWidth: 0,
         items: [
           {text: '展示示例一'},
