@@ -101,6 +101,13 @@
 
       }
     },
+    watch:{
+      '$route':function () {
+       this.$data.classChosen1=this.$props.classChosen;
+       this.$data.postChosen1=this.$props.postChosen;
+       this.$data.placeChosen1=this.$props.placeChosen;
+      }
+    },
     created () {
       this.$data.classChosen1=this.$props.classChosen;
       this.$data.postChosen1=this.$props.postChosen;

@@ -19,6 +19,13 @@
   import PostCard from '../miniComponents/PostCard.vue'
   export default {
     name: 'Campus',
+    watch:{
+      '$route':function () {
+        this.$data.classChosen=this.$route.query.typeChosen;
+        this.$data.postChosen=this.$route.query.positionName;
+        this.$data.placeChosen=this.$route.query.placeChosen;
+      }
+    },
     data () {
       return {
         postChosen: '',

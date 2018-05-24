@@ -19,6 +19,13 @@ import Selector from '../miniComponents/Selector.vue'
 import PostCard from '../miniComponents/PostCard.vue'
 export default {
   name: 'Social',
+  watch:{
+    '$route':function () {
+      this.$data.classChosen=this.$route.query.typeChosen;
+      this.$data.postChosen=this.$route.query.positionName;
+      this.$data.placeChosen=this.$route.query.placeChosen;
+    }
+  },
   created () {
     let _this = this
     if(this.$route.query.typeChosen){
