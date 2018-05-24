@@ -326,14 +326,20 @@
         this.searchPositions()
       },
       searchPositions(){
+        let typeChosen=this.$data.postChosen;
+        let positionName=this.$data.input3;
+        let placeChosen=this.$data.placeChosen;
+        this.$data.postChosen='';
+        this.$data.input3='';
+        this.$data.placeChosen='';
         console.log(this.$data.resumeChosen);
         if(this.$data.resumeChosen===1){
           this.$router.push({
             path:'/Campus/Post',
             query:{
-              typeChosen:this.$data.postChosen,
-              positionName:this.$data.input3,
-              placeChosen:this.$data.placeChosen
+              typeChosen:typeChosen,
+              positionName:positionName,
+              placeChosen:placeChosen
             }
           })
         }
@@ -341,9 +347,9 @@
           this.$router.push({
             path:'/Social',
             query:{
-              typeChosen:this.$data.postChosen,
-              positionName:this.$data.input3,
-              placeChosen:this.$data.placeChosen
+              typeChosen:typeChosen,
+              positionName:positionName,
+              placeChosen:placeChosen
             }
           })
         }
@@ -351,9 +357,9 @@
           this.$router.push({
             path:'/Trainee',
             query:{
-              typeChosen:this.$data.postChosen,
-              positionName:this.$data.input3,
-              placeChosen:this.$data.placeChosen
+              typeChosen:typeChosen,
+              positionName:positionName,
+              placeChosen:placeChosen
             }
           })
         }
