@@ -1,7 +1,7 @@
 <template>
   <div id="FormBasicInformation">
     <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading" >
-      <div style="width:100%;height:10px">
+      <div style="width:100%;height:0px">
       </div>
       <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2>
       <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>

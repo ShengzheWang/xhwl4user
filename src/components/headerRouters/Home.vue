@@ -13,7 +13,7 @@
       <div style="width: 26%;min-width:300px;display: inline-block;top:40%;left:37%;position: absolute">
         <el-form style="text-align: left;">
           <el-form-item style="margin-bottom:10px">
-            <div style="display: inline-block;width:100%;padding: 5px;border-radius: 52px;">
+            <div style="display: inline-block;width:100%;padding: 4px;border: solid 0.3px #ffffff;border-radius: 6px">
               <el-input :placeholder="resumeChosen==0?'你的搜索将基于 -  社会招聘  -':resumeChosen==1?'你的搜索将基于 -  校园招聘  -':'你的搜索将基于 -  实习生招聘  -'" v-model="input3" style="font-size: 18px;height: 50px;width:100%">
                 <el-button slot="append" @click="searchPositions"><i class="icon iconfont icon-sousuo" style="font-size: 30px;color: transpartent"></i> </el-button>
               </el-input>
@@ -382,7 +382,7 @@
     #canvas-frame { width: 100%; height: 100%;background:url('../../../static/img/main1.jpg') no-repeat;background-size:100% 100%}
     .el-input__inner{
       border:2px solid #fafafa;
-      border-radius:100px 0 0 100px;
+
       height: 50px;
       color:#ffffff;
       background: transparent !important;
@@ -390,7 +390,6 @@
 
     .el-input-group__append{
       border:1px solid #fafafa;
-      border-radius:0px 100px 100px 0;
       background: #ffffff;
     }
   }

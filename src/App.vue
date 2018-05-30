@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="min-width:1200px">
     <XhwlHeader></XhwlHeader>
-    <keep-alive>
+    <keep-alive include="Home">
     <router-view style="background: #fafafa"></router-view>
     </keep-alive>
     <xhwl-footer v-if="$route.path!= '/'"></xhwl-footer>

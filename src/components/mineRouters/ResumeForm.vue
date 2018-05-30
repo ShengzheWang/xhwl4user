@@ -1,32 +1,38 @@
 <template>
   <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;" class="animated bounceInLeft">
-    <div style="margin:0 auto;text-align: center">
-      <el-radio-group v-model="resumes_form" size="large" @change="changeType">
+    <div style="margin:0 auto;text-align: center;;height: auto">
+      <img style="width: 150%;margin-left: -22.5%; -webkit-filter: brightness(0.3);z-index: 1;
+    -moz-filter: brightness(0.5);
+    -o-filter: brightness(0.5);
+    -ms-filter: brightness(0.5);
+    filter: brightness(0.5);height: auto" :src="'../../../static/img/resume-'+resumes_form+'.png'"/>
+      <el-radio-group v-model="resumes_form" size="large" @change="changeType" style="margin-top: -33%;height: 100%">
         <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
         <el-radio class="radio4forms" label="2" border isText >社会招聘简历</el-radio>
         <el-radio class="radio4forms" label="3" border isText >实习招聘简历</el-radio>
       </el-radio-group>
-      <div style=" width:640px;margin:0 auto;color: #707070;">
-      <transition >
-      <h3 v-if="resumes_form==1" style="text-align: left;color: #707070;font-weight: normal">校园招聘简历只能投递校园招聘职位</h3>
-      <h3 v-else-if="resumes_form==2" style="color: #707070;font-weight: normal">社会招聘简历只能投递社会招聘职位</h3>
-      <h3 v-else  style="text-align: right;color: #707070;font-weight: normal">实习招聘简历只能投递实习职位</h3>
-      </transition>
-      </div>
+      <div style="position: absolute;top:200px;text-align: center;width: 100%">
+      <div style=" width:650px;position:absolute;left:50%;margin-left: -330px;">
+      <h3 v-if="resumes_form==1" style="text-align: left;color: #ffffff;font-weight: normal;">校园招聘简历只能投递校园招聘职位</h3>
+      <h3 v-else-if="resumes_form==2" style="color: #ffffff;font-weight: normal">社会招聘简历只能投递社会招聘职位</h3>
+      <h3 v-else  style="text-align: right;color: #ffffff;font-weight: normal">实习招聘简历只能投递实习职位</h3>
+      </div></div>
     </div>
-    <el-row class="tac" style="margin-top: 20px;">
+    <el-row class="tac" style="margin-top: 5%;">
       <el-col :span="4">
         <div style="height:0px">
         </div>
     <el-menu
       :default-active="formNow"
       @select="handleSelect"
-      background-color="#fafafa"
-      text-color="#444444"
-      active-text-color="#fafafa"
-      active-background-color="#1476C1"
+      text-color="#ffffff"
+      background-color="#001C31"
+      active-text-color='#ffffff'
+      active-background-color="#1476BF"
       class="el-menu-vertical-demo"
       :router="true"
+      style="background: #ffffff"
+
       >
       <el-menu-item  class="item4forms" v-for="item in forms"
                      v-bind:key="item.index" :index="item.index" :route="'/ResumeForm/'+item.index">
@@ -36,13 +42,14 @@
           <i v-if="item.isNecessary"  class="img4forms icon iconfont icon-xinghao" style="margin-left: 15px;font-size: 16px"></i>
         </template>
       </el-menu-item>
-      <div style="width: 100%;text-align: center;margin-top: 20%">
+      <div class="needMarginBorder" style="width: 80%"></div>
+      <div style="width: 100%;text-align: center;margin-top: 10%">
       <el-button class="button4details" @click="details()">预览简历</el-button>
       </div>
     </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="width: 100%;min-height: 700px;margin:0 -1px; background: #ffffff;border: solid 3px #e6e6e6" >
+        <div style="width: 100%;min-height: 820px;margin-left:2%; background: #ffffff;" >
           <router-view ></router-view>
         </div>
       </el-col>
@@ -139,15 +146,42 @@ export default {
 </script>
 <style lang="less">
   #ResumeForm {
+    .el-menu-item, .el-submenu__title{
+      line-height: 1.4;
+    }
+    .item4forms {
+      background: #ffffff !important;
+      height: 70px !important;
+      text-align: left;
+      color:#7c7c7c!important;
+      width: 100%;
+      transition: all 0.1s;
+      box-sizing: border-box;
+      z-index: 0;
+      line-height: 70px;
+      i{
+        color: inherit;
+      }
+    }
+
+    .item4forms:hover {
+      background:#37BCFD !important;
+      color: #ffffff !important;
+
+    }
+    .item4forms.is-active {
+      background:#37BCFD !important;
+      color: #ffffff !important;
+      width: 113%;
+      box-sizing: border-box;
+    }
     .iconfont{
       font-size:30px
     }
     .el-button--primary{
-      border-radius: 40px;
       font-size: 16px;
     }
     .el-button--info{
-      border-radius: 40px;
       font-size: 16px;
     }
     .button4forms{
@@ -157,30 +191,26 @@ export default {
       font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF;
       letter-spacing: 2px;
-      border-radius: 46px;
       font-size: 20px;
 
     }
     .button4forms:hover {
-      background: #E01B2F;
+      background: #37BCFD;
       border: 1px solid #E01B2F;
       /* 保存并进行下一步: */
       font-family: MicrosoftYaHei-Bold;
       color: #FFFFFF;
     }
     .button4details{
-      border: solid 2px #E01B2F;
+      border: none;
       height:50px;
       font-size: 20px;
-      width: 70%;
-      color: #E01B2F;
-      background: #fafafa;
-      border-radius: 50px;
       transition: all 0.3s;
+      margin-bottom: 20px;
       &:hover{
-        color:#ffffff;
-        background:#E01B2F;
         transform: scale(1.05);
+        background: #ffffff !important;
+        color:#37BCFD
       }
     }
   }

@@ -1,6 +1,9 @@
 <template>
   <div id="Campus">
     <div class="block">
+      <div style="position:absolute;width: 100%;top:70px;background:#0a0a0a">
+        <img style="width: 100%" src="../../../static/img/post-1.png"/>
+      </div>
       <div style="width: 60%;margin:0% auto;height: auto">
         <selector resume-form="1" @ChangeSearch="ChangePositions" v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen"></selector>
         <post-card resume-form="1" v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen" ></post-card>

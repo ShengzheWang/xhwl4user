@@ -1,8 +1,8 @@
 <template>
-  <div id="PostCard" style="">
+  <div id="PostCard" style="z-index: 999">
     <h1 v-if="cardInfo.length===0">没有您所要检索的职位、请重新筛选！</h1>
     <el-card v-else v-for="item in cardInfo" class="box-card animated fadeIn" v-bind:key="item.index"
-             v-bind:style="'margin-top:2%;width:100%;padding:10px 10px;background-color:#ffffff;animation-delay:'+(item.index)*0.2+'s'">
+             v-bind:style="'z-index: 999;margin-top:2%;width:100%;padding:10px 10px;background-color:#ffffff;animation-delay:'+(item.index)*0.2+'s'">
       <div>
         <span style="font-size:24px;font-weight: bold" class="name"> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  {{item.positionType}}</span>
