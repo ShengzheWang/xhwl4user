@@ -16,7 +16,7 @@
           :limit="1"
           :on-success="uploadSuccess1"
           :action="$axios.defaults.baseURL+'/upload-resume'">
-          <el-button  v-if="file1 === ''" size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
+          <el-button  v-if="file1 === null" size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
           <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过简历，重复提交会覆盖原本的简历文件哦（已投递的除外）!" placement="right">
             <el-button size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
           </el-tooltip>
@@ -32,7 +32,7 @@
             :limit="1"
             :on-success="uploadSuccess2"
             :action="$axios.defaults.baseURL+'/upload-support-detail'">
-            <el-button  v-if="file2 === ''" size="middle" plain>点击上传辅助材料（支持ZIP格式）</el-button>
+            <el-button  v-if="file2 === null" size="middle" plain>点击上传辅助材料（支持ZIP格式）</el-button>
             <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过简历，重复提交会覆盖原本的简历文件哦（已投递的除外）!" placement="right">
               <el-button size="middle" plain>点击上传辅助材料（支持ZIP 格式）</el-button>
             </el-tooltip>
