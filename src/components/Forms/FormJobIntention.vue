@@ -34,6 +34,21 @@
 </template>
 <script>
 
+ Date.prototype.Format = function (fmt) {
+    var o = {
+      "M+": this.getMonth() + 1, //月份
+      "d+": this.getDate(), //日
+      "h+": this.getHours(), //小时
+      "m+": this.getMinutes(), //分
+      "s+": this.getSeconds(), //秒
+      "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+      "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+  }
 
 export default {
 
@@ -48,6 +63,19 @@ export default {
             callback(new Error('请输入正确的薪资'))
           }
         }
+    }
+    
+    
+    var checkAfterToday=(rule,value,callback)=>{
+      var date=new Date();
+      let flag=false;
+      date=date.Format('yyyy-MM-dd');
+      let temp=value.Format('yyyy-MM-dd');
+      if(date>temp){
+        callback(new Error('选择日期不能早于当前日期'))
+      }else{
+        callback();
+      }
     }
 
     return {
@@ -68,7 +96,8 @@ export default {
           {required:true,message:'请选择城市',trigger:'blur'}
         ],
         expectedTimeForDuty:[
-          {required:true,type:'date',message:'请选择时间',trigger:'blur'}
+          {required:true,type:'date',message:'请选择时间',trigger:'blur'},
+            {validator:checkAfterToday,trigger:'blur'}
         ]
       }
     }
