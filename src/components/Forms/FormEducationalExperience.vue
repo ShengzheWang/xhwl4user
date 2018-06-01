@@ -111,13 +111,13 @@ export default {
       }] ,
 
       rules: {
-        school: [{pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '名字不合法', trigger: 'change'},
+        school: [{pattern: /^[-.\sA-Za-z\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '名字不合法', trigger: 'change'},
           {required: true, message: '学校不能为空', trigger: 'change'}],
         rank: [{validator: checkRank, message: '请输入正确的排名', trigger: 'change'},
           {required: true, message: '请输入排名', trigger: 'change'},
           {type: 'number', message: '请输入正确的排名', trigger: 'change'}],
         speciality: [{required: true, message: '请输入专业', trigger: 'change'},
-          {pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '专业名字不合法', trigger: 'change'}],
+          {pattern: /^[-.\sA-Za-z\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/, message: '专业名字不合法', trigger: 'change'}],
         educationHistory: [
           {required: true, message: '请选择学历', trigger: 'blur'}
         ],
