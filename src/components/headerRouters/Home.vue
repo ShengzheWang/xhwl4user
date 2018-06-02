@@ -174,7 +174,7 @@
       )
       var positionsNext = positions
       camera.position.z = 5;
-      const speed = 0.00055
+      const speed = 0.00015
       var change = 0
       var angle
       var wait2up = 0
