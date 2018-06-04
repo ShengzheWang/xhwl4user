@@ -1,24 +1,25 @@
 <template>
-  <div id="ResumeForm" style="width: 70%;min-width: 1200px;margin:0% auto;" class="animated bounceInLeft">
-    <div style="margin:0 auto;text-align: center;;height: auto">
-      <img style="width: 150%;margin-left: -22.5%; -webkit-filter: brightness(0.3);z-index: 1;
-    -moz-filter: brightness(0.5);
-    -o-filter: brightness(0.5);
-    -ms-filter: brightness(0.5);
-    filter: brightness(0.5);height: auto" :src="'../../../static/img/resume-'+resumes_form+'.png'"/>
-      <el-radio-group v-model="resumes_form" size="large" @change="changeType" style="margin-top: -33%;height: 100%">
-        <el-radio class="radio4forms" label="1" border isText style="margin-top: 20px">校园招聘简历</el-radio>
-        <el-radio class="radio4forms" label="2" border isText >社会招聘简历</el-radio>
-        <el-radio class="radio4forms" label="3" border isText >实习招聘简历</el-radio>
-      </el-radio-group>
-      <div style="position: absolute;top:200px;text-align: center;width: 100%">
-      <div style=" width:650px;position:absolute;left:50%;margin-left: -330px;">
-      <h3 v-if="resumes_form==1" style="text-align: left;color: #ffffff;font-weight: normal;">校园招聘简历只能投递校园招聘职位</h3>
-      <h3 v-else-if="resumes_form==2" style="color: #ffffff;font-weight: normal">社会招聘简历只能投递社会招聘职位</h3>
-      <h3 v-else  style="text-align: right;color: #ffffff;font-weight: normal">实习招聘简历只能投递实习职位</h3>
-      </div></div>
+  <div id="ResumeForm" class="animated bounceInLeft">
+    <div class="Resume_type">
+      <img  :src="'../../../static/img/resume-'+resumes_form+'.png'"/>
+      <div class="select_type">
+        <el-radio-group v-model="resumes_form" size="large" @change="changeType">
+          <el-radio class="radio4forms" label="1" border isText >
+            校园招聘简历
+            <p v-show="resumes_form==1">校园招聘简历只能投递校园招聘职位</p>
+          </el-radio>
+          <el-radio class="radio4forms" label="2" border isText >
+            社会招聘简历
+            <p v-show="resumes_form==2">社会招聘简历只能投递社会招聘职位</p>
+          </el-radio>
+          <el-radio class="radio4forms" label="3" border isText >
+            实习招聘简历
+            <p v-show="resumes_form==3">实习招聘简历只能投递实习职位</p>
+          </el-radio>
+        </el-radio-group>
+      </div>
     </div>
-    <el-row class="tac" style="margin-top: 5%;">
+    <el-row class="resume_form" style="margin-top: 5%;">
       <el-col :span="4">
         <div style="height:0px">
         </div>
@@ -146,6 +147,56 @@ export default {
 </script>
 <style lang="less">
   #ResumeForm {
+    width: 70%;
+    min-width: 1200px;
+    margin:0% auto;
+    .Resume_type{
+      margin:0 auto;
+      text-align: center;
+      height: 270px;
+      position:relative;
+      img {
+        width: 150%;
+        height:270px;
+        margin-left: -22.5%;
+        -webkit-filter: brightness(0.3);
+        -moz-filter: brightness(0.5);
+        -o-filter: brightness(0.5);
+        -ms-filter: brightness(0.5);
+        filter: brightness(0.5);
+        z-index: 1;
+      }
+      .select_type{
+        position:absolute;
+        top: 0%;
+        left: 0%;
+        width: 1200px;
+        height:100px;
+        margin-top: 100px;
+        .el-radio-group {
+          .el-radio {
+            width: 176px;
+            height: 48px;
+            line-height: 48px;
+            padding: 0;
+            .el-radio__inner {
+              display: none;
+            }
+            .el-radio__label {
+              p {
+                position: absolute;
+                width: 50px;
+                margin-left: -25px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .resume_form {
+
+    }
     .el-menu-item, .el-submenu__title{
       line-height: 1.4;
     }

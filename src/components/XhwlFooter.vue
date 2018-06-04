@@ -1,5 +1,5 @@
 <template>
-  <div id="XhwlFooter">
+  <div id="XhwlFooter" :class="setPosition === true ? 'setPosition': ''">
     <div class="footer">
       <div class="wrap">
         <ul class="friend-link">
@@ -19,6 +19,40 @@
   </div>
 </template>
 <script>
+import { winHeight } from '@/util'
+export default {
+  name: 'XhwlFooter',
+  data() {
+    return{
+      minHeight: 0,
+      setPosition: false
+    }
+  },
+  mounted() {
+    this.resize()
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
+  },
+  methods: {
+    resize() {
+      // console.log(121)
+      var height1 = window.innerHeight
+      var height2 = document.body.scrollHeight
+      console.log('height', height1, height2)
+      if (height1 === height2) {
+        this.setPosition = true
+      } else {
+        this.setPosition = false
+      }
+    },
+  },
+  watch: {
+    $route(to, from) {
+      this.resize()
+    }
+  }
+}
 </script>
 <style scoped>
   XhwlFooter {
@@ -28,6 +62,14 @@
     text-align: left;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  #XhwlFooter.setPosition{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    background: red;
   }
 
 </style>

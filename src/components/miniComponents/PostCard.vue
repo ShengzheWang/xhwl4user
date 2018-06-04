@@ -17,7 +17,7 @@
         <div style="margin-top: 1%">
           <a style="font-size: 20px"> <i class="icon iconfont icon-gongzuodidian-shixin icon4card"></i>     工作地点：{{item.workPlace}}</a>
         </div>
-        <div style="margin-top: 1%;"> <i class="icon iconfont icon-suozaibumen- icon4card"></i>
+        <div style="margin-top: 1%;"> <i class="icon iconfont icon-suozaibumen-icon4card"></i>
           <a  style="font-size: 20px">      所属部门：{{item.department}}</a>
         </div>
       </div>
