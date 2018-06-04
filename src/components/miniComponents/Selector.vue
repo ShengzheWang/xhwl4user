@@ -28,7 +28,7 @@
                              :fetch-suggestions="querySearchForType"
                              placeholder="请输入类型"
                              @select="handleSelectForType" :clearable="true"
-                             prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom"
+                             prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom"
             ></el-autocomplete>
            <!-- <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
             </el-input>-->

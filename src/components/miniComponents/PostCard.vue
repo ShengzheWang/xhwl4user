@@ -1,5 +1,5 @@
 <template>
-  <div id="PostCard" style="z-index: 999;min-height: 500px">
+  <div id="PostCard" style="z-index: 999;min-height: 650px">
     <div v-if="cardInfo.length===0" style="width:100%;">
     <h1 style="color:#ffffff;margin-top: 100px;position: absolute;z-index: 1000">没有您所要检索的职位、请重新筛选！</h1>
     </div>
