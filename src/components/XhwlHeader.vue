@@ -301,7 +301,7 @@ export default {
           {validator:checkLogPassRepeat,trigger:'blur'}
         ]
       },
-      mine: [{path: '', text: '个人中心'},
+      mine: [
         {path: '/MyResume', text: '我的简历'},
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}]
     }
