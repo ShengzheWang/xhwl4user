@@ -262,11 +262,19 @@ export default {
           {validator:checkLogPassRepeat,trigger:'blur'}
         ]
       },
+<<<<<<< HEAD
       mine: [{path: '', text: '个人中心'},
+=======
+      mine: [
+<<<<<<< HEAD
+=======
+        {path: '', text: '个人中心'},
+>>>>>>> 2d62a028e6920550ef0989446ef615cc45b8960a
+>>>>>>> parent of 0bdf2da... 合并有一些错误
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘'}
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}
       ],
-      messageNum: 0
+       messageNum: 0
     }
   },
   methods: {
