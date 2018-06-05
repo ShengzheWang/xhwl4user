@@ -41,7 +41,7 @@
       <div style="width:25%;display:inline-block;height: 90px;text-align: center;vertical-align: top;font-size: 14px" class="animated fadeInDown" v-else>
         <div style="margin-top:14px;">
       <el-dropdown >
-        <el-badge  style="font-size: 8px" :value="mine[2].messageNum" class="item">
+        <el-badge  style="font-size: 8px" :value="messageNum" class="item">
 
       <el-button  type="text" ><img
         src="../../static/img/Default.png" style="width: 24px;"><i class="el-icon-arrow-down el-icon--right"></i></el-button>

@@ -241,6 +241,7 @@ export default {
               display: none;
             }
             .el-radio__label {
+              padding: 0!important;
               p {
                 position: absolute;
                 width: 50px;
@@ -290,12 +291,12 @@ export default {
         .item4forms:hover {
           background:#37BCFD !important;
           color: #ffffff !important;
-          @include borderRadius(5px);
+          @include borderRadius(0px);
         }
         .item4forms.is-active {
           background:#37BCFD !important;
           color: #ffffff !important;
-          @include borderRadius(5px);
+          @include borderRadius(0px);
           width: 110%;
           box-sizing: border-box;
         }

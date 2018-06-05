@@ -18,6 +18,9 @@ body {
     font-size: 12px;
     margin:0
 }
+.el-button{
+  border-radius: 0;
+}
 a:link {
     text-decoration: none;
 }
