@@ -1,15 +1,56 @@
 <template>
   <div id="FormBasicInformation">
-    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading" >
-      <div style="width:100%;height:0px">
-      </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">基本信息</h2>
-      <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">请保证基本信息的准确无误</h4>
-      <div style="width:100%;height:10px">
+    <div class="form_information animated fadeIn" v-if="!loading" >
+      <div class="form_info_title">
+        <h2>基本信息</h2>
+        <h4>请保证基本信息的准确无误</h4>
       </div>
       <el-form label-position="labelPosition" label-width="200px" :rules="rules" :model="formBasic" ref="formBasic" :status-icon="true" >
-
-        <el-form-item label="上传照片" style="width: 50%;position: absolute;left:55%">
+        <div class="resume_form-items">
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="formBasic.name"></el-input>
+          </el-form-item>
+          <el-form-item label="性别" prop="sex">
+            <el-select v-model="formBasic.sex">
+              <el-option label="男" :value="1"></el-option>
+              <el-option label="女" :value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="证件类型及号码" prop="idNumber">
+            <el-input class="identify_num" v-model="formBasic.idNumber">
+              <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型">
+                <el-option label="身份证" :value="1"></el-option>
+                <el-option label="港澳台通行证" :value="2"></el-option>
+                <el-option label="护照" :value="3"></el-option>
+              </el-select>
+            </el-input>
+          </el-form-item>
+          <el-form-item label="出生日期" prop="birthday">
+            <el-date-picker type="date" placeholder="选择日期" v-model="formBasic.birthday" class="input-date"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="电子邮箱" prop="email">
+            <el-input v-model="formBasic.email"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号码" prop="telephone">
+            <el-input v-model="formBasic.telephone"></el-input>
+          </el-form-item>
+          <el-form-item label="婚姻状况">
+            <el-select placeholder="请选择" v-model="formBasic.maritalStatus">
+              <el-option label="已婚" :value="2"></el-option>
+              <el-option label="未婚" :value="1"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="工作年限" prop="workSeniority">
+            <el-input-number v-model="formBasic.workSeniority"></el-input-number>
+          </el-form-item>
+          <el-form-item label="政治面貌">
+            <el-input v-model="formBasic.politicalStatus"></el-input>
+          </el-form-item>
+          <el-form-item label="现居住地" prop="presentAddress">
+            <el-input v-model="formBasic.presentAddress"></el-input>
+          </el-form-item>
+        </div>
+        <div class="avatar_upload_item">
           <el-upload
             class="avatar-uploader"
             :action="$axios.defaults.baseURL+'/upload-photo'"
@@ -21,57 +62,13 @@
             <i v-else class="el-icon-plus
           avatar-uploader-icon"></i>
           </el-upload>
-        </el-form-item>
-        <el-form-item label="姓名" style="width: 50%" prop="name">
-          <el-input v-model="formBasic.name"></el-input>
-        </el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-select v-model="formBasic.sex">
-            <el-option label="男" :value="1"></el-option>
-            <el-option label="女" :value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="证件类型及号码" style="width: 60%" prop="idNumber">
-          <el-input class="input-with-select" v-model="formBasic.idNumber">
-            <el-select v-model="formBasic.idType" slot="prepend"  placeholder="证件类型" style="width: 150px">
-              <el-option label="身份证" :value="1"></el-option>
-              <el-option label="港澳台通行证" :value="2"></el-option>
-              <el-option label="护照" :value="3"></el-option>
-            </el-select>
-          </el-input>
-        </el-form-item>
-        <el-form-item label="出生日期" prop="birthday">
-          <el-date-picker type="date" placeholder="选择日期" v-model="formBasic.birthday"
-                          class="input-date"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="电子邮箱" style="width: 50%" prop="email">
-          <el-input v-model="formBasic.email"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号码" style="width: 50%" prop="telephone">
-          <el-input v-model="formBasic.telephone"></el-input>
-        </el-form-item>
-        <el-form-item label="婚姻状况" prop="maritalStatus">
-          <el-select placeholder="请选择" v-model="formBasic.maritalStatus">
-            <el-option label="已婚" :value="2"></el-option>
-            <el-option label="未婚" :value="1"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="工作年限" style="width: 50%;padding-right: 30px" prop="workSeniority">
-          <el-input-number v-model="formBasic.workSeniority"></el-input-number>
-        </el-form-item>
-        <el-form-item label="政治面貌" style="width: 50%" prop="politicalStatus">
-          <el-input v-model="formBasic.politicalStatus"></el-input>
-        </el-form-item>
-        <el-form-item label="现居住地" style="width: 50%" prop="presentAddress">
-          <el-input v-model="formBasic.presentAddress"></el-input>
-        </el-form-item>
+          <div class="upload_avatar_word" style="text-align: center; font-size: 16px;">上传照片</div>
+        </div>
         <div class="needMarginBorder"></div>
-        <el-form-item  style="width: 25%">
+        <el-form-item>
           <el-button type="primary" class="button4forms" @click="nextStep('formBasic')">保存并进行下一步</el-button>
         </el-form-item>
       </el-form>
-      <div style="width:100%;height:30px">
-      </div>
     </div>
   </div>
 </template>
@@ -158,9 +155,6 @@ export default {
         callback(new Error('请选择证件类型'))
       }
     }
-
-
-
     return {
       header: {
       },
@@ -315,6 +309,21 @@ export default {
 }
 </script>
 <style>
+.resume_form-items {
+  width: 100%;
+}
+.avatar_upload_item {
+  position: absolute;
+  right: 10%;
+  top: 12%;
+  width: 130px;
+  height: 200px;
+  .upload_avatar_word {
+    width:130px;
+    line-height: 20px;
+    font-size: 16px;
+  }
+}
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -328,20 +337,33 @@ export default {
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
+    width: 130px;
+    height: 155px;
+    line-height: 150px;
     text-align: center;
   }
   .avatar {
-    width: 178px;
-    height: 178px;
+    width: 130px;
+    height: 155px;
     display: block;
   }
-.input-date{
-  width:40.3%;
-}
-.input-with-select .el-input-group__prepend {
-  background-color: #fff;
+.identify_num .el-input-group__prepend{
+  .el-select {
+    .el-input  {
+      input {
+        padding-left: 10px;
+        padding-right: 20px;
+      }
+      span.el-input__suffix {
+        width: 30px!important;
+        height: 30px;
+        i.el-select__caret, i.el-input__icon{
+          width: 15px;
+        }
+      }
+    }
+  }
+
+  /* background-color: #fff; */
 }
 </style>

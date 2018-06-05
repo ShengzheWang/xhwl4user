@@ -18,12 +18,13 @@
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
-        <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
+        <el-menu-item index="3" style="border: none" route="/Campus/Post" class="item4menu">校园招聘</el-menu-item>
+        <!-- <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
           <template style="border: none" slot="title">校园招聘</template>
           <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
           <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
           <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
-        </el-submenu>
+        </el-submenu> -->
         <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
         <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
@@ -261,9 +262,12 @@ export default {
           {validator:checkLogPassRepeat,trigger:'blur'}
         ]
       },
-      mine: [{path: '', text: '个人中心'},
+      mine: [
+        {path: '', text: '个人中心'},
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}]
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}
+      ],
+       messageNum: 0
     }
   },
   methods: {
@@ -505,8 +509,8 @@ export default {
                   url: '/deliver'
                 }).then(function (response) {
                   _this.$nextTick(() => {
-                    _this.$data.mine[2].messageNum = response.data.length
-                    console.log(_this.$data.mine[2].messageNum)
+                    _this.$data.messageNum = response.data.length
+                    console.log(_this.$data.messageNum)
                   })
                 })
                 break

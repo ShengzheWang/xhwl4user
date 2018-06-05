@@ -1,49 +1,40 @@
 <template>
   <div id="FormProjectExperience" >
-    <div style="width:90%;margin: 0% auto;" v-if="!loading">
-      <div style="width:100%;height:10px">
-      </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">项目经历</h2>
-      <div style="width:100%;height:10px">
+    <div class="form_information" v-if="!loading">
+      <div class="form_info_title">
+        <h2>项目经历</h2>
       </div>
       <div v-for="(formProject,index) in formsProject">
-      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :model="formProject" :status-icon="true" ref="formsProject" :rules="rules">
-        <el-form-item label="项目名称" style="width: 50%" prop="projectName" >
-          <el-input v-model="formProject.projectName"></el-input>
-        </el-form-item>
-        <el-form-item label="担任角色" style="width: 50%" prop="projectRole">
-          <el-input v-model="formProject.projectRole"></el-input>
-        </el-form-item>
-        <el-form-item label="详细描述" style="width: 70%" prop="projectDescription">
-          <el-input
-            type="textarea"
-            :rows="7"
-            placeholder="请输入内容"
-            v-model="formProject.projectDescription">
-          </el-input>
-          <span>{{formProject.projectDescription.length}}/200</span>
-        </el-form-item>
-        <el-form-item label="" style="width: 70%">
-          <el-button type="primary" @click="saveOne(index,'formsProject')">保存</el-button>
-          <el-button type="info" @click="deleteOne(formProject.id,index)">删除</el-button>
-        </el-form-item>
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formProject" :status-icon="true" ref="formsProject" :rules="rules">
+        <div class="resume_form-items">
+          <el-form-item label="项目名称" prop="projectName" >
+            <el-input v-model="formProject.projectName"></el-input>
+          </el-form-item>
+          <el-form-item label="担任角色" prop="projectRole">
+            <el-input v-model="formProject.projectRole"></el-input>
+          </el-form-item>
+          <el-form-item label="详细描述" prop="projectDescription">
+            <el-input v-model="formProject.projectDescription" type="textarea" :rows="7" placeholder="请输入内容"></el-input>
+            <span>{{formProject.projectDescription.length}}/200</span>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="saveOne(index,'formsProject')">保存</el-button>
+            <el-button type="info" @click="deleteOne(formProject.id,index)">删除</el-button>
+          </el-form-item>
+        </div>
         <div class="needMarginBorder"></div>
       </el-form>
       </div>
       <div>
-      <el-form  label-position="labelPosition" label-width="300px">
-        <el-form-item label="还有其他项目经历？" style="width: 50%">
+      <el-form  label-position="labelPosition" label-width="200px">
+        <el-form-item label="还有其他项目经历？">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>
         <div class="needMarginBorder"></div>
-        <el-form-item style="width: 25%">
+        <el-form-item>
           <el-button type="primary" class="button4forms" @click="nextStep('formsProject')">保存并进行下一步</el-button>
         </el-form-item>
-        <div style="width:100%;height:30px">
-        </div>
       </el-form>
-      </div>
-      <div style="width:100%;height:30px">
       </div>
     </div>
   </div>
@@ -69,14 +60,9 @@ var checkRoleName=(rule,value,callback)=>{
   }
 }
 
-
   export default {
-
-
   data () {
-
     return {
-
       loading: true,
       formsProject: [{
         id: null,
@@ -84,7 +70,6 @@ var checkRoleName=(rule,value,callback)=>{
         projectName: '',
         projectRole: '',
         projectDescription: '',
-
       }],
 
       rules:{
@@ -112,11 +97,12 @@ var checkRoleName=(rule,value,callback)=>{
       url:'/project'
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.formsProject=response.data;
+        console.log('response', response.data.length)
+        if (response.data.length !== 0) {
+          _this.$data.formsProject=response.data;
+        }
         _this.$data.loading = false
       })
-
-
     })
   },
   methods: {

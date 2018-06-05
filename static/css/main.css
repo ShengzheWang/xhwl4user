@@ -67,10 +67,10 @@ ol, ul {
   background: #37BCFD;
   color: #ffffff;
 }
-.el-radio__input.is-checked+.el-radio__label{
+/* .el-radio__input.is-checked+.el-radio__label{
 
   color: #ffffff;
-}
+} */
 .icon4card{
   color:#1476C1;
   font-size: 24px !important;

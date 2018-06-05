@@ -1,62 +1,56 @@
 <template>
   <div id="FormEducationExperience" >
-    <div style="width:90%;margin: 0% auto;" class="animated fadeIn" v-if="!loading" >
-      <div style="width:100%;height:10px">
-      </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">教育经历</h2>
-      <h4 style="display: inline-block;margin-left: 20px;font-weight: normal">教育经历请从最高学历开始填起</h4>
-      <div style="width:100%;height:10px">
+    <div class="form_information animated fadeIn" v-if="!loading" >
+      <div class="form_info_title">
+        <h2>教育经历</h2>
+        <h4>教育经历请从最高学历开始填起</h4>
       </div>
       <div  v-for="(formEducation,index) in formsEducation">
-      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :model="formEducation" :status-icon="true" ref="formsEducation" :rules="rules" v-if="!loading">
-        <el-form-item label="入学日期" prop="startTime">
-          <el-date-picker type="date" placeholder="选择日期"
-                          class="input-date" v-model="formEducation.startTime"
-                          format="yyyy-MM-dd"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="毕业日期" prop="endTime">
-          <el-date-picker type="date" placeholder="选择日期"
-                          class="input-date" v-model="formEducation.endTime"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="学校" style="width: 50%" prop="school" >
-          <el-input v-model="formEducation.school"></el-input>
-        </el-form-item>
-        <el-form-item label="专业" style="width: 50%" prop="speciality">
-          <el-input v-model="formEducation.speciality"></el-input>
-        </el-form-item>
-        <el-form-item label="学历" style="width: 50%" prop="educationHistory">
-          <el-select v-model="formEducation.educationHistory" placeholder="请选择学历" :rules="[{required:true,trigger:'blur'}]">
-            <el-option label="高中" :value="1"></el-option>
-            <el-option label="专科" :value="2"></el-option>
-            <el-option label="本科" :value="3"></el-option>
-            <el-option label="研究生" :value="4"></el-option>
-            <el-option label="博士生" :value="5"></el-option>
-            <el-option label="博士后" :value="6"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="专业成绩排名占比" style="width: 50%" prop="rank" >
-          <el-input v-model.number="formEducation.rank">
-            <template slot="append">%</template>
-          </el-input>
-        </el-form-item>
-        <el-form-item style="width: 67%">
-          <el-button type="primary"  @click="saveOne(index,'formsEducation')">保存</el-button>
-          <el-button type="info"  @click="deleteOne(formEducation.id,index)">删除</el-button>
-        </el-form-item>
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formEducation" :status-icon="true" ref="formsEducation" :rules="rules" v-if="!loading">
+        <div class="resume_form-items">
+          <el-form-item label="入学日期" prop="startTime">
+            <el-date-picker type="date" placeholder="选择日期" class="input-date" v-model="formEducation.startTime" format="yyyy-MM-dd"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="毕业日期" prop="endTime">
+            <el-date-picker type="date" placeholder="选择日期" class="input-date" v-model="formEducation.endTime"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="学校" prop="school" >
+            <el-input v-model="formEducation.school"></el-input>
+          </el-form-item>
+          <el-form-item label="专业" prop="speciality">
+            <el-input v-model="formEducation.speciality"></el-input>
+          </el-form-item>
+          <el-form-item label="学历" prop="educationHistory">
+            <el-select v-model="formEducation.educationHistory" placeholder="请选择学历" :rules="[{required:true,trigger:'blur'}]">
+              <el-option label="高中" :value="1"></el-option>
+              <el-option label="专科" :value="2"></el-option>
+              <el-option label="本科" :value="3"></el-option>
+              <el-option label="研究生" :value="4"></el-option>
+              <el-option label="博士生" :value="5"></el-option>
+              <el-option label="博士后" :value="6"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="专业成绩排名占比">
+            <el-input v-model.number="formEducation.rank">
+              <template slot="append">%</template>
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary"  @click="saveOne(index,'formsEducation')">保存</el-button>
+            <el-button type="info"  @click="deleteOne(formEducation.id,index)">删除</el-button>
+          </el-form-item>
+        </div>
         <div class="needMarginBorder"></div>
       </el-form>
       </div>
-
       <el-form  label-position="labelPosition" label-width="300px" v-if="!loading">
-      <el-form-item label="还有其他教育经历？" style="width: 50%">
+      <el-form-item label="还有其他教育经历？">
         <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
       </el-form-item>
       <div class="needMarginBorder"></div>
-      <el-form-item style="width: 25%">
+      <el-form-item>
         <el-button type="primary" class="button4forms" @click="nextStep('formsEducation')">保存并进行下一步</el-button>
       </el-form-item>
-      <div style="width:100%;height:30px">
-      </div>
       </el-form>
 
     </div>
@@ -139,7 +133,9 @@ export default {
       url: '/education'
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.formsEducation = response.data
+        if (response.data.length !== 0) {
+          _this.$data.formsEducation = response.data
+        }
         _this.$data.loading = false
       })
     })
@@ -244,8 +240,4 @@ export default {
 }
 </script>
 <style scoped>
-
-  .input-date{
-    width:40.3%;
-  }
 </style>

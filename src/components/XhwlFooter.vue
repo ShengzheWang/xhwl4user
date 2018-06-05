@@ -36,15 +36,13 @@ export default {
   },
   methods: {
     resize() {
-      // console.log(121)
       var height1 = window.innerHeight
       var height2 = document.body.scrollHeight
-      console.log('height', height1, height2)
-      if (height1 === height2) {
-        this.setPosition = true
-      } else {
-        this.setPosition = false
-      }
+      // if (height1 === height2) {
+      //   this.setPosition = true
+      // } else {
+      //   this.setPosition = false
+      // }
     },
   },
   watch: {
