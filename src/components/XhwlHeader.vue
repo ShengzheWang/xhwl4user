@@ -624,8 +624,8 @@ export default {
           url: '/deliver'
         }).then(function (response) {
           _this.$nextTick(() => {
-            _this.$data.mine[2].messageNum = response.data.length
-            console.log(_this.$data.mine[2].messageNum)
+            _this.$data.messageNum = response.data.length
+            console.log(_this.$data.messageNum)
           })
         })
       }).catch(function(error) {
