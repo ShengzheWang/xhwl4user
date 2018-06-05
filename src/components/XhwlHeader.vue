@@ -263,14 +263,10 @@ export default {
         ]
       },
       mine: [
-<<<<<<< HEAD
-=======
-        {path: '', text: '个人中心'},
->>>>>>> 2d62a028e6920550ef0989446ef615cc45b8960a
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}
+        {path: '/MyJobApplication', text: '我的应聘'}
       ],
-       messageNum: 0
+      messageNum: 0
     }
   },
   methods: {
