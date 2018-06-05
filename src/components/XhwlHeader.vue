@@ -18,12 +18,13 @@
 
         <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
         <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
-        <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
+        <el-menu-item index="3" style="border: none" route="/Campus/Post" class="item4menu">校园招聘</el-menu-item>
+        <!-- <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
           <template style="border: none" slot="title">校园招聘</template>
           <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
           <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
           <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
-        </el-submenu>
+        </el-submenu> -->
         <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
         <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
@@ -170,46 +171,6 @@
 import {isvalidPhone} from "../util/Validate";
 export default {
   name: 'XhwlHeader',
-  watch: {
-    $route(to, from) {
-      //console.log(to.path)
-      switch(to.path){
-        case '/':
-          this.$data.activeIndex = '1'
-          break
-        case '/Social':
-          this.$data.activeIndex = '2'
-          break
-        case '/Trainee':
-          this.$data.activeIndex = '4'
-          break
-        case '/Campus/Post':
-          this.$data.activeIndex = '3-1'
-          break
-        case '/Campus/Procedure':
-          this.$data.activeIndex = '3-2'
-          break
-        case '/Campus/Plan':
-          this.$data.activeIndex = '3-3'
-          break
-        case '/AboutUs':
-          this.$data.activeIndex = '5'
-          break
-        default:
-          this.$data.activeIndex = ''
-//        <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
-//          <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
-//          <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
-//          <template style="border: none" slot="title">校园招聘</template>
-//          <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
-//          <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
-//          <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
-//          </el-submenu>
-//          <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
-//          <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
-      }
-    }
-  },
   data () {
 
     var checkPhoneNum=(rule,value,callback)=>{
@@ -302,85 +263,16 @@ export default {
         ]
       },
       mine: [
+<<<<<<< HEAD
+=======
+        {path: '', text: '个人中心'},
+>>>>>>> 2d62a028e6920550ef0989446ef615cc45b8960a
         {path: '/MyResume', text: '我的简历'},
-        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}]
+        {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}
+      ],
+       messageNum: 0
     }
   },
-  beforeMount () {
-    switch(this.$route.path){
-      case '/':
-        this.$data.activeIndex = '1'
-        break
-      case '/Social':
-        this.$data.activeIndex = '2'
-        break
-      case '/Trainee':
-        this.$data.activeIndex = '4'
-        break
-      case '/Campus/Post':
-        this.$data.activeIndex = '3-1'
-        break
-      case '/Campus/Procedure':
-        this.$data.activeIndex = '3-2'
-        break
-      case '/Campus/Plan':
-        this.$data.activeIndex = '3-3'
-        break
-      case '/AboutUs':
-        this.$data.activeIndex = '5'
-        break
-      default:
-        this.$data.activeIndex = ''
-//        <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
-//          <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
-//          <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
-//          <template style="border: none" slot="title">校园招聘</template>
-//          <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
-//          <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
-//          <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
-//          </el-submenu>
-//          <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
-//          <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
-    }
-    const token = document.cookie.split(';')[0]
-    console.log(token)
-    let _this = this
-    if (token) {
-      this.$axios.defaults.headers.Authorization = token
-      this.$axios({
-        method: 'get',
-        url: '/tokenCheck',
-      }).then(function (response) {
-        _this.$message('欢迎回来')
-        _this.$data.Need2Login = false
-        _this.$axios({
-          method: 'get',
-          url: '/deliver'
-        }).then(function (response) {
-          _this.$nextTick(() => {
-            _this.$data.mine[2].messageNum = response.data.length
-            console.log(_this.$data.mine[2].messageNum)
-          })
-        })
-      }).catch(function(error) {
-        _this.$message('用户凭证已过期，请重新登陆')
-        delete _this.$axios.defaults.headers['Authorization']
-        document.cookie = ''
-        _this.$data.Need2Login = true
-        _this.$router.push('/')
-      })
-    }
-    this.$axios({
-      method: 'get',
-      url: '/createPictureCaptcha'
-    }).then(function (response) {
-      console.log(_this.$data.indentifyingImg)
-      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
-      _this.$data.uuid=response.data.uuid;
-    }).catch(function(error) {
-    })
-  },
-
   methods: {
     getPhoneMessageForReset(formName){
       let flag=false;
@@ -620,8 +512,8 @@ export default {
                   url: '/deliver'
                 }).then(function (response) {
                   _this.$nextTick(() => {
-                    _this.$data.mine[2].messageNum = response.data.length
-                    console.log(_this.$data.mine[2].messageNum)
+                    _this.$data.messageNum = response.data.length
+                    console.log(_this.$data.messageNum)
                   })
                 })
                 break
@@ -643,6 +535,120 @@ export default {
         }
       })
     }
+  },
+  watch: {
+    $route(to, from) {
+      //console.log(to.path)
+      switch(to.path){
+        case '/':
+          this.$data.activeIndex = '1'
+          break
+        case '/Social':
+          this.$data.activeIndex = '2'
+          break
+        case '/Trainee':
+          this.$data.activeIndex = '4'
+          break
+        case '/Campus/Post':
+          this.$data.activeIndex = '3-1'
+          break
+        case '/Campus/Procedure':
+          this.$data.activeIndex = '3-2'
+          break
+        case '/Campus/Plan':
+          this.$data.activeIndex = '3-3'
+          break
+        case '/AboutUs':
+          this.$data.activeIndex = '5'
+          break
+        default:
+          this.$data.activeIndex = ''
+//        <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
+//          <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
+//          <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
+//          <template style="border: none" slot="title">校园招聘</template>
+//          <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
+//          <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
+//          <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
+//          </el-submenu>
+//          <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
+//          <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
+      }
+    }
+  },
+  beforeMount () {
+    switch(this.$route.path){
+      case '/':
+        this.$data.activeIndex = '1'
+        break
+      case '/Social':
+        this.$data.activeIndex = '2'
+        break
+      case '/Trainee':
+        this.$data.activeIndex = '4'
+        break
+      case '/Campus/Post':
+        this.$data.activeIndex = '3-1'
+        break
+      case '/Campus/Procedure':
+        this.$data.activeIndex = '3-2'
+        break
+      case '/Campus/Plan':
+        this.$data.activeIndex = '3-3'
+        break
+      case '/AboutUs':
+        this.$data.activeIndex = '5'
+        break
+      default:
+        this.$data.activeIndex = ''
+//        <el-menu-item index="1" style="border: none" route="/" class="item4menu">首页</el-menu-item>
+//          <el-menu-item index="2" style="border: none" route="/Social" class="item4menu">社会招聘</el-menu-item>
+//          <el-submenu index="3" style="border: none" mode="horizontal" class="item4menu">
+//          <template style="border: none" slot="title">校园招聘</template>
+//          <el-menu-item index="3-1" style="border: none" route="/Campus/Post">校招职位</el-menu-item>
+//          <el-menu-item index="3-2" style="border: none" route="/Campus/Procedure">招聘流程</el-menu-item>
+//          <el-menu-item index="3-3" style="border: none" route="/Campus/Plan">培养计划</el-menu-item>
+//          </el-submenu>
+//          <el-menu-item index="4" style="border: none" route="/Trainee" class="item4menu">实习生招聘</el-menu-item>
+//          <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
+    }
+    const token = document.cookie.split(';')[0]
+    console.log(token)
+    let _this = this
+    if (token) {
+      this.$axios.defaults.headers.Authorization = token
+      this.$axios({
+        method: 'get',
+        url: '/tokenCheck',
+      }).then(function (response) {
+        _this.$message('欢迎回来')
+        _this.$data.Need2Login = false
+        _this.$axios({
+          method: 'get',
+          url: '/deliver'
+        }).then(function (response) {
+          _this.$nextTick(() => {
+            _this.$data.mine[2].messageNum = response.data.length
+            console.log(_this.$data.mine[2].messageNum)
+          })
+        })
+      }).catch(function(error) {
+        _this.$message('用户凭证已过期，请重新登陆')
+        delete _this.$axios.defaults.headers['Authorization']
+        document.cookie = ''
+        _this.$data.Need2Login = true
+        _this.$router.push('/')
+      })
+    }
+    this.$axios({
+      method: 'get',
+      url: '/createPictureCaptcha'
+    }).then(function (response) {
+      console.log(_this.$data.indentifyingImg)
+      _this.$data.indentifyingImg = 'data:image/png;base64,'+response.data.picture
+      _this.$data.uuid=response.data.uuid;
+    }).catch(function(error) {
+    })
   }
 }
 </script>

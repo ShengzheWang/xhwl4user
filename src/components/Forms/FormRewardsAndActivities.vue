@@ -1,40 +1,35 @@
 <template>
   <div id="FormRewardsAndActivities" >
-    <div style="width:90%;margin: 0% auto;" v-if="!loading">
-      <div style="width:100%;height:10px">
-      </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">奖励活动</h2>
-      <div style="width:100%;height:10px">
+    <div class='form_information' v-if="!loading">
+      <div class="form_info_title">
+        <h2>奖励活动</h2>
       </div>
       <div  v-for="(formAward,index) in formsAward">
-      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :model="formAward" :status-icon="true" ref="formsAward" :rules="rules" >
-        <el-form-item label="奖励日期" prop="dateOfAward">
-          <el-date-picker type="date" placeholder="选择日期" v-model="formAward.dateOfAward"
-                          class="input-date"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="奖励名称" style="width: 50%" prop="awardName">
-          <el-input v-model="formAward.awardName"></el-input>
-        </el-form-item>
-        <el-form-item label="" style="width: 70%">
-          <el-button type="primary" @click="saveOne(index,'formsAward')">保存</el-button>
-          <el-button type="info" @click="deleteOne(formAward.id,index)">删除</el-button>
-        </el-form-item>
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :model="formAward" :status-icon="true" ref="formsAward" :rules="rules" >
+        <div class="resume_form-items">
+          <el-form-item label="奖励日期" prop="dateOfAward">
+            <el-date-picker type="date" placeholder="选择日期" v-model="formAward.dateOfAward"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="奖励名称" prop="awardName">
+            <el-input v-model="formAward.awardName"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="saveOne(index,'formsAward')">保存</el-button>
+            <el-button type="info" @click="deleteOne(formAward.id,index)">删除</el-button>
+          </el-form-item>
+        </div>
         <div class="needMarginBorder"></div>
       </el-form>
       </div>
-      <el-form  label-position="labelPosition" label-width="300px">
-        <el-form-item label="还有其他获奖经历？" style="width: 50%">
+      <el-form  label-position="labelPosition" label-width="200px">
+        <el-form-item label="还有其他获奖经历？">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>
         <div class="needMarginBorder"></div>
         <el-form-item style="width: 25%">
           <el-button type="primary" class="button4forms" @click="nextStep('formsAward')">保存并进行下一步</el-button>
         </el-form-item>
-        <div style="width:100%;height:30px">
-        </div>
       </el-form>
-      <div style="width:100%;height:30px">
-      </div>
     </div>
   </div>
 </template>
@@ -80,7 +75,9 @@ export default {
       url: '/award'
     }).then(function (response) {
       _this.$nextTick(() => {
-        _this.$data.formsAward = response.data
+        if (response.data.length !== 0) {
+          _this.$data.formsAward = response.data
+        }
         _this.$data.loading = false
       })
     })

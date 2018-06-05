@@ -197,6 +197,7 @@
   }
 </script>
 <style lang="less">
+// @import "src/styles/mixin.scss";
   #Selector{
     .button4choose{
       background: rgba(255,255,255,0.5);
@@ -205,7 +206,7 @@
       height: 54px;
       border: solid 2px #ffffff;
       font-size: 20px;
-      border-radius: 0;
+      border-radius: 5px;
     }
     .input-name{
     }
@@ -221,7 +222,8 @@
         color:#ffffff
       }
       .el-input{
-
+        border-radius: 5px;
+        // @include borderRadius(5px);
         border:#37BCFD solid 2px;
         width: 100%;
         font-size: 20px;

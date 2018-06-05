@@ -14,6 +14,9 @@ import '../static/css/iconfont.css'
 import '../static/css/reformat.css'
 import router from './router/index.js'
 import Router from 'vue-router'
+
+import '@/styles/index.scss' // global css
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$axios = axios

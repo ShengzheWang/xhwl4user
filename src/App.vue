@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="min-width:1200px">
+  <div id="app" :style="{minWidth: 1200 + 'px'}">
     <XhwlHeader></XhwlHeader>
     <keep-alive include="Home">
     <router-view style="background: #fafafa"></router-view>
@@ -40,7 +40,8 @@ export default {
         {text: '校园招聘'},
         {text: '社会招聘'},
         {text: '实习生招聘'}
-      ]
+      ],
+      minHeight: 100
     }
   },
   methods: {},

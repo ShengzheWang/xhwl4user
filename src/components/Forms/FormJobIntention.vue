@@ -1,34 +1,31 @@
 <template>
   <div id="FormTraineeExperience" >
-    <div style="width:90%;margin: 0% auto;" v-if="!loading">
-      <div style="width:100%;height:10px">
+    <div class="form_information" v-if="!loading">
+      <div class="form_info_title">
+        <h2>求职意向</h2>
       </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">求职意向</h2>
-      <div style="width:100%;height:10px">
-      </div>
-      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :rules="rules" :status-icon="true" :model="formsIntention" ref="formsIntention">
-        <el-form-item label="可到岗时间" prop="expectedTimeForDuty">
-          <el-date-picker type="date" placeholder="选择日期" v-model="formsIntention.expectedTimeForDuty"
-                          class="input-date"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="期望工作地点" style="width: 50%" prop="workPlace">
-          <el-radio-group v-model.number="formsIntention.workPlace">
-            <el-radio label="深圳" :value="1"></el-radio>
-            <el-radio label="其他" :value="2"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="期望薪资" style="width: 50%" prop="salary">
-          <el-input v-model.number="formsIntention.salary">
-            <template slot="append">元/月</template>
-          </el-input>
-        </el-form-item>
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :rules="rules" :status-icon="true" :model="formsIntention" ref="formsIntention">
+        <div class="resume_form_items">
+          <el-form-item label="可到岗时间" prop="expectedTimeForDuty">
+            <el-date-picker type="date" placeholder="选择日期" v-model="formsIntention.expectedTimeForDuty"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="期望工作地点" prop="workPlace">
+            <el-radio-group v-model.number="formsIntention.workPlace">
+              <el-radio label="深圳" :value="1"></el-radio>
+              <el-radio label="其他" :value="2"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="期望薪资" prop="salary">
+            <el-input v-model.number="formsIntention.salary">
+              <template slot="append">元/月</template>
+            </el-input>
+          </el-form-item>
+        </div>
         <div class="needMarginBorder"></div>
-        <el-form-item  style="width: 25%">
+        <el-form-item>
           <el-button type="primary" class="button4forms" @click="nextStep('formsIntention')">保存并进行下一步</el-button>
         </el-form-item>
       </el-form>
-      <div style="width:100%;height:30px">
-      </div>
     </div>
   </div>
 </template>
@@ -64,8 +61,7 @@ export default {
           }
         }
     }
-    
-    
+
     var checkAfterToday=(rule,value,callback)=>{
       var date=new Date();
       let flag=false;
@@ -149,7 +145,4 @@ export default {
 }
 </script>
 <style scoped>
-  .input-date{
-    width:40.3%;
-  }
 </style>

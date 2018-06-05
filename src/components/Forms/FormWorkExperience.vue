@@ -1,52 +1,46 @@
 <template>
   <div id="FormWorkExperience">
-    <div style="width:90%;margin: 0% auto;" v-if="!loading">
-      <div style="width:100%;height:10px">
-      </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">工作经历</h2>
-      <div style="width:100%;height:10px">
+    <div class="form_information" v-if="!loading">
+      <div class="form_info_title">
+        <h2>工作经历</h2>
       </div>
       <div v-for="(formWorkExp,index) in formsWorkExp">
-        <el-form label-position="labelPosition" label-width="300px" :status-icon="true" class="animated fadeIn" :rules="rules"
+        <el-form label-position="labelPosition" label-width="200px" :status-icon="true" class="animated fadeIn" :rules="rules"
                  :model="formWorkExp" ref="formsWorkExp">
-          <el-form-item label="起始日期" prop="startTime">
-            <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.startTime"
-                            class="input-date"></el-date-picker>
-          </el-form-item>
-          <el-form-item label="结束日期" prop="endTime">
-            <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.endTime"
-                            class="input-date"></el-date-picker>
-          </el-form-item>
-          <el-form-item label="所在公司" style="width: 50%" prop="company">
-            <el-input v-model="formWorkExp.company"></el-input>
-          </el-form-item>
-          <el-form-item label="所任职位" style="width: 50%" prop="position">
-            <el-input v-model="formWorkExp.position"></el-input>
-          </el-form-item>
-          <el-form-item label="详细描述" style="width: 70%" prop="description">
-            <el-input type="textarea" rows="7" v-model="formWorkExp.description"></el-input>
-            <span>{{formWorkExp.description.length}}/200</span>
-          </el-form-item>
-          <el-form-item label="" style="width: 70%">
-            <el-button type="primary" @click="saveOne(index,'formsWorkExp')">保存</el-button>
-            <el-button type="info" @click="deleteOne(formWorkExp.id,index)">删除</el-button>
-          </el-form-item>
+           <div class="resume_form-items">
+              <el-form-item label="起始日期" prop="startTime">
+                <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.startTime"></el-date-picker>
+              </el-form-item>
+              <el-form-item label="结束日期" prop="endTime">
+                <el-date-picker type="date" placeholder="选择日期" v-model="formWorkExp.endTime"></el-date-picker>
+              </el-form-item>
+              <el-form-item label="所在公司" prop="company">
+                <el-input v-model="formWorkExp.company"></el-input>
+              </el-form-item>
+              <el-form-item label="所任职位" prop="position">
+                <el-input v-model="formWorkExp.position"></el-input>
+              </el-form-item>
+              <el-form-item label="详细描述" prop="description">
+                <el-input type="textarea" rows="7" v-model="formWorkExp.description"></el-input>
+                <span>{{formWorkExp.description.length}}/200</span>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="saveOne(index,'formsWorkExp')">保存</el-button>
+                <el-button type="info" @click="deleteOne(formWorkExp.id,index)">删除</el-button>
+              </el-form-item>
+            </div>
           <div class="needMarginBorder"></div>
         </el-form>
       </div>
-      <el-form label-position="labelPosition" label-width="300px" >
-        <el-form-item label="还有其他工作经历？" style="width: 50%">
+      <el-form label-position="labelPosition" label-width="200px" >
+        <el-form-item label="还有其他工作经历？">
           <el-button @click="addOne()"><i class="el-icon-plus"></i></el-button>
         </el-form-item>
         <div class="needMarginBorder"></div>
-        <el-form-item style="width: 25%">
+        <el-form-item>
           <el-button type="primary" class="button4forms" @click="nextStep('formsWorkExp')">保存并进行下一步</el-button>
         </el-form-item>
-        <div style="width:100%;height:30px">
-        </div>
       </el-form>
-      <div style="width:100%;height:30px">
-      </div>
     </div>
   </div>
 </template>
@@ -74,16 +68,16 @@
       }
       return {
         loading: true,
-        formsWorkExp: null,
-        formWorkExpDefault: {
+        // formsWorkExp: null,
+        formsWorkExp: [{
           id: null,
           resumeId: '',
-          startTime: '',
-          endTime: '',
+          startTime: null,
+          endTime: null,
           company: '',
           position: '',
           description: ''
-        },
+        }],
         rules: {
           startTime: [
             {type: 'date', message: '请选择正确的日期', trigger: 'blur'}
@@ -116,7 +110,9 @@
         url: '/work'
       }).then(function (response) {
         _this.$nextTick(() => {
-          _this.$data.formsWorkExp = response.data
+          if (response.data.length !== 0) {
+            _this.$data.formsWorkExp = response.data
+          }
           _this.$data.loading = false
         })
       })
@@ -166,6 +162,7 @@
         }
       },
       addOne () {
+        console.log('formsWorkExp', this.$data.formsWorkExp)
         this.$data.formsWorkExp.push(
           {
             id: null,
@@ -226,7 +223,4 @@
   }
 </script>
 <style scoped>
-  .input-date {
-    width: 40.3%;
-  }
 </style>

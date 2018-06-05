@@ -1,29 +1,23 @@
 <template>
   <div id="FormSelfEvaluation" >
-    <div style="width:90%;margin: 0% auto;" v-if="!loading">
-      <div style="width:100%;height:10px">
+    <div class="form_information" v-if="!loading">
+      <div class="form_info_title">
+        <h2>自我评价</h2>
       </div>
-      <h2 style="width:140px;text-align: right;display: inline-block;font-size: 30px">自我评价</h2>
-      <div style="width:100%;height:10px">
-      </div>
-      <el-form label-position="labelPosition" label-width="300px" class="animated fadeIn" :status-icon="true"
+      <el-form label-position="labelPosition" label-width="200px" class="animated fadeIn" :status-icon="true"
                :model="formSelfEvaluation" ref="formSelfEvaluation" :rules="rules" >
-        <el-form-item label="自我评价" style="width: 70%" prop="selfAssessment" >
-          <el-input
-            type="textarea"
-            :rows="15"
-            placeholder="请输入内容"
-            v-model="formSelfEvaluation.selfAssessment">
-          </el-input>
-          <span>{{formSelfEvaluation.selfAssessment.length}}/500</span>
+        <el-form-item label="自我评价" prop="selfAssessment">
+          <div class="resume_form-items">
+            <el-input type="textarea" :rows="10" placeholder="请输入内容" v-model="formSelfEvaluation.selfAssessment">
+            </el-input>
+            <span>{{formSelfEvaluation.selfAssessment.length}}/500</span>
+          </div>
         </el-form-item>
         <div class="needMarginBorder"></div>
-        <el-form-item  style="width: 25%">
+        <el-form-item>
           <el-button type="primary" class="button4forms" @click="nextStep('formSelfEvaluation')">保存并进行下一步</el-button>
         </el-form-item>
       </el-form>
-      <div style="width:100%;height:30px">
-      </div>
     </div>
   </div>
 </template>

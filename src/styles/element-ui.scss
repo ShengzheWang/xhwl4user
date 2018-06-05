@@ -1,0 +1,59 @@
+@import './mixin.scss';
+//覆盖一些element-ui样式
+
+//简历创建表单
+.resume_form_info .el-form {
+  .el-form-item {
+    width: 100%;
+    margin-bottom: 22px;
+    font-size: 16px;
+    .el-form-item__label {
+      width: 20%;
+      line-height: 40px;
+    }
+    .el-form-item__content {
+      width: 80%;
+      .el-input{
+        width: 40%;
+      }
+      .el-select{
+        width: 40%;
+      }
+      .el-input-number{
+        width: 40%;
+        .el-input {
+          width: 100%;
+        }
+      }
+      .el-textarea {
+        width: 70%;
+      }
+      // 证件号码
+      .identify_num {
+        .el-input-group__prepend {
+          width: 104px!important;
+          padding:0;
+          .el-select {
+            width: 100%;
+            margin: 0;
+            .el-input{
+              width: 100%;
+              input {
+                padding: 0 30px 0 10px;
+                height: 38px;
+              }
+              span.el-input__suffix {
+                width: 30px!important;
+                height: 30px;
+                i.el-select__caret, .el-input__icon{
+                  width: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
