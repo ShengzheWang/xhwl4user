@@ -1,12 +1,12 @@
 <template>
-  <div id="AboutUs" style="text-align: center;font-size:0">
+  <div id="AboutUs" style="text-align: center">
     <!--<div class="banner" id="banner4aboutUs" style="margin: 1% auto;">-->
       <!--<div class="banner-view"></div>-->
       <!--<div class="banner-btn"></div>-->
       <!--<div class="banner-number"></div>-->
       <!--<div class="banner-progres"></div>-->
     <!--</div>-->
-    <img v-for="item in 20" v-bind:key="item" :src="'../../../static/img/aboutUs/1_'+(item<=10?('0'+(item-1).toString()):(item-1).toString())+'x00.jpg'" style="width: 70%">
+    <img src="../../../static/img/aboutUs.jpg" style="width: 70%">
   </div>
 </template>
 <script>
