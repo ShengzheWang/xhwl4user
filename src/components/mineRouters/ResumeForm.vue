@@ -291,12 +291,12 @@ export default {
         .item4forms:hover {
           background:#37BCFD !important;
           color: #ffffff !important;
-          @include borderRadius(0px);
+          @include borderRadius(0);
         }
         .item4forms.is-active {
           background:#37BCFD !important;
           color: #ffffff !important;
-          @include borderRadius(0px);
+          @include borderRadius(0px 6px 6px 0px);
           width: 110%;
           box-sizing: border-box;
         }
@@ -345,6 +345,7 @@ export default {
         }
       }
       .resume_form_info{
+        background: #fff;
         border: 1px solid #f5f5f5;
         .resume_form_container {
           width: 100%;
