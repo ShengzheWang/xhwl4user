@@ -41,7 +41,7 @@
       <div style="width:25%;display:inline-block;height: 90px;text-align: center;vertical-align: top;font-size: 14px" class="animated fadeInDown" v-else>
         <div style="margin-top:14px;">
       <el-dropdown >
-        <el-badge  style="font-size: 8px" :value="messageNum" class="item">
+        <el-badge  style="font-size: 8px" :value="mine[1].messageNum" class="item">
 
       <el-button  type="text" ><img
         src="../../static/img/Default.png" style="width: 24px;"><i class="el-icon-arrow-down el-icon--right"></i></el-button>
@@ -266,7 +266,7 @@ export default {
         {path: '/MyResume', text: '我的简历'},
         {path: '/MyJobApplication', text: '我的应聘', messageNum: 0}
       ],
-       messageNum: 0
+
     }
   },
   methods: {
@@ -508,8 +508,7 @@ export default {
                   url: '/deliver'
                 }).then(function (response) {
                   _this.$nextTick(() => {
-                    _this.$data.messageNum = response.data.length
-                    console.log(_this.$data.messageNum)
+                    _this.$data.mine[1].messageNum = response.data.length
                   })
                 })
                 break
@@ -624,7 +623,7 @@ export default {
           url: '/deliver'
         }).then(function (response) {
           _this.$nextTick(() => {
-            _this.$data.messageNum = response.data.length
+            _this.$data.mine[1].messageNum = response.data.length
             console.log(_this.$data.messageNum)
           })
         })
