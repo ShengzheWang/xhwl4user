@@ -7,8 +7,8 @@
     <!-- <img v-lazy="../../../static/img/2.jpg" style="width: 70%">
     <img v-lazy="../../../static/img/3.jpg" style="width: 70%"> -->
     <ul id="container" style="font-size: 0px;">
-     <li v-for="img in list">
-       <img v-lazy="img" style="width: 70%;">
+     <li v-for="img in list" style="width: 70%;margin:0 auto;background: #ffffff">
+       <img v-lazy="img" style="max-width: 100%;background: #ffffff">
      </li>
    </ul>
   </div>

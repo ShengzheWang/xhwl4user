@@ -21,7 +21,7 @@ import '@/styles/index.scss' // global css
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Vuelazyload, {
-
+  loading: require('../static/img/loading.gif'),
     // '../static/img/aboutUs/2.jpg',
     // '../static/img/aboutUs/3.jpg',
     // '../static/img/aboutUs/4.jpg',
