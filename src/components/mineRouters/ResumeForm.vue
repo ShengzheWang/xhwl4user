@@ -254,8 +254,8 @@ export default {
       }
     }
     .resume_form {
-      width: 70%;
-      min-width: 1200px;
+      // width: 70%;
+      width: 1200px;
       margin:0 auto;
       margin-top: 46px;
       .resume_form_menu{
