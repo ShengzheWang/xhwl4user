@@ -321,9 +321,6 @@ export default {
     .has-gutter th{
       padding:20px 0;
     }
-    .el-table__fixed-header-wrapper th{
-      padding:20px 0;
-    }
     .state-failure {
       color: #E01B2F;
     }

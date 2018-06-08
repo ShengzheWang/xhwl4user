@@ -1,19 +1,16 @@
 <template>
   <div id="Social">
     <div class="block">
-      <div style="position:absolute;width: 100%;top:70px;background:#0a0a0a ">
-         <img style="width: 100%; height: 355px;" src="../../../static/img/post-2.jpg"/>
+      <div style="width: 60%;margin:0% auto;height: auto,z-index:9999,position:absolute;">
+        <selector  resume-form="2" @ChangeSearch="ChangePositions"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen"></selector>
+        <post-card resume-form="2"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen" ></post-card>
       </div>
-    <div style="width: 60%;margin:0% auto;height: auto">
-      <selector  resume-form="2" @ChangeSearch="ChangePositions"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen"></selector>
-      <post-card resume-form="2"  v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen" ></post-card>
-    </div>
       <!--<el-switch-->
       <!--v-model="value3"-->
       <!--active-text="校园招聘"-->
       <!--inactive-text="社会招聘" style="margin-top: 3%;margin-left:1%">-->
       <!--</el-switch>-->
-  </div>
+    </div>
   </div>
 </template>
 
@@ -84,4 +81,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .block{
+    background-size: 100% 355px ;
+    background-image: url(../../../static/img/post-2.jpg);
+    background-repeat: no-repeat;
+  }
+
 </style>
