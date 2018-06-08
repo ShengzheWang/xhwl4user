@@ -1,7 +1,7 @@
 <template>
   <div id="Selector" class="animated fadeIn" style="vertical-align: middle;height:50%">
-    <div style="width:100%;display:block;margin-top: 50px">
-      <p style="color: #ffffff">{{resumeType === -1?'你还未登录，不能进行投递哦':resumeType === 0?'你还未创建简历，不能进行投递哦':('你目前的简历类型为  '+
+    <div style="width:100%;display:block;">
+      <p style="color: #ffffff;margin-top:0px;">{{resumeType === -1?'你还未登录，不能进行投递哦':resumeType === 0?'你还未创建简历，不能进行投递哦':('你目前的简历类型为  '+
       (resumeType===2?'社招简历':resumeType===1?'校招简历':'实习生简历'))}}</p>
 
       <el-form class="filter_post">

@@ -29,7 +29,7 @@
         <el-menu-item index="5" style="border: none" route="/AboutUs" class="item4menu">关于兴海物联</el-menu-item>
       </el-menu>
   </div>
-    <div style="width:25%;display: inline-block;height: 120px;text-align: center;vertical-align: middle" v-if="Need2Login" class="animated fadeInDown">
+    <div style="width:25%;display: inline-block;height: 76px;text-align: center;vertical-align: top" v-if="Need2Login" class="animated fadeInDown">
       <div style="margin: 21px auto">
         <el-button plain @click="dialogFormVisible1 = true; State = false" class="button4plain"
                    style="">注册</el-button>
