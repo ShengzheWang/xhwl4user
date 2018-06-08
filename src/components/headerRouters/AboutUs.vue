@@ -1,11 +1,5 @@
 <template>
-
   <div id="AboutUs" style="text-align: center">
-    <!-- <img src="../../../static/img/aboutUs.jpg" style="width: 70%"> -->
-    <!-- <img src="../../../static/img/aboutUs.jpg" style="width: 70%"> -->
-    <!-- <img v-lazy="" style="width: 70%"> -->
-    <!-- <img v-lazy="../../../static/img/2.jpg" style="width: 70%">
-    <img v-lazy="../../../static/img/3.jpg" style="width: 70%"> -->
     <ul id="container" style="font-size: 0px;">
      <li v-for="img in list" style="width: 70%;margin:0 auto;background: #ffffff">
        <img v-lazy="img" style="max-width: 100%;background: #ffffff">
