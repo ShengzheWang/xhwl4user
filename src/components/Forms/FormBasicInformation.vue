@@ -314,7 +314,7 @@ export default {
 }
 .avatar_upload_item {
   position: absolute;
-  right: 10%;
+  right: 16%;
   top: 12%;
   width: 130px;
   height: 200px;

@@ -4,54 +4,46 @@
       <p style="color: #ffffff">{{resumeType === -1?'你还未登录，不能进行投递哦':resumeType === 0?'你还未创建简历，不能进行投递哦':('你目前的简历类型为  '+
       (resumeType===2?'社招简历':resumeType===1?'校招简历':'实习生简历'))}}</p>
 
-      <el-form>
-        <el-col style="width: 27%">
-          <el-form-item >
-            <el-autocomplete class="input4selector"
-                             v-model="placeChosen1"
-                             :fetch-suggestions="querySearchForPlace"
-                             placeholder="请输入地点"
-                             @select="handleSelectForPlace" :clearable="true"
-                             prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom"
-            ></el-autocomplete>
-            <!--<el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
-            </el-input>-->
-          </el-form-item>
-        </el-col>
-        <el-col style="width: 2%">
-          <div style="width: 100%;display: inline-block"></div>
-        </el-col>
-        <el-col style="width: 27%">
-          <el-form-item >
-            <el-autocomplete class="input4selector"
-                             v-model="classChosen1"
-                             :fetch-suggestions="querySearchForType"
-                             placeholder="请输入类型"
-                             @select="handleSelectForType" :clearable="true"
-                             prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom"
-            ></el-autocomplete>
-           <!-- <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
-            </el-input>-->
-          </el-form-item>
-        </el-col>
-        <el-col style="width: 2%">
-          <div style="width: 100%;display: inline-block"></div>
-        </el-col>
-        <el-col style="width: 27%">
-          <el-form-item >
-            <el-input  v-model="postChosen1" prefix-icon="icon iconfont icon4form icon-zhiweimingcheng" placeholder="职位名称" class="input4selector">
-            </el-input>
-          </el-form-item>
-        </el-col>
-        <el-col style="width: 2%">
-          <div style="width: 100%;display: inline-block"></div>
-        </el-col>
-        <el-col style="width: 13%">
-          <el-form-item >
-            <el-button class="button4choose" @click="SearchPositions">筛选</el-button>
-          </el-form-item>
-        </el-col>
-
+      <el-form class="filter_post">
+        <el-row :gutter="20">
+          <el-col :span="7">
+            <el-form-item >
+              <el-autocomplete class="input4selector"
+                               v-model="placeChosen1"
+                               :fetch-suggestions="querySearchForPlace"
+                               placeholder="请输入地点"
+                               @select="handleSelectForPlace" :clearable="true"
+                               prefix-icon="icon iconfont icon4form icon-gongzuodidian-"
+              ></el-autocomplete>
+              <!--<el-input  v-model="placeChosen1" prefix-icon="icon iconfont icon4form icon-gongzuodidian-" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="工作地点" class="input4selector" >
+              </el-input>-->
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item >
+              <el-autocomplete class="input4selector"
+                               v-model="classChosen1"
+                               :fetch-suggestions="querySearchForType"
+                               placeholder="请输入类型"
+                               @select="handleSelectForType" :clearable="true"
+                               prefix-icon="icon iconfont icon4form icon-zhiweileixing"
+              ></el-autocomplete>
+             <!-- <el-input  v-model="classChosen1" prefix-icon="icon iconfont icon4form icon-zhiweileixing" suffix-icon="icon icon4form el-icon-caret-bottom" placeholder="职位类型" class="input4selector">
+              </el-input>-->
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item >
+              <el-input  v-model="postChosen1" prefix-icon="icon iconfont icon4form icon-zhiweimingcheng" placeholder="职位名称" class="input4selector">
+              </el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="3">
+            <el-form-item >
+              <el-button class="button4choose" @click="SearchPositions">筛选</el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
     </div>
   </div>
@@ -207,6 +199,9 @@
       border: solid 2px #ffffff;
       font-size: 20px;
       border-radius: 5px;
+    }
+    .filter_post {
+      margin-bottom: 50px;
     }
     .input-name{
     }

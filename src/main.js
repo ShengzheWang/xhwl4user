@@ -14,11 +14,16 @@ import '../static/css/iconfont.css'
 import '../static/css/reformat.css'
 import router from './router/index.js'
 import Router from 'vue-router'
+import Vuelazyload from 'vue-lazyload'
 
 import '@/styles/index.scss' // global css
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(Vuelazyload, {
+  loading: require('../static/img/1.jpg')
+})
+
 Vue.prototype.$axios = axios
 Vue.prototype.$qs = qs
 Vue.use(Router)
