@@ -14,11 +14,35 @@ import '../static/css/iconfont.css'
 import '../static/css/reformat.css'
 import router from './router/index.js'
 import Router from 'vue-router'
+import Vuelazyload from 'vue-lazyload'
 
 import '@/styles/index.scss' // global css
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(Vuelazyload, {
+  loading: require('../static/img/loading.gif'),
+    // '../static/img/aboutUs/2.jpg',
+    // '../static/img/aboutUs/3.jpg',
+    // '../static/img/aboutUs/4.jpg',
+    // '../static/img/aboutUs/5.jpg',
+    // '../static/img/aboutUs/6.jpg',
+    // '../static/img/aboutUs/7.jpg',
+    // '../static/img/aboutUs/8.jpg',
+    // '../static/img/aboutUs/9.jpg',
+    // '../static/img/aboutUs/10.jpg',
+    // '../static/img/aboutUs/11.jpg',
+    // '../static/img/aboutUs/12.jpg',
+    // '../static/img/aboutUs/13.jpg',
+    // '../static/img/aboutUs/14.jpg',
+    // '../static/img/aboutUs/15.jpg',
+    // '../static/img/aboutUs/16.jpg',
+    // '../static/img/aboutUs/17.jpg',
+    // '../static/img/aboutUs/18.jpg',
+    // '../static/img/aboutUs/19.jpg',
+    // '../static/img/aboutUs/20.jpg')
+})
+
 Vue.prototype.$axios = axios
 Vue.prototype.$qs = qs
 Vue.use(Router)
