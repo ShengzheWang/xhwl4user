@@ -34,7 +34,7 @@
           width="200"
         >
           <template slot-scope="scope">
-            <el-button type="primary" class="button4details" size="middle">
+            <el-button type="primary" class="button4details" size="middle" @click="deleteApp(scope.row,scope.$index)">
               {{(scope.row.recruitmentState <= 0||scope.row.recruitmentState>4)?'查看详情':'撤回申请'}}
             </el-button>
           </template>
@@ -295,6 +295,26 @@ export default {
     })
   },
   methods: {
+    deleteApp(row,index){
+      if(row.recruitmentState<=4&&row.recruitmentState>0){
+        let _this=this;
+        this.$axios({
+          method:'delete',
+          url:'/deliver/'+row.id
+        }).then((res)=>{
+          _this.$message({
+            type:'success',
+            message:'撤回成功！'
+          })
+          _this.$data.tableData.splice(index,1)
+        }).catch((err)=>{
+          _this.$message({
+            type:'danger',
+            message:'撤回失败~'
+          })
+        })
+      }
+    },
     createAResume () {
       this.$router.push('/ResumeForm/1')
     },
