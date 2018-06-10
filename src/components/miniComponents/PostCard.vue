@@ -78,11 +78,14 @@
       let _this = this
       this.$axios({
         method: 'get',
+        header:{
+          size:9999
+        },
         url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
               '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
       }).then(function (response) {
         _this.$nextTick(() => {
-          response.data.forEach((item, index) => {
+          response.data.content.forEach((item, index) => {
             item['index'] = index
             item['Ashow'] = false
             item['department'] = _this.$data.typeTable[item['department']-1]
@@ -109,12 +112,15 @@
         let _this = this
         this.$axios({
           method: 'get',
+          header:{
+            size:9999
+          },
           url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
           '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
         }).then(function (response) {
           _this.$nextTick(() => {
             _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
-            response.data.forEach((item, index) => {
+            response.data.content.forEach((item, index) => {
               item['index'] = index
               item['Ashow'] = false
               item['department'] = _this.$data.typeTable[item['department']-1]
@@ -129,12 +135,15 @@
         let _this = this
         this.$axios({
           method: 'get',
+          header:{
+            size:9999
+          },
           url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
           '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
         }).then(function (response) {
           _this.$nextTick(() => {
             _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
-            response.data.forEach((item, index) => {
+            response.data.content.forEach((item, index) => {
               item['index'] = index
               item['Ashow'] = false
               item['department'] = _this.$data.typeTable[item['department']-1]
@@ -149,12 +158,15 @@
         let _this = this
         this.$axios({
           method: 'get',
+          header:{
+            size:9999
+          },
           url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
           '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
         }).then(function (response) {
           _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
           _this.$nextTick(() => {
-            response.data.forEach((item, index) => {
+            response.data.content.forEach((item, index) => {
               item['index'] = index
               item['Ashow'] = false
               item['department'] = _this.$data.typeTable[item['department']-1]
@@ -204,10 +216,9 @@
 <style lang="less">
   #PostCard {
     .button-red{
-      border-radius: 16px;
+      border-radius: 40px;
       background: #E01B2F !important;
       border: 1px solid #E01B2F;
-      /* 保存并进行下一步: */
       color: #FFFFFF !important;
       font-size: 20px;
       transition: all 0.3s;
