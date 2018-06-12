@@ -8,7 +8,7 @@
       <div>
         <span style="font-size:24px;font-weight: bold" class="name"> {{item.positionName}}</span>
         <span style="font-size:18px;" class="name">  {{item.positionType}}</span>
-        <span style="float:right;font-size:14px;margin-top: 10px">发布于 {{item.publishDate}}</span>
+        <span style="float:right;font-size:14px;"><a style="color: #1476BF;text-align: center;float: right;font-size: 30px">{{item.salary}}</a></span>
       </div>
 
       <div style="height:20px;" class="blank"></div>
@@ -33,7 +33,7 @@
                 <i class="icon iconfont icon-chakanxiangqing icon4card"></i>
                 <a style="font-size: 20px">岗位描述：</a>
               </div>
-              <div style="display: block;margin-top: 1%;margin-left:120px">
+              <div style="display: block;margin-top: 1%;margin-left:130px">
                 <a style="white-space:pre-wrap;font-size: 20px">{{item.jobResponsibilities}}</a>
               </div>
             </div>
@@ -42,7 +42,7 @@
                 <i class="icon iconfont icon-gongzuoyaoqiu icon4card"></i>
                 <a style="font-size: 20px">岗位要求：</a>
               </div>
-              <div style="display: block;margin-top: 1%;margin-left:120px">
+              <div style="display: block;margin-top: 1%;margin-left:130px">
                 <a style="white-space:pre-wrap;font-size: 20px">{{item.jobRequirements}}</a>
               </div>
             </div>
@@ -50,10 +50,12 @@
 
         </el-collapse-transition>
       </div>
-      <div style="position: relative;margin-bottom:2%;margin-top: 2%;float: right" >
-        <el-button type="text"   @click="item.Ashow=!item.Ashow;" style="font-size: 20px"
+      <div style="position: relative;margin-bottom:5%;margin-top: 2%;" >
+        <span style="float:left;font-size:14px;margin-top: 10px">
+          发布于 {{item.publishDate}}</span>
+        <el-button class="button-red" style=";float: right;margin-left: 20px" @click="send(item.index)" >立即申请</el-button>
+        <el-button type="text"   @click="item.Ashow=!item.Ashow;" style="font-size: 20px;float: right"
         >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
-        <el-button class="button-red" @click="send(item.index)" >立即申请</el-button>
 
       </div>
     </el-card>
@@ -216,7 +218,7 @@
 <style lang="less">
   #PostCard {
     .button-red{
-      border-radius: 40px;
+      border-radius: 0px;
       background: #E01B2F !important;
       border: 1px solid #E01B2F;
       color: #FFFFFF !important;
