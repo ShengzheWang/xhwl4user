@@ -15,12 +15,14 @@
           accept="application/pdf"
           :limit="1"
           :on-success="uploadSuccess1"
-          :action="$axios.defaults.baseURL+'/upload-resume'">
-          <el-button  v-if="file1 === null" size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
-          <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过简历，重复提交会覆盖原本的简历文件哦（已投递的除外）!" placement="right">
-            <el-button size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
-          </el-tooltip>
+          :action="$axios.defaults.baseURL+'/upload-resume'"
+          style="display: inline-block">
+          <el-button size="middle" plain>点击上传简历文档（支持PDF格式）</el-button>
         </el-upload>
+          <el-button v-if="file1 === null" size="middle" type="danger" style="margin-left: 5px" :disabled="true" icon="el-icon-delete"></el-button>
+          <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过简历，点击此按钮可以删除原来的简历!" placement="right">
+            <el-button size="middle" type="danger" icon="el-icon-delete" style="margin-left: 5px;" @click="delete1"></el-button>
+          </el-tooltip>
         </el-form-item>
         <el-form-item label="上传其他材料">
           <el-upload
@@ -30,12 +32,14 @@
             accept="application/zip"
             :limit="1"
             :on-success="uploadSuccess2"
-            :action="$axios.defaults.baseURL+'/upload-support-detail'">
-            <el-button  v-if="file2 === null" size="middle" plain>点击上传辅助材料（支持ZIP格式）</el-button>
-            <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过简历，重复提交会覆盖原本的简历文件哦（已投递的除外）!" placement="right">
-              <el-button size="middle" plain>点击上传辅助材料（支持ZIP 格式）</el-button>
-            </el-tooltip>
+            :action="$axios.defaults.baseURL+'/upload-support-detail'"
+            style="display: inline-block">
+            <el-button size="middle" plain>点击上传辅助材料（支持RAR格式）</el-button>
           </el-upload>
+          <el-button v-if="file2 === null" size="middle" type="danger" style="margin-left: 5px" :disabled="true" icon="el-icon-delete"></el-button>
+          <el-tooltip v-else class="item" effect="dark" content="你曾经有提交过辅助材料，点击此按钮可以删除原来的辅助材料!" placement="right">
+            <el-button size="middle" type="danger" icon="el-icon-delete" style="margin-left: 5px;" @click="delete2"></el-button>
+          </el-tooltip>
         </el-form-item>
         <div class="needMarginBorder"></div>
         <el-form-item  style="width: 25%">
@@ -46,7 +50,10 @@
   </div>
 </template>
 <script>
+import ElButton from '../../../node_modules/element-ui/packages/button/src/button.vue'
+
 export default {
+  components: {ElButton},
   data () {
     return {
       select: '',
@@ -71,6 +78,34 @@ export default {
     }
   },
   methods: {
+    delete1(){
+      let _this = this
+      this.$axios({
+        method: 'delete',
+        url: '/deleteResume'
+      }).then(function (response) {
+        _this.$message({
+          type: 'success',
+          message: '删除简历成功'
+        })
+        _this.$data.file1 = null
+      }).catch(function(error) {
+      })
+    },
+    delete1(){
+      let _this = this
+      this.$axios({
+        method: 'delete',
+        url: '/deleteSupportDetail'
+      }).then(function (response) {
+        _this.$message({
+          type: 'success',
+          message: '删除辅助材料成功'
+        })
+        _this.$data.file2 = null
+      }).catch(function(error) {
+      })
+    },
     uploadSuccess1(response, file) {
       this.$message({
         type: 'success',
