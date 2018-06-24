@@ -92,7 +92,7 @@ export default {
       }).catch(function(error) {
       })
     },
-    delete1(){
+    delete2(){
       let _this = this
       this.$axios({
         method: 'delete',
