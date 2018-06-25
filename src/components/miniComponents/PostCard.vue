@@ -56,9 +56,22 @@
         <el-button class="button-red" style=";float: right;margin-left: 20px" @click="send(item.index)" >立即申请</el-button>
         <el-button type="text"   @click="item.Ashow=!item.Ashow;" style="font-size: 20px;float: right"
         >{{item.Ashow?'收起详情':'查看详情'}}</el-button>
-
       </div>
     </el-card>
+    <div class="el-pagination__total page-total">
+      共<a>{{total}}</a>条
+    </div>
+    <div class="page-select">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handlePageChange"
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20, 30]"
+        :page-size="pageSize"
+        layout="sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -80,11 +93,9 @@
       let _this = this
       this.$axios({
         method: 'get',
-        header:{
-          size:9999
-        },
         url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
-              '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
+              '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+
+              '&page=1&size=10'
       }).then(function (response) {
         _this.$nextTick(() => {
           response.data.content.forEach((item, index) => {
@@ -92,7 +103,9 @@
             item['Ashow'] = false
             item['department'] = _this.$data.typeTable[item['department']-1]
             _this.$data.cardInfo.push(item)
+
           })
+          _this.$data.total=response.data.totalElements;
           console.log(_this.$data.cardInfo)
         })
       })
@@ -100,6 +113,9 @@
     },
     data () {
       return {
+        currentPage:1,
+        pageSize:10,
+        total:0,
         kind: '',
         cardInfo: [],
         typeTable:['人事行政部', '财务管理部', '部门管理部', '市场开发部', '工程技术部',
@@ -110,61 +126,36 @@
     watch:{
       //监测到selector变化时的函数
       placeChosen(val,oldval){
-        console.log(this.$props.placeChosen);
         let _this = this
         this.$axios({
           method: 'get',
-          header:{
-            size:9999
-          },
           url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
-          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
+          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+'&page='+
+            this.$data.currentPage+'&size='+this.$data.pageSize
         }).then(function (response) {
+          console.log(response);
+          _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
           _this.$nextTick(() => {
-            _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
             response.data.content.forEach((item, index) => {
               item['index'] = index
               item['Ashow'] = false
               item['department'] = _this.$data.typeTable[item['department']-1]
               _this.$data.cardInfo.push(item)
             })
-            console.log(_this.$data.cardInfo)
+            _this.$data.total=response.data.totalElements;
           })
         })
 
       },
       postChosen(val,oldval){
         let _this = this
-        this.$axios({
-          method: 'get',
-          header:{
-            size:9999
-          },
-          url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
-          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
-        }).then(function (response) {
-          _this.$nextTick(() => {
-            _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
-            response.data.content.forEach((item, index) => {
-              item['index'] = index
-              item['Ashow'] = false
-              item['department'] = _this.$data.typeTable[item['department']-1]
-              _this.$data.cardInfo.push(item)
-            })
-            console.log(_this.$data.cardInfo)
-          })
-        })
 
-      },
-      classChosen(val,oldval){
-        let _this = this
         this.$axios({
           method: 'get',
-          header:{
-            size:9999
-          },
+
           url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
-          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen
+          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+'&page='+
+          this.$data.currentPage+'&size='+this.$data.pageSize
         }).then(function (response) {
           _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
           _this.$nextTick(() => {
@@ -174,12 +165,84 @@
               item['department'] = _this.$data.typeTable[item['department']-1]
               _this.$data.cardInfo.push(item)
             })
-            console.log(_this.$data.cardInfo)
+            _this.$data.total=response.data.totalElements;
+          })
+        })
+
+      },
+      classChosen(val,oldval){
+        let _this = this
+        console.log(_this.$props.postChosen);
+        console.log(_this.$props.classChosen);
+        this.$axios({
+          method: 'get',
+          url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
+          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+this.$props.postChosen+'&page='+
+          this.$data.currentPage+'&size='+this.$data.pageSize
+        }).then(function (response) {
+          _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
+          _this.$nextTick(() => {
+            response.data.content.forEach((item, index) => {
+              item['index'] = index
+              item['Ashow'] = false
+              item['department'] = _this.$data.typeTable[item['department']-1]
+              _this.$data.cardInfo.push(item)
+            })
+            _this.$data.total=response.data.totalElements;
           })
         })
       },
     },
     methods: {
+      handlePageChange(val){
+        let _this=this;
+        this.$data.currentPage=val;
+        this.$axios({
+          method: 'get',
+          header:{
+            size:_this.$data.pageSize,
+            page:_this.$data.currentPage
+          },
+          url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
+          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+'&page='+_this.$data.currentPage+
+            '&size='+_this.$data.pageSize
+        }).then(function (response) {
+          _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
+          _this.$nextTick(() => {
+            response.data.content.forEach((item, index) => {
+              item['index'] = index
+              item['Ashow'] = false
+              item['department'] = _this.$data.typeTable[item['department']-1]
+              _this.$data.cardInfo.push(item);
+            })
+            _this.$data.total=response.data.totalElements;
+          })
+        })
+        this.$data.kind=this.$props.resumeForm==='1'?'校招':this.$props.resumeForm==='2'?'社招':'实习生'
+
+      },
+      handleSizeChange(val){
+        let _this=this;
+        this.$data.pageSize=val;
+        this.$axios({
+          method: 'get',
+          url: '/positions/' + this.$props.resumeForm+'?positionType='+this.$props.classChosen+
+          '&workPlace='+this.$props.placeChosen+'&positionName='+this.$props.postChosen+'&size='+this.$data.pageSize
+          +'&page='+1
+        }).then(function (response) {
+          _this.$data.cardInfo.splice(0,_this.$data.cardInfo.length);
+          _this.$nextTick(() => {
+            response.data.content.forEach((item, index) => {
+              item['index'] = index
+              item['Ashow'] = false
+              item['department'] = _this.$data.typeTable[item['department']-1]
+              _this.$data.cardInfo.push(item);
+            })
+            _this.$data.total=response.data.totalElements;
+          })
+        })
+        this.$data.kind=this.$props.resumeForm==='1'?'校招':this.$props.resumeForm==='2'?'社招':'实习生'
+      },
       send (index) {
         let _this=this
         if (this.$axios.defaults.headers.Authorization == null) {
@@ -240,6 +303,28 @@
         padding:30px;
       }
   }
+
+  .page-total {
+    width: 30%;
+    display: inline-block;
+    margin-top: 3%;
+    margin-right: 0;
+    vertical-align: top;
+    font-size: 13px;
+    a {
+      font-weight: bolder;
+      font-size: 16px;
+    }
+  }
+
+  .page-select {
+    display: inline-block;
+    margin: 3% auto;
+    text-align: right;
+    width: 69%;
+  }
+
+
   .transition-box {
     margin-bottom: 10px;
     width: 200px;

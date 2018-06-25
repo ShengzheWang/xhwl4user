@@ -2,7 +2,7 @@
   <div id="Campus">
     <div class="block">
       <div style="position:absolute;width: 100%;top:70px;background:#0a0a0a">
-        <img style="width: 100%;height: 355px;" src="../../../static/img/post-1.jpg"/>
+        <!--<img style="width: 100%;height: 355px;" src="../../../static/img/post-1.jpg"/>-->
       </div>
       <div style="width: 60%;margin:0% auto;height: auto">
         <selector resume-form="1" @ChangeSearch="ChangePositions" v-bind:classChosen="classChosen" v-bind:postChosen="postChosen" v-bind:placeChosen="placeChosen"></selector>
@@ -77,8 +77,6 @@
           this.$data.postChosen=data.postChosen;
           this.$data.placeChosen=data.placeChosen;
           this.$data.form=data;
-          console.log(this.$data.placeChosen)
-
         }
     },
     components: {Selector, PostCard}
@@ -87,4 +85,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .block{
+    background-size: 100% 355px ;
+    background-image: url(../../../static/img/post-1.jpg);
+    background-repeat: no-repeat;
+  }
 </style>
